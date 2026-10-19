@@ -1,12 +1,12 @@
-# Using Asyar
+# Using Launcher
 
-Asyar is a keyboard-first launcher: press your global hotkey, start typing, and
-act — without touching the mouse. This guide walks you through everything Asyar
+Launcher is a keyboard-first launcher: press your global hotkey, start typing, and
+act — without touching the mouse. This guide walks you through everything Launcher
 can do.
 
 ## Start here
 
-1. **[Getting Started](./getting-started.md)** — Install Asyar, finish the first-run setup, and run your first search.
+1. **[Getting Started](./getting-started.md)** — Install Launcher, finish the first-run setup, and run your first search.
 2. **[The Basics](./the-basics.md)** — How search, results, navigation, and the action panel work. The mental model behind everything else.
 
 ## Features

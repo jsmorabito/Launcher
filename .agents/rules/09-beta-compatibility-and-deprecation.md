@@ -1,6 +1,6 @@
 # Beta Compatibility & Deprecation Policy (until 0.2.0)
 
-Asyar is in beta, and third-party extensions are already published in the Asyar Store. Beta means
+Launcher is in beta, and third-party extensions are already published in the Launcher Store. Beta means
 **internals are free to change, but the contract with published extensions is not, until launcher
 `0.2.0`.** This rule replaces the older "backward compatibility is irrelevant" stance.
 
@@ -14,11 +14,11 @@ A change is **protected** if a published extension, built against an older SDK o
 could observe it:
 
 - Extension `manifest.json` schema: fields, values, command and preference definitions, permission names, `role`/`background` semantics.
-- Public `asyar-sdk` exports (types, services, methods, signatures, return shapes, error semantics).
-- The host↔extension wire contract: `asyar:api:<namespace>:<method>` type strings, `NAMESPACES`, envelope and payload shapes, event names and payloads delivered to extensions. Published extensions **bundle their SDK**, so the host must keep accepting old wire shapes even after the SDK moves on.
-- Extension runtime behavior: worker/view roles, `asyar-extension://` protocol, bridge/CSP behavior, the permission gate's allow/deny results for already-declared permissions.
-- Extension packaging and store contracts: archive layout, `asyar-ext-builder` output, catalog and registry formats.
-- Public deeplinks (`asyar://…`) and persisted extension-owned data (extension storage, preferences) that extensions read back.
+- Public `launcher-sdk` exports (types, services, methods, signatures, return shapes, error semantics).
+- The host↔extension wire contract: `launcher:api:<namespace>:<method>` type strings, `NAMESPACES`, envelope and payload shapes, event names and payloads delivered to extensions. Published extensions **bundle their SDK**, so the host must keep accepting old wire shapes even after the SDK moves on.
+- Extension runtime behavior: worker/view roles, `launcher-extension://` protocol, bridge/CSP behavior, the permission gate's allow/deny results for already-declared permissions.
+- Extension packaging and store contracts: archive layout, `launcher-ext-builder` output, catalog and registry formats.
+- Public deeplinks (`launcher://…`) and persisted extension-owned data (extension storage, preferences) that extensions read back.
 
 **Not protected (break freely, cleanly, no shims):** Tier 1 built-ins and their internals, Tauri
 commands used only by the launcher frontend, internal Rust/TS module boundaries, launcher-private
@@ -42,7 +42,7 @@ shim.
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript / SDK                               | JSDoc `@deprecated Use <replacement>. Remove in 0.2.0.` on the symbol                                                                                                                                      |
 | Rust                                           | `#[deprecated(since = "<ver>", note = "Use <replacement>; remove in 0.2.0")]` where the item is not a specta/wire type, otherwise a doc comment with the same text                                         |
-| Manifest field / value                         | Validator accepts it and emits a **deprecation warning** (never an error) naming the replacement. Surfaced by `asyar-ext-builder` and dev tooling. The runtime logs it once per extension, never per call. |
+| Manifest field / value                         | Validator accepts it and emits a **deprecation warning** (never an error) naming the replacement. Surfaced by `launcher-ext-builder` and dev tooling. The runtime logs it once per extension, never per call. |
 | IPC type string / payload shape                | Router accepts it, normalizes to the new shape, and logs a once-per-extension deprecation notice                                                                                                           |
 | Compat code (any adapter, branch, or fallback) | Marker comment `// COMPAT(remove in 0.2.0): <what, and which published extensions need it>`. Follow the exact `remove in X.Y.Z` form used in `workerHost.svelte.ts`, so a deadline guard can parse it.     |
 | Docs                                           | Add the deprecation to `docs/` extension-author docs (migration note: old to new) in the same change                                                                                                       |
@@ -71,5 +71,5 @@ Add each new deprecation to the ledger in §5 in the same change.
 | Deprecated item                                                                     | Replacement                                                   | Location                                                                                                         | Remove in |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------- |
 | Iframe compatibility fallback for published HTML-built worker bundles               | JS-entry worker bundles (Web Worker)                          | `services/extension/workerHost.svelte.ts`                                                                        | 0.2.0     |
-| Manifest-declared actions (`ManifestAction`, `manifest.actions`, `command.actions`) | In-view registered actions (`context.actions.registerAction`) | `asyar-sdk/src/types/ExtensionType.ts`, `discovery.rs`                                                           | 0.2.0     |
+| Manifest-declared actions (`ManifestAction`, `manifest.actions`, `command.actions`) | In-view registered actions (`context.actions.registerAction`) | `launcher-sdk/src/types/ExtensionType.ts`, `discovery.rs`                                                           | 0.2.0     |
 | Pre-#860 `free` launcher anchor (fractions of the monitor's extent)                 | `freeTravel` anchor (fractions of available window travel)    | `launcher_placement/{types,resolve,classify,service}.rs`, `services/launcher/launcherPlacementService.svelte.ts` | 0.2.0     |

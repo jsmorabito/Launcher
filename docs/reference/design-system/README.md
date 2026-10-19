@@ -1,6 +1,6 @@
 # Design System
 
-Asyar's design language is **Measure**: every value in the product is derived
+Launcher's design language is **Measure**: every value in the product is derived
 from a constraint — a window dimension, a contrast ratio, a scale step, a count
 of rows that must fit — rather than chosen because it looked right.
 
@@ -49,7 +49,7 @@ what AI coding agents load before touching frontend code.
 ## Enforcement
 
 A design language that is only a document decays within two release cycles.
-Asyar's is executable:
+Launcher's is executable:
 
 | Mechanism                | Enforces                                                                                                                                                                                   |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

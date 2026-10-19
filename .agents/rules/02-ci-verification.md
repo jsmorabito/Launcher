@@ -1,6 +1,6 @@
 # Mandatory Local CI Verification Matrix
 
-Asyar uses a **Two-Loop Verification Model** to balance developer/agent velocity with release-grade correctness:
+Launcher uses a **Two-Loop Verification Model** to balance developer/agent velocity with release-grade correctness:
 
 ## The Two-Loop Verification Model
 
@@ -33,13 +33,13 @@ Asyar uses a **Two-Loop Verification Model** to balance developer/agent velocity
 1. **Workspace Prettier Check**: `pnpm format:check`
 2. **Design System Compliance**: `pnpm check:design`
 3. **Full Frontend & Workspace Tests**: `pnpm -r --if-present test:run`
-4. **Rust Formatting**: `cargo fmt --check` (in `asyar-launcher/src-tauri`)
-5. **Rust Clippy**: `cargo clippy --workspace --all-targets -- -D warnings` (in `asyar-launcher/src-tauri`)
-6. **Rust Test Suite**: `cargo test --workspace` (in `asyar-launcher/src-tauri`)
+4. **Rust Formatting**: `cargo fmt --check` (in `launcher-app/src-tauri`)
+5. **Rust Clippy**: `cargo clippy --workspace --all-targets -- -D warnings` (in `launcher-app/src-tauri`)
+6. **Rust Test Suite**: `cargo test --workspace` (in `launcher-app/src-tauri`)
 
 > **Always pass `--workspace` to `cargo test` and `cargo clippy`.** The Cargo workspace sets
 > `default-members = ["."]`, so the bare commands silently skip the ~610 tests in
-> `src-tauri/crates/*` (asyar-storage, asyar-search, asyar-platform, asyar-calculator) and
+> `src-tauri/crates/*` (launcher-storage, launcher-search, launcher-platform, launcher-calculator) and
 > report ~3,190 instead of the full ~3,816. `scripts/check-ci.mjs` already does this.
 
-_(If TypeScript/Rust bindings were touched, also verify: `cargo test export_bindings -- --ignored` and check `git diff --exit-code -- asyar-launcher/src/bindings.ts`)_
+_(If TypeScript/Rust bindings were touched, also verify: `cargo test export_bindings -- --ignored` and check `git diff --exit-code -- launcher-app/src/bindings.ts`)_

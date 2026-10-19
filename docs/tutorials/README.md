@@ -1,6 +1,6 @@
 # Tutorials
 
-Learning-oriented lessons. Work through these in order when you're new to Asyar extension development.
+Learning-oriented lessons. Work through these in order when you're new to Launcher extension development.
 
 ## Pages in this section
 

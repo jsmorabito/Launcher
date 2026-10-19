@@ -1,0 +1,21 @@
+{
+  "id": "quit",
+  "name": "Launcher",
+  "icon": "icon:power",
+  "version": "1.0.0",
+  "lifecycle": {
+    "disableable": true
+  },
+  "description": "Quit the Launcher application",
+  "type": "extension",
+  "searchable": true,
+  "commands": [
+    {
+      "id": "quit-launcher",
+      "name": "Quit Launcher",
+      "icon": "icon:power",
+      "description": "Quit the Launcher application",
+      "mode": "background"
+    }
+  ]
+}

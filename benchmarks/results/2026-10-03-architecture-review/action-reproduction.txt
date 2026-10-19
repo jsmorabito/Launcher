@@ -1,5 +1,5 @@
 
- RUN  v4.1.10 /private/tmp/asyar-branch-benchmark/asyar-launcher
+ RUN  v4.1.10 /private/tmp/launcher-branch-benchmark/launcher-app
 
  ❯ src/services/search/searchOrchestrator.test.ts (19 tests | 1 failed) 7ms
      × prefers worker actionId over the aggregator navigation closure 2ms

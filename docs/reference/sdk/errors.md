@@ -1,8 +1,8 @@
 # Error Handling & Error Classes
 
-`asyar-sdk` provides typed error classes for handling IPC errors, permission issues, and timeouts in extensions.
+`launcher-sdk` provides typed error classes for handling IPC errors, permission issues, and timeouts in extensions.
 
-All custom errors inherit from `AsyarError`, which extends the standard JavaScript `Error`.
+All custom errors inherit from `LauncherError`, which extends the standard JavaScript `Error`.
 
 ---
 
@@ -10,7 +10,7 @@ All custom errors inherit from `AsyarError`, which extends the standard JavaScri
 
 ```
 Error
- └── AsyarError
+ └── LauncherError
       ├── PermissionDeniedError
       ├── PermissionConsentRequiredError
       └── IpcTimeoutError
@@ -20,12 +20,12 @@ Error
 
 ## Error Classes
 
-### `AsyarError`
+### `LauncherError`
 
 Base error class for all SDK and host IPC errors.
 
 ```typescript
-export class AsyarError extends Error {
+export class LauncherError extends Error {
   public readonly code: string;
   public readonly details?: Record<string, unknown>;
 
@@ -44,7 +44,7 @@ export class AsyarError extends Error {
 Thrown when an IPC call is blocked because the required permission is not declared in `manifest.json`.
 
 ```typescript
-export class PermissionDeniedError extends AsyarError {
+export class PermissionDeniedError extends LauncherError {
   public readonly permission?: string;
 
   constructor(message: string, permission?: string);
@@ -62,7 +62,7 @@ export class PermissionDeniedError extends AsyarError {
 Thrown when an extension declared a permission in `manifest.json`, but the user has not yet consented to or approved the permission set (or consent was withheld pending review in Settings).
 
 ```typescript
-export class PermissionConsentRequiredError extends AsyarError {
+export class PermissionConsentRequiredError extends LauncherError {
   public readonly permission?: string;
 
   constructor(message: string, permission?: string);
@@ -80,7 +80,7 @@ export class PermissionConsentRequiredError extends AsyarError {
 Thrown when an IPC call between an extension and the host times out before receiving a response envelope.
 
 ```typescript
-export class IpcTimeoutError extends AsyarError {
+export class IpcTimeoutError extends LauncherError {
   public readonly command?: string;
   public readonly timeoutMs?: number;
 
@@ -104,8 +104,8 @@ import {
   PermissionDeniedError,
   PermissionConsentRequiredError,
   IpcTimeoutError,
-  AsyarError,
-} from 'asyar-sdk/contracts'; // or from 'asyar-sdk/worker' / 'asyar-sdk/view'
+  LauncherError,
+} from 'launcher-sdk/contracts'; // or from 'launcher-sdk/worker' / 'launcher-sdk/view'
 
 try {
   await clipboard.readCurrentText();
@@ -119,11 +119,11 @@ try {
   } else if (err instanceof IpcTimeoutError) {
     // IPC call timed out
     console.error(`Command ${err.command} timed out after ${err.timeoutMs}ms.`);
-  } else if (err instanceof AsyarError) {
+  } else if (err instanceof LauncherError) {
     // Other structured SDK error
-    console.error(`Asyar error [${err.code}]:`, err.message, err.details);
+    console.error(`Launcher error [${err.code}]:`, err.message, err.details);
   } else {
-    // Non-Asyar generic error
+    // Non-Launcher generic error
     console.error('Unexpected error:', err);
   }
 }
@@ -131,13 +131,13 @@ try {
 
 ---
 
-## Wire Protocol (`asyar:response`)
+## Wire Protocol (`launcher:response`)
 
-When the host IPC pipeline rejects a request, the `asyar:response` envelope carries structured error information:
+When the host IPC pipeline rejects a request, the `launcher:response` envelope carries structured error information:
 
 ```typescript
 interface IPCResponse<T = any> {
-  type: 'asyar:response';
+  type: 'launcher:response';
   messageId: string;
   result?: T;
   error?: string; // Human-readable error message

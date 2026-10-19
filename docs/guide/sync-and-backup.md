@@ -7,18 +7,18 @@ _Figure: the Account settings tab._
 
 ## Signing in
 
-Asyar uses your Asyar account for cloud sync and subscription features. Signing in is optional — Asyar works fully offline without an account.
+Launcher uses your Launcher account for cloud sync and subscription features. Signing in is optional — Launcher works fully offline without an account.
 
 To sign in:
 
 1. Open **Settings → Account** (`⌘,`, then the Account tab).
 2. Click **Sign in with GitHub** or **Sign in with Google**.
 3. A browser window opens for authentication. Complete the login there.
-4. Asyar polls for confirmation. Once your browser finishes, the launcher updates automatically.
+4. Launcher polls for confirmation. Once your browser finishes, the launcher updates automatically.
 
 After signing in, your name, avatar, and the list of features unlocked by your subscription appear at the top of the Account tab. To sign out, click **Sign Out** next to your profile.
 
-By signing in you agree to the Asyar Terms of Service and Privacy Policy.
+By signing in you agree to the Launcher Terms of Service and Privacy Policy.
 
 ## Cloud sync
 
@@ -26,28 +26,28 @@ Cloud sync keeps your settings, commands, and AI conversation history in sync ac
 
 When sync is enabled:
 
-- Asyar syncs automatically in the background.
+- Launcher syncs automatically in the background.
 - The **Last Synced** row in the Account tab shows when the most recent sync completed.
 - Click **Sync Now** to trigger a manual sync at any time.
 
 If a sync error occurs, an error message appears below the Last Synced row.
 
-You can turn Cloud Sync on or off at any time using the **Sync** toggle in **Settings → Account**. When turned off or when signed out, Asyar operates in strict local-first mode: all outbound sync egress is blocked at the native core, and your data stays completely on this device.
+You can turn Cloud Sync on or off at any time using the **Sync** toggle in **Settings → Account**. When turned off or when signed out, Launcher operates in strict local-first mode: all outbound sync egress is blocked at the native core, and your data stays completely on this device.
 
 ## End-to-end encryption
 
-By default, your synced data is stored on Asyar's servers in a form the server can read. End-to-end encryption (E2EE) changes this: your data is encrypted on your device before it leaves, and the server stores only ciphertext it cannot decrypt.
+By default, your synced data is stored on Launcher's servers in a form the server can read. End-to-end encryption (E2EE) changes this: your data is encrypted on your device before it leaves, and the server stores only ciphertext it cannot decrypt.
 
 **Enabling E2EE:**
 
 1. In **Settings → Account**, find the **Encrypted Sync** row and turn on the toggle.
 2. An enrolment dialog opens. You will be asked to create a passphrase — choose something strong that you can remember, because it cannot be recovered from the server side.
-3. Asyar also generates a **recovery phrase** (a mnemonic word list). Store this somewhere safe — it is the only way to regain access if you forget your passphrase.
+3. Launcher also generates a **recovery phrase** (a mnemonic word list). Store this somewhere safe — it is the only way to regain access if you forget your passphrase.
 4. Once you confirm, encryption is active. The status badge changes to "On" with a green indicator.
 
 **Daily use:**
 
-When E2EE is on, Asyar caches the decryption key on your device so you do not need to enter your passphrase on every sync. If the cache is cleared (for example, after a reinstall), the status shows **Locked** and you will be prompted to enter your passphrase once to unlock it.
+When E2EE is on, Launcher caches the decryption key on your device so you do not need to enter your passphrase on every sync. If the cache is cleared (for example, after a reinstall), the status shows **Locked** and you will be prompted to enter your passphrase once to unlock it.
 
 **Managing your passphrase:**
 
@@ -64,13 +64,13 @@ Turn off the Encrypted Sync toggle and confirm the dialog. Your data will be re-
 
 ## Export & import a backup
 
-Local backups let you save a snapshot of your Asyar data to a file and restore it on the same computer or a different one — independent of cloud sync.
+Local backups let you save a snapshot of your Launcher data to a file and restore it on the same computer or a different one — independent of cloud sync.
 
 **Exporting a backup:**
 
 1. Open **Settings → Backup**.
 2. Check the data categories you want to include (for example, Snippets, Agents, Shortcuts).
-3. If the backup includes sensitive data such as API keys, Asyar warns you. You can set an optional password to encrypt the file; if you leave it blank, sensitive fields are stripped from the exported file automatically.
+3. If the backup includes sensitive data such as API keys, Launcher warns you. You can set an optional password to encrypt the file; if you leave it blank, sensitive fields are stripped from the exported file automatically.
 4. Click **Export…** and choose where to save the file.
 
 **Importing a backup:**

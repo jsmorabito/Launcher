@@ -1,6 +1,6 @@
 # Clipboard Privacy — Defense in Depth
 
-Asyar treats clipboard data as potentially sensitive and applies layered
+Launcher treats clipboard data as potentially sensitive and applies layered
 protections. This document is the design reference for the layered
 approach; see [`reference/permissions.md`](../reference/permissions.md)
 for the user-facing behaviour summary.
@@ -9,7 +9,7 @@ for the user-facing behaviour summary.
 
 Clipboard history routinely contains: passwords pasted from password
 managers, 2FA codes, recovery phrases, API tokens, SSH private keys,
-credit card numbers, personal data. Asyar must not be the weak link
+credit card numbers, personal data. Launcher must not be the weak link
 between a user's password manager and a server breach.
 
 The principal threats:
@@ -36,7 +36,7 @@ opt-out (`CanIncludeInClipboardHistory`,
 source-app denylist (default: eight common password managers + Apple
 Keychain Access).
 
-Code: [`src-tauri/src/clipboard_privacy/`](../../asyar-launcher/src-tauri/src/clipboard_privacy/).
+Code: [`src-tauri/src/clipboard_privacy/`](../../launcher-app/src-tauri/src/clipboard_privacy/).
 Settings UI: **Settings → Privacy → Clipboard Privacy**.
 
 Addresses threats 1 and 2 partially (secrets that opt out at the source
@@ -81,8 +81,8 @@ The user can disable redaction globally or per-category in
   default).
 - Secrets pasted as images.
 
-Code: [`src-tauri/src/secret_detection/`](../../asyar-launcher/src-tauri/src/secret_detection/),
-[`src/services/privacy/secretRedactionService.svelte.ts`](../../asyar-launcher/src/services/privacy/secretRedactionService.svelte.ts).
+Code: [`src-tauri/src/secret_detection/`](../../launcher-app/src-tauri/src/secret_detection/),
+[`src/services/privacy/secretRedactionService.svelte.ts`](../../launcher-app/src/services/privacy/secretRedactionService.svelte.ts).
 Settings UI: **Settings → Privacy → Secret Redaction**.
 
 Addresses threats 1 and 2 for the most common secret formats that
@@ -101,7 +101,7 @@ The hardcoded `prefs_key_material()` defense-in-depth scheme is gone:
 honest about not being a real secret, replaced by something that is.
 
 **Linux fallback:** when Secret Service is unavailable (headless,
-minimal WM, DBus-less container), Asyar falls back to a `0600`
+minimal WM, DBus-less container), Launcher falls back to a `0600`
 file-backed key under `appData/keystore-v1.dat` and surfaces a
 warning-severity diagnostic so the user knows protection is reduced
 to the file-permissions level. macOS / Windows treat keychain
@@ -120,8 +120,8 @@ table, no carry-forward of legacy constants.
 Addresses threat 1 directly: an offline disk image alone cannot decrypt
 the data without the (locked) OS keychain.
 
-Code: [`src-tauri/src/crypto/`](../../asyar-launcher/src-tauri/src/crypto/),
-[`src/services/privacy/encryptionService.svelte.ts`](../../asyar-launcher/src/services/privacy/encryptionService.svelte.ts).
+Code: [`src-tauri/src/crypto/`](../../launcher-app/src-tauri/src/crypto/),
+[`src/services/privacy/encryptionService.svelte.ts`](../../launcher-app/src/services/privacy/encryptionService.svelte.ts).
 Settings UI: **Settings → Privacy → Encryption at Rest**.
 
 ## Layer 4a — Per-item delta cloud sync (shipped 2026-05-04)
@@ -177,12 +177,12 @@ knows their local edit was overridden by a newer version.
 
 Tombstones (deleted items) are pushed with `deleted: true` and stay
 in `cloud_sync_items` for 30 days so other devices have a chance to
-pick up the deletion; a daily `asyar:prune-cloud-sync-tombstones`
+pick up the deletion; a daily `launcher:prune-cloud-sync-tombstones`
 console command (scheduled 03:30 UTC) hard-deletes them after that.
 
-Code: [`src-tauri/src/sync/`](../../asyar-launcher/src-tauri/src/sync/),
-[`src-tauri/src/storage/cloud_sync_state.rs`](../../asyar-launcher/src-tauri/src/storage/cloud_sync_state.rs),
-[`src/services/sync/cloudSyncService.svelte.ts`](../../asyar-launcher/src/services/sync/cloudSyncService.svelte.ts).
+Code: [`src-tauri/src/sync/`](../../launcher-app/src-tauri/src/sync/),
+[`src-tauri/src/storage/cloud_sync_state.rs`](../../launcher-app/src-tauri/src/storage/cloud_sync_state.rs),
+[`src/services/sync/cloudSyncService.svelte.ts`](../../launcher-app/src/services/sync/cloudSyncService.svelte.ts).
 Spec: [`docs/superpowers/specs/2026-05-03-delta-sync-cloud-sync.md`](../superpowers/specs/2026-05-03-delta-sync-cloud-sync.md).
 
 ## Layer 4b/4c — Optional end-to-end encrypted sync
@@ -204,19 +204,19 @@ recovery after passphrase loss, or explicit user "lock sync" action.
 
 Recovery is honest: passphrase loss = data loss. Users get a one-time
 24-word BIP-39 recovery phrase at enrolment and are encouraged to
-write it down. Asyar.org cannot reset a passphrase.
+write it down. Launcher.org cannot reset a passphrase.
 
 Addresses threat 2 directly. A server breach reveals only ciphertext.
 
-Code paths: [`src-tauri/src/sync/e2ee/`](../../asyar-launcher/src-tauri/src/sync/e2ee/),
-[`src-tauri/src/crypto/`](../../asyar-launcher/src-tauri/src/crypto/) (`kdf.rs`, `mnemonic.rs`, `sync_envelope.rs`),
-[`src/services/sync/syncEncryptionService.svelte.ts`](../../asyar-launcher/src/services/sync/syncEncryptionService.svelte.ts),
-[`src/components/settings/EncryptionEnrolmentDialog.svelte`](../../asyar-launcher/src/components/settings/EncryptionEnrolmentDialog.svelte),
-[`src/components/settings/PassphraseDialog.svelte`](../../asyar-launcher/src/components/settings/PassphraseDialog.svelte),
-[`src/components/settings/RotatePassphraseDialog.svelte`](../../asyar-launcher/src/components/settings/RotatePassphraseDialog.svelte),
-[`src/components/settings/RecoverWithMnemonicDialog.svelte`](../../asyar-launcher/src/components/settings/RecoverWithMnemonicDialog.svelte),
-[`src/components/settings/RecoveryPhraseDialog.svelte`](../../asyar-launcher/src/components/settings/RecoveryPhraseDialog.svelte),
-[`src/components/settings/DisableE2eeDialog.svelte`](../../asyar-launcher/src/components/settings/DisableE2eeDialog.svelte).
+Code paths: [`src-tauri/src/sync/e2ee/`](../../launcher-app/src-tauri/src/sync/e2ee/),
+[`src-tauri/src/crypto/`](../../launcher-app/src-tauri/src/crypto/) (`kdf.rs`, `mnemonic.rs`, `sync_envelope.rs`),
+[`src/services/sync/syncEncryptionService.svelte.ts`](../../launcher-app/src/services/sync/syncEncryptionService.svelte.ts),
+[`src/components/settings/EncryptionEnrolmentDialog.svelte`](../../launcher-app/src/components/settings/EncryptionEnrolmentDialog.svelte),
+[`src/components/settings/PassphraseDialog.svelte`](../../launcher-app/src/components/settings/PassphraseDialog.svelte),
+[`src/components/settings/RotatePassphraseDialog.svelte`](../../launcher-app/src/components/settings/RotatePassphraseDialog.svelte),
+[`src/components/settings/RecoverWithMnemonicDialog.svelte`](../../launcher-app/src/components/settings/RecoverWithMnemonicDialog.svelte),
+[`src/components/settings/RecoveryPhraseDialog.svelte`](../../launcher-app/src/components/settings/RecoveryPhraseDialog.svelte),
+[`src/components/settings/DisableE2eeDialog.svelte`](../../launcher-app/src/components/settings/DisableE2eeDialog.svelte).
 Settings UI: **Settings → Account → Encrypted Sync**.
 
 ## Layer 5 — Retention & automatic eviction (shipped 2026-09-30)
@@ -254,7 +254,7 @@ Snippet "private" tag / local-only sync opt-out (shipped 2026-09-30):
 
 ## What this is NOT
 
-Asyar does not promise to detect every secret. Layer 1 catches items
+Launcher does not promise to detect every secret. Layer 1 catches items
 that opt out at the source; Layer 2 catches the most common known
 formats. A user manually typing a password into a chat field, or
 copying from an app that uses a non-standard clipboard mechanism, is
@@ -266,4 +266,4 @@ not eliminate it.
 - Spec: [`docs/superpowers/specs/2026-05-01-clipboard-capture-exclusion.md`](../superpowers/specs/2026-05-01-clipboard-capture-exclusion.md)
 - Plan: [`docs/superpowers/plans/2026-05-01-clipboard-capture-exclusion.md`](../superpowers/plans/2026-05-01-clipboard-capture-exclusion.md)
 - Permissions reference: [`docs/reference/permissions.md`](../reference/permissions.md)
-- Source: [`src-tauri/src/clipboard_privacy/`](../../asyar-launcher/src-tauri/src/clipboard_privacy/), [`src/services/privacy/clipboardPrivacyService.svelte.ts`](../../asyar-launcher/src/services/privacy/clipboardPrivacyService.svelte.ts)
+- Source: [`src-tauri/src/clipboard_privacy/`](../../launcher-app/src-tauri/src/clipboard_privacy/), [`src/services/privacy/clipboardPrivacyService.svelte.ts`](../../launcher-app/src/services/privacy/clipboardPrivacyService.svelte.ts)

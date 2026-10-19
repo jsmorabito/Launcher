@@ -53,7 +53,7 @@ To maintain maximum velocity during TDD without context bloat or verification ta
 
 ```bash
 # Run all tests
-cd asyar-launcher/src-tauri && cargo test
+cd launcher-app/src-tauri && cargo test
 
 # Run tests for one file/module
 cargo test <module_name>
@@ -101,7 +101,7 @@ mod tests {
 **Commands:**
 
 ```bash
-cd asyar-launcher
+cd launcher-app
 
 # Watch mode during development
 pnpm test
@@ -159,9 +159,9 @@ When a feature interacts across registration boundaries:
 | Task                          | Command                                | Location                          |
 | ----------------------------- | -------------------------------------- | --------------------------------- |
 | Run Rust tests                | `cargo test` (in src-tauri/)           | `*.rs` inline `#[cfg(test)]`      |
-| Run launcher TS tests (watch) | `pnpm test` (in asyar-launcher/)       | `src/**/*.test.ts`                |
-| Run launcher TS tests (once)  | `pnpm test:run` (in asyar-launcher/)   | `src/**/*.test.ts`                |
-| Run SDK tests (once)          | `pnpm test:run` (in asyar-sdk/)        | `src/**/*.test.ts`                |
+| Run launcher TS tests (watch) | `pnpm test` (in launcher-app/)       | `src/**/*.test.ts`                |
+| Run launcher TS tests (once)  | `pnpm test:run` (in launcher-app/)   | `src/**/*.test.ts`                |
+| Run SDK tests (once)          | `pnpm test:run` (in launcher-sdk/)        | `src/**/*.test.ts`                |
 | Mock Tauri invoke             | `vi.mock('@tauri-apps/api/core', ...)` | top of test file                  |
 | Mock globals/env              | `vi.stubGlobal()` / `vi.stubEnv()`     | inside test, restore in afterEach |
 | Inner loop frontend checks    | `pnpm check:ci:frontend`               | repo root                         |

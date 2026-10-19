@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Launcher Dev",
+  "identifier": "org.launcher.dev",
+  "bundle": {
+    "icon": ["icons/dev/icon.png"]
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["launcher-dev"]
+      }
+    }
+  }
+}

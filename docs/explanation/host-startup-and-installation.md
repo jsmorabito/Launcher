@@ -6,13 +6,13 @@ order: 9
 
 ## 3. Application Startup Sequence
 
-When the user launches Asyar, the startup process follows a strict sequence to guarantee that OS hooks, system services, and extensions are securely bolted together before the UI is presented:
+When the user launches Launcher, the startup process follows a strict sequence to guarantee that OS hooks, system services, and extensions are securely bolted together before the UI is presented:
 
 1. **Rust Initialization (`main.rs` -> `lib.rs:run()`):**
    - Tauri builder starts.
    - Core plugins are initialized (`fs`, `http`, `global_shortcut`, `clipboard_manager`, `opener`).
 2. **Custom Protocol Registration:**
-   - `.register_uri_scheme_protocol("asyar-extension", ...)` sets up the handler for Tier 2 extension asset resolution.
+   - `.register_uri_scheme_protocol("launcher-extension", ...)` sets up the handler for Tier 2 extension asset resolution.
 3. **App Setup phase (`setup_app`):**
    - System tray icon and menu are configured.
    - The main window (`SPOTLIGHT_LABEL`) is retrieved and OS-specific composition (e.g., Vibrancy on macOS, Blur on Windows) is applied.
@@ -57,20 +57,20 @@ When a user discovers a third-party extension in the Store:
 3. **Rust Processing:**
    - Downloads the extension archive from the provided URL using the `reqwest` HTTP client.
    - Saves the downloaded payload to a temporary file (`NamedTempFile`).
-   - Verifies the SHA-256 checksum against the value stored in the Asyar Store API. Mismatches abort installation.
+   - Verifies the SHA-256 checksum against the value stored in the Launcher Store API. Mismatches abort installation.
    - Extracts the zip archive into `$APP_DATA/extensions/{extensionId}/`.
 4. **Live Reload:** `extensionLoaderService.loadAllExtensions()` picks up the new extension without a restart.
 5. **Indexing:** `ExtensionManager.syncCommandIndex()` pushes the new commands into the Rust search index.
 6. **Failure Cleanup:** If download or extraction fails, Rust purges the installation directory before returning an error.
 
-### Path B — Local file install (`.asyar`)
+### Path B — Local file install (`.launcher`)
 
-Users can also install from a local `.asyar` file (a renamed ZIP) via Settings → Extensions → **Install from File...**. This supports all extension types — `view`, `result`, and `theme`.
+Users can also install from a local `.launcher` file (a renamed ZIP) via Settings → Extensions → **Install from File...**. This supports all extension types — `view`, `result`, and `theme`.
 
-1. **User Interaction:** User clicks "Install from File..." → native file picker filtered to `*.asyar`.
+1. **User Interaction:** User clicks "Install from File..." → native file picker filtered to `*.launcher`.
 2. **Frontend:** Calls `show_open_extension_dialog` Tauri command (returns the selected path), then `install_extension_from_file` with that path.
 3. **Rust processing (`install_from_file`):**
-   - Validates the file has a `.asyar` extension.
+   - Validates the file has a `.launcher` extension.
    - Extracts the ZIP to a temp directory (reuses `extract_zip()` with zip-slip protection).
    - Reads and validates `manifest.json` (reuses `read_manifest()` + `validate_compatibility()`).
    - Runs `validate_package_structure()`:
@@ -86,7 +86,7 @@ Users can also install from a local `.asyar` file (a renamed ZIP) via Settings �
 
 ## 6. Extension View Rendering Pipeline
 
-This flow details exactly how Asyar transitions from a user pressing `Enter` on a search result to rendering an extension view.
+This flow details exactly how Launcher transitions from a user pressing `Enter` on a search result to rendering an extension view.
 
 ### For Tier 1 (Built-in)
 
@@ -108,9 +108,9 @@ This flow details exactly how Asyar transitions from a user pressing `Enter` on 
 4. The `$activeView` store updates.
 5. In `src/routes/+page.svelte`, because `isBuiltIn` is false, it mounts `<ExtensionIframe extensionId="xyz-plugin" view="xyz-plugin/DefaultView" />`.
 6. `ExtensionIframe.svelte` reactively generates the `src` attribute string:
-   `asyar-extension://xyz-plugin/index.html?view=DefaultView`
+   `launcher-extension://xyz-plugin/index.html?view=DefaultView`
 7. The `<iframe sandbox="allow-scripts allow-same-origin allow-forms allow-popups">` DOM node is attached.
-8. **Protocol Interception (`lib.rs`):** The network request for `asyar-extension://` is intercepted by the Tauri Rust core.
+8. **Protocol Interception (`lib.rs`):** The network request for `launcher-extension://` is intercepted by the Tauri Rust core.
 9. **Path Resolution:**
    - Rust strips query parameters (`?view=DefaultView`) using `.split('?').next().unwrap()`.
    - It iterates through paths in a strict, security-focused priority order: it checks Host bundle resources (Priority 2) **first**, and only if not found does it check the user AppData directory (Priority 3). Priority 1 is reserved exclusively for a localized development source directory and is only evaluated in debug builds.

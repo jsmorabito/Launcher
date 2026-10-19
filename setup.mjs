@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Asyar Development Workspace Setup
+ * Launcher Development Workspace Setup
  *
  * Clones bundled extensions, installs workspace dependencies, builds the SDK,
  * and verifies the setup.
  *
  * Usage:
  *   git clone https://github.com/Xoshbin/asyar.git
- *   cd asyar
+ *   cd launcher
  *   node setup.mjs
  *
  * Cross-platform (Node.js, no bash dependencies).
@@ -105,16 +105,16 @@ for (const ext of extensions) {
   console.log(`  Building extensions/${ext.name}...`);
   run('pnpm build', { cwd: dir });
   console.log(`  Attaching extensions/${ext.name}...`);
-  run('pnpm exec asyar attach', { cwd: dir });
+  run('pnpm exec launcher attach', { cwd: dir });
   console.log(`  ✓ extensions/${ext.name} built and attached`);
 }
 
 // ── Verify setup ─────────────────────────────────────────────────────────────
 
-step('Verifying setup (asyar doctor)');
+step('Verifying setup (launcher doctor)');
 
 try {
-  run('node dist/cli/index.js doctor', { cwd: resolve(root, 'asyar-sdk') });
+  run('node dist/cli/index.js doctor', { cwd: resolve(root, 'launcher-sdk') });
 } catch {
   console.error('\n⚠ Doctor reported issues — see above for details.');
   console.error('  The workspace is installed but may need manual fixes.');
@@ -126,7 +126,7 @@ try {
 console.log(`
 ${'─'.repeat(64)}
 
-  ✓ Asyar development workspace is ready!
+  ✓ Launcher development workspace is ready!
 
   Quick start:
     pnpm dev          Build SDK and start the app

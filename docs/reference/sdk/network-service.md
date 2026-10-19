@@ -99,7 +99,7 @@ if (response.status === 401) {
   [threat model](../../explanation/permission-system.md#secret-references)).
 - Secret-bearing responses are capped at **10 MiB**, and request timeouts at
   **30 seconds**. These restrictions do not change ordinary fetch behavior.
-- Tokens are never refreshed or written by Asyar. Surface an expired token's
+- Tokens are never refreshed or written by Launcher. Surface an expired token's
   **HTTP 401** so the user can re-log in with their CLI.
 - WebSocket secret references are **unsupported**. `secretRefs` belongs only to
   HTTP `RequestOptions`.
@@ -139,7 +139,7 @@ await socket.send(JSON.stringify({ id: 1, type: 'subscribe_events', event_type: 
 await socket.close(1000, 'User navigated away');
 ```
 
-> ⚠️ **Never use `window.fetch()`, `XMLHttpRequest`, or `new WebSocket()` directly inside your extension.** The iframe's Content Security Policy blocks external network connections (`default-src asyar-extension: 'self'`). Always route HTTP and WebSocket calls through `NetworkService`. Declare `"network"` in your `manifest.json` permissions.
+> ⚠️ **Never use `window.fetch()`, `XMLHttpRequest`, or `new WebSocket()` directly inside your extension.** The iframe's Content Security Policy blocks external network connections (`default-src launcher-extension: 'self'`). Always route HTTP and WebSocket calls through `NetworkService`. Declare `"network"` in your `manifest.json` permissions.
 
 **Timeout & Lifecycle behaviour:**
 

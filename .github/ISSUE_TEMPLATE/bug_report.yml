@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug or issue with Asyar
+description: Report a bug or issue with Launcher
 title: '[Bug]: '
 labels: ['bug']
 body:
@@ -10,8 +10,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: Asyar Version
-      description: What version of Asyar are you running? (e.g., v0.1.1-38)
+      label: Launcher Version
+      description: What version of Launcher are you running? (e.g., v0.1.1-38)
       placeholder: 'v1.x.x'
     validations:
       required: true

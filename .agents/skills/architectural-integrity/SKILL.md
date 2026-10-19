@@ -1,18 +1,18 @@
 ---
 name: architectural-integrity
-description: Use before planning or implementing ANY feature, bug fix, refactor, or API change that touches Asyar's architecture — extension system, service layer, IPC contracts, Tauri commands, manifest contributions, or cross-layer data flow. Triggers on new features, new extension APIs, new services, bug fixes involving multiple layers, refactors of infrastructure code, adding new contribution points, and any work that could affect how built-in features or third-party extensions interact with the platform. Also triggers on any task where you need to decide which architectural layer owns the logic, whether Tier 2 extensions can use a capability, or whether a change requires a manifest/permission update. Does NOT trigger for pure CSS/styling fixes (use design-language), isolated unit tests, documentation updates, version bumps, mechanical renames, or answering informational questions about the codebase.
+description: Use before planning or implementing ANY feature, bug fix, refactor, or API change that touches Launcher's architecture — extension system, service layer, IPC contracts, Tauri commands, manifest contributions, or cross-layer data flow. Triggers on new features, new extension APIs, new services, bug fixes involving multiple layers, refactors of infrastructure code, adding new contribution points, and any work that could affect how built-in features or third-party extensions interact with the platform. Also triggers on any task where you need to decide which architectural layer owns the logic, whether Tier 2 extensions can use a capability, or whether a change requires a manifest/permission update. Does NOT trigger for pure CSS/styling fixes (use design-language), isolated unit tests, documentation updates, version bumps, mechanical renames, or answering informational questions about the codebase.
 ---
 
 # Architectural Integrity
 
-Asyar is a platform, not an app. Every decision — features, bug fixes, refactors — must be made from a platform-level perspective. The architecture is inspired by VS Code's extension host model: the core app is a thin, stable shell that consumes capabilities from extensions through well-defined interfaces.
+Launcher is a platform, not an app. Every decision — features, bug fixes, refactors — must be made from a platform-level perspective. The architecture is inspired by VS Code's extension host model: the core app is a thin, stable shell that consumes capabilities from extensions through well-defined interfaces.
 
 ## Beta Phase Mindset
 
-Asyar is in Beta. This changes everything about how you approach code:
+Launcher is in Beta. This changes everything about how you approach code:
 
 - **Internals: break freely.** Internal module boundaries, Tier 1 built-ins, frontend-only Tauri commands, launcher-private stores and schemas: no shims, no legacy hacks. If a clean design requires a breaking change, make it.
-- **The third-party extension contract is protected until launcher 0.2.0.** Extensions already published in the Asyar Store must keep working. This covers the manifest schema, the public `asyar-sdk` API, host↔extension IPC wire shapes (extensions bundle their own SDK), runtime behavior, and packaging/store formats. Never break these in place. Add the clean new contract, mark the old one **deprecated** (remove in 0.2.0), and keep it alive through a single boundary adapter. Full policy: `.agents/rules/09-beta-compatibility-and-deprecation.md`.
+- **The third-party extension contract is protected until launcher 0.2.0.** Extensions already published in the Launcher Store must keep working. This covers the manifest schema, the public `launcher-sdk` API, host↔extension IPC wire shapes (extensions bundle their own SDK), runtime behavior, and packaging/store formats. Never break these in place. Add the clean new contract, mark the old one **deprecated** (remove in 0.2.0), and keep it alive through a single boundary adapter. Full policy: `.agents/rules/09-beta-compatibility-and-deprecation.md`.
 - **Compatibility never shapes the core.** The core sees only the new, clean design. Old shapes are normalized at ingress (manifest parsing, IPC router, SDK re-export), tested with an old-format fixture, guarded by a deadline test, and deleted before 0.2.0.
 - **Security/privacy outrank compatibility**, and if you can't stay compatible cleanly, stop and ask the user rather than silently breaking or hacking.
 - **Prioritize clean code over legacy internal contracts.** If an internal interface is wrong, redesign it. Do not patch around it.
@@ -27,12 +27,12 @@ Not sure whether something is observable by a published extension? Treat it as p
 
 All features might eventually be extended by third parties. Design every capability as if an extension will need to use it — because one will.
 
-Asyar already implements this with its **Two-Tier Extension Model**:
+Launcher already implements this with its **Two-Tier Extension Model**:
 
 - **Tier 1 (Built-in features)** run in the privileged host context at `src/built-in-features/*/`. They share the main JS execution context with full Tauri API access.
 - **Tier 2 (Installed extensions)** follow the **Separation of Headless Compute and Visual Canvas**:
   - **Headless Worker (`role: 'worker'`)**: Executes in an **off-main-thread compute environment** (e.g. Web Worker / dedicated worker host) completely decoupled from the launcher window's DOM and main renderer thread. Always-on (push subscriptions, schedules, timers, tray, RPC handlers). Heavy compute or interval polling in background workers can never drop launcher UI frames, micro-stutter the search bar, or block input handling.
-  - **Visual View (`role: 'view'`)**: Executes in a **sandboxed visual `<iframe>`** at the `asyar-extension://` custom protocol, mounted on-demand strictly when the user navigates to an extension view and unmounted when dismissed.
+  - **Visual View (`role: 'view'`)**: Executes in a **sandboxed visual `<iframe>`** at the `launcher-extension://` custom protocol, mounted on-demand strictly when the user navigates to an extension view and unmounted when dismissed.
   - **Multi-Engine Horizon**: Web Workers off the main thread today $\rightarrow$ pluggable isolated native runtimes (QuickJS / Wasm component hosts with direct Rust IPC) for high-throughput extensions tomorrow.
   - They communicate exclusively via typed IPC envelopes. A misbehaving Tier 2 extension cannot crash the host or degrade the UI event loop. See [`docs/explanation/extension-runtime.md`](../../../docs/explanation/extension-runtime.md).
 
@@ -46,13 +46,13 @@ When building a new search engine, background task, data provider, or any capabi
 2. **The core app is a consumer, not an implementor.** It orchestrates and renders. The actual logic lives behind the interface.
 3. **Never tightly couple the main UI thread with extension execution logic.** If you're writing code that only works when called directly from a Svelte component and cannot be invoked over IPC, you're creating a Tier-1-only feature. That's a design smell.
 
-### Real Asyar Examples
+### Real Launcher Examples
 
 **Good — SearchOrchestrator as a consumer:**
 The `SearchOrchestrator` at `src/services/search/searchOrchestrator.svelte.ts` doesn't implement search. It aggregates results from the Rust search engine and from `extensionManager.searchAll(query)`. Any extension implementing the `search()` method automatically contributes results. The orchestrator doesn't care where results come from.
 
 **Good — ExtensionIpcRouter as a generic dispatcher:**
-The `ExtensionIpcRouter` at `src/services/extension/ExtensionIpcRouter.ts` routes `asyar:api:{service}:{method}` messages to service instances via a service registry. Adding a new service doesn't require changing the router — just register the service.
+The `ExtensionIpcRouter` at `src/services/extension/ExtensionIpcRouter.ts` routes `launcher:api:{service}:{method}` messages to service instances via a service registry. Adding a new service doesn't require changing the router — just register the service.
 
 **Good — sync_application_index, after the fix:**
 The `sync_application_index` Tauri command at `src-tauri/src/commands/applications.rs` used to carry 40+ lines of diffing, indexing, and state mutation directly in the handler. It now parses its arguments and delegates: `service::sync_application_index(&app, &search_state, paths)`. Copy this shape — the handler converts wire types, the service module owns the logic.
@@ -69,11 +69,11 @@ VS Code's Extension Host runs in a separate process. Extensions never touch the 
 
 Instead of hardcoding features into the UI, features register themselves through a contribution system. Internal features and third-party extensions use the exact same API to inject their capabilities.
 
-Asyar already has this through `manifest.json`:
+Launcher already has this through `manifest.json`:
 
 ```json
 {
-  "id": "org.asyar.pomodoro",
+  "id": "org.launcher.pomodoro",
   "type": "extension",
   "background": { "main": "dist/worker.js" },
   "commands": [
@@ -99,7 +99,7 @@ When adding a new system command, menu item, search source, or UI contribution:
 2. **If no contribution point exists, create one.** Design it as a generic registration mechanism, not a one-off addition. The new feature should register itself the same way a third-party extension would.
 3. **Never manually edit core UI components to add a feature.** If you're adding an `if (featureId === 'my-feature')` branch in the core renderer, you're doing it wrong. The core should be feature-agnostic.
 
-### Real Asyar Examples
+### Real Launcher Examples
 
 **Good — Command index sync is manifest-driven:**
 The `syncCommandIndex()` method in `extensionManager.svelte.ts` formats all commands as `cmd_{extensionId}_{commandId}` and syncs them to the Rust search index. New extensions automatically appear in search. No core UI changes needed.
@@ -108,14 +108,14 @@ The `syncCommandIndex()` method in `extensionManager.svelte.ts` formats all comm
 Any extension with `searchable: true` in its manifest has its `search()` method called during query execution. The Calculator, Snippets, and Shortcuts extensions all contribute search results through the same mechanism. No special-casing in the search pipeline.
 
 **Good — Extension storage as a platform service:**
-Extensions persist data via `context.proxies.storage` (SDK `IStorageService` interface). The IPC Router auto-injects the calling `extensionId`, so each extension's data is isolated at the SQL level (`WHERE extension_id = ?`). The Rust `storage::extension_kv` module stores all extensions' data in one shared `extension_storage` table in `asyar_data.db`. On uninstall, `lifecycle.rs` calls `extension_kv::clear(extension_id)` — no orphaned data. Permissions: `storage:read` / `storage:write` in `manifest.json`.
+Extensions persist data via `context.proxies.storage` (SDK `IStorageService` interface). The IPC Router auto-injects the calling `extensionId`, so each extension's data is isolated at the SQL level (`WHERE extension_id = ?`). The Rust `storage::extension_kv` module stores all extensions' data in one shared `extension_storage` table in `launcher_data.db`. On uninstall, `lifecycle.rs` calls `extension_kv::clear(extension_id)` — no orphaned data. Permissions: `storage:read` / `storage:write` in `manifest.json`.
 
 **Anti-pattern to avoid — Hardcoded settings tabs:**
 The settings page at `src/routes/settings/` uses a hardcoded tab array. If a new settings section needs adding, it requires editing the core settings component. A better approach: extensions declare settings contributions in their manifest, and the settings UI renders them dynamically.
 
 ### VS Code Parallel
 
-VS Code's `package.json` `contributes` field is the canonical example. Extensions declare commands, menus, keybindings, views, settings, languages, themes, and more — all without touching VS Code's source. The core UI reads these declarations and renders accordingly. Asyar's `manifest.json` serves the same purpose.
+VS Code's `package.json` `contributes` field is the canonical example. Extensions declare commands, menus, keybindings, views, settings, languages, themes, and more — all without touching VS Code's source. The core UI reads these declarations and renders accordingly. Launcher's `manifest.json` serves the same purpose.
 
 ---
 
@@ -151,7 +151,7 @@ This skill focuses on the _structural_ question: are layers properly separated, 
 
 For rules about _what logic belongs in Rust vs. the frontend_, see the **rust-first** skill. For _correct Svelte 5 and Tauri 2 API usage_ at each layer, see the **tech-versions** skill.
 
-### Real Asyar Examples
+### Real Launcher Examples
 
 **Good — Extension uninstall as thin wrapper:**
 The `uninstall_extension` command at `src-tauri/src/commands/extensions.rs` extracts state and delegates to `extensions::lifecycle::uninstall()`. The command layer is just plumbing — all logic lives in the service module. Any future caller (a CLI tool, a headless test, another Rust module) can reuse the same service function.
@@ -177,7 +177,7 @@ VS Code's architecture has a strict process boundary: the renderer process (UI),
 
 Early extensible platforms tried passing DOM access or UI framework components directly to extensions. This tightly couples extensions to the host's internal framework and breaks constantly when the host upgrades.
 
-**Asyar's correct approach:** Tier 2 extensions get sandboxed iframes for visual presentation (`role: 'view'`) and off-main-thread worker contexts for headless compute (`role: 'worker'`), communicating through typed IPC. They cannot touch the host's DOM or internal Svelte components. This is exactly how VS Code's Webview and Extension Host APIs work — extension views provide HTML content rendered in a sandboxed frame, while extension logic runs off the UI thread without accessing the host renderer DOM.
+**Launcher's correct approach:** Tier 2 extensions get sandboxed iframes for visual presentation (`role: 'view'`) and off-main-thread worker contexts for headless compute (`role: 'worker'`), communicating through typed IPC. They cannot touch the host's DOM or internal Svelte components. This is exactly how VS Code's Webview and Extension Host APIs work — extension views provide HTML content rendered in a sandboxed frame, while extension logic runs off the UI thread without accessing the host renderer DOM.
 
 **For data-driven UI (like lists and trees):** Use declarative data structures. The extension provides data (title, icon, description, actions); the host renders it in the standard UI. This is the pattern behind `ExtensionResult[]` returned from `search()` — the extension describes results, the host renders them in `ResultsList`.
 
@@ -191,7 +191,7 @@ If a bug's root cause is a flaw in the infrastructure design, do not apply a loc
 
 **Example:** If an IPC message isn't reaching an extension, don't add a retry loop in the component. Trace the message through `MessageBroker` → `ExtensionIpcRouter` → permission gate → service dispatch. Find the actual failure point and fix the contract.
 
-Since Asyar is in Beta, you have full permission to make breaking changes to internals to fix root causes. There is no excuse for symptom patching. If the root-cause fix changes the protected third-party extension contract, redesign it cleanly and keep the old contract working as a deprecated boundary adapter until 0.2.0 (see Beta Phase Mindset).
+Since Launcher is in Beta, you have full permission to make breaking changes to internals to fix root causes. There is no excuse for symptom patching. If the root-cause fix changes the protected third-party extension contract, redesign it cleanly and keep the old contract working as a deprecated boundary adapter until 0.2.0 (see Beta Phase Mindset).
 
 ### Never Hardcode What Should Be Registered
 
@@ -213,8 +213,8 @@ Two problems: the class name leaked into the wire contract (renaming `LogService
 
 **The fix is a two-layer mechanical guard:**
 
-1. **`asyar-sdk/src/ipc/namespaces.ts`** is the single source of truth. The `NAMESPACES` readonly array lists every valid wire namespace; the `Namespace` union type is derived from it.
-2. **`defineServiceRegistry()`** at `asyar-launcher/src/services/extension/defineServiceRegistry.ts` is a typed identity function whose parameter extends `Partial<Record<Namespace, unknown>>`. Passing a non-canonical key is a compile error. The registry itself is composed in `asyar-launcher/src/services/extension/buildServiceRegistry.ts`.
+1. **`launcher-sdk/src/ipc/namespaces.ts`** is the single source of truth. The `NAMESPACES` readonly array lists every valid wire namespace; the `Namespace` union type is derived from it.
+2. **`defineServiceRegistry()`** at `launcher-app/src/services/extension/defineServiceRegistry.ts` is a typed identity function whose parameter extends `Partial<Record<Namespace, unknown>>`. Passing a non-canonical key is a compile error. The registry itself is composed in `launcher-app/src/services/extension/buildServiceRegistry.ts`.
 
 ```typescript
 return defineServiceRegistry({
@@ -226,7 +226,7 @@ return defineServiceRegistry({
 });
 ```
 
-The key IS the wire namespace (`asyar:api:<namespace>:<method>`). Renaming the backing class never breaks the wire. Adding a new namespace is a single edit to `NAMESPACES` followed by compile errors pointing at every place that needs updating.
+The key IS the wire namespace (`launcher:api:<namespace>:<method>`). Renaming the backing class never breaks the wire. Adding a new namespace is a single edit to `NAMESPACES` followed by compile errors pointing at every place that needs updating.
 
 ### Never Introduce Capabilities Blindly (Search First, Maintain Single Ownership)
 
@@ -266,7 +266,7 @@ For auditing specific IPC contracts, permission gate coverage, and type string c
 
 ### The Pattern
 
-Privacy and data security in Asyar are **fail-closed** by default. No private user data, telemetry, or privileged cloud requests ever leave the device unless explicitly authorized by authentication, entitlement, and user consent.
+Privacy and data security in Launcher are **fail-closed** by default. No private user data, telemetry, or privileged cloud requests ever leave the device unless explicitly authorized by authentication, entitlement, and user consent.
 
 - **Rust Core is the Policy Brain**: All policy evaluations and authorization rules are defined and enforced in native Rust (`crate::auth::policy::Gate`).
 - **Typed `Ability` Enum**: All privileged operations are represented by typed variants (`Ability::CloudSyncEgress`, `Ability::AiCloudModels`, `Ability::AiConversationSync`, `Ability::TelemetryCrashReport`, `Ability::TelemetryUsageShare`). String-matching checks are strictly forbidden for core abilities.
@@ -280,7 +280,7 @@ Privacy and data security in Asyar are **fail-closed** by default. No private us
 
 ### The Pattern
 
-Built-in features in Asyar (such as Calculator, Clipboard History, Snippets, Notes, Aliases, Window Management, and System) are first-class platform primitives, not pseudo-extensions. They do not incur dynamic manifest parsing or IPC closure-stripping side-tables (`inlineActions`). They consist of two distinct layers:
+Built-in features in Launcher (such as Calculator, Clipboard History, Snippets, Notes, Aliases, Window Management, and System) are first-class platform primitives, not pseudo-extensions. They do not incur dynamic manifest parsing or IPC closure-stripping side-tables (`inlineActions`). They consist of two distinct layers:
 
 1. **Platform Service Layer**: Rust engine, background SQLite store, system event watchers, and IPC service handlers registered in `buildServiceRegistry.ts`.
 2. **Bundled UI Layer**: Svelte views, command palette entries, search bar interceptors/accessories, ⌘K actions, and deeplink routes.

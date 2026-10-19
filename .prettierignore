@@ -15,17 +15,17 @@ pnpm-lock.yaml
 # Generated files — reformatting them just fights the generator's own output
 # style on the next regen, and some are byte-matched by Rust contract tests
 # (e.g. diagnostics.rs's kinds_contract asserts exact `"kind"` quoting).
-asyar-launcher/src/bindings.ts
-asyar-sdk/src/generated/calculator.ts
-asyar-sdk/src/generated/files.ts
-asyar-launcher/src/services/search/types/Application.ts
-asyar-launcher/src/services/search/types/Command.ts
-asyar-launcher/src/services/search/types/SearchableItem.ts
-asyar-launcher/src/services/diagnostics/kinds.ts
-asyar-launcher/src/services/extension/gatedPermissions.ts
-asyar-sdk/cli/lib/knownRuntimes.ts
-asyar-sdk/cli/lib/gatedPermissions.ts
-asyar-launcher/src-tauri/resources/ext-builder/sidecar.js
-asyar-launcher/src-tauri/gen/
+launcher-app/src/bindings.ts
+launcher-sdk/src/generated/calculator.ts
+launcher-sdk/src/generated/files.ts
+launcher-app/src/services/search/types/Application.ts
+launcher-app/src/services/search/types/Command.ts
+launcher-app/src/services/search/types/SearchableItem.ts
+launcher-app/src/services/diagnostics/kinds.ts
+launcher-app/src/services/extension/gatedPermissions.ts
+launcher-sdk/cli/lib/knownRuntimes.ts
+launcher-sdk/cli/lib/gatedPermissions.ts
+launcher-app/src-tauri/resources/ext-builder/sidecar.js
+launcher-app/src-tauri/gen/
 
 .remember/

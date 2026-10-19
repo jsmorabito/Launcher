@@ -1,12 +1,12 @@
 name: Feature Request
-description: Suggest an idea or enhancement for Asyar
+description: Suggest an idea or enhancement for Launcher
 title: '[Feature]: '
 labels: ['enhancement']
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for your interest in improving Asyar! Please provide as much context as possible.
+        Thanks for your interest in improving Launcher! Please provide as much context as possible.
   - type: textarea
     id: problem
     attributes:

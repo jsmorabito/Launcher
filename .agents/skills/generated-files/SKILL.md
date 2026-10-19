@@ -31,14 +31,14 @@ is erased on the next regen and CI fails on the diff.
   ┌──────────────────────────────┐   ┌───────────────────────────┐   ┌────────────────────────────────┐
   │ src-tauri/src/permissions.rs │──▶│ generate-permission-      │──▶│ src/services/extension/        │
   │   get_required_permission    │   │   catalog.mjs             │  ├▶│   gatedPermissions.ts          │
-  └──────────────────────────────┘   │  (writes BOTH copies)     │  │ │ asyar-sdk/cli/lib/             │
+  └──────────────────────────────┘   │  (writes BOTH copies)     │  │ │ launcher-sdk/cli/lib/             │
                                      └───────────────────────────┘  └▶│   gatedPermissions.ts          │
   ┌──────────────────────────────┐   ┌───────────────────────────┐   ├────────────────────────────────┤
   │ src-tauri/src/error.rs       │──▶│ generate-diagnostic-      │──▶│ src/services/diagnostics/      │
   │ src-tauri/src/search_engine/ │   │   kinds.mjs               │   │   kinds.ts                     │
   │   mod.rs   (error variants)  │   └───────────────────────────┘   ├────────────────────────────────┤
   ├──────────────────────────────┤   ┌───────────────────────────┐   │                                │
-  │ src-tauri/src/runtimes/      │──▶│ generate-known-           │──▶│ asyar-sdk/cli/lib/             │
+  │ src-tauri/src/runtimes/      │──▶│ generate-known-           │──▶│ launcher-sdk/cli/lib/             │
   │   catalog.fallback.json      │   │   runtimes.mjs (in sdk)   │   │   knownRuntimes.ts             │
   ├──────────────────────────────┤   ├───────────────────────────┤   ├────────────────────────────────┤
   │ any #[derive(specta::Type)]  │──▶│ cargo test export_bindings│──▶│ src/bindings.ts   (+ the 3     │
@@ -54,15 +54,15 @@ Concrete commands:
 
 | You changed                                 | Run (from this directory)                                   |
 | ------------------------------------------- | ----------------------------------------------------------- |
-| `permissions.rs::get_required_permission`   | `pnpm gen:permission-catalog` — in `asyar-launcher/`        |
-| `AppError` / `SearchError` variants         | `pnpm gen:diagnostic-kinds` — in `asyar-launcher/`          |
-| `runtimes/catalog.fallback.json`            | `npm run gen:known-runtimes` — in `asyar-sdk/`              |
+| `permissions.rs::get_required_permission`   | `pnpm gen:permission-catalog` — in `launcher-app/`        |
+| `AppError` / `SearchError` variants         | `pnpm gen:diagnostic-kinds` — in `launcher-app/`          |
+| `runtimes/catalog.fallback.json`            | `npm run gen:known-runtimes` — in `launcher-sdk/`              |
 | any of the above (blanket)                  | `pnpm gen:all` — in that package                            |
 | a `specta::Type` struct, or the export list | `cargo test export_bindings -- --ignored` — in `src-tauri/` |
-| emoji dataset                               | `pnpm --filter org.asyar.emoji run gen:data` — anywhere     |
+| emoji dataset                               | `pnpm --filter org.launcher.emoji run gen:data` — anywhere     |
 
-Note the launcher's package name is **`asyar`**, not `asyar-launcher` — so a
-`--filter asyar-launcher` will not resolve. `cd` into the package instead.
+Note the launcher's package name is **`launcher`**, not `launcher-app` — so a
+`--filter launcher-app` will not resolve. `cd` into the package instead.
 
 **You usually don't need to run the first four by hand.** `pretest`,
 `pretest:run`, and `prebuild` all chain `gen:all` in both packages, so
@@ -92,7 +92,7 @@ byte-matches `kinds.ts`'s exact `"kind"` quoting.
 - A second step regenerates `bindings.ts` and diffs it the same way.
 - `src-tauri/src/diagnostics.rs::kinds_contract` asserts every Rust kind is
   present in `kinds.ts`, with the error message telling you which script to run.
-- `asyar-launcher/scripts/permission-coverage.test.mjs` (picked up by vitest via
+- `launcher-app/scripts/permission-coverage.test.mjs` (picked up by vitest via
   the `scripts/**/*.test.mjs` glob) asserts every SDK `.invoke()` call type is
   classified gated-or-public in the Rust gate.
 
@@ -119,14 +119,14 @@ of this pattern found in this repo had already drifted by the time it was found:
   package.
 - `VALID_RUNTIMES` was hand-typed against `known_names()`.
 - `screen:pick-color` reached the Rust gate and the JS catalog but not the CLI
-  validator → `asyar publish` rejected a permission the launcher enforced.
+  validator → `launcher publish` rejected a permission the launcher enforced.
 
 **If you are about to write a TS constant whose values come from a Rust file:
 stop and write a generator instead.**
 
 ### Recipe for a new generated file
 
-Copy `asyar-launcher/scripts/generate-permission-catalog.mjs` — it is the
+Copy `launcher-app/scripts/generate-permission-catalog.mjs` — it is the
 reference implementation, including the two-output case.
 
 1. **Parse the real source.** Read the Rust/JSON file and regex the values out,
@@ -162,8 +162,8 @@ lists, not mirrors:
 
 | File                                                            | Why it stays hand-written                                                                                                                                                                               |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `asyar-sdk/cli/lib/manifest.ts` `VALID_PERMISSIONS`             | Deliberately broader than the Rust gate — includes declarative-only permissions (`store:read`, `tools:register`, `runs:track`) that `get_required_permission` never sees. No single Rust source exists. |
-| `asyar-launcher/src/services/extension/permissionCatalog.ts`    | Human-written display copy (title + description) for the consent dialog. Prose, not data.                                                                                                               |
+| `launcher-sdk/cli/lib/manifest.ts` `VALID_PERMISSIONS`             | Deliberately broader than the Rust gate — includes declarative-only permissions (`store:read`, `tools:register`, `runs:track`) that `get_required_permission` never sees. No single Rust source exists. |
+| `launcher-app/src/services/extension/permissionCatalog.ts`    | Human-written display copy (title + description) for the consent dialog. Prose, not data.                                                                                                               |
 | `docs/reference/permissions.md`, `docs/reference/sdk/README.md` | Hand-written developer docs that mirror the lists in prose. Known to drift; grep them when adding a permission.                                                                                         |
 
 ### Adding a new permission — the full checklist
@@ -174,9 +174,9 @@ generated one is automatic:
 ```
 1. src-tauri/src/permissions.rs        ← THE source. Enforcement lives here.
 2. run gen:permission-catalog          ← writes both gatedPermissions.ts copies
-3. asyar-sdk/cli/lib/manifest.ts       ← VALID_PERMISSIONS, by hand
+3. launcher-sdk/cli/lib/manifest.ts       ← VALID_PERMISSIONS, by hand
                                           (then `npm run build:cli` — the linked
-                                           `asyar` binary runs dist/, not src/)
+                                           `launcher` binary runs dist/, not src/)
 4. permissionCatalog.ts                ← title + description, by hand
 5. docs/reference/permissions.md       ← the table, by hand
 ```
