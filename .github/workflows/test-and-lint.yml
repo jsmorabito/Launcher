@@ -41,11 +41,11 @@ jobs:
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
 
       - name: Check Rust formatting
         run: cargo fmt --check
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
@@ -61,10 +61,10 @@ jobs:
 
       - name: Sync SvelteKit
         run: pnpm svelte-kit sync
-        working-directory: asyar-launcher
+        working-directory: launcher-app
 
       - name: Check launcher Svelte types
-        run: pnpm --dir asyar-launcher check
+        run: pnpm --dir launcher-app check
 
       - name: Run workspace tests (SDK + launcher frontend)
         run: pnpm -r --if-present test:run
@@ -78,14 +78,14 @@ jobs:
       - name: Verify generated Rust-derived files are up to date
         run: |
           git diff --exit-code -- \
-            asyar-launcher/src/services/diagnostics/kinds.ts \
-            asyar-launcher/src/services/extension/gatedPermissions.ts \
-            asyar-sdk/cli/lib/knownRuntimes.ts \
-            asyar-sdk/cli/lib/gatedPermissions.ts
+            launcher-app/src/services/diagnostics/kinds.ts \
+            launcher-app/src/services/extension/gatedPermissions.ts \
+            launcher-sdk/cli/lib/knownRuntimes.ts \
+            launcher-sdk/cli/lib/gatedPermissions.ts
 
       - name: Run Rust tests
         run: cargo test --workspace
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
       # Regenerates launcher and SDK bindings (specta) from Rust types registered in
       # search_engine/models.rs::export_bindings — normally run manually, so
@@ -93,18 +93,18 @@ jobs:
       # struct and forgot to regenerate."
       - name: Regenerate TypeScript bindings from Rust types
         run: cargo test export_bindings -- --ignored
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
       - name: Verify generated TypeScript bindings are up to date
-        run: git diff --exit-code -- asyar-launcher/src/bindings.ts asyar-sdk/src/generated/calculator.ts asyar-sdk/src/generated/files.ts
+        run: git diff --exit-code -- launcher-app/src/bindings.ts launcher-sdk/src/generated/calculator.ts launcher-sdk/src/generated/files.ts
 
       - name: Run Clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
       - name: Check Rust docs compile
         run: cargo doc --no-deps --document-private-items
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
         env:
           RUSTDOCFLAGS: '-D warnings'
 
@@ -127,12 +127,12 @@ jobs:
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
           # Persist the cache even when tests fail, so re-runs while iterating
           # don't re-download and re-compile the whole dependency graph.
           cache-on-failure: true
 
-      # `build.rs` reads node_modules/asyar-sdk/package.json to inject the SDK
+      # `build.rs` reads node_modules/launcher-sdk/package.json to inject the SDK
       # version, so the workspace symlink must exist. `--ignore-scripts` skips
       # the native (keytar) builds the Rust tests don't need, keeping this fast.
       - name: Setup Node.js
@@ -172,7 +172,7 @@ jobs:
       # Runs the whole suite, including the windows_key_resolver matrix (the
       # AZERTY/QWERTZ cases execute here because FR/DE were installed above).
       # A single cargo invocation — a second one re-compiles the ~2-minute
-      # `asyar` crate from scratch, so the visible --nocapture diagnostic
+      # `launcher` crate from scratch, so the visible --nocapture diagnostic
       # isn't worth doubling the job time.
       #
       # One test is skipped: `snippets::…routes_to_windows_resolver_for_shift_
@@ -186,7 +186,7 @@ jobs:
       # rather than the active layout.
       - name: Run Rust tests
         run: cargo test --workspace -- --skip resolve_keypress_routes_to_windows_resolver_for_shift_colon
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
   # macOS-only Rust build/test/lint run. Deliberately lean — no frontend/
   # pnpm/doc steps (those are platform-agnostic and covered by
@@ -210,10 +210,10 @@ jobs:
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
           cache-on-failure: true
 
-      # build.rs reads node_modules/asyar-sdk/package.json to inject the
+      # build.rs reads node_modules/launcher-sdk/package.json to inject the
       # SDK version, so the workspace symlink must exist. --ignore-scripts
       # skips native (keytar) builds the Rust tests don't need.
       - name: Setup Node.js
@@ -231,7 +231,7 @@ jobs:
 
       - name: Run Rust tests
         run: cargo test --workspace
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri
 
       # `cargo clippy --all-targets -D warnings` on ubuntu never compiles
       # `#[cfg(target_os = "macos")]` code, so this is the only job that
@@ -241,4 +241,4 @@ jobs:
       # covers macOS-gated code correctly.
       - name: Run Clippy
         run: cargo clippy --workspace --all-targets -- -D warnings
-        working-directory: asyar-launcher/src-tauri
+        working-directory: launcher-app/src-tauri

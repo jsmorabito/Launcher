@@ -1,4 +1,4 @@
-# Asyar Project Agent Guidelines & Rules
+# Launcher Project Agent Guidelines & Rules
 
 The following rules are mandatory across all agent sessions, subagents, and tasks in this repository.
 
@@ -15,7 +15,7 @@ The following rules are mandatory across all agent sessions, subagents, and task
 
 ## 3. Mandatory Verification & Local CI Matrix
 
-Asyar balances velocity and release-grade correctness using a **Two-Loop Verification Model**:
+Launcher balances velocity and release-grade correctness using a **Two-Loop Verification Model**:
 
 - **Inner Loop (Iterative Development)**: Use fast, domain-specific checks that run in seconds:
   - Frontend/UI changes: `pnpm check:ci:frontend` (or `node scripts/check-ci.mjs --frontend`)
@@ -32,23 +32,23 @@ Or manually run the steps:
 1. **Workspace Prettier Check**: `pnpm format:check` (in repo root)
 2. **Design System Compliance**: `pnpm check:design` (in repo root)
 3. **Full Frontend & Workspace Tests**: `pnpm -r --if-present test:run` (in repo root)
-4. **Rust Formatting (if Rust touched)**: `cargo fmt --check` (in `asyar-launcher/src-tauri`)
-5. **Clippy with `-D warnings` (if Rust touched)**: `cargo clippy --workspace --all-targets -- -D warnings` (in `asyar-launcher/src-tauri`)
-6. **Rust Test Suite (if Rust touched)**: `cargo test --workspace` (in `asyar-launcher/src-tauri`)
+4. **Rust Formatting (if Rust touched)**: `cargo fmt --check` (in `launcher-app/src-tauri`)
+5. **Clippy with `-D warnings` (if Rust touched)**: `cargo clippy --workspace --all-targets -- -D warnings` (in `launcher-app/src-tauri`)
+6. **Rust Test Suite (if Rust touched)**: `cargo test --workspace` (in `launcher-app/src-tauri`)
 
 > **Always pass `--workspace` to `cargo test` and `cargo clippy`.** The Cargo workspace sets
 > `default-members = ["."]`, so the bare commands silently skip the ~610 tests in
-> `src-tauri/crates/*` (asyar-storage, asyar-search, asyar-platform, asyar-calculator) and
+> `src-tauri/crates/*` (launcher-storage, launcher-search, launcher-platform, launcher-calculator) and
 > report ~3,190 instead of the full ~3,816. `scripts/check-ci.mjs` already does this.
 
-7. **Type & Bindings Check (if bindings/types touched)**: `cargo test export_bindings -- --ignored` and check `git diff --exit-code -- asyar-launcher/src/bindings.ts`
+7. **Type & Bindings Check (if bindings/types touched)**: `cargo test export_bindings -- --ignored` and check `git diff --exit-code -- launcher-app/src/bindings.ts`
 
 ## 4. Formatting Enforcement
 
 - Format-on-save does not run automatically on files edited by agents.
 - Before concluding a task, ensure modified files are formatted:
   - JS/TS/Svelte/JSON/MD: `pnpm exec prettier --write <file>` or `pnpm format`
-  - Rust: `rustfmt <file>` or `cd asyar-launcher/src-tauri && cargo fmt`
+  - Rust: `rustfmt <file>` or `cd launcher-app/src-tauri && cargo fmt`
 
 ## 5. Architectural Invariants
 
@@ -70,7 +70,7 @@ Or manually run the steps:
   - Built-ins must not incur dynamic manifest parsing or IPC closure-stripping side-tables (`inlineActions`). Built-in providers contribute directly to search results without closure stripping.
   - Platform services (`files:search`, `screen:capture`, `calculator:evaluate`, `notes:read`) remain registered in `ServiceRegistry` (`buildServiceRegistry`) for Tier 2 extensions.
   - Disabling optional built-ins is a direct reactive settings gate suppressing UI presentation without disrupting underlying platform services or requiring synthetic extension unregistration workflows.
-- **Beta Compatibility & Deprecation (until launcher 0.2.0)**: Asyar is in beta, so internals break freely and cleanly (SOLID, DRY, root-cause fixes, no symptom patching). But the **third-party extension contract** must not break for extensions already published in the Asyar Store: manifest schema, public `asyar-sdk` API, host↔extension IPC wire shapes (published extensions bundle their own SDK), runtime behavior, packaging/store formats. Full policy in `.agents/rules/09-beta-compatibility-and-deprecation.md`:
+- **Beta Compatibility & Deprecation (until launcher 0.2.0)**: Launcher is in beta, so internals break freely and cleanly (SOLID, DRY, root-cause fixes, no symptom patching). But the **third-party extension contract** must not break for extensions already published in the Launcher Store: manifest schema, public `launcher-sdk` API, host↔extension IPC wire shapes (published extensions bundle their own SDK), runtime behavior, packaging/store formats. Full policy in `.agents/rules/09-beta-compatibility-and-deprecation.md`:
   - Additive first: add the clean new contract beside the old one; mark the old one **deprecated** (`@deprecated … Remove in 0.2.0`, `#[deprecated]`, manifest/IPC deprecation warnings, `// COMPAT(remove in 0.2.0): …`) and keep it working until 0.2.0.
   - Confine compat to **one adapter at the boundary** that normalizes old shapes into new ones. The core only sees the new shape, and there are no scattered `if (legacy)` branches.
   - Every adapter has a contract test with an old-format fixture and a deadline guard (like `workerFallbackDeadline.test.ts`). All of it is removed before 0.2.0.

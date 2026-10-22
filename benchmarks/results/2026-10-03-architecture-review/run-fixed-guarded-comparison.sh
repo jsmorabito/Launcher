@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 OUT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HARNESS="/private/tmp/asyar-comparison-harness/benchmarks"
+HARNESS="/private/tmp/launcher-comparison-harness/benchmarks"
 
 # Override either bundle from the environment, e.g. to measure the production
 # build in /Applications instead of a dev-identity bundle:
-#   ASYAR_FIXED_APP=/Applications/asyar.app bash run-fixed-guarded-comparison.sh ...
-# NOTE: a production bundle has a different CFBundleIdentifier (org.asyar.app vs
-# org.asyar.dev) and therefore a different app-data dir, so the two phases load
+#   LAUNCHER_FIXED_APP=/Applications/launcher.app bash run-fixed-guarded-comparison.sh ...
+# NOTE: a production bundle has a different CFBundleIdentifier (org.launcher.app vs
+# org.launcher.dev) and therefore a different app-data dir, so the two phases load
 # different amounts of indexed data. The per-phase footer records the item count.
-MAIN="${ASYAR_MAIN_APP:-/private/tmp/asyar-benchmark-apps/main/Asyar Dev.app}"
-FIXED="${ASYAR_FIXED_APP:-/private/tmp/asyar-benchmark-apps/fixed-guarded/Asyar Dev.app}"
+MAIN="${LAUNCHER_MAIN_APP:-/private/tmp/launcher-benchmark-apps/main/Launcher Dev.app}"
+FIXED="${LAUNCHER_FIXED_APP:-/private/tmp/launcher-benchmark-apps/fixed-guarded/Launcher Dev.app}"
 
 # Which phases to run. The `main` phase always uses the dev-identity baseline
-# bundle, so overriding only ASYAR_FIXED_APP still launches Asyar Dev first —
-# set ASYAR_ONLY=fixed-guarded to measure just the overridden bundle.
-#   ASYAR_ONLY=fixed-guarded ASYAR_FIXED_APP=/Applications/asyar.app bash ... ...
-PHASES="${ASYAR_ONLY:-main fixed-guarded}"
+# bundle, so overriding only LAUNCHER_FIXED_APP still launches Launcher Dev first —
+# set LAUNCHER_ONLY=fixed-guarded to measure just the overridden bundle.
+#   LAUNCHER_ONLY=fixed-guarded LAUNCHER_FIXED_APP=/Applications/launcher.app bash ... ...
+PHASES="${LAUNCHER_ONLY:-main fixed-guarded}"
 
 for phase in $PHASES; do
   case "$phase" in
     main | fixed-guarded) ;;
     *)
-      echo "ASYAR_ONLY must be 'main', 'fixed-guarded', or both (space separated); got '$phase'." >&2
+      echo "LAUNCHER_ONLY must be 'main', 'fixed-guarded', or both (space separated); got '$phase'." >&2
       exit 2
       ;;
   esac
@@ -65,17 +65,17 @@ for revision in $PHASES; do
   # report that may well get published.
   if [[ "$revision" == main ]]; then
     app="$MAIN"
-    if [[ "$app" == *"/asyar-benchmark-apps/main/"* ]]; then
+    if [[ "$app" == *"/launcher-benchmark-apps/main/"* ]]; then
       sha=9145d66c145e9f58f824945606d0df43266dbb25
     else
-      sha="not derived from git — bundle supplied via ASYAR_MAIN_APP (see Bundle line below)"
+      sha="not derived from git — bundle supplied via LAUNCHER_MAIN_APP (see Bundle line below)"
     fi
   else
     app="$FIXED"
-    if [[ "$app" == *"/asyar-benchmark-apps/fixed-guarded/"* ]]; then
+    if [[ "$app" == *"/launcher-benchmark-apps/fixed-guarded/"* ]]; then
       sha="$(cat "$OUT/fixed-guarded/source-head.txt") plus compiled-changes.patch"
     else
-      sha="not derived from git — bundle supplied via ASYAR_FIXED_APP (see Bundle line below)"
+      sha="not derived from git — bundle supplied via LAUNCHER_FIXED_APP (see Bundle line below)"
     fi
   fi
 
@@ -89,18 +89,18 @@ for revision in $PHASES; do
   defaults write "$identity" NSQuitAlwaysKeepsWindows -bool false 2>/dev/null || true
   rm -rf "$HOME/Library/Saved Application State/$identity.savedState" 2>/dev/null || true
 
-  # Both bundles share the binary name, so quit every Asyar before each phase —
+  # Both bundles share the binary name, so quit every Launcher before each phase —
   # a stray copy also defeats bench.sh's PID-by-path tracking.
   quit_bundle "$MAIN" "$(plist "$MAIN" CFBundleIdentifier)" || true
   quit_bundle "$FIXED" "$(plist "$FIXED" CFBundleIdentifier)" || true
 
-  items="$(sqlite3 "$HOME/Library/Application Support/$identity/asyar_data.db" 'SELECT COUNT(*) FROM search_items;' 2>/dev/null || echo '?')"
+  items="$(sqlite3 "$HOME/Library/Application Support/$identity/launcher_data.db" 'SELECT COUNT(*) FROM search_items;' 2>/dev/null || echo '?')"
   extra=""
-  if [[ "$revision" == fixed-guarded && "$app" == *"/asyar-benchmark-apps/fixed-guarded/"* ]]; then
+  if [[ "$revision" == fixed-guarded && "$app" == *"/launcher-benchmark-apps/fixed-guarded/"* ]]; then
     extra='Release symbol stripping disabled; sizes differ from normal releases. See fixed-guarded/compiled-changes.patch for the exact diff. '
   fi
 
-  bash "$HARNESS/bench.sh" --yes --asyar-app "$app" "$@"
+  bash "$HARNESS/bench.sh" --yes --launcher-app "$app" "$@"
 
   # bench.sh --yes exits via `die` on a failed probe without writing latest.md;
   # refuse to fabricate a result-shaped file from the footer alone.

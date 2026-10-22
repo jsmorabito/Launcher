@@ -11,10 +11,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
 const steps = [
-  { name: 'asyar-sdk', cwd: resolve(root, 'asyar-sdk'), cmd: 'pnpm run build:all' },
+  { name: 'launcher-sdk', cwd: resolve(root, 'launcher-sdk'), cmd: 'pnpm run build:all' },
   {
-    name: 'asyar-launcher (frontend)',
-    cwd: resolve(root, 'asyar-launcher'),
+    name: 'launcher-app (frontend)',
+    cwd: resolve(root, 'launcher-app'),
     cmd: 'pnpm run build',
   },
 ];

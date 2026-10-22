@@ -4,11 +4,11 @@ order: 4
 
 ## 9. Actions — The ⌘K Panel
 
-Actions are keyboard-accessible commands that appear in Asyar's Action Drawer when the user presses **⌘K**. They are **contextual** — what appears depends on where the user is and what your extension has registered.
+Actions are keyboard-accessible commands that appear in Launcher's Action Drawer when the user presses **⌘K**. They are **contextual** — what appears depends on where the user is and what your extension has registered.
 
-Actions are registered in code with `actionService.registerAction()` and appear while your extension panel is open. Asyar has no manifest-declared actions on root-search rows: to expose something without opening a view, declare another **command** (a `background` command runs immediately and can show a HUD or toast); for anything view-specific, register an action inside the view.
+Actions are registered in code with `actionService.registerAction()` and appear while your extension panel is open. Launcher has no manifest-declared actions on root-search rows: to expose something without opening a view, declare another **command** (a `background` command runs immediately and can show a HUD or toast); for anything view-specific, register an action inside the view.
 
-> **Deprecated: manifest `actions`.** Earlier versions let `manifest.json` declare `actions` (extension- and command-level) that showed on the root-search row. That feature was removed. Manifests that still declare them keep loading — the field is ignored and the launcher logs a notice — but it is rejected from launcher 0.2.0, and `asyar build` / `asyar validate` warn about it now. Move those actions into your view with `registerAction`, or declare another command.
+> **Deprecated: manifest `actions`.** Earlier versions let `manifest.json` declare `actions` (extension- and command-level) that showed on the root-search row. That feature was removed. Manifests that still declare them keep loading — the field is ignored and the launcher logs a notice — but it is rejected from launcher 0.2.0, and `launcher build` / `launcher validate` warn about it now. Move those actions into your view with `registerAction`, or declare another command.
 
 ### What actions are for
 
@@ -19,7 +19,7 @@ Use actions for secondary operations relevant while the user is looking at your 
 The `execute` function is a live JavaScript closure. It **cannot be serialized over postMessage**. The SDK uses a two-registry approach:
 
 1. When you call `registerAction({ id, ..., execute })`, the SDK stores the closure locally in the iframe's `ExtensionBridge.actionRegistry`. Only the metadata (`id`, `title`, `icon`, etc.) is sent to the host.
-2. When the user activates an action from the ⌘K Drawer, the host sends `asyar:action:execute` to the correct iframe.
+2. When the user activates an action from the ⌘K Drawer, the host sends `launcher:action:execute` to the correct iframe.
 3. The SDK receives the message, looks up the `execute` closure in `actionRegistry`, and calls it.
 
 ### Registering actions
@@ -27,8 +27,8 @@ The `execute` function is a live JavaScript closure. It **cannot be serialized o
 Register actions after your view is mounted:
 
 ```typescript
-import { ActionContext, ActionCategory } from 'asyar-sdk';
-import type { IActionService, ExtensionAction } from 'asyar-sdk';
+import { ActionContext, ActionCategory } from 'launcher-sdk';
+import type { IActionService, ExtensionAction } from 'launcher-sdk';
 
 const actionService = context.getService<IActionService>('actions');
 
@@ -53,8 +53,8 @@ actionService.registerAction(refreshAction);
 ```svelte
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { ActionContext, ActionCategory } from 'asyar-sdk';
-  import type { IActionService } from 'asyar-sdk';
+  import { ActionContext, ActionCategory } from 'launcher-sdk';
+  import type { IActionService } from 'launcher-sdk';
 
   interface Props {
     actionService: IActionService;
@@ -115,7 +115,7 @@ actionService.registerAction(refreshAction);
 | `SEARCH_VIEW`    | While the main search result list is active       |
 | `RESULT`         | When a specific result item is highlighted        |
 | `COMMAND_RESULT` | After a command has returned a result             |
-| `CORE`           | Built-in Asyar actions — do not use in extensions |
+| `CORE`           | Built-in Launcher actions — do not use in extensions |
 
 ---
 
@@ -149,7 +149,7 @@ A `shortcut` is a declaration, not just a hint: the launcher shows it next to th
 | `ActionCategory.EDIT`        | Edit           | Create, update, delete operations           |
 | `ActionCategory.SHARE`       | Share          | Export, copy to clipboard, send             |
 | `ActionCategory.DESTRUCTIVE` | Destructive    | Irreversible actions — delete, clear, reset |
-| `ActionCategory.SYSTEM`      | System         | Reserved for built-in Asyar actions         |
+| `ActionCategory.SYSTEM`      | System         | Reserved for built-in Launcher actions         |
 
 Custom category strings are fully supported — use them for domain-specific grouping.
 

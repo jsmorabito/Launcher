@@ -1,4 +1,4 @@
-| Metric                                 | Asyar 0.1.1-49 | Raycast 2.6.2.0 |
+| Metric                                 | Launcher 0.1.1-49 | Raycast 2.6.2.0 |
 | -------------------------------------- | -------------: | --------------: |
 | Hotkey → window visible (median of 15) |        13.9 ms |         22.2 ms |
 | Hotkey → window visible (p95)          |        17.3 ms |         32.0 ms |

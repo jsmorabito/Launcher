@@ -42,7 +42,7 @@ jobs:
             artifact-name: macos-x64-artifacts
     defaults:
       run:
-        working-directory: asyar-launcher
+        working-directory: launcher-app
     steps:
       - uses: actions/checkout@v6
         with:
@@ -58,7 +58,7 @@ jobs:
           targets: ${{ matrix.rust-target }}
       - uses: swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
           key: ${{ matrix.rust-target }}
 
       - name: Install workspace dependencies
@@ -73,7 +73,7 @@ jobs:
           bun-version: latest
 
       - name: Build ext-builder sidecar JS
-        working-directory: asyar-ext-builder
+        working-directory: launcher-ext-builder
         run: |
           bun install
           bun run build:js
@@ -120,8 +120,8 @@ jobs:
         with:
           name: ${{ matrix.artifact-name }}
           path: |
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/dmg/*.dmg
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/macos/*.app.tar.gz*
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/dmg/*.dmg
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/macos/*.app.tar.gz*
 
   build-windows:
     needs: test-and-lint
@@ -141,7 +141,7 @@ jobs:
             artifact-name: windows-arm64-artifacts
     defaults:
       run:
-        working-directory: asyar-launcher
+        working-directory: launcher-app
     steps:
       - uses: actions/checkout@v6
         with:
@@ -157,7 +157,7 @@ jobs:
           targets: ${{ matrix.rust-target }}
       - uses: swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
           key: ${{ matrix.rust-target }}
 
       - name: Install workspace dependencies
@@ -172,7 +172,7 @@ jobs:
           bun-version: latest
 
       - name: Build ext-builder sidecar JS
-        working-directory: asyar-ext-builder
+        working-directory: launcher-ext-builder
         run: |
           bun install
           bun run build:js
@@ -189,14 +189,14 @@ jobs:
           $target = "${{ matrix.rust-target }}"
           $arch = "${{ matrix.arch }}"
           $releaseDir = "src-tauri/target/$target/release"
-          $portableDir = "$releaseDir/portable/asyar"
+          $portableDir = "$releaseDir/portable/launcher"
 
           if (Test-Path "$releaseDir/portable") {
             Remove-Item -Recurse -Force "$releaseDir/portable"
           }
           New-Item -ItemType Directory -Force -Path $portableDir | Out-Null
 
-          Copy-Item "$releaseDir/asyar.exe" -Destination "$portableDir/"
+          Copy-Item "$releaseDir/launcher.exe" -Destination "$portableDir/"
 
           if (Test-Path "src-tauri/built-in-features") {
             Copy-Item -Recurse "src-tauri/built-in-features" -Destination "$portableDir/"
@@ -205,7 +205,7 @@ jobs:
             Copy-Item -Recurse "src-tauri/resources" -Destination "$portableDir/"
           }
 
-          $zipPath = "$releaseDir/asyar_windows_${arch}_portable.zip"
+          $zipPath = "$releaseDir/launcher_windows_${arch}_portable.zip"
           Compress-Archive -Path "$portableDir/*" -DestinationPath $zipPath -Force
           Write-Host "Created portable archive at $zipPath"
 
@@ -214,9 +214,9 @@ jobs:
         with:
           name: ${{ matrix.artifact-name }}
           path: |
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/msi/*.msi
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/msi/*.msi.sig
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/*.zip
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/msi/*.msi
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/msi/*.msi.sig
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/*.zip
 
   build-linux:
     needs: test-and-lint
@@ -229,18 +229,18 @@ jobs:
           - arch: amd64
             runner: ubuntu-22.04
             rust-target: x86_64-unknown-linux-gnu
-            summon-source: asyar-summon-x86_64-unknown-linux-gnu
-            summon-asset: asyar-summon_amd64
+            summon-source: launcher-summon-x86_64-unknown-linux-gnu
+            summon-asset: launcher-summon_amd64
             artifact-name: linux-amd64-artifacts
           - arch: arm64
             runner: ubuntu-24.04-arm
             rust-target: aarch64-unknown-linux-gnu
-            summon-source: asyar-summon-aarch64-unknown-linux-gnu
-            summon-asset: asyar-summon_aarch64
+            summon-source: launcher-summon-aarch64-unknown-linux-gnu
+            summon-asset: launcher-summon_aarch64
             artifact-name: linux-arm64-artifacts
     defaults:
       run:
-        working-directory: asyar-launcher
+        working-directory: launcher-app
     steps:
       - uses: actions/checkout@v6
         with:
@@ -265,7 +265,7 @@ jobs:
           targets: ${{ matrix.rust-target }}
       - uses: swatinem/rust-cache@v2
         with:
-          workspaces: asyar-launcher/src-tauri -> target
+          workspaces: launcher-app/src-tauri -> target
           key: linux-${{ matrix.arch }}
 
       - name: Install workspace dependencies
@@ -280,7 +280,7 @@ jobs:
           bun-version: latest
 
       - name: Build ext-builder sidecar JS
-        working-directory: asyar-ext-builder
+        working-directory: launcher-ext-builder
         run: |
           bun install
           bun run build:js
@@ -332,8 +332,8 @@ jobs:
           # eglGetDisplay(EGL_DEFAULT_DISPLAY) fail with EGL_BAD_PARAMETER.
           LINUXDEPLOY_EXCLUDED_LIBRARIES: 'libwayland-client.so*'
           # Embed AppImage update metadata for AppImageUpdate / zsync delta updates (issue #668)
-          UPDATE_INFORMATION: 'gh-releases-zsync|Xoshbin|asyar|latest|*${{ matrix.arch }}*.AppImage.zsync'
-          LDAI_UPDATE_INFORMATION: 'gh-releases-zsync|Xoshbin|asyar|latest|*${{ matrix.arch }}*.AppImage.zsync'
+          UPDATE_INFORMATION: 'gh-releases-zsync|Xoshbin|launcher|latest|*${{ matrix.arch }}*.AppImage.zsync'
+          LDAI_UPDATE_INFORMATION: 'gh-releases-zsync|Xoshbin|launcher|latest|*${{ matrix.arch }}*.AppImage.zsync'
         run: |
           pnpm tauri build -v --target ${{ matrix.rust-target }}
           SUMMON_SOURCE="src-tauri/binaries/${{ matrix.summon-source }}"
@@ -396,11 +396,11 @@ jobs:
           name: ${{ matrix.artifact-name }}
           if-no-files-found: error
           path: |
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.AppImage
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.AppImage.sig
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.zsync
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/bundle/deb/*.deb
-            asyar-launcher/src-tauri/target/${{ matrix.rust-target }}/release/${{ matrix.summon-asset }}
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.AppImage
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.AppImage.sig
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/appimage/*.zsync
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/bundle/deb/*.deb
+            launcher-app/src-tauri/target/${{ matrix.rust-target }}/release/${{ matrix.summon-asset }}
 
   publish:
     needs: [build-macos, build-windows, build-linux]
@@ -449,7 +449,7 @@ jobs:
             artifacts/**/*.zsync
             artifacts/**/*.deb
             artifacts/**/*.zip
-            artifacts/**/asyar-summon_*
+            artifacts/**/launcher-summon_*
           draft: false
           prerelease: ${{ contains(github.event.inputs.tag || github.ref_name, '-') }}
           generate_release_notes: true
@@ -460,7 +460,7 @@ jobs:
 
       - name: Notify Website
         env:
-          ASYAR_UPDATE_TOKEN: ${{ secrets.ASYAR_UPDATE_TOKEN }}
+          LAUNCHER_UPDATE_TOKEN: ${{ secrets.LAUNCHER_UPDATE_TOKEN }}
           APP_URL: 'https://asyar.org'
           REF_NAME: ${{ github.event.inputs.tag || github.ref_name }}
           REPO: ${{ github.repository }}
@@ -541,7 +541,7 @@ jobs:
           curl --fail-with-body --retry 3 --retry-all-errors --retry-delay 5 \
             -X POST "$APP_URL/api/releases" \
             -H "Content-Type: application/json" \
-            -H "X-Asyar-Update-Token: $ASYAR_UPDATE_TOKEN" \
+            -H "X-Launcher-Update-Token: $LAUNCHER_UPDATE_TOKEN" \
             -d "$PAYLOAD"
 
       - name: Update Homebrew Cask
@@ -563,53 +563,53 @@ jobs:
           SHA_ARM64=$(sha256sum "$MAC_AARCH64_DMG_PATH" | cut -d' ' -f1)
           SHA_X64=$(sha256sum "$MAC_X64_DMG_PATH" | cut -d' ' -f1)
 
-          git clone --depth 1 "https://x-access-token:${HOMEBREW_TAP_TOKEN}@github.com/Xoshbin/homebrew-asyar.git" tap
+          git clone --depth 1 "https://x-access-token:${HOMEBREW_TAP_TOKEN}@github.com/Xoshbin/homebrew-launcher.git" tap
           mkdir -p tap/Casks
 
-          cat > tap/Casks/asyar.rb <<EOF
-          cask "asyar" do
+          cat > tap/Casks/launcher.rb <<EOF
+          cask "launcher" do
             arch arm: "aarch64", intel: "x64"
 
             version "${VERSION}"
             sha256 arm:   "${SHA_ARM64}",
                    intel: "${SHA_X64}"
 
-            url "https://github.com/Xoshbin/asyar/releases/download/v#{version}/asyar_#{version}_#{arch}.dmg"
-            name "Asyar"
+            url "https://github.com/Xoshbin/asyar/releases/download/v#{version}/launcher_#{version}_#{arch}.dmg"
+            name "Launcher"
             desc "Extensible launcher and productivity toolbox"
             homepage "https://asyar.org/"
 
             auto_updates true
             depends_on macos: :ventura
 
-            app "asyar.app"
+            app "launcher.app"
 
             zap trash: [
-              "~/Library/Application Support/org.asyar",
-              "~/Library/Application Support/org.asyar.app",
-              "~/Library/Caches/org.asyar",
-              "~/Library/Caches/org.asyar.app",
-              "~/Library/HTTPStorages/org.asyar",
-              "~/Library/HTTPStorages/org.asyar.app",
-              "~/Library/Preferences/org.asyar.plist",
-              "~/Library/Preferences/org.asyar.app.plist",
-              "~/Library/Saved Application State/org.asyar.savedState",
-              "~/Library/Saved Application State/org.asyar.app.savedState",
-              "~/Library/WebKit/org.asyar",
-              "~/Library/WebKit/org.asyar.app",
+              "~/Library/Application Support/org.launcher",
+              "~/Library/Application Support/org.launcher.app",
+              "~/Library/Caches/org.launcher",
+              "~/Library/Caches/org.launcher.app",
+              "~/Library/HTTPStorages/org.launcher",
+              "~/Library/HTTPStorages/org.launcher.app",
+              "~/Library/Preferences/org.launcher.plist",
+              "~/Library/Preferences/org.launcher.app.plist",
+              "~/Library/Saved Application State/org.launcher.savedState",
+              "~/Library/Saved Application State/org.launcher.app.savedState",
+              "~/Library/WebKit/org.launcher",
+              "~/Library/WebKit/org.launcher.app",
             ]
           end
           EOF
 
           cd tap
-          git config user.name "asyar-release-bot"
+          git config user.name "launcher-release-bot"
           git config user.email "actions@github.com"
-          git add Casks/asyar.rb
+          git add Casks/launcher.rb
           if git diff --cached --quiet; then
             echo "Cask already up to date for ${VERSION}."
             exit 0
           fi
-          git commit -m "asyar ${VERSION}"
+          git commit -m "launcher ${VERSION}"
           git push origin HEAD:main
 
       - name: Check winget eligibility
@@ -628,7 +628,7 @@ jobs:
           VERSION="${REF_NAME#v}"
 
           # winget-pkgs policy: a package's default manifest must track a stable
-          # release, not a prerelease-only channel. Every Asyar release today is a
+          # release, not a prerelease-only channel. Every Launcher release today is a
           # numeric pre-release (hyphenated), so skip until the first stable tag.
           if [[ "$VERSION" == *-* ]]; then
             echo "$VERSION is a pre-release — winget-pkgs doesn't accept pre-release-only manifests. Skipping."
@@ -647,6 +647,6 @@ jobs:
         if: steps.winget_check.outputs.eligible == 'true'
         uses: vedantmgoyal9/winget-releaser@v2
         with:
-          identifier: Xoshbin.Asyar
+          identifier: Xoshbin.Launcher
           token: ${{ secrets.WINGET_TOKEN }}
           release-tag: ${{ github.event.inputs.tag || github.ref_name }}

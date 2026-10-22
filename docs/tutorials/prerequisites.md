@@ -10,20 +10,20 @@ order: 1
 | ----------- | ------------------------ |
 | Node.js     | 18 or later              |
 | pnpm        | 8 or later (recommended) |
-| Asyar app   | Installed and running    |
+| Launcher app   | Installed and running    |
 
-### Install the Asyar CLI
+### Install the Launcher CLI
 
-The `asyar-sdk` npm package provides both the runtime SDK and the `asyar` CLI used throughout your entire development workflow.
+The `launcher-sdk` npm package provides both the runtime SDK and the `launcher` CLI used throughout your entire development workflow.
 
 ```bash
-npm install -g asyar-sdk
+npm install -g launcher-sdk
 ```
 
 Verify installation:
 
 ```bash
-asyar --version
+launcher --version
 ```
 
 ### Per-project dependencies
@@ -31,7 +31,7 @@ asyar --version
 Every extension project needs at minimum:
 
 ```bash
-pnpm add asyar-sdk svelte
+pnpm add launcher-sdk svelte
 pnpm add -D vite @sveltejs/vite-plugin-svelte typescript
 ```
 

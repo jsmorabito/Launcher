@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
-const SRC = resolve(root, 'asyar-launcher/src');
+const SRC = resolve(root, 'launcher-app/src');
 const TOKENS_FILE = resolve(SRC, 'resources/styles/style.css');
 const BARREL = resolve(SRC, 'components/index.ts');
 
@@ -261,7 +261,7 @@ for (const file of files) {
   });
 
   // The voice/fill split. --accent-* is the voice: bright enough to read as
-  // text on an Asyar surface, and therefore too bright to carry white text on
+  // text on an Launcher surface, and therefore too bright to carry white text on
   // top of it. --accent-*-fill is the ground: verified to carry
   // --text-on-accent at 4.5:1. Pairing a voice background with --text-on-accent
   // produces text at roughly 2:1, which is the exact defect this split exists

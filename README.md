@@ -1,4 +1,4 @@
-# Asyar
+# Launcher
 
 **The power of Raycast. The speed of Alfred. Privacy by design.**
 
@@ -8,7 +8,7 @@ A fast, open-source launcher for macOS, Windows, and Linux.
 
 ## Tiny Footprint. Native Performance.
 
-Asyar is built with **Tauri + Rust** instead of Electron. That means:
+Launcher is built with **Tauri + Rust** instead of Electron. That means:
 
 - **Significantly less RAM** — no bundled Chromium, no V8 runtime sitting idle
 - **Instant startup** — the Rust backend initializes in milliseconds
@@ -21,7 +21,7 @@ Asyar is built with **Tauri + Rust** instead of Electron. That means:
 
 <!-- benchmarks:start -->
 
-| Metric                                 | Asyar 0.1.1-49 | Raycast 2.6.2.0 |
+| Metric                                 | Launcher 0.1.1-49 | Raycast 2.6.2.0 |
 | -------------------------------------- | -------------: | --------------: |
 | Hotkey → window visible (median of 15) |        13.9 ms |         22.2 ms |
 | Hotkey → window visible (p95)          |        17.3 ms |         32.0 ms |
@@ -45,11 +45,11 @@ on screen. Reproduce with [`benchmarks/bench.sh`](benchmarks/README.md).</sub>
 
 <!-- benchmarks:end -->
 
-Don't take my word for it: [`benchmarks/bench.sh`](benchmarks/README.md) measures Asyar against Raycast black-box on your own machine — hotkey-to-window latency, cold start, full-process-group memory, idle CPU and wakeups, idle disk writes, and app size — and regenerates this table with `--update-readme`. Raycast Beta is included automatically when it is installed; the run above was made on a machine without it. The three privileged rows (CPU ms/s, idle wakeups, idle disk writes) need passwordless `sudo` for `powermetrics` and `fs_usage` and report `n/a` without it — see [`benchmarks/README.md`](benchmarks/README.md#optional-passwordless-measurement-tools).
+Don't take my word for it: [`benchmarks/bench.sh`](benchmarks/README.md) measures Launcher against Raycast black-box on your own machine — hotkey-to-window latency, cold start, full-process-group memory, idle CPU and wakeups, idle disk writes, and app size — and regenerates this table with `--update-readme`. Raycast Beta is included automatically when it is installed; the run above was made on a machine without it. The three privileged rows (CPU ms/s, idle wakeups, idle disk writes) need passwordless `sudo` for `powermetrics` and `fs_usage` and report `n/a` without it — see [`benchmarks/README.md`](benchmarks/README.md#optional-passwordless-measurement-tools).
 
 ---
 
-![Asyar launcher](docs/images/getting-started-hero.png)
+![Launcher launcher](docs/images/getting-started-hero.png)
 
 ---
 
@@ -84,8 +84,8 @@ curl -fsSL https://raw.githubusercontent.com/Xoshbin/asyar/main/install.sh | sh
 
 ```bash
 brew tap Xoshbin/asyar
-brew trust --tap xoshbin/asyar   # one-time — Homebrew 6+ requires trusting third-party taps
-brew install --cask asyar
+brew trust --tap xoshbin/launcher   # one-time — Homebrew 6+ requires trusting third-party taps
+brew install --cask launcher
 ```
 
 **Windows, or a manual download for any OS:** grab the installer for your platform from
@@ -93,20 +93,20 @@ brew install --cask asyar
 
 **Linux (Wayland) Shortcut Setup:**
 
-The Linux installer places the AppImage at `~/.local/bin/asyar` and a lightweight summon command beside it at `~/.local/bin/asyar-summon`. Wayland protocol security prevents background applications from intercepting global keyboard shortcuts directly, so bind your preferred shortcut in your desktop environment or window manager to execute `asyar-summon`:
+The Linux installer places the AppImage at `~/.local/bin/launcher` and a lightweight summon command beside it at `~/.local/bin/launcher-summon`. Wayland protocol security prevents background applications from intercepting global keyboard shortcuts directly, so bind your preferred shortcut in your desktop environment or window manager to execute `launcher-summon`:
 
-- **GNOME:** Open **Settings** → **Keyboard** → **View and Customize Shortcuts** → **Custom Shortcuts**, click **+**, set Name to `Asyar`, Command to `asyar-summon`, and assign your shortcut (e.g. `Ctrl+Space` or `Super+Space`).
-- **KDE Plasma:** Open **System Settings** → **Shortcuts** → **Custom Shortcuts** (or **Command/URL**), add a new global shortcut for `asyar-summon`, and set your trigger key (e.g. `Alt+Space` or `Meta+Space`).
-- **Hyprland:** Add `bind = ALT, SPACE, exec, asyar-summon` to `~/.config/hypr/hyprland.conf`.
-- **Sway:** Add `bindsym Mod1+space exec asyar-summon` to `~/.config/sway/config`.
+- **GNOME:** Open **Settings** → **Keyboard** → **View and Customize Shortcuts** → **Custom Shortcuts**, click **+**, set Name to `Launcher`, Command to `launcher-summon`, and assign your shortcut (e.g. `Ctrl+Space` or `Super+Space`).
+- **KDE Plasma:** Open **System Settings** → **Shortcuts** → **Custom Shortcuts** (or **Command/URL**), add a new global shortcut for `launcher-summon`, and set your trigger key (e.g. `Alt+Space` or `Meta+Space`).
+- **Hyprland:** Add `bind = ALT, SPACE, exec, launcher-summon` to `~/.config/hypr/hyprland.conf`.
+- **Sway:** Add `bindsym Mod1+space exec launcher-summon` to `~/.config/sway/config`.
 
 ---
 
 ### Switching from Raycast?
 
-If you are moving over from Raycast, you don't have to rebuild your configuration from scratch. I built an instant importer directly into Asyar so you can carry over your setup in seconds:
+If you are moving over from Raycast, you don't have to rebuild your configuration from scratch. I built an instant importer directly into Launcher so you can carry over your setup in seconds:
 
-- **1-Click Migration:** Export your data from Raycast (**Export Settings & Data** ➔ `.rayconfig`), summon Asyar, and search **Import from Raycast** (or click the button on the Welcome onboarding screen).
+- **1-Click Migration:** Export your data from Raycast (**Export Settings & Data** ➔ `.rayconfig`), summon Launcher, and search **Import from Raycast** (or click the button on the Welcome onboarding screen).
 - **What Carries Over:** Snippets (with keywords and dynamic expansions), Quicklinks (mapped directly to Portals with `{query}` support), and App Hotkeys/Aliases.
 - **Privacy & Safety First:** Duplicate items are skipped cleanly, your Raycast setup is never altered, and imported data is protected locally with AES-256-GCM encryption backed by your OS Keychain.
 
@@ -114,9 +114,9 @@ If you are moving over from Raycast, you don't have to rebuild your configuratio
 
 ---
 
-## Asyar vs. The Alternatives
+## Launcher vs. The Alternatives
 
-|                                                               |       **Asyar**        |               Raycast               |       Alfred        |
+|                                                               |       **Launcher**        |               Raycast               |       Alfred        |
 | ------------------------------------------------------------- | :--------------------: | :---------------------------------: | :-----------------: |
 | **Open Source**                                               |      ✅ (GPL/MIT)      |                 ❌                  |         ❌          |
 | **100% Offline & Local-First** (data never leaves device)     |           ✅           |                 ❌                  |         ✅          |
@@ -143,11 +143,11 @@ If you are moving over from Raycast, you don't have to rebuild your configuratio
 ## Features
 
 - **Application Launcher** — Find and launch any installed application instantly
-- **AI Agents with Tool Calling** — Build custom AI agents with persistent threads and tool calling, backed by your choice of provider (OpenAI, Anthropic, Google, Ollama, OpenRouter, or any OpenAI-compatible endpoint). **Asyar Assistant** is built in — press `Tab` from the empty launcher to summon it. Streaming responses, LaTeX math, syntax highlighting, and Mermaid diagrams included.
+- **AI Agents with Tool Calling** — Build custom AI agents with persistent threads and tool calling, backed by your choice of provider (OpenAI, Anthropic, Google, Ollama, OpenRouter, or any OpenAI-compatible endpoint). **Launcher Assistant** is built in — press `Tab` from the empty launcher to summon it. Streaming responses, LaTeX math, syntax highlighting, and Mermaid diagrams included.
 - **Silent AI Commands** — Mark any agent as silent, point it at your selection (or clipboard, or a one-shot argument), and have the response **replace the text in place** in whatever app you were typing in. No launcher window, no chat view, no confirm dialog. Perfect for "fix grammar", "translate this", "make it shorter", or any other one-shot transform you run dozens of times a day.
 - **Built-in Tools for Agents** — Eight tools your agents can use out of the box: calculator, clipboard read/write, file read/write, shell execution, web fetch, and launcher search. Extensions can register their own tools too.
 - **MCP (Model Context Protocol)** — Connect any MCP-compatible server. Auto-detects existing configs from Claude Desktop, Cursor, Cline, Continue, and Zed; bundled `bun` and `uv` let `npx`/`uvx`-based servers run without a local Node.js or Python install. First-call permission prompts gate write and exec tools per agent.
-- **Scripts** — Run shell scripts from the launcher. Add metadata headers (`@asyar.title`, `@asyar.icon`, `@asyar.argument:N`) so your script gets a name, icon, and prompted arguments. Live progress surfaces as a run row.
+- **Scripts** — Run shell scripts from the launcher. Add metadata headers (`@launcher.title`, `@launcher.icon`, `@launcher.argument:N`) so your script gets a name, icon, and prompted arguments. Live progress surfaces as a run row.
 - **Run Tracking** — Long-running work — agents and scripts — shows live status dots in the launcher. Failed runs stay until dismissed; succeeded agent threads stay until you close them, so you can pick a conversation back up at any time.
 - **Calculator** — Instant math evaluation with currency conversion, directly in the search bar
 - **Clipboard History** — Search and reuse anything you've copied, with rich markdown, syntax highlighting, and LaTeX rendering for text items. Cmd/Ctrl-click (or Cmd/Ctrl+↑/↓) to select several items, then Enter merges them into a single paste
@@ -158,13 +158,13 @@ If you are moving over from Raycast, you don't have to rebuild your configuratio
 - **Window Management** — 17 built-in layout presets (halves, quarters, thirds, maximize, center) plus custom saved layouts; undo the last move with "Restore Previous"; works on macOS, Windows, and Linux
 - **Context Modes** — Type prefixes (`ask ai`, a URL, etc.) to switch the launcher into a specialized mode; visual chips indicate the active context
 - **Create Extension** — Scaffold a new extension from a template without leaving the launcher
-- **AI Extension Builder** — Describe an extension in plain language (_"build an extension for Notion"_) and an AI agent scaffolds, codes, builds, and verifies it for you — gating feasibility up front, asking clarifying questions via notifications, and dropping a working extension into `~/AsyarExtensions`. Uses your own Anthropic key (BYOK, no Asyar account). Browse and one-click-publish everything you've built from the **My Extensions** view.
+- **AI Extension Builder** — Describe an extension in plain language (_"build an extension for Notion"_) and an AI agent scaffolds, codes, builds, and verifies it for you — gating feasibility up front, asking clarifying questions via notifications, and dropping a working extension into `~/LauncherExtensions`. Uses your own Anthropic key (BYOK, no Launcher account). Browse and one-click-publish everything you've built from the **My Extensions** view.
 - **Themes** — Customize the launcher's appearance with built-in themes or create your own
 - **Backup & Restore** — Export and import your data locally; optional password encryption for sensitive fields
 - **Privacy by Default** — Clipboard items the OS or source app marks private (NSPasteboard concealed/transient/auto-generated, Windows clipboard-history opt-out) are never stored; password managers (1Password, Bitwarden, KeePassXC, Dashlane, Enpass, LastPass, Apple Keychain Access) are denylisted by default. Known secret formats (AWS keys, GitHub/GitLab/Stripe/Slack/OpenAI/Anthropic tokens, JWTs, PEM private keys, Luhn-validated credit cards) are redacted in place across clipboard, snippets, and AI conversations — including before the AI provider sees them.
 - **Extension Store** — Browse and install extensions from [asyar.org](https://asyar.org)
 - **Root-Search Extension Actions** — Extensions declare ⌘K actions directly in `manifest.json` at two scopes: extension-level (any command selected) and command-level (only that command). Both scopes stack automatically.
-- **Deep Link Integration** — Trigger any extension command from a browser, terminal, or script via `asyar://extensions/{extensionId}/{commandId}?param=value` URLs
+- **Deep Link Integration** — Trigger any extension command from a browser, terminal, or script via `launcher://extensions/{extensionId}/{commandId}?param=value` URLs
 - **Reactive Live Subtitles** — Extensions push real-time data into search result subtitles without re-running a search; used by the built-in calculator and available to any extension via `updateCommandMetadata()`
 - **Background Scheduling** — Commands declare a `schedule` interval in `manifest.json` (1 min – 24 h) to run background tasks automatically, even when the launcher is closed
 - **HUD Notifications** — Lightweight, auto-dismissing heads-up messages for instant feedback (e.g., layout name after a window move, "Copied" after a snippet paste)
@@ -183,13 +183,13 @@ The launcher interface follows your system language and is available in:
 - 简体中文 (Simplified Chinese)
 - 繁體中文 (Traditional Chinese)
 
-Want Asyar in your language? See [Contributing a Localization](CONTRIBUTING.md#internationalization-i18n--translations).
+Want Launcher in your language? See [Contributing a Localization](CONTRIBUTING.md#internationalization-i18n--translations).
 
 ---
 
 ## Privacy Scorecard
 
-|                                                                                | Asyar |
+|                                                                                | Launcher |
 | ------------------------------------------------------------------------------ | :---: |
 | Data stored locally only                                                       |  ✅   |
 | Works fully offline                                                            |  ✅   |
@@ -210,11 +210,11 @@ Want Asyar in your language? See [Contributing a Localization](CONTRIBUTING.md#i
 
 ## Privacy Defenses
 
-Asyar's privacy work is layered — each layer protects a different boundary, and the layers compose.
+Launcher's privacy work is layered — each layer protects a different boundary, and the layers compose.
 
 ### Layer 1 — Capture-time exclusion
 
-When a clipboard event arrives, Asyar inspects the OS pasteboard's type identifiers and the source app's bundle id **before** writing anything to disk. Items match any of the following are dropped at the door:
+When a clipboard event arrives, Launcher inspects the OS pasteboard's type identifiers and the source app's bundle id **before** writing anything to disk. Items match any of the following are dropped at the door:
 
 - **macOS** — pasteboards carrying `org.nspasteboard.ConcealedType`, `TransientType`, `AutoGeneratedType`, or Apple's auto-generated promised type.
 - **Windows** — pasteboards registered with `CanIncludeInClipboardHistory` or `ExcludeClipboardContentFromMonitorProcessing`.
@@ -224,7 +224,7 @@ Items rejected at this layer never reach SQLite, so they cannot leak via local d
 
 ### Layer 2 — Pattern-based secret redaction
 
-For everything that _does_ get stored, Asyar runs a regex-based detector over clipboard items (text / HTML / RTF), snippet expansions, and AI conversation messages. Each match is replaced in place with `[redacted: <kind>]` — items still appear in history but the secret value is gone.
+For everything that _does_ get stored, Launcher runs a regex-based detector over clipboard items (text / HTML / RTF), snippet expansions, and AI conversation messages. Each match is replaced in place with `[redacted: <kind>]` — items still appear in history but the secret value is gone.
 
 Bundled detector kinds (false-positive rate near zero on plain-English text):
 
@@ -244,11 +244,11 @@ The user can disable redaction globally or per-category in **Settings → Privac
 
 Clipboard `content` / `preview`, snippet `expansion`, AI conversation message bodies, and encrypted extension preferences are stored as AES-256-GCM ciphertext on disk. The 32-byte master key lives in the OS keychain — Keychain Services on macOS, Credential Manager on Windows, freedesktop Secret Service on Linux. An offline disk image alone is no longer sufficient to read your data; the attacker also needs an unlocked session keychain.
 
-On Linux without Secret Service (headless, minimal WM, DBus-less containers) Asyar falls back to a `0600` file-backed key and surfaces a warning in **Settings → Privacy → Encryption at Rest**, telling you to install gnome-keyring or KWallet for full protection. macOS / Windows treat keychain unavailability as fatal — the keychain is part of the OS install, so failure is exceptional and refusing to start is safer than silent degradation.
+On Linux without Secret Service (headless, minimal WM, DBus-less containers) Launcher falls back to a `0600` file-backed key and surfaces a warning in **Settings → Privacy → Encryption at Rest**, telling you to install gnome-keyring or KWallet for full protection. macOS / Windows treat keychain unavailability as fatal — the keychain is part of the OS install, so failure is exceptional and refusing to start is safer than silent degradation.
 
 ### Layer 4a — Minimal cloud sync
 
-Cloud sync (when enabled) is built around a simple privacy promise: **the less data on the wire, the smaller the surface for any potential breach.** Asyar uploads only what you've actually changed since your last sync — never your whole history, never on a fixed schedule. An idle launcher moves zero bytes. Editing one snippet syncs one snippet. Concurrent edits on different devices coexist instead of overwriting each other.
+Cloud sync (when enabled) is built around a simple privacy promise: **the less data on the wire, the smaller the surface for any potential breach.** Launcher uploads only what you've actually changed since your last sync — never your whole history, never on a fixed schedule. An idle launcher moves zero bytes. Editing one snippet syncs one snippet. Concurrent edits on different devices coexist instead of overwriting each other.
 
 ### Layer 4b/4c — Optional end-to-end encrypted cloud sync
 
@@ -256,7 +256,7 @@ Opt-in passphrase-based E2EE on top of the per-item sync layer. Default OFF. Ena
 
 - Passphrase → Argon2id → 32-byte sync key → AES-256-GCM per item.
 - Passphrase entered once at enrolment; derived key cached in the OS keychain — daily UX has zero friction.
-- 24-word BIP-39 recovery phrase issued at enrolment. Passphrase loss without the recovery phrase means data loss; Asyar.org cannot reset it.
+- 24-word BIP-39 recovery phrase issued at enrolment. Passphrase loss without the recovery phrase means data loss; Launcher.org cannot reset it.
 
 ### Layer 5 — Retention & automatic eviction
 
@@ -299,7 +299,7 @@ See [`docs/explanation/clipboard-privacy.md`](docs/explanation/clipboard-privacy
 
 ### Detailed Platform Compatibility
 
-_(Asyar is fully tested and verified on **macOS**, **Windows 11**, and **Debian**)_
+_(Launcher is fully tested and verified on **macOS**, **Windows 11**, and **Debian**)_
 
 - **macOS:** Fully supported and tested. Global features like Snippets require Accessibility permissions.
 - **Windows:** Fully tested on Windows 11. Supported on Windows 10 out-of-the-box.
@@ -321,17 +321,17 @@ _(Asyar is fully tested and verified on **macOS**, **Windows 11**, and **Debian*
 
 ## How Extensions Work
 
-Asyar's power comes from its extension system. Extensions add commands to the launcher, contribute live search results, and open rich UI panels.
+Launcher's power comes from its extension system. Extensions add commands to the launcher, contribute live search results, and open rich UI panels.
 
 - **Built-in extensions** run natively alongside the app for maximum speed
 - **Installed extensions** run in secure sandboxes — they can't crash the app or access other extensions' data
-- **Build your own** with the [Asyar SDK](asyar-sdk/) using any web framework (Svelte, React, Vue, or vanilla JS)
+- **Build your own** with the [Launcher SDK](launcher-sdk/) using any web framework (Svelte, React, Vue, or vanilla JS)
 
 ---
 
 ## Extension Security Model
 
-Raycast gives every extension full Node.js access — filesystem, network, child processes — with no restrictions. Asyar takes a different approach: **extensions only get the permissions they declare, enforced at two layers.**
+Raycast gives every extension full Node.js access — filesystem, network, child processes — with no restrictions. Launcher takes a different approach: **extensions only get the permissions they declare, enforced at two layers.**
 
 Every installed extension declares the permissions it needs in its `manifest.json`. At runtime, those declarations are enforced twice:
 
@@ -358,15 +358,15 @@ On top of permission gating, each installed extension runs in an **isolated ifra
 
 ## AI Agents
 
-Asyar agents are first-class command targets — type the agent's name, press `Enter`, and chat in a persistent thread. Each agent has its own provider, model, system prompt, and toolset.
+Launcher agents are first-class command targets — type the agent's name, press `Enter`, and chat in a persistent thread. Each agent has its own provider, model, system prompt, and toolset.
 
-- **Asyar Assistant (built in)** — A default agent appears the moment you configure any provider. Press `Tab` from the empty launcher to summon it, or type `ask ai`.
-- **BYOK across 6 providers** — OpenAI, Anthropic, Google, Ollama, OpenRouter, or any OpenAI-compatible endpoint. API keys live in the OS keychain; no Asyar account or AI subscription needed.
+- **Launcher Assistant (built in)** — A default agent appears the moment you configure any provider. Press `Tab` from the empty launcher to summon it, or type `ask ai`.
+- **BYOK across 6 providers** — OpenAI, Anthropic, Google, Ollama, OpenRouter, or any OpenAI-compatible endpoint. API keys live in the OS keychain; no Launcher account or AI subscription needed.
 - **Tool calling on every provider** — All six supported providers can invoke tools — the 8 built-in tools (calculator, clipboard, file I/O, shell, web fetch, launcher search), tools contributed by installed extensions, or tools served by any MCP server.
 - **Persistent threads** — Conversations are saved locally in SQLite. Start a new thread or resume an existing one from the agent's `⌘K` menu; succeeded threads remain visible in the launcher until you dismiss them.
 - **MCP integration** — Add Model Context Protocol servers from **Settings → MCP**, or auto-import existing configs from Claude Desktop, Cursor, Cline, Continue, or Zed. Bundled `bun` and `uv` sidecars run `npx`/`uvx`-based servers without system installs.
 - **Streaming + cancellation** — Replies stream word-by-word; cancel mid-response.
-- **Your key, your data** — requests go directly from your device to your provider; nothing routes through Asyar servers.
+- **Your key, your data** — requests go directly from your device to your provider; nothing routes through Launcher servers.
 
 ---
 
@@ -405,7 +405,7 @@ Typing certain prefixes transforms the launcher into a specialized mode:
 
 | Prefix                  | Mode                       |
 | ----------------------- | -------------------------- |
-| `ask ai`, `ai`, `chat`  | Asyar Assistant (AI Agent) |
+| `ask ai`, `ai`, `chat`  | Launcher Assistant (AI Agent) |
 | A URL or portal trigger | Portal / web view          |
 
 An active context is shown as a chip in the search bar. Press `Escape` to exit the current context and return to normal search.
@@ -428,7 +428,7 @@ See the [File Search guide](docs/guide/features/file-search.md) for the full wal
 
 ## Window Management
 
-Asyar includes a built-in window management extension that lets you snap and resize any window without leaving the keyboard.
+Launcher includes a built-in window management extension that lets you snap and resize any window without leaving the keyboard.
 
 - **17 layout presets** — left/right halves, top/bottom halves, all four corners, thirds (left, center, right), two-thirds, maximize, and center
 - **Custom layouts** — save the current window position and size as a named preset, then recall it any time
@@ -469,7 +469,7 @@ The scheduler (backed by Tokio) fires the command every `interval` seconds (60 s
 
 ## Backup & Restore
 
-Asyar lets you export and import your data locally — no account required.
+Launcher lets you export and import your data locally — no account required.
 
 Go to **Settings → Backup** to:
 
@@ -485,15 +485,15 @@ Cloud sync and account-based backup are intentionally out of scope — they will
 ## Build an Extension
 
 ```bash
-npm install -g asyar-sdk
+npm install -g launcher-sdk
 ```
 
-The `asyar` CLI handles the full workflow — scaffolding, development, building, and publishing:
+The `launcher` CLI handles the full workflow — scaffolding, development, building, and publishing:
 
 ```bash
-asyar dev        # development mode with hot reload
-asyar build      # production build
-asyar publish    # package and publish to the store
+launcher dev        # development mode with hot reload
+launcher build      # production build
+launcher publish    # package and publish to the store
 ```
 
 See the [developer documentation](docs/) for the full walkthrough — start with the [tutorials](docs/tutorials/).
@@ -503,7 +503,7 @@ See the [developer documentation](docs/) for the full walkthrough — start with
 You don't have to leave the launcher to make an extension:
 
 - **Create Extension** — scaffold from a template.
-- **Build Extension with AI** — describe it in plain language and let an AI agent build a working extension for you (BYOK Anthropic key). It uses its own knowledge of Asyar's capabilities and limits, tells you up front if a request isn't possible, and notifies you when the build is done.
+- **Build Extension with AI** — describe it in plain language and let an AI agent build a working extension for you (BYOK Anthropic key). It uses its own knowledge of Launcher's capabilities and limits, tells you up front if a request isn't possible, and notifies you when the build is done.
 - **My Extensions** — browse everything you've built, open it in your editor, or publish it to the store (`⌘K`).
 
 See [Use the Create Extension tool](docs/how-to/use-create-extension-tool.md) for the in-app flow, and the [AI Extension Builder explanation](docs/explanation/ai-extension-builder.md) for how it works under the hood.
@@ -518,21 +518,21 @@ To set up the full development environment:
 
 ```bash
 git clone https://github.com/Xoshbin/asyar.git
-cd asyar
+cd launcher
 node setup.mjs
 ```
 
-`setup.mjs` installs workspace dependencies, builds the SDK, clones any optional Tier 2 sample extensions (like `sdk-playground`) into `extensions/`, and runs `asyar doctor` to verify the setup.
+`setup.mjs` installs workspace dependencies, builds the SDK, clones any optional Tier 2 sample extensions (like `sdk-playground`) into `extensions/`, and runs `launcher doctor` to verify the setup.
 
 ### Runtime downloads (bun / uv / claude)
 
-Asyar no longer bundles `bun`, `uv`, or `claude` at build time. Instead, each is
+Launcher no longer bundles `bun`, `uv`, or `claude` at build time. Instead, each is
 downloaded on demand the first time a feature actually needs it (an MCP server
 without a system Node.js/Python, or the AI Extension Builder), behind a consent
 dialog, verified against a pinned sha256. See
-[`asyar-launcher/src-tauri/src/runtimes/`](asyar-launcher/src-tauri/src/runtimes/)
+[`launcher-app/src-tauri/src/runtimes/`](launcher-app/src-tauri/src/runtimes/)
 for the download/verify/install machinery, and
-[`asyar-launcher/src-tauri/binaries/README.md`](asyar-launcher/src-tauri/binaries/README.md)
+[`launcher-app/src-tauri/binaries/README.md`](launcher-app/src-tauri/binaries/README.md)
 if you want to place a runtime manually for local `tauri dev` testing.
 
 For architecture details, see the [explanation docs](docs/explanation/).
@@ -546,4 +546,4 @@ For release procedures (both launcher and SDK), see [`RELEASING.md`](RELEASING.m
 
 ## Licensing
 
-This repository uses a split-licensing model. The core application (`asyar-launcher`) is licensed under the GPL-3.0 license. The SDK and extension tooling (`asyar-sdk`, `asyar-ext-builder`) are licensed under the MIT license. See the respective directories for full details.
+This repository uses a split-licensing model. The core application (`launcher-app`) is licensed under the GPL-3.0 license. The SDK and extension tooling (`launcher-sdk`, `launcher-ext-builder`) are licensed under the MIT license. See the respective directories for full details.

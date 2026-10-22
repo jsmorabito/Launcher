@@ -1,0 +1,4 @@
+packages:
+  - '.'
+  - 'src/built-in-features/*'
+  - '../launcher-sdk'

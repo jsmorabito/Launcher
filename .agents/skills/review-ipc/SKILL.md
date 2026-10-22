@@ -1,6 +1,6 @@
 ---
 name: review-ipc
-description: Audit IPC message contracts between extensions and the Asyar host. Use when adding a new SDK service, adding a new proxy method, changing a postMessage type string, or reviewing permission gate coverage.
+description: Audit IPC message contracts between extensions and the Launcher host. Use when adding a new SDK service, adding a new proxy method, changing a postMessage type string, or reviewing permission gate coverage.
 allowed-tools: Read, Grep, Glob
 ---
 
@@ -15,7 +15,7 @@ Every Tier 2 extension operates across **two execution contexts** following the 
 - **Worker (`role: 'worker'`)**: Always-on headless compute running off-main-thread (Web Worker / worker host context, or fallback iframe).
 - **View (`role: 'view'`)**: On-demand visual canvas running in a sandboxed `<iframe>` (`view.html`).
 
-Each context imports from its dedicated SDK entry (`asyar-sdk/worker` vs `asyar-sdk/view`) and owns its own `MessageBroker` and `ExtensionContext`. The IPC bridge audited here therefore covers **both** contexts' calls into the host. `ExtensionIpcRouter` maps the caller back to its identity and role — services that branch on role read it off the dispatch context.
+Each context imports from its dedicated SDK entry (`launcher-sdk/worker` vs `launcher-sdk/view`) and owns its own `MessageBroker` and `ExtensionContext`. The IPC bridge audited here therefore covers **both** contexts' calls into the host. `ExtensionIpcRouter` maps the caller back to its identity and role — services that branch on role read it off the dispatch context.
 
 For the runtime details (state machine, mailbox, RPC), see
 [`docs/explanation/extension-runtime.md`](../../../docs/explanation/extension-runtime.md);
@@ -26,24 +26,24 @@ for the per-message protocol, see
 
 ### 1. Type string format consistency
 
-All SDK proxy methods must call `broker.invoke('{service}:{action}', ...)`. The `MessageBroker` prepends `asyar:api:` automatically, producing `asyar:api:{service}:{action}`. Verify:
+All SDK proxy methods must call `broker.invoke('{service}:{action}', ...)`. The `MessageBroker` prepends `launcher:api:` automatically, producing `launcher:api:{service}:{action}`. Verify:
 
-- Every `this.broker.invoke(...)` call in `asyar-sdk/src/services/*Proxy.ts` uses the `{service}:{action}` format (no `asyar:api:` prefix — that's added by MessageBroker)
-- The resulting full type (`asyar:api:{service}:{action}`) is **classified in the Rust gate** — `asyar-launcher/src-tauri/src/permissions.rs`: either `get_required_permission` (needs a manifest permission) or `is_public_call` (deliberately permission-free). That is the ONLY enforcement point — there is no JS-side gate to update
+- Every `this.broker.invoke(...)` call in `launcher-sdk/src/services/*Proxy.ts` uses the `{service}:{action}` format (no `launcher:api:` prefix — that's added by MessageBroker)
+- The resulting full type (`launcher:api:{service}:{action}`) is **classified in the Rust gate** — `launcher-app/src-tauri/src/permissions.rs`: either `get_required_permission` (needs a manifest permission) or `is_public_call` (deliberately permission-free). That is the ONLY enforcement point — there is no JS-side gate to update
 - The gate **fails closed** (since 2026-07-24): a call type in neither list is DENIED, so a new proxy method nobody classified breaks loudly instead of becoming default-allowed
 - New proxies are added to **the right entry's bag**: the worker entry
-  ([`asyar-sdk/src/worker.ts`](../../../asyar-sdk/src/worker.ts)) only
+  ([`launcher-sdk/src/worker.ts`](../../../launcher-sdk/src/worker.ts)) only
   exposes proxies that don't depend on the DOM or user interaction; the
-  view entry ([`asyar-sdk/src/view.ts`](../../../asyar-sdk/src/view.ts))
+  view entry ([`launcher-sdk/src/view.ts`](../../../launcher-sdk/src/view.ts))
   exposes the full bag — it re-exports `contracts.ts`, which is where the
   shared proxies and `ExtensionContext` live. A misclassified proxy is a
   Phase-6 regression.
 
 ### 2. Permission gate coverage
 
-Coverage is **auto-enforced** by `asyar-launcher/scripts/permission-coverage.test.mjs` (runs in CI via vitest): it extracts every `.invoke('service:action')` call type in the SDK and fails if any is not classified in the Rust gate (`get_required_permission` ∪ `is_public_call`). A forgotten mapping turns CI red — you no longer hand-audit this.
+Coverage is **auto-enforced** by `launcher-app/scripts/permission-coverage.test.mjs` (runs in CI via vitest): it extracts every `.invoke('service:action')` call type in the SDK and fails if any is not classified in the Rust gate (`get_required_permission` ∪ `is_public_call`). A forgotten mapping turns CI red — you no longer hand-audit this.
 
-When adding/auditing a gated API, edit `asyar-launcher/src-tauri/src/permissions.rs`:
+When adding/auditing a gated API, edit `launcher-app/src-tauri/src/permissions.rs`:
 
 - Add gated calls to `get_required_permission` — the permission string must be a valid manifest permission (e.g. `clipboard:read`, `network`, `fs:read`, `runs:track`, `tools:register`). The generated `gatedPermissions.ts` (launcher + SDK CLI copies) is derived from it by `scripts/generate-permission-catalog.mjs` — run `pnpm gen:permission-catalog`
 - Add deliberately permission-free calls to `is_public_call` (with a one-line rationale) — do NOT rely on fall-through, which now denies
@@ -53,7 +53,7 @@ When adding/auditing a gated API, edit `asyar-launcher/src-tauri/src/permissions
 
 Tier 1 (built-in) extensions **must not** use `ActionServiceProxy` for registering actions. Callbacks are stripped by `JSON.stringify` in `postMessage` serialization.
 
-Check every file in `asyar-launcher/src/built-in-features/*/index.ts`:
+Check every file in `launcher-app/src/built-in-features/*/index.ts`:
 
 - Actions must be registered via `actionService.registerAction(...)` (the host singleton imported from `../../services/action/actionService.svelte`)
 - Any use of `context.getService<IActionService>('actions')` for registering callbacks should be flagged
@@ -62,29 +62,29 @@ Check every file in `asyar-launcher/src/built-in-features/*/index.ts`:
 
 Verify that for any new service method added to a proxy:
 
-- The host-side handler exists in `asyar-launcher/src/services/extension/ExtensionIpcRouter.ts` or a dedicated service file
-- Replies use `event.source` so they land in the requesting execution context. Post `{ type: 'asyar:response', messageId, result }` with a target origin for iframe windows; Web Worker sources take only the message (no window target-origin argument)
-- Error path sends `{ type: 'asyar:response', messageId, error: string }`
-- Host → extension messages go through `postToExtension(extensionId, role, message)` in `asyar-launcher/src/services/extension/extensionDelivery.ts`, which routes to Web Workers or compatibility iframes. Use `{ fallback: false }` for strictly role-scoped subscriptions. Reserve `pickExtensionIframe` for iframe-specific operations such as view focus and readiness scans; never assume a worker is an iframe
+- The host-side handler exists in `launcher-app/src/services/extension/ExtensionIpcRouter.ts` or a dedicated service file
+- Replies use `event.source` so they land in the requesting execution context. Post `{ type: 'launcher:response', messageId, result }` with a target origin for iframe windows; Web Worker sources take only the message (no window target-origin argument)
+- Error path sends `{ type: 'launcher:response', messageId, error: string }`
+- Host → extension messages go through `postToExtension(extensionId, role, message)` in `launcher-app/src/services/extension/extensionDelivery.ts`, which routes to Web Workers or compatibility iframes. Use `{ fallback: false }` for strictly role-scoped subscriptions. Reserve `pickExtensionIframe` for iframe-specific operations such as view focus and readiness scans; never assume a worker is an iframe
 
 ### 5. Role-aware dispatch checks (Phase 6+)
 
 When auditing services that branch on iframe role:
 
-- `actions.registerActionHandler` is role-neutral — registering from either role is supported and the launcher routes the matching `asyar:action:execute` envelope back to whichever role registered
+- `actions.registerActionHandler` is role-neutral — registering from either role is supported and the launcher routes the matching `launcher:action:execute` envelope back to whichever role registered
 - `commands.onCommand` for a `mode: "background"` manifest command must register from the **worker**; the launcher dispatches background-mode commands to the worker execution context
-- `state:rpcRequest` / `state:rpcReply` envelopes carry the worker↔view RPC protocol; the worker-side interceptor in `asyar-sdk/src/worker.ts` is the only place that calls `extensionRpc.deliverActionPayload(...)`. View-side calls go through `context.request(...)` only.
+- `state:rpcRequest` / `state:rpcReply` envelopes carry the worker↔view RPC protocol; the worker-side interceptor in `launcher-sdk/src/worker.ts` is the only place that calls `extensionRpc.deliverActionPayload(...)`. View-side calls go through `context.request(...)` only.
 
 ## Files to read
 
-- `asyar-sdk/src/ipc/MessageBroker.ts` — confirms `broker.invoke()` prepends `asyar:api:`
-- `asyar-sdk/src/services/*Proxy.ts` — all proxy service files
-- `asyar-sdk/src/worker.ts`, `asyar-sdk/src/view.ts`, `asyar-sdk/src/contracts.ts` — entry-point split
-- `asyar-launcher/src-tauri/src/permissions.rs` — the real gate (`get_required_permission` + `is_public_call` + `gate_decision`, fail-closed)
-- `asyar-launcher/scripts/permission-coverage.test.mjs` — the CI coverage gate (SDK call types ⊆ classified)
-- `asyar-launcher/src/services/extension/ExtensionIpcRouter.ts` — host IPC handler + role-source mapping
-- `asyar-launcher/src/services/extension/extensionIframeSelector.ts` — `pickExtensionIframe` role-prefer/fallback selector
-- `asyar-launcher/src/built-in-features/*/index.ts` — Tier 1 action registration
+- `launcher-sdk/src/ipc/MessageBroker.ts` — confirms `broker.invoke()` prepends `launcher:api:`
+- `launcher-sdk/src/services/*Proxy.ts` — all proxy service files
+- `launcher-sdk/src/worker.ts`, `launcher-sdk/src/view.ts`, `launcher-sdk/src/contracts.ts` — entry-point split
+- `launcher-app/src-tauri/src/permissions.rs` — the real gate (`get_required_permission` + `is_public_call` + `gate_decision`, fail-closed)
+- `launcher-app/scripts/permission-coverage.test.mjs` — the CI coverage gate (SDK call types ⊆ classified)
+- `launcher-app/src/services/extension/ExtensionIpcRouter.ts` — host IPC handler + role-source mapping
+- `launcher-app/src/services/extension/extensionIframeSelector.ts` — `pickExtensionIframe` role-prefer/fallback selector
+- `launcher-app/src/built-in-features/*/index.ts` — Tier 1 action registration
 
 ## Host → Extension Push Messages (out of scope for this audit)
 
@@ -92,8 +92,8 @@ The host sends two push message types directly into extension iframes. These are
 
 | Message type            | Direction     | Purpose                                                           |
 | ----------------------- | ------------- | ----------------------------------------------------------------- |
-| `asyar:theme:variables` | host → iframe | Injects all CSS custom properties on load and on theme change     |
-| `asyar:theme:fonts`     | host → iframe | Sends Satoshi + JetBrains Mono as base64 `@font-face` CSS on load |
+| `launcher:theme:variables` | host → iframe | Injects all CSS custom properties on load and on theme change     |
+| `launcher:theme:fonts`     | host → iframe | Sends Satoshi + JetBrains Mono as base64 `@font-face` CSS on load |
 
 Sender: `ExtensionIframe.svelte` (`handleIframeLoad`, `MutationObserver`)
 Receiver: `ExtensionContext.ts` `setupThemeInjection()` in the SDK

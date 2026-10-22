@@ -11,7 +11,7 @@ work is bounded by construction, not by how many files exist on disk.
 
 ## 1. Rust module map
 
-All of it lives under `asyar-launcher/src-tauri/src/file_index/`:
+All of it lives under `launcher-app/src-tauri/src/file_index/`:
 
 | File                                                  | Responsibility                                                                                                     |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -22,14 +22,14 @@ All of it lives under `asyar-launcher/src-tauri/src/file_index/`:
 | `ranking.rs`                                          | Pure scoring functions (match quality, frecency, depth, type prior)                                                |
 | `file_id.rs`                                          | Stable file id: FNV hash of `(dev, inode)` (Unix) / `(volume, file_index)` (Windows) — survives renames            |
 | `walker.rs`                                           | Parallel initial scan (`ignore` crate), exclusion patterns, hard entry cap, bundle-as-leaf handling                |
-| `watcher.rs`                                          | Raw `notify` watcher + Asyar-owned coalescer (exclusion check first, flush every 500 ms), `FileIndexWatcherHandle` |
+| `watcher.rs`                                          | Raw `notify` watcher + Launcher-owned coalescer (exclusion check first, flush every 500 ms), `FileIndexWatcherHandle` |
 | `snapshot.rs`                                         | Versioned bincode snapshot — instant restart without a full rescan                                                 |
 | `learning.rs`                                         | In-memory per-query selection/pin boosts, loaded once at startup (never queried on the keystroke path)             |
 | `service.rs`                                          | `FileIndexState` — the lifecycle/state machine tying everything together, Tauri-agnostic by design                 |
 | `provider.rs` + `deep/{mdfind,everything,plocate}.rs` | On-demand "Deep Search" escalation to the OS-native search tool                                                    |
 | `commands.rs`                                         | Thin `#[tauri::command]` wrappers — no logic beyond extract/delegate/map-error                                     |
 
-`asyar-launcher/src-tauri/src/thumbnail/` is a separate, related subsystem
+`launcher-app/src-tauri/src/thumbnail/` is a separate, related subsystem
 (§7).
 
 Two SQLite tables back learning/pins: `storage/file_search_selections.rs`,
@@ -101,7 +101,7 @@ load snapshot (instant, if present)
 A manual or config-triggered rebuild (`file_index_rebuild` /
 `file_index_set_config`) calls `FileIndexState::mark_rescanning()`
 **synchronously** — before the actual scan is spawned — and emits
-`asyar:file-index-status` immediately. This matters: the scan itself runs
+`launcher:file-index-status` immediately. This matters: the scan itself runs
 on a `spawn_blocking` task and can take several seconds on a large
 `$HOME`; without the synchronous status flip, the UI would show stale
 `Ready` data with no indication anything was happening until the scan
@@ -132,7 +132,7 @@ itself) can't append tail entries the walker would never emit.
 
 ## 6. Watcher internals: why not `notify-debouncer-full`
 
-`watcher.rs` uses a **raw `notify` watcher** plus a small Asyar-owned
+`watcher.rs` uses a **raw `notify` watcher** plus a small Launcher-owned
 coalescer, not `notify-debouncer-full`. The debouncer's default
 `FileIdMap` cache walks and `stat`s **every file under each watched
 root** into a `HashMap<PathBuf, FileId>` — no exclusions, symlinks
@@ -170,13 +170,13 @@ flips status to `CapReached` rather than growing unbounded.
 
 ## 7. Thumbnails — a separate, related subsystem
 
-`asyar-launcher/src-tauri/src/thumbnail/` generates and caches file preview
+`launcher-app/src-tauri/src/thumbnail/` generates and caches file preview
 thumbnails, served the same way application icons already are:
 
 ```
 get_file_thumbnail(path, maxDim)
   → cache key = hash(path, mtime, size, maxDim)   // an edit produces a new key automatically
-  → cache hit?  → return asyar-thumb://<key>.png instantly
+  → cache hit?  → return launcher-thumb://<key>.png instantly
   → cache miss  → generate (bounded to 3 concurrent generations), cache, return
 ```
 
@@ -229,7 +229,7 @@ every write once over budget.
 | `file_search_clear_history`             | `{}`                           | `()`                                          |
 | `deep_search_availability`              | `{}`                           | `string \| null` (provider id)                |
 | `deep_search`                           | `{query, limit?}`              | `FileHit[]`                                   |
-| `get_file_thumbnail`                    | `{path, maxDim?}`              | `string \| null` (an `asyar-thumb://` URL)    |
+| `get_file_thumbnail`                    | `{path, maxDim?}`              | `string \| null` (an `launcher-thumb://` URL)    |
 | `read_text_preview`                     | `{pathStr, maxBytes?}`         | `string` (bounded, lossy-UTF8)                |
 | `open_in_terminal` / `quick_look_path`  | `{pathStr}`                    | `()`                                          |
 
@@ -241,7 +241,7 @@ Rust command instead, which isn't subject to that scope at all. This is
 also why thumbnails are generated Rust-side rather than read via
 `plugin-fs` in the frontend.
 
-Event: `asyar:file-index-status` — emitted on every state transition
+Event: `launcher:file-index-status` — emitted on every state transition
 (startup, rebuild start/end, config change). A rebuild's only visible
 milestones are the synchronous `Rescanning` flip and the final
 `Ready`/`CapReached` emission (§4); there is no mid-scan progress event.

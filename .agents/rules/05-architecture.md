@@ -38,7 +38,7 @@
 
 - **Decoupled Compute from DOM Presentation**:
   - **Headless Worker (`role: 'worker'`)**: Must execute in off-main-thread compute environments (e.g. Web Workers or isolated worker host contexts). Headless background execution (schedules, interval pollers, push subscriptions, WebSocket/fetch connections, tools, RPC handlers) must never reside in main-window DOM iframes where JavaScript execution contends with the launcher's search bar, input latency, and 120 FPS animations.
-  - **Visual Canvas (`role: 'view'`)**: Strictly reserved for UI presentation. Sandboxed `<iframe>` elements at `asyar-extension://` are mounted on-demand only when a foreground visual view is active and dismissed when the user navigates away.
+  - **Visual Canvas (`role: 'view'`)**: Strictly reserved for UI presentation. Sandboxed `<iframe>` elements at `launcher-extension://` are mounted on-demand only when a foreground visual view is active and dismissed when the user navigates away.
   - **Multi-Engine Horizon**: Web Workers off the main thread today $\rightarrow$ pluggable isolated native runtimes (e.g. QuickJS or Wasm components with direct Rust IPC bindings) for high-throughput extensions tomorrow, completely eliminating browser engine overhead for background compute.
 
 ## 6. Strict Separation of Presentation Lifecycle and Daemon Compute
@@ -64,8 +64,8 @@ is right and your change is wrong — fix the change, not the test.
 | Subscribe to bridged events with `appListen`, never the raw `listen` from `@tauri-apps/api/event` — `bridge_emit` feeds only `appListen` subscribers once the poller connects.   | `lib/ipc/bridgeListenerGuard.test.ts`                                          |
 | Built-in features never declare `background.main` and are never mounted as workers; they are compiled into the launcher bundle.                                                  | `extensions/discovery.rs` manifest tests + `workerRegistry.svelte.ts`          |
 | Every Tauri command path appears exactly once in `commands/handlers.rs`.                                                                                                         | `command_paths_are_registered_once`                                            |
-| The TypeScript and Rust rankers must agree on which items match and their tier (scores and intra-tier order may differ).                                                         | `crates/asyar-search/tests/parity-fixture.json`, run from both suites          |
-| Extension builds must set `modulePreload: false` — Vite's polyfill touches `document` and kills a Web Worker on line one. Use `defineExtensionConfig` from `asyar-sdk/vite`.     | `asyar-sdk/src/vite.test.ts`, `create-extension/scaffoldService.build.test.ts` |
+| The TypeScript and Rust rankers must agree on which items match and their tier (scores and intra-tier order may differ).                                                         | `crates/launcher-search/tests/parity-fixture.json`, run from both suites          |
+| Extension builds must set `modulePreload: false` — Vite's polyfill touches `document` and kills a Web Worker on line one. Use `defineExtensionConfig` from `launcher-sdk/vite`.     | `launcher-sdk/src/vite.test.ts`, `create-extension/scaffoldService.build.test.ts` |
 | The iframe compatibility fallback for failed workers is temporary and must be removed before 0.2.0 (policy: `09-beta-compatibility-and-deprecation.md`).                         | `services/extension/workerFallbackDeadline.test.ts`                            |
 
 **The recurring failure mode behind all of these:** a check validated the _input_ while the runtime

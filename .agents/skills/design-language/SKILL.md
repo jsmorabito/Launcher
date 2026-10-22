@@ -1,9 +1,9 @@
 ---
 name: design-language
-description: Use when building, modifying, or fixing any frontend UI in the Asyar launcher — new components, new views, layout changes, styling decisions, new built-in features, visual bug fixes, and anything in settings or onboarding. Answers "what do I use here?" for fonts, colour, typography, spacing, motion, components, and layout.
+description: Use when building, modifying, or fixing any frontend UI in the Launcher launcher — new components, new views, layout changes, styling decisions, new built-in features, visual bug fixes, and anything in settings or onboarding. Answers "what do I use here?" for fonts, colour, typography, spacing, motion, components, and layout.
 ---
 
-# Asyar Design Language — Measure
+# Launcher Design Language — Measure
 
 This file answers one question: **given what you are building, what do you use?**
 
@@ -23,9 +23,9 @@ judgement calls are the tables.
 
 ## The thesis, in one paragraph
 
-> **Every value in Asyar is measured, not chosen.**
+> **Every value in Launcher is measured, not chosen.**
 
-Asyar is 750 × 480, of which 384px is content, and it is on screen for two to
+Launcher is 750 × 480, of which 384px is content, and it is on screen for two to
 six seconds. Nothing in it has room to be arbitrary. A value is either derived
 from a constraint — a window dimension, a contrast ratio, a scale step, a count
 of rows that must fit — or it is a guess, and this is a system that does not
@@ -89,7 +89,7 @@ Two faces. There is no third.
 - `--font-ui` is applied globally to `*`. You only name it explicitly inside a
   component that also sets `font-family` for another reason.
 - **Satoshi renders on every platform, macOS included.** There is deliberately
-  no per-platform override. Asyar used to fall back to San Francisco on macOS;
+  no per-platform override. Launcher used to fall back to San Francisco on macOS;
   that gave the app no typographic identity on its primary platform. Do not
   reintroduce it.
 - Reach for mono when characters need to line up or be read individually. A
@@ -143,7 +143,7 @@ color: var(--accent-primary);
 `check:design` fails the build on a voice token used as a background in the
 same rule as `--text-on-accent` (`voice-as-fill`). It cannot catch the inverse,
 so: **never use a `-fill` token as a text colour** — it is too dark to read on
-an Asyar surface.
+an Launcher surface.
 
 ### Surfaces, from back to front
 
@@ -197,7 +197,7 @@ state.**
 | `--accent-success` | Succeeded, healthy, connected                                                |
 | `--accent-warning` | Needs attention, degraded, in progress                                       |
 | `--accent-danger`  | Destructive action, error, failed                                            |
-| `--asyar-brand`    | Asyar's identity. The same blue as the accent — one identity colour, not two |
+| `--launcher-brand`    | Launcher's identity. The same blue as the accent — one identity colour, not two |
 
 For a **tinted background** in a state colour, mix it rather than inventing a
 second token — this is the house formula, and it uses the voice ramp for both
@@ -357,7 +357,7 @@ The launcher's content area is 384px, the list insets it by `--space-3` top and
 bottom, and **368px is exactly nine rows**: `9 × 40 + 8 × 1`.
 
 - The row height is `var(--shell-row-h)` (40px). Changing it changes how much
-  of Asyar is visible at once.
+  of Launcher is visible at once.
 - Row separation is a raw `1px`, **not** `--space-0-5`. Two pixels overflows
   368 and costs a whole row. This is the one place a raw pixel beats a token.
 - Never hardcode `56px`, `40px` or `384px`. Use `--shell-header-h`,
@@ -431,7 +431,7 @@ directly.
 
 ## 7. Voice — how it reads
 
-Asyar is mostly words, and it writes the way an instrument reports: flatly, in
+Launcher is mostly words, and it writes the way an instrument reports: flatly, in
 the user's terms, without personality.
 
 | Rule                                | Do                                              | Not                           |
@@ -550,7 +550,7 @@ If two components look like they both fit, pick the more specific one.
 ### Scrolling
 
 Every scrolling container gets `.custom-scrollbar`. No exceptions — the
-checker enforces it, because the platform default scrollbar against Asyar's
+checker enforces it, because the platform default scrollbar against Launcher's
 surfaces is immediately obvious.
 
 ### The five surfaces
@@ -629,13 +629,13 @@ view. Design rules apply to the **view**.
   and JetBrains Mono files. `var(--bg-primary)`, `var(--font-ui)` etc. just
   work. **The same "never hardcode a colour" rule applies**, and so does the
   voice/fill split.
-- Icons come from the `<asyar-icon>` web component: call `registerIconElement()`
-  once in the view entry, then `<asyar-icon name="calculator" size="20">`.
+- Icons come from the `<launcher-icon>` web component: call `registerIconElement()`
+  once in the view entry, then `<launcher-icon name="calculator" size="20">`.
   Icons inherit `currentColor`.
-- There is **no bare `asyar-sdk` entry point** — import from `asyar-sdk/view`,
-  `asyar-sdk/worker`, or `asyar-sdk/contracts`. The icon helpers are
+- There is **no bare `launcher-sdk` entry point** — import from `launcher-sdk/view`,
+  `launcher-sdk/worker`, or `launcher-sdk/contracts`. The icon helpers are
   DOM-dependent and ship on `/view` only.
-- For IDE autocomplete outside the running app, import `asyar-sdk/tokens.css`.
+- For IDE autocomplete outside the running app, import `launcher-sdk/tokens.css`.
 
 A **theme** extension may override colour, shadow, radius, font family and
 duration tokens. It may **not** override `--space-*`, `--font-size-*`,

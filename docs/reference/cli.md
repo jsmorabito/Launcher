@@ -8,30 +8,30 @@ order: 2
 
 | Command                     | Description                                                |
 | --------------------------- | ---------------------------------------------------------- |
-| `asyar validate`            | Validate `manifest.json` against all rules                 |
-| `asyar build`               | Validate + run `vite build` + verify output                |
-| `asyar dev`                 | Validate + build + link + watch for changes                |
-| `asyar dev --dev`           | Same as `dev`, but links to the dev flavor of Asyar        |
-| `asyar link`                | Build + create symlink + register in `dev_extensions.json` |
-| `asyar link --watch`        | `link` + continuous file watching and rebuild              |
-| `asyar link --dev`          | `link` targeting the dev flavor of Asyar                   |
-| `asyar unlink`              | Remove symlink and unregister from `dev_extensions.json`   |
-| `asyar unlink --dev`        | `unlink` targeting the dev flavor of Asyar                 |
-| `asyar attach [path]`       | Register extension directory in `dev_extensions.json`      |
-| `asyar attach --all [path]` | Scan directory for extensions and attach each one          |
-| `asyar detach [id-or-path]` | Unregister a dev extension from `dev_extensions.json`      |
-| `asyar detach --all`        | Remove all dev extension registrations                     |
-| `asyar doctor`              | Check environment health and diagnose common setup issues  |
-| `asyar publish`             | Full publish pipeline (validate → build → GitHub → Store)  |
+| `launcher validate`            | Validate `manifest.json` against all rules                 |
+| `launcher build`               | Validate + run `vite build` + verify output                |
+| `launcher dev`                 | Validate + build + link + watch for changes                |
+| `launcher dev --dev`           | Same as `dev`, but links to the dev flavor of Launcher        |
+| `launcher link`                | Build + create symlink + register in `dev_extensions.json` |
+| `launcher link --watch`        | `link` + continuous file watching and rebuild              |
+| `launcher link --dev`          | `link` targeting the dev flavor of Launcher                   |
+| `launcher unlink`              | Remove symlink and unregister from `dev_extensions.json`   |
+| `launcher unlink --dev`        | `unlink` targeting the dev flavor of Launcher                 |
+| `launcher attach [path]`       | Register extension directory in `dev_extensions.json`      |
+| `launcher attach --all [path]` | Scan directory for extensions and attach each one          |
+| `launcher detach [id-or-path]` | Unregister a dev extension from `dev_extensions.json`      |
+| `launcher detach --all`        | Remove all dev extension registrations                     |
+| `launcher doctor`              | Check environment health and diagnose common setup issues  |
+| `launcher publish`             | Full publish pipeline (validate → build → GitHub → Store)  |
 
 ---
 
-### `asyar validate`
+### `launcher validate`
 
 Checks your manifest against all validation rules. Prints a pass/fail report. Safe to run any time.
 
 ```bash
-asyar validate
+launcher validate
 ```
 
 **What it checks:**
@@ -56,101 +56,101 @@ asyar validate
 
 ---
 
-### `asyar build`
+### `launcher build`
 
 Validates the manifest, runs `vite build`, and verifies `dist/index.html` was produced.
 
 ```bash
-asyar build
+launcher build
 
 # Skip validation (e.g. in CI where validate already ran)
-asyar build --skip-validate
+launcher build --skip-validate
 ```
 
 **Bundle size note:** Every dependency — including Svelte, any component library, utility packages — is bundled into `dist/`. There is no shared runtime. Do not mark Svelte as external in Vite config; it must be included in the bundle.
 
 ---
 
-### `asyar dev` — active development mode (recommended)
+### `launcher dev` — active development mode (recommended)
 
 ```bash
-asyar dev
+launcher dev
 
-# Target the dev flavor (org.asyar.dev) instead of production
-asyar dev --dev
+# Target the dev flavor (org.launcher.dev) instead of production
+launcher dev --dev
 ```
 
 1. Validates the manifest.
 2. Runs an initial `vite build`.
-3. Creates a symlink in the Asyar extensions directory (if needed) and registers the source directory in `dev_extensions.json`.
+3. Creates a symlink in the Launcher extensions directory (if needed) and registers the source directory in `dev_extensions.json`.
 4. Watches `src/` for changes and rebuilds on every save.
 
-Every successful rebuild is live in Asyar the next time you open the extension panel (the iframe loads fresh on each open).
+Every successful rebuild is live in Launcher the next time you open the extension panel (the iframe loads fresh on each open).
 
-> **Flavors:** If you are running the **dev build** of Asyar (identifier `org.asyar.dev`), pass `--dev` so the extension is linked into the correct app data directory. Without the flag, the symlink and registration are created for the production build.
+> **Flavors:** If you are running the **dev build** of Launcher (identifier `org.launcher.dev`), pass `--dev` so the extension is linked into the correct app data directory. Without the flag, the symlink and registration are created for the production build.
 
 > **If you used "Create Extension"** to scaffold your project, the dev path is already registered and step 3 is a no-op. Just run `pnpm dev` (which calls `vite build --watch`).
 
 ---
 
-### `asyar link` — manual registration
+### `launcher link` — manual registration
 
-Use this when you **manually cloned** an extension from GitHub and its path is not registered with Asyar.
+Use this when you **manually cloned** an extension from GitHub and its path is not registered with Launcher.
 
 ```bash
-asyar link
+launcher link
 ```
 
 1. Runs `vite build` (skipped for themes).
 2. Creates a symlink from `$APPDATA/extensions/<id>/` pointing to your project root (or copies files on Windows if symlinks are unavailable).
-3. Atomically registers the extension's absolute source path in `$APPDATA/dev_extensions.json`. This ensures Asyar's custom scheme handler (`asyar-extension://`) permits serving extension assets without `403 Access Denied` errors on production release builds.
+3. Atomically registers the extension's absolute source path in `$APPDATA/dev_extensions.json`. This ensures Launcher's custom scheme handler (`launcher-extension://`) permits serving extension assets without `403 Access Denied` errors on production release builds.
 
-With a symlink in place, subsequent `vite build` runs are immediately reflected. You do not need to run `asyar link` again after each rebuild.
+With a symlink in place, subsequent `vite build` runs are immediately reflected. You do not need to run `launcher link` again after each rebuild.
 
 ```bash
 # Watch mode: rebuild on every change
-asyar link --watch
+launcher link --watch
 
-# Target the dev flavor (org.asyar.dev) instead of production
-asyar link --dev
+# Target the dev flavor (org.launcher.dev) instead of production
+launcher link --dev
 
 # Combine both flags
-asyar link --dev --watch
+launcher link --dev --watch
 ```
 
-> **Flavors:** Asyar ships two builds — production (`org.asyar.app`) and dev (`org.asyar.dev`). By default `asyar link` targets production. Pass `--dev` when testing against a locally built dev instance of Asyar.
+> **Flavors:** Launcher ships two builds — production (`org.launcher.app`) and dev (`org.launcher.dev`). By default `launcher link` targets production. Pass `--dev` when testing against a locally built dev instance of Launcher.
 
 ---
 
-### `asyar unlink` — remove local registration
+### `launcher unlink` — remove local registration
 
 Use this to remove the symlink from the extensions directory and remove the extension's entry from `dev_extensions.json`.
 
 ```bash
-asyar unlink
+launcher unlink
 
-# Target the dev flavor (org.asyar.dev) instead of production
-asyar unlink --dev
+# Target the dev flavor (org.launcher.dev) instead of production
+launcher unlink --dev
 ```
 
 ---
 
-### `asyar attach` — register development extensions
+### `launcher attach` — register development extensions
 
-Registers an extension directory for development loading directly into `$APPDATA/dev_extensions.json`. Unlike `asyar link`, `attach` allows mapping arbitrary project folders directly into the launcher's dev registry without requiring symlinks in `$APPDATA/extensions/`.
+Registers an extension directory for development loading directly into `$APPDATA/dev_extensions.json`. Unlike `launcher link`, `attach` allows mapping arbitrary project folders directly into the launcher's dev registry without requiring symlinks in `$APPDATA/extensions/`.
 
 ```bash
 # Attach the current working directory
-asyar attach
+launcher attach
 
 # Attach a specific extension directory
-asyar attach ./path/to/my-extension
+launcher attach ./path/to/my-extension
 
 # Batch attach: scan a folder for all subdirectories containing manifest.json
-asyar attach ./extensions --all
+launcher attach ./extensions --all
 
 # Attach without triggering an initial Vite build
-asyar attach --no-build
+launcher attach --no-build
 ```
 
 Options:
@@ -160,22 +160,22 @@ Options:
 
 ---
 
-### `asyar detach` — unregister development extensions
+### `launcher detach` — unregister development extensions
 
 Removes an extension from `$APPDATA/dev_extensions.json`. You can identify the extension by its ID, its filesystem path, or by running the command inside the extension directory.
 
 ```bash
 # Detach extension in the current directory (reads manifest.id)
-asyar detach
+launcher detach
 
 # Detach by extension ID
-asyar detach org.asyar.coffee
+launcher detach org.launcher.coffee
 
 # Detach by path
-asyar detach ./extensions/asyar-coffee-extension
+launcher detach ./extensions/launcher-coffee-extension
 
 # Detach all registered dev extensions
-asyar detach --all
+launcher detach --all
 ```
 
 Options:
@@ -184,52 +184,52 @@ Options:
 
 ---
 
-### `asyar doctor` — diagnostic environment check
+### `launcher doctor` — diagnostic environment check
 
 Analyzes your local environment, tooling, and repository configuration to diagnose common issues.
 
 ```bash
-asyar doctor
+launcher doctor
 ```
 
 **Diagnostic checks performed:**
 
 1. **Platform & Tooling:** OS architecture, Node version, and `pnpm` availability.
 2. **SDK Freshness:** When running inside or alongside the SDK source, verifies whether `dist/` is newer than `src/` and `cli/` files.
-3. **Workspace Linking:** Inspects `node_modules/asyar-sdk` to ensure it is workspace-linked rather than a frozen npm package copy.
+3. **Workspace Linking:** Inspects `node_modules/launcher-sdk` to ensure it is workspace-linked rather than a frozen npm package copy.
 4. **Extensions Directory:** Validates that `$APPDATA/extensions/` exists and reports the count of installed extensions.
-5. **Store Connectivity:** Pings the Asyar Store API to confirm reachability.
+5. **Store Connectivity:** Pings the Launcher Store API to confirm reachability.
 6. **Monorepo Detection:** Confirms root workspace location and configuration.
 
 Exits with code `0` if all checks pass or show non-critical warnings; exits with code `1` if actionable failures are detected.
 
 ---
 
-### `asyar publish` — release to GitHub & Store
+### `launcher publish` — release to GitHub & Store
 
-Automates the complete publishing pipeline: validation, building, GitHub release creation, and submission to the Asyar Store.
+Automates the complete publishing pipeline: validation, building, GitHub release creation, and submission to the Launcher Store.
 
 ```bash
-asyar publish
+launcher publish
 
 # Test packaging and validation without making remote changes
-asyar publish --dry-run
+launcher publish --dry-run
 
 # Clear stored credentials and re-authenticate via GitHub OAuth
-asyar publish --reset-auth
+launcher publish --reset-auth
 
 # Explicitly specify repository URL
-asyar publish --repo https://github.com/my-user/my-extension.git
+launcher publish --repo https://github.com/my-user/my-extension.git
 ```
 
 **Pipeline steps:**
 
 1. **Manifest Validation & Linting:** Validates required fields, command definitions, and icon assets.
 2. **Production Build:** Executes `vite build` (skipped for pure themes) and validates that `dist/` is newer than source files.
-3. **Store Authentication:** Authenticates against Asyar Store using GitHub OAuth.
+3. **Store Authentication:** Authenticates against Launcher Store using GitHub OAuth.
 4. **Version Collision Guard:** Confirms that the target version is not already live in the store.
 5. **GitHub Release:** Packages the bundle, computes SHA-256 checksums, creates a git tag, and uploads the `.zip` asset.
-6. **Store Catalog Submission:** Submits metadata and release URLs to the Asyar Store API.
+6. **Store Catalog Submission:** Submits metadata and release URLs to the Launcher Store API.
 
 ---
 
@@ -239,7 +239,7 @@ asyar publish --repo https://github.com/my-user/my-extension.git
 # Terminal — start Vite in watch mode
 pnpm dev   # or: vite build --watch
 
-# Asyar — test your changes
+# Launcher — test your changes
 # Close the extension panel → re-open it → changes are live
 ```
 
