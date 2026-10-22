@@ -201,6 +201,10 @@ pub fn handle_extension_request(
                 .header("Content-Type", mime_type)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Content-Security-Policy", extension_csp_header())
+                // Extension bundles keep stable file names (`view.js`) while their
+                // hashed chunks change per build, so a cached entry point would
+                // import chunks that no longer exist. Always revalidate.
+                .header("Cache-Control", "no-cache")
                 .body(content)
                 .unwrap()
         }

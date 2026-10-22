@@ -54,6 +54,11 @@
       "sending": "Enviando…",
       "dismiss": "Dispensar"
     },
+    "extension_load_failed": {
+      "title": "Esta visualização da extensão não carregou",
+      "body": "O Launcher não conseguiu iniciar “{name}”. Recarregue-a ou reinicie o Launcher se continuar acontecendo.",
+      "reload": "Recarregar"
+    },
     "usage_share": {
       "title": "Estatísticas de Uso",
       "description": "Compartilhe estatísticas anônimas de uso para ajudar a melhorar o Launcher.",

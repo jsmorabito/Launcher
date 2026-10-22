@@ -54,6 +54,11 @@
       "sending": "Sending…",
       "dismiss": "Dismiss"
     },
+    "extension_load_failed": {
+      "title": "This extension view didn't load",
+      "body": "Launcher couldn't start “{name}”. Reload it, or restart Launcher if it keeps happening.",
+      "reload": "Reload"
+    },
     "usage_share": {
       "title": "Usage Analytics",
       "description": "Share anonymous usage statistics to help improve Launcher.",

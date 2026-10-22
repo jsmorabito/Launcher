@@ -54,6 +54,11 @@
       "sending": "发送中……",
       "dismiss": "忽略"
     },
+    "extension_load_failed": {
+      "title": "此扩展视图未能加载",
+      "body": "Launcher 无法启动“{name}”。请重新加载；如果问题持续，请重启 Launcher。",
+      "reload": "重新加载"
+    },
     "usage_share": {
       "title": "使用情况分析",
       "description": "分享匿名使用统计，帮助改进 Launcher。",

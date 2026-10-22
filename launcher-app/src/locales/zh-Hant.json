@@ -54,6 +54,11 @@
       "sending": "傳送中……",
       "dismiss": "忽略"
     },
+    "extension_load_failed": {
+      "title": "此擴充功能檢視未能載入",
+      "body": "Launcher 無法啟動「{name}」。請重新載入；若問題持續，請重新啟動 Launcher。",
+      "reload": "重新載入"
+    },
     "usage_share": {
       "title": "使用情況分析",
       "description": "分享匿名使用統計，幫助改進 Launcher。",
