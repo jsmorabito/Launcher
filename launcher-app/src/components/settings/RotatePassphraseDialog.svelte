@@ -121,13 +121,13 @@
     font-size: var(--font-size-xl);
     font-weight: 600;
     margin-bottom: var(--space-2);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
   }
 
   .dialog-body {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-bottom: var(--space-4);
     font-family: var(--font-ui);
   }
@@ -154,11 +154,11 @@
 
   .text-caption {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
   }
 
   .text-caption.error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

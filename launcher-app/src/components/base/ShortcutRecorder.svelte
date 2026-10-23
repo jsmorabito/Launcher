@@ -255,8 +255,8 @@
 
   .recorder-button {
     width: 100%;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-4) var(--space-6);
     cursor: pointer;
@@ -268,29 +268,29 @@
   }
 
   .recorder-button:hover:not(:disabled) {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .recorder-button:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 50%, transparent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 50%, transparent);
   }
 
   .recorder-button.recording {
-    background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 8%, var(--color-bg));
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 25%, transparent);
   }
 
   .recorder-button.error {
-    background: color-mix(in srgb, var(--accent-danger) 8%, var(--bg-primary));
-    border-color: var(--accent-danger);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-danger) 25%, transparent);
+    background: color-mix(in srgb, var(--color-danger) 8%, var(--color-bg));
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-danger) 25%, transparent);
   }
 
   .recorder-button.success {
-    background: color-mix(in srgb, var(--accent-success) 8%, var(--bg-primary));
-    border-color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 8%, var(--color-bg));
+    border-color: var(--color-success);
   }
 
   .recorder-content {
@@ -307,73 +307,73 @@
   }
 
   .chip-separator {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
     font-weight: 600;
   }
 
   .chip-separator.recording-separator {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .chip-separator.success-separator {
-    color: var(--accent-success);
+    color: var(--color-success);
   }
 
   .chip-separator.error-separator {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .chip-separator.example-separator {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .chip {
     padding: var(--space-1) var(--space-3);
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
     font-size: var(--font-size-md);
     font-weight: 600;
     border-radius: var(--radius-xs);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 
   .chip.recording-chip {
-    background: color-mix(in srgb, var(--accent-primary) 15%, var(--bg-hover));
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--color-accent) 15%, var(--color-hover));
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .chip.success-chip {
-    background: color-mix(in srgb, var(--accent-success) 15%, var(--bg-hover));
-    border-color: var(--accent-success);
-    color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 15%, var(--color-hover));
+    border-color: var(--color-success);
+    color: var(--color-success);
   }
 
   .chip.example-chip {
-    background: var(--bg-hover);
-    color: var(--text-tertiary);
-    border-color: var(--border-color);
+    background: var(--color-hover);
+    color: var(--color-text-faint);
+    border-color: var(--color-border);
   }
 
   .chip.error-chip {
-    background: color-mix(in srgb, var(--accent-danger) 15%, var(--bg-hover));
-    border-color: var(--accent-danger);
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 15%, var(--color-hover));
+    border-color: var(--color-danger);
+    color: var(--color-danger);
   }
 
   .example-label {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
   }
 
   .recording-label {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
   }
 
   .placeholder-text {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-md);
   }
 
@@ -395,13 +395,13 @@
   }
 
   .success-message {
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-base);
     text-align: center;
   }
 
   .error-message {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-base);
     text-align: center;
     display: flex;

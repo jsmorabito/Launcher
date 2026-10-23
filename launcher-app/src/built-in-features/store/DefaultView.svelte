@@ -173,7 +173,7 @@
   .store-detail-title {
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: var(--space-8) 0 var(--space-3);
     text-align: center;
   }
@@ -182,10 +182,10 @@
     margin-top: var(--space-9);
     width: 100%;
     max-width: 28rem;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     padding: var(--space-3);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     box-shadow: var(--shadow-xs);
   }
 

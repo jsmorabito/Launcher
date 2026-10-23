@@ -114,7 +114,7 @@
   .section-description {
     margin: 0 0 var(--space-3) 0;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
@@ -132,10 +132,10 @@
   .error {
     margin-bottom: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .path-list {
@@ -161,11 +161,11 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   :global(.path-icon) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -173,7 +173,7 @@
     flex: 1;
     min-width: 0;
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     white-space: nowrap;
     overflow: hidden;
@@ -187,7 +187,7 @@
   .empty {
     padding: var(--space-4);
     text-align: center;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
   }
 </style>

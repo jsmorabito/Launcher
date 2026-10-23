@@ -26,11 +26,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-tertiary);
-    color: var(--text-primary);
+    background-color: var(--color-surface);
+    color: var(--color-text);
     flex-shrink: 0;
     overflow: hidden;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 
   /* Sizes */

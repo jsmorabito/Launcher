@@ -248,7 +248,7 @@
   }
 
   .password-error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .summary-rows {

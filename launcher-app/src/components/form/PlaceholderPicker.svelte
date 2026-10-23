@@ -84,8 +84,8 @@
     top: calc(100% + 4px);
     left: 0;
     right: 0;
-    background: var(--bg-popup);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: 0 8px 24px var(--shadow-color);
     overflow: hidden;
@@ -94,9 +94,9 @@
   .picker-header {
     padding: var(--space-2) var(--space-5);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-weight: 600;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -121,22 +121,22 @@
 
   .picker-item:hover,
   .picker-item.highlighted {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .picker-item.highlighted .picker-label {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .picker-label {
     font-weight: 600;
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .picker-description {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

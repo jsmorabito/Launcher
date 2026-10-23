@@ -57,7 +57,7 @@
 <style>
   .settings-radio-group {
     padding: var(--space-5) var(--space-6);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .settings-radio-group.no-border {
@@ -66,13 +66,13 @@
 
   .label {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-base);
   }
 
   .description {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-top: var(--space-1);
   }
 
@@ -92,17 +92,17 @@
 
   input[type='radio'] {
     margin-top: var(--space-1);
-    accent-color: var(--accent-primary);
+    accent-color: var(--color-accent);
   }
 
   .option-label {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .option-description {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-top: var(--space-0-5);
   }
 </style>

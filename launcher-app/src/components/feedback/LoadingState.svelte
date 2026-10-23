@@ -26,6 +26,6 @@
   }
 
   .loading-text {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

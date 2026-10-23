@@ -709,7 +709,7 @@ mod tests {
     async fn validate_theme_json_valid_theme() {
         let dest = make_zip_and_extract(&[(
             "theme.json",
-            br#"{"variables":{"--bg-primary":"red"},"fonts":[]}"#,
+            br#"{"variables":{"--color-bg":"red"},"fonts":[]}"#,
         )])
         .await
         .unwrap();
@@ -774,7 +774,7 @@ mod tests {
     #[tokio::test]
     async fn validate_theme_json_valid_font() {
         let dest = make_zip_and_extract(&[
-            ("theme.json", br#"{"variables":{"--bg-primary":"blue"},"fonts":[{"family":"Inter","weight":"400","style":"normal","src":"fonts/Inter.woff2"}]}"#),
+            ("theme.json", br#"{"variables":{"--color-bg":"blue"},"fonts":[{"family":"Inter","weight":"400","style":"normal","src":"fonts/Inter.woff2"}]}"#),
             ("fonts/Inter.woff2", b"woff2data"),
         ]).await.unwrap();
         let result = validate_theme_json(dest.path());
@@ -796,7 +796,7 @@ mod tests {
     #[tokio::test]
     async fn validate_package_structure_theme_valid() {
         let manifest = r#"{"id":"my-theme","name":"My Theme","version":"1.0.0","type":"theme"}"#;
-        let theme = r#"{"variables":{"--bg-primary":"red"},"fonts":[]}"#;
+        let theme = r#"{"variables":{"--color-bg":"red"},"fonts":[]}"#;
         let dest = make_zip_and_extract(&[
             ("manifest.json", manifest.as_bytes()),
             ("theme.json", theme.as_bytes()),

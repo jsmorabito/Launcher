@@ -385,13 +385,13 @@
   .field-label {
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
 
   .required {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .array-row,
@@ -413,7 +413,7 @@
   .add-btn {
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     cursor: pointer;
     font-size: var(--font-size-xs);
     padding: var(--space-1) 0;
@@ -421,11 +421,11 @@
   }
 
   .add-btn:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .validation-error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-xs);
     margin: 0;
   }
@@ -437,13 +437,13 @@
   }
 
   .test-ok {
-    background: color-mix(in srgb, var(--accent-success) 15%, transparent);
-    color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    color: var(--color-success);
   }
 
   .test-fail {
-    background: color-mix(in srgb, var(--accent-danger) 15%, transparent);
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    color: var(--color-danger);
   }
 
   .form-actions {

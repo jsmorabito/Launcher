@@ -43,7 +43,7 @@
     background: transparent;
     border: none;
     border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     cursor: pointer;
     transition:
@@ -52,8 +52,8 @@
   }
 
   .bottom-bar-button:hover:not(:disabled) {
-    color: var(--text-primary);
-    background-color: var(--bg-hover);
+    color: var(--color-text);
+    background-color: var(--color-hover);
   }
 
   .bottom-bar-button:focus-visible {

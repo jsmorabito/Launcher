@@ -9,7 +9,7 @@
  *    the two copies drifting, and a drifted copy is invisible until someone
  *    happens to be in the other mode.
  *
- * 2. CONTRAST. --text-on-accent is a single constant white, and the whole
+ * 2. CONTRAST. --color-on-solid is a single constant white, and the whole
  *    reason the fill ramp exists separately from the voice ramp is that fills
  *    are guaranteed to carry it. The stylesheet claims 4.5:1; this measures it.
  *
@@ -117,16 +117,16 @@ function contrast(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-const ON_ACCENT = /--text-on-accent:\s*(#[0-9a-f]{6})/i.exec(STYLE)?.[1] ?? '';
+const ON_ACCENT = /--color-on-solid:\s*(#[0-9a-f]{6})/i.exec(STYLE)?.[1] ?? '';
 
-describe('the fill ramp carries --text-on-accent', () => {
-  it('finds --text-on-accent as an opaque hex', () => {
+describe('the fill ramp carries --color-on-solid', () => {
+  it('finds --color-on-solid as an opaque hex', () => {
     expect(ON_ACCENT).toMatch(/^#[0-9a-f]{6}$/i);
   });
 
   const fills = PALETTES.flatMap(({ mode, forced }) =>
     Object.entries(tokens(block(forced)))
-      .filter(([name]) => name.endsWith('-fill'))
+      .filter(([name]) => name.endsWith('-solid'))
       .map(([name, value]) => ({ mode, name, value })),
   );
 
@@ -140,7 +140,7 @@ describe('the fill ramp carries --text-on-accent', () => {
     expect(value).toMatch(/^#[0-9a-f]{6}$/i);
   });
 
-  it.each(fills)('$mode $name reaches 4.5:1 against --text-on-accent', ({ value }) => {
+  it.each(fills)('$mode $name reaches 4.5:1 against --color-on-solid', ({ value }) => {
     expect(contrast(value, ON_ACCENT)).toBeGreaterThanOrEqual(4.5);
   });
 });
@@ -150,19 +150,21 @@ describe('the voice ramp stays distinct from the fill ramp', () => {
   // text on paper already carries white. In dark mode they must not, because a
   // value bright enough to read on a dark ground cannot carry white text.
   const dark = tokens(block(PALETTES[0].forced));
+  const voiceName = (state: string) =>
+    state === 'primary' ? '--color-accent' : `--color-${state}`;
 
   it.each(['primary', 'success', 'warning', 'danger'])(
-    'dark --accent-%s differs from its fill',
+    'dark %s voice differs from its solid fill',
     (state) => {
-      expect(dark[`--accent-${state}`]).not.toBe(dark[`--accent-${state}-fill`]);
+      expect(dark[voiceName(state)]).not.toBe(dark[`${voiceName(state)}-solid`]);
     },
   );
 
   it.each(['primary', 'success', 'warning', 'danger'])(
-    'dark --accent-%s is the lighter of the pair',
+    'dark %s voice is the lighter of the pair',
     (state) => {
-      const voice = relativeLuminance(dark[`--accent-${state}`]);
-      const fill = relativeLuminance(dark[`--accent-${state}-fill`]);
+      const voice = relativeLuminance(dark[voiceName(state)]);
+      const fill = relativeLuminance(dark[`${voiceName(state)}-solid`]);
       expect(voice).toBeGreaterThan(fill);
     },
   );

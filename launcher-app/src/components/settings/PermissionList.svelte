@@ -57,14 +57,14 @@
     flex-direction: column;
     /* design-ok: 1px structural gap creates hairline dividers via background bleed-through, not a scaled spacing value */
     gap: 1px;
-    background: var(--border-color);
-    border: 1px solid var(--border-color);
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
   }
 
   .permission-item {
-    background: var(--bg-secondary-full-opacity);
+    background: var(--color-bg-subtle-opaque);
     padding: var(--space-4) var(--space-5);
   }
 
@@ -78,18 +78,18 @@
   .permission-title {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .permission-scope {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .permission-desc {
     margin: var(--space-1) 0 0;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.45;
   }
 
@@ -102,11 +102,11 @@
 
   .permission-arg-chip,
   .permission-arg-json {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
     padding: var(--space-0-5) var(--space-2);
-    color: var(--text-primary);
+    color: var(--color-text);
     word-break: break-all;
   }
 
@@ -116,6 +116,6 @@
   }
 
   .permission-caution {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

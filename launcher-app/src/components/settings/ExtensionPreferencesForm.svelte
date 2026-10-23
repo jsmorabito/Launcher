@@ -129,7 +129,7 @@
   }
 
   .error-inline {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: 0.75rem;
     font-family: var(--font-ui);
   }

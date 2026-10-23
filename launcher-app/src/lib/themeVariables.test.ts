@@ -11,16 +11,16 @@ describe('collectThemeVariables', () => {
   });
 
   it('returns only non-empty entries', () => {
-    element.style.setProperty('--bg-primary', 'rgb(255, 255, 255)');
-    element.style.setProperty('--text-primary', '');
+    element.style.setProperty('--color-bg', 'rgb(255, 255, 255)');
+    element.style.setProperty('--color-text', '');
 
     const vars = collectThemeVariables(element);
-    expect(vars['--bg-primary']).toBe('rgb(255, 255, 255)');
-    expect(vars).not.toHaveProperty('--text-primary');
+    expect(vars['--color-bg']).toBe('rgb(255, 255, 255)');
+    expect(vars).not.toHaveProperty('--color-text');
   });
 
   it('result keys are all from THEME_VAR_NAMES', () => {
-    element.style.setProperty('--bg-primary', 'blue');
+    element.style.setProperty('--color-bg', 'blue');
     element.style.setProperty('--custom-var', 'red');
 
     const vars = collectThemeVariables(element);
@@ -39,9 +39,9 @@ describe('collectThemeVariables', () => {
   it('trims whitespace from values', () => {
     // Note: getPropertyValue usually returns trimmed values, but we want to be sure
     // and sometimes it might have leading/trailing spaces depending on implementation
-    element.style.setProperty('--bg-primary', '  rgb(0, 0, 0)  ');
+    element.style.setProperty('--color-bg', '  rgb(0, 0, 0)  ');
     const vars = collectThemeVariables(element);
-    expect(vars['--bg-primary']).toBe('rgb(0, 0, 0)');
+    expect(vars['--color-bg']).toBe('rgb(0, 0, 0)');
   });
 });
 
@@ -59,9 +59,9 @@ describe('THEMEABLE_VAR_NAMES', () => {
   });
 
   it('still allows core color tokens', () => {
-    expect(THEMEABLE_VAR_NAMES).toContain('--bg-primary');
-    expect(THEMEABLE_VAR_NAMES).toContain('--text-primary');
-    expect(THEMEABLE_VAR_NAMES).toContain('--accent-primary');
+    expect(THEMEABLE_VAR_NAMES).toContain('--color-bg');
+    expect(THEMEABLE_VAR_NAMES).toContain('--color-text');
+    expect(THEMEABLE_VAR_NAMES).toContain('--color-accent');
   });
 
   it('is a strict subset of THEME_VAR_NAMES (the iframe-injection list)', () => {
@@ -96,8 +96,8 @@ describe('THEMEABLE_VAR_NAMES', () => {
   });
 
   it('allows the fill ramp, so a theme cannot recolor the voice and leave fills stale', () => {
-    expect(THEMEABLE_VAR_NAMES).toContain('--accent-primary-fill');
-    expect(THEMEABLE_VAR_NAMES).toContain('--accent-danger-fill');
+    expect(THEMEABLE_VAR_NAMES).toContain('--color-accent-solid');
+    expect(THEMEABLE_VAR_NAMES).toContain('--color-danger-solid');
   });
 
   it('allows the edge tokens, so a theme can recolor the edges on its surfaces', () => {

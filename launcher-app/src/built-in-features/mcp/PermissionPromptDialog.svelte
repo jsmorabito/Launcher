@@ -57,21 +57,21 @@
   onEnter={() => onDecide('allow_once')}
 >
   {#snippet children()}
-    <h2 id="mcp-permission-title" class="text-xl font-semibold mb-4 text-[var(--text-primary)]">
+    <h2 id="mcp-permission-title" class="text-xl font-semibold mb-4 text-[var(--color-text)]">
       {t('features.mcp.ui.prompt_title')}
     </h2>
-    <p class="text-[var(--text-secondary)] mb-3">
+    <p class="text-[var(--color-text-muted)] mb-3">
       <strong>{agentLabel}</strong>
       {t('features.mcp.ui.prompt_wants')}
       <code class="font-mono text-sm">{toolId}</code>
       {t('features.mcp.ui.prompt_on')} <strong>{serverLabel}</strong>.
     </p>
     {#if toolDescription}
-      <p class="text-[var(--text-secondary)] text-sm italic">
+      <p class="text-[var(--color-text-muted)] text-sm italic">
         {toolDescription}
       </p>
     {:else}
-      <p class="text-[var(--text-secondary)] text-sm italic">
+      <p class="text-[var(--color-text-muted)] text-sm italic">
         {t('features.mcp.ui.no_description')}
       </p>
     {/if}
@@ -88,8 +88,8 @@
 
 <style>
   :global(.btn-confirm-primary) {
-    background: var(--accent-primary-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-accent-solid) !important;
+    color: var(--color-on-solid) !important;
     border: none !important;
   }
 

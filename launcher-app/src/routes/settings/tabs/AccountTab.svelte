@@ -284,13 +284,13 @@
                     cx="8"
                     cy="8"
                     r="7"
-                    fill="color-mix(in srgb, var(--accent-success) 20%, transparent)"
-                    stroke="var(--accent-success)"
+                    fill="color-mix(in srgb, var(--color-success) 20%, transparent)"
+                    stroke="var(--color-success)"
                     stroke-width="1.5"
                   />
                   <path
                     d="M5 8l2 2 4-4"
-                    stroke="var(--accent-success)"
+                    stroke="var(--color-success)"
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -502,7 +502,7 @@
     align-items: center;
     gap: var(--space-4);
     padding: var(--space-8) var(--space-6);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   /* Error banner */
@@ -510,8 +510,8 @@
     width: 100%;
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--accent-danger) 12%, var(--bg-secondary));
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 12%, var(--color-bg-subtle));
+    color: var(--color-danger);
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
   }
@@ -520,7 +520,7 @@
   .terms-text {
     margin: 0;
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-family: var(--font-ui);
   }
 
@@ -549,8 +549,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     font-size: var(--font-size-base);
     font-weight: 600;
     font-family: var(--font-ui);
@@ -567,7 +567,7 @@
   .profile-name {
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     white-space: nowrap;
     overflow: hidden;
@@ -576,7 +576,7 @@
 
   .profile-email {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     white-space: nowrap;
     overflow: hidden;
@@ -598,7 +598,7 @@
 
   .entitlement-label {
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
   }
 
@@ -612,7 +612,7 @@
   }
 
   .secondary-text {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .text-link {
@@ -622,7 +622,7 @@
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-primary);
+    color: var(--color-text);
     text-decoration: underline;
   }
 
@@ -647,7 +647,7 @@
 
   .error-text {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-family: var(--font-ui);
   }
 

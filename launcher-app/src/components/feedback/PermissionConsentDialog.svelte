@@ -28,10 +28,10 @@
 
 <Modal isOpen={true} labelledBy="permission-consent-title" onEscape={onDecline} onEnter={onAccept}>
   {#snippet children()}
-    <h2 id="permission-consent-title" class="text-xl font-semibold mb-2 text-[var(--text-primary)]">
+    <h2 id="permission-consent-title" class="text-xl font-semibold mb-2 text-[var(--color-text)]">
       {request.extensionName} requests permissions
     </h2>
-    <p class="text-[var(--text-secondary)] text-sm mb-4">{subtitle}</p>
+    <p class="text-[var(--color-text-muted)] text-sm mb-4">{subtitle}</p>
 
     <div class="max-h-72 overflow-y-auto pr-1 custom-scrollbar">
       <PermissionList permissions={request.permissions} permissionArgs={request.permissionArgs} />
@@ -46,8 +46,8 @@
 
 <style>
   :global(.btn-consent-primary) {
-    background: var(--accent-primary-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-accent-solid) !important;
+    color: var(--color-on-solid) !important;
     border: none !important;
   }
 

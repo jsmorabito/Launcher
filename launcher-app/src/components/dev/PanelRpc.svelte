@@ -73,19 +73,19 @@
     align-items: center;
     gap: var(--space-5);
     padding: var(--space-3) var(--space-5);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .toolbar span {
     font-variant-numeric: tabular-nums;
   }
   .toolbar button {
     margin-left: auto;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
     cursor: pointer;
     padding: var(--space-0-5) var(--space-3);
     font-size: var(--font-size-xs);
@@ -99,7 +99,7 @@
   th,
   td {
     padding: var(--space-1) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -109,7 +109,7 @@
     font-size: var(--font-size-2xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .cid {
     width: 130px;
@@ -120,7 +120,7 @@
   }
   code {
     font-family: var(--font-mono);
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
   .badge {
     display: inline-block;
@@ -133,24 +133,24 @@
     text-transform: uppercase;
   }
   .badge.phase-request {
-    background: color-mix(in srgb, var(--accent-warning) 25%, transparent);
-    color: var(--accent-warning);
+    background: color-mix(in srgb, var(--color-warning) 25%, transparent);
+    color: var(--color-warning);
     animation: pulse 1.2s ease-in-out infinite;
   }
   .badge.phase-resolved {
-    background: color-mix(in srgb, var(--accent-success) 20%, transparent);
-    color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 20%, transparent);
+    color: var(--color-success);
   }
   .badge.phase-rejected {
-    background: color-mix(in srgb, var(--accent-danger) 25%, transparent);
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 25%, transparent);
+    color: var(--color-danger);
   }
   /* A timeout is a failure too, so it stays in the danger hue — the outline
      is what separates "we gave up waiting" from "the call was rejected". */
   .badge.phase-timeout {
     background: transparent;
-    border-color: color-mix(in srgb, var(--accent-danger) 50%, transparent);
-    color: var(--accent-danger);
+    border-color: color-mix(in srgb, var(--color-danger) 50%, transparent);
+    color: var(--color-danger);
   }
   @keyframes pulse {
     0%,

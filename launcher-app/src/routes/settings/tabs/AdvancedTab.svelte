@@ -127,6 +127,6 @@
   .error-message {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

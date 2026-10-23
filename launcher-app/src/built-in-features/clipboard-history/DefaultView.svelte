@@ -708,9 +708,9 @@
           {:else}
             <div class="clip-detail-content custom-scrollbar" bind:this={detailEl}>
               {#if !selectedFullItem}
-                <span style="color: var(--text-tertiary)">{t('common.loading_ellipsis')}</span>
+                <span style="color: var(--color-text-faint)">{t('common.loading_ellipsis')}</span>
               {:else if !selectedFullItem.content}
-                <span style="color: var(--text-tertiary)"
+                <span style="color: var(--color-text-faint)"
                   >{t('features.clipboard.ui.no_preview')}</span
                 >
               {:else if selectedFullItem.redactedKinds?.length}
@@ -730,7 +730,7 @@
                     <img
                       src={imageUrl}
                       class="max-w-full max-h-full object-contain rounded-md shadow-sm border"
-                      style="border-color: var(--border-color);"
+                      style="border-color: var(--color-border);"
                       alt={t('features.clipboard.ui.preview_alt')}
                     />
                   {:else}
@@ -792,7 +792,7 @@
                       <img
                         src={soloThumb}
                         class="max-w-full object-contain rounded-md shadow-sm border file-solo-thumb"
-                        style="border-color: var(--border-color);"
+                        style="border-color: var(--color-border);"
                         alt="Preview of {fileNameOf(filePaths[0])}"
                       />
                     </div>
@@ -800,7 +800,7 @@
                   {#each filePaths as filePath}
                     <div
                       class="flex items-center gap-2 py-1.5 px-2 rounded"
-                      style="background: var(--bg-secondary);"
+                      style="background: var(--color-bg-subtle);"
                     >
                       {#if !soloThumb && fileThumbnails[filePath]}
                         <img
@@ -825,7 +825,7 @@
                       {/if}
                       <span
                         class="text-sm truncate flex-1"
-                        style="color: var(--text-primary); font-family: var(--font-mono);"
+                        style="color: var(--color-text); font-family: var(--font-mono);"
                         >{fileNameOf(filePath)}</span
                       >
                       <IconButton
@@ -1022,16 +1022,16 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background: var(--color-accent-solid);
+    color: var(--color-on-solid);
     z-index: var(--z-base);
   }
 
   .indexing-hint {
     padding: var(--space-1) var(--space-5);
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
-    background: var(--bg-secondary);
+    color: var(--color-text-faint);
+    background: var(--color-bg-subtle);
     text-align: center;
     flex-shrink: 0;
   }
@@ -1053,7 +1053,7 @@
 
   .source-preview {
     font-family: var(--font-mono);
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: pre-wrap;
     word-break: break-word;
     font-size: var(--font-size-md);
@@ -1063,7 +1063,7 @@
   .truncation-notice {
     padding: var(--space-3) 0;
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-style: italic;
   }
 
@@ -1083,14 +1083,14 @@
 
   .url-progress-bar {
     height: 2px;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     overflow: hidden;
   }
 
   .url-progress-fill {
     height: 100%;
     width: 40%;
-    background: var(--accent-primary);
+    background: var(--color-accent);
     animation: url-progress 1.2s ease-in-out infinite;
   }
 
@@ -1113,14 +1113,14 @@
   .skeleton-line {
     height: 14px;
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-block {
     height: 80px;
     border-radius: var(--radius-sm);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     animation: skeleton-pulse 1.5s ease-in-out infinite;
     animation-delay: 0.3s;
   }
@@ -1145,7 +1145,7 @@
 
   .url-fetch-notice {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     margin-top: var(--space-1);
   }
 
@@ -1161,24 +1161,24 @@
   }
 
   .url-icon {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     opacity: 0.7;
   }
 
   .url-domain {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .url-full {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     word-break: break-all;
     max-width: 100%;
     padding: var(--space-3) var(--space-5);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-sm);
   }
 
@@ -1188,7 +1188,7 @@
     font-size: var(--font-size-sm);
     line-height: 1.6;
     overflow-wrap: break-word;
-    color: var(--text-primary);
+    color: var(--color-text);
     background: transparent;
     position: relative;
     isolation: isolate;
@@ -1208,7 +1208,7 @@
   }
 
   :global(.html-preview a) {
-    color: var(--accent-primary) !important;
+    color: var(--color-accent) !important;
   }
 
   :global(.html-preview img) {
@@ -1218,8 +1218,8 @@
 
   :global(.html-preview pre),
   :global(.html-preview code) {
-    background-color: var(--bg-secondary) !important;
-    color: var(--text-primary) !important;
+    background-color: var(--color-bg-subtle) !important;
+    color: var(--color-text) !important;
     border-radius: var(--radius-sm);
     padding: var(--space-0-5) var(--space-2);
   }
@@ -1246,7 +1246,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-1);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     flex-shrink: 0;
   }
 
@@ -1267,13 +1267,13 @@
 
   .source-app-name {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
   }
 
   .source-app-title {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     max-width: 128px;
     overflow: hidden;
     text-overflow: ellipsis;

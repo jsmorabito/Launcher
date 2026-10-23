@@ -26,18 +26,18 @@ describe('shared control surface defaults', () => {
   it('keeps default buttons visible inside SettingsCard surfaces', async () => {
     const css = await readSource('resources/styles/style.css');
 
-    expect(cssRule(css, '  .btn {')).toContain('background-color: var(--bg-secondary);');
+    expect(cssRule(css, '  .btn {')).toContain('background-color: var(--color-bg-subtle);');
   });
 
   it('keeps default badges visible inside SettingsCard surfaces', async () => {
     const source = await readSource('components/base/Badge.svelte');
 
-    expect(source).toContain('background-color: var(--bg-secondary);');
+    expect(source).toContain('background-color: var(--color-bg-subtle);');
   });
 
   it('keeps default selects visible inside SettingsCard surfaces', async () => {
     const source = await readSource('components/base/Select.svelte');
 
-    expect(source).toContain('background-color: var(--bg-secondary);');
+    expect(source).toContain('background-color: var(--color-bg-subtle);');
   });
 });

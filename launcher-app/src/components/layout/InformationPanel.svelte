@@ -40,7 +40,7 @@
     min-width: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
   }
   .info-chip-badge {
@@ -51,8 +51,8 @@
     height: var(--size-md);
     flex-shrink: 0;
     border-radius: var(--radius-sm);
-    background-color: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background-color: var(--color-accent-solid);
+    color: var(--color-on-solid);
   }
   .info-chip-img {
     width: var(--size-xs);
@@ -65,7 +65,7 @@
   }
   .info-chip-label {
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -73,7 +73,7 @@
   .info-chip-subtitle {
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     flex-shrink: 0;
   }
 </style>

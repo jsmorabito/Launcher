@@ -178,8 +178,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     overflow: hidden;
   }
@@ -190,7 +190,7 @@
     justify-content: space-between;
     gap: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-bottom: 1px solid var(--separator);
     flex-shrink: 0;
     cursor: grab;
@@ -211,7 +211,7 @@
     flex-shrink: 0;
     border: none;
     background: transparent;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-md);
     line-height: 1;
     cursor: pointer;
@@ -219,20 +219,20 @@
     border-radius: var(--radius-xs);
   }
   .sticky-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
 
   .sticky-state {
     padding: var(--space-5);
     font-size: var(--font-size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .sticky-title {
     border: none;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-md);
     font-weight: 600;
     padding: var(--space-3) var(--space-4) var(--space-1);
@@ -245,7 +245,7 @@
     resize: none;
     border: none;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     line-height: 1.6;
     padding: var(--space-2) var(--space-4) var(--space-4);

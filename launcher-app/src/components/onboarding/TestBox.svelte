@@ -52,7 +52,7 @@
     border: 1px dashed var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
   }
   .testbox--disabled {
     opacity: 0.55;
@@ -60,14 +60,14 @@
   .testbox__label {
     margin: 0 0 var(--space-2);
     font-size: var(--font-size-md);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   :global(.testbox__input) {
     width: 100%;
     box-sizing: border-box;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-size-md);
@@ -75,6 +75,6 @@
   .testbox__hint {
     margin: var(--space-2) 0 0;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

@@ -32,18 +32,18 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
     margin: 0;
   }
   .guidance__title {
     font-size: var(--font-size-display);
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
   .guidance__body {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xl);
     line-height: 1.6;
   }

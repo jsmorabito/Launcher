@@ -135,8 +135,8 @@ if (viewName === 'DefaultView') {
     height: 100%;
     font-family: system-ui, sans-serif;
     padding: 2rem;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--color-bg);
+    color: var(--color-text);
   }
   h1 {
     font-size: 1.5rem;
@@ -147,7 +147,7 @@ if (viewName === 'DefaultView') {
     margin-bottom: 1.5rem;
   }
   button {
-    background: var(--accent-primary, #2563eb);
+    background: var(--color-accent, #2563eb);
     color: white;
     border: none;
     padding: 0.5rem 1.25rem;

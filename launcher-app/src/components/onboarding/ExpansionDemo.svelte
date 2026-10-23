@@ -16,7 +16,7 @@
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
   }
   .demo__row {
     display: flex;
@@ -25,14 +25,14 @@
   }
   .demo__trigger {
     font-family: var(--font-mono);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-0-5) var(--space-3);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .demo__arrow {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   .demo__result {
     font-size: var(--font-size-lg);
@@ -40,6 +40,6 @@
   .demo__note {
     margin: var(--space-2) 0 0;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

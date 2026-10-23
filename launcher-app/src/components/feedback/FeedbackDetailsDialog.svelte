@@ -95,18 +95,18 @@
   }
   .message {
     margin: 0;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-md);
   }
   .progress-row {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   section h4 {
     margin: 0 0 var(--space-2);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -116,8 +116,8 @@
     margin: 0;
     padding: var(--space-3);
     border-radius: var(--radius-md);
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
@@ -128,7 +128,7 @@
     gap: var(--space-1) var(--space-3);
   }
   dt {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   dd {
     margin: 0;

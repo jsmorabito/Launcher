@@ -184,12 +184,12 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
   .code-inline {
-    background: var(--bg-hover);
+    background: var(--color-hover);
     padding: var(--space-0-5) var(--space-1);
     border-radius: var(--radius-xs);
   }

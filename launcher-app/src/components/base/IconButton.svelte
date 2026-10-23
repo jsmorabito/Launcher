@@ -44,7 +44,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     border-radius: var(--radius-sm);
     transition:
       background var(--transition-fast),
@@ -72,8 +72,8 @@
   }
 
   .icon-button:hover:not(:disabled) {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
 
   .icon-button:focus-visible {
@@ -87,11 +87,11 @@
   }
 
   .variant-danger {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .variant-danger:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+    color: var(--color-danger);
   }
 </style>

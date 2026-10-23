@@ -106,7 +106,7 @@
       {#if handler.initError}
         <div
           class="p-2 text-center"
-          style="background: color-mix(in srgb, var(--accent-warning) 15%, var(--bg-primary)); color: var(--text-primary);"
+          style="background: color-mix(in srgb, var(--color-warning) 15%, var(--color-bg)); color: var(--color-text);"
         >
           ⚠️ {handler.initError}
         </div>
@@ -160,7 +160,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: var(--bg-primary);
+    background: var(--color-bg);
   }
 
   .settings-header {

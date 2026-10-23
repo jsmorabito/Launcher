@@ -234,7 +234,7 @@
     padding: var(--space-2) var(--space-5) var(--space-1);
     font-size: var(--font-size-xs);
     font-weight: 600;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
   }
@@ -243,8 +243,8 @@
     width: var(--size-xl);
     height: var(--size-xl);
     border-radius: var(--radius-md);
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     display: flex;
     align-items: center;
     justify-content: center;

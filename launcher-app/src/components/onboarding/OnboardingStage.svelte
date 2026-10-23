@@ -29,7 +29,7 @@
   }
   .stage__hero {
     box-shadow: var(--shadow-xl);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
   .stage--left .stage__hero {
     left: 48%;
@@ -45,9 +45,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(90deg, var(--bg-popup), transparent 24%);
+    background: linear-gradient(90deg, var(--color-surface-raised), transparent 24%);
   }
   .stage--left::after {
-    background: linear-gradient(270deg, var(--bg-popup), transparent 24%);
+    background: linear-gradient(270deg, var(--color-surface-raised), transparent 24%);
   }
 </style>

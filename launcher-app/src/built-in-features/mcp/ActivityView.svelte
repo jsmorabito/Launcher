@@ -64,7 +64,7 @@
   }
 
   .audit-time {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     white-space: nowrap;
     min-width: 70px;
   }
@@ -78,15 +78,15 @@
   }
 
   .audit-status.success {
-    color: var(--accent-success);
+    color: var(--color-success);
   }
 
   .audit-status.failure {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .audit-args {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-family: var(--font-mono);
     overflow: hidden;
     text-overflow: ellipsis;

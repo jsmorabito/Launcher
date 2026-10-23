@@ -78,14 +78,14 @@
   .toggle {
     background: transparent;
     border: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     cursor: pointer;
     padding: 0;
   }
   .summary {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-style: italic;
   }
   .children {
@@ -99,23 +99,23 @@
     line-height: 1.5;
   }
   .key {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     margin-right: var(--space-1);
   }
   .json-string {
-    color: var(--syntax-string);
+    color: var(--color-syntax-string);
   }
   .json-number {
-    color: var(--syntax-number);
+    color: var(--color-syntax-number);
   }
   .json-boolean {
-    color: var(--syntax-keyword);
+    color: var(--color-syntax-keyword);
   }
   .json-null {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-style: italic;
   }
   .json-other {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

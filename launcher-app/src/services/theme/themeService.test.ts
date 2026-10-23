@@ -7,10 +7,10 @@ vi.mock('../../lib/ipc/commands', () => ({
 
 vi.mock('../../lib/themeVariables', () => {
   const THEME_VAR_NAMES = [
-    '--bg-primary',
-    '--bg-secondary',
-    '--text-primary',
-    '--accent-primary',
+    '--color-bg',
+    '--color-bg-subtle',
+    '--color-text',
+    '--color-accent',
     '--font-ui',
     '--space-5',
     '--font-size-base',
@@ -38,50 +38,50 @@ describe('themeService', () => {
   it('applyTheme sets CSS variables on documentElement', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
       variables: {
-        '--bg-primary': 'rgba(25, 25, 35, 0.85)',
-        '--accent-primary': 'rgb(138, 43, 226)',
+        '--color-bg': 'rgba(25, 25, 35, 0.85)',
+        '--color-accent': 'rgb(138, 43, 226)',
       },
       fonts: [],
     });
     await applyTheme('my-dark-theme');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe(
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe(
       'rgba(25, 25, 35, 0.85)',
     );
-    expect(document.documentElement.style.getPropertyValue('--accent-primary')).toBe(
+    expect(document.documentElement.style.getPropertyValue('--color-accent')).toBe(
       'rgb(138, 43, 226)',
     );
   });
 
   it('applyTheme silently ignores unknown variable names', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
-      variables: { '--bg-primary': 'red', '--totally-unknown': 'ignored' },
+      variables: { '--color-bg': 'red', '--totally-unknown': 'ignored' },
       fonts: [],
     });
     await applyTheme('test-theme');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('red');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('red');
     expect(document.documentElement.style.getPropertyValue('--totally-unknown')).toBe('');
   });
 
   it('applyTheme ignores structural tokens so a theme cannot resize the layout', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
-      variables: { '--bg-primary': 'red', '--space-5': '40px', '--font-size-base': '20px' },
+      variables: { '--color-bg': 'red', '--space-5': '40px', '--font-size-base': '20px' },
       fonts: [],
     });
     await applyTheme('bloated-theme');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('red');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('red');
     expect(document.documentElement.style.getPropertyValue('--space-5')).toBe('');
     expect(document.documentElement.style.getPropertyValue('--font-size-base')).toBe('');
   });
 
   it('removeTheme clears all overridden CSS variables', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
-      variables: { '--bg-primary': 'blue' },
+      variables: { '--color-bg': 'blue' },
       fonts: [],
     });
     await applyTheme('test-theme');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('blue');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('blue');
     removeTheme();
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('');
   });
 
   it('applyTheme injects @font-face style element for fonts', async () => {
@@ -114,23 +114,23 @@ describe('themeService', () => {
 
   it('applyTheme replaces previous theme when called twice', async () => {
     vi.mocked(getThemeDefinition)
-      .mockResolvedValueOnce({ variables: { '--bg-primary': 'red' }, fonts: [] })
+      .mockResolvedValueOnce({ variables: { '--color-bg': 'red' }, fonts: [] })
       .mockResolvedValueOnce({
-        variables: { '--bg-primary': 'blue', '--text-primary': 'white' },
+        variables: { '--color-bg': 'blue', '--color-text': 'white' },
         fonts: [],
       });
     await applyTheme('theme-a');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('red');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('red');
     await applyTheme('theme-b');
-    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('blue');
-    expect(document.documentElement.style.getPropertyValue('--text-primary')).toBe('white');
+    expect(document.documentElement.style.getPropertyValue('--color-bg')).toBe('blue');
+    expect(document.documentElement.style.getPropertyValue('--color-text')).toBe('white');
   });
 
   // The marker lets CSS (.settings-page opaque overrides) step aside so a
   // custom theme's full palette — text included — flows through coherently.
   it('applyTheme marks documentElement with data-custom-theme = themeId', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
-      variables: { '--bg-primary': 'blue' },
+      variables: { '--color-bg': 'blue' },
       fonts: [],
     });
     await applyTheme('catppuccin');
@@ -139,7 +139,7 @@ describe('themeService', () => {
 
   it('removeTheme clears the data-custom-theme marker', async () => {
     vi.mocked(getThemeDefinition).mockResolvedValue({
-      variables: { '--bg-primary': 'blue' },
+      variables: { '--color-bg': 'blue' },
       fonts: [],
     });
     await applyTheme('catppuccin');

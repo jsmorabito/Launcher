@@ -77,7 +77,7 @@
   }
 
   .hint {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
     margin-top: var(--space-6);
     display: flex;

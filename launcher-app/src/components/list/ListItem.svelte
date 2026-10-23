@@ -79,7 +79,7 @@
      full reasoning; the component-scoped copy is what actually wins here, so
      the two have to agree. */
   .list-row.selected {
-    background-color: var(--bg-selected);
+    background-color: var(--color-accent-subtle);
     box-shadow: inset 0 0 2px 0.5px var(--kbd-rim);
   }
 

@@ -123,39 +123,39 @@ looks fine to you and is unreadable to someone else.
 | Ramp           | Token             | Use for                                                               |
 | -------------- | ----------------- | --------------------------------------------------------------------- |
 | **The voice**  | `--accent-*`      | Text, icons, strokes, focus rings, borders, and the source for a tint |
-| **The ground** | `--accent-*-fill` | The background of a filled surface that carries `--text-on-accent`    |
+| **The ground** | `--accent-*-fill` | The background of a filled surface that carries `--color-on-solid`    |
 
-The test is mechanical: **does this surface have `--text-on-accent` (or
+The test is mechanical: **does this surface have `--color-on-solid` (or
 `--control-knob`) on top of it?** Yes → `-fill`. No → the voice.
 
 ```css
 /* A filled button, a checked checkbox, a user chat bubble, a coloured tile */
-background: var(--accent-primary-fill);
-color: var(--text-on-accent);
+background: var(--color-accent-solid);
+color: var(--color-on-solid);
 
 /* A status dot, a meter bar, a progress fill, a left accent seam — no text */
-background: var(--accent-primary);
+background: var(--color-accent);
 
 /* An accent-coloured label, a link, an icon */
-color: var(--accent-primary);
+color: var(--color-accent);
 ```
 
 `check:design` fails the build on a voice token used as a background in the
-same rule as `--text-on-accent` (`voice-as-fill`). It cannot catch the inverse,
+same rule as `--color-on-solid` (`voice-as-fill`). It cannot catch the inverse,
 so: **never use a `-fill` token as a text colour** — it is too dark to read on
 an Launcher surface.
 
 ### Surfaces, from back to front
 
-| Token              | Use for                                                      |
-| ------------------ | ------------------------------------------------------------ |
-| `--bg-primary`     | The window background. You rarely set this yourself          |
-| `--bg-secondary`   | Cards, sidebars, panels — anything sitting on the window     |
-| `--bg-tertiary`    | Inputs, wells, and subtle insets inside a card               |
-| `--bg-hover`       | Hover on any interactive row, button, or tile                |
-| `--bg-selected`    | The selected row — the only surface token carrying chroma    |
-| `--bg-popup`       | Opaque popups and menus                                      |
-| `--surface-canvas` | Only where external HTML assumes a white page (URL previews) |
+| Token                    | Use for                                                      |
+| ------------------------ | ------------------------------------------------------------ |
+| `--color-bg`             | The window background. You rarely set this yourself          |
+| `--color-bg-subtle`      | Cards, sidebars, panels — anything sitting on the window     |
+| `--color-surface`        | Inputs, wells, and subtle insets inside a card               |
+| `--color-hover`          | Hover on any interactive row, button, or tile                |
+| `--color-accent-subtle`  | The selected row — the only surface token carrying chroma    |
+| `--color-surface-raised` | Opaque popups and menus                                      |
+| `--surface-canvas`       | Only where external HTML assumes a white page (URL previews) |
 
 Never set an opaque background on the root container — platform overrides
 (macOS transparency, Windows Acrylic, opaque Linux) handle that automatically.
@@ -165,12 +165,12 @@ actually want is `--scrim` to push the thing beneath it back.
 
 ### Text
 
-| Token              | Use for                                         |
-| ------------------ | ----------------------------------------------- |
-| `--text-primary`   | Headings, labels, the content the user came for |
-| `--text-secondary` | Subtitles, metadata, supporting detail          |
-| `--text-tertiary`  | Placeholders, hints, disabled text, timestamps  |
-| `--text-on-accent` | Text or icons on any `--accent-*-fill` surface  |
+| Token                | Use for                                         |
+| -------------------- | ----------------------------------------------- |
+| `--color-text`       | Headings, labels, the content the user came for |
+| `--color-text-muted` | Subtitles, metadata, supporting detail          |
+| `--color-text-faint` | Placeholders, hints, disabled text, timestamps  |
+| `--color-on-solid`   | Text or icons on any `--accent-*-fill` surface  |
 
 Three tiers. If you want a fourth, you want a different layout.
 
@@ -191,28 +191,28 @@ state.**
 
 ### Semantic state
 
-| Token              | Means                                                                        |
-| ------------------ | ---------------------------------------------------------------------------- |
-| `--accent-primary` | Primary action, focus, selection, links                                      |
-| `--accent-success` | Succeeded, healthy, connected                                                |
-| `--accent-warning` | Needs attention, degraded, in progress                                       |
-| `--accent-danger`  | Destructive action, error, failed                                            |
-| `--launcher-brand`    | Launcher's identity. The same blue as the accent — one identity colour, not two |
+| Token             | Means                                                                           |
+| ----------------- | ------------------------------------------------------------------------------- |
+| `--color-accent`  | Primary action, focus, selection, links                                         |
+| `--color-success` | Succeeded, healthy, connected                                                   |
+| `--color-warning` | Needs attention, degraded, in progress                                          |
+| `--color-danger`  | Destructive action, error, failed                                               |
+| `--color-accent`  | Launcher's identity. The same blue as the accent — one identity colour, not two |
 
 For a **tinted background** in a state colour, mix it rather than inventing a
 second token — this is the house formula, and it uses the voice ramp for both
 the tint and the text so they always agree:
 
 ```css
-background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-color: var(--accent-danger);
+background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+color: var(--color-danger);
 ```
 
 ### Lines and edges
 
 | Token            | Use for                                                              |
 | ---------------- | -------------------------------------------------------------------- |
-| `--border-color` | The border of an interactive element                                 |
+| `--color-border` | The border of an interactive element                                 |
 | `--separator`    | List dividers, section rules, subtle outlines                        |
 | `--divider-soft` | The faintest hairline (split-view handle)                            |
 | `--rim-light`    | Edge highlight, inside a shadow or gradient — see [§4](#4-elevation) |
@@ -228,7 +228,7 @@ control with an outline".
 Only for rendered code and structured data. The Prism markdown theme and
 `JsonTree` both read from these, so a snippet looks the same everywhere.
 
-`--syntax-comment` · `--syntax-keyword` · `--syntax-string` · `--syntax-number` · `--syntax-function`
+`--color-syntax-comment` · `--color-syntax-keyword` · `--color-syntax-string` · `--color-syntax-number` · `--color-syntax-title`
 
 ### Everything else
 
@@ -572,20 +572,20 @@ density and how much chrome is acceptable.
 
 Every interactive element covers every state:
 
-| State            | Pattern                                                |
-| ---------------- | ------------------------------------------------------ |
-| Hover            | `background: var(--bg-hover)`                          |
-| Active / pressed | `.pressable`, or `background: var(--bg-selected)`      |
-| Keyboard focus   | Nothing — the global `*:focus-visible` ring handles it |
-| Disabled         | `opacity: 0.5; cursor: not-allowed`                    |
-| Selected in list | Let `.list-row.selected` / `.selected-result` do it    |
+| State            | Pattern                                                   |
+| ---------------- | --------------------------------------------------------- |
+| Hover            | `background: var(--color-hover)`                          |
+| Active / pressed | `.pressable`, or `background: var(--color-accent-subtle)` |
+| Keyboard focus   | Nothing — the global `*:focus-visible` ring handles it    |
+| Disabled         | `opacity: 0.5; cursor: not-allowed`                       |
+| Selected in list | Let `.list-row.selected` / `.selected-result` do it       |
 
-**Hover must never be mistakable for selection** (Principle III). `--bg-hover`
-is neutral; `--bg-selected` carries chroma. That difference is load-bearing —
+**Hover must never be mistakable for selection** (Principle III). `--color-hover`
+is neutral; `--color-accent-subtle` carries chroma. That difference is load-bearing —
 do not "improve" hover by tinting it.
 
 **The selected row is a flat band, everywhere, and it is not yours to
-restyle.** `background-color: var(--bg-selected)` plus
+restyle.** `background-color: var(--color-accent-subtle)` plus
 `box-shadow: inset 0 0 2px 0.5px var(--kbd-rim)`, identical in
 `.list-row.selected` and `.selected-result`. It never takes a border, a
 gradient, or an accent seam — this is the most-seen element in the app and the
@@ -626,7 +626,7 @@ Extensions run in two sandboxed iframes — a hidden worker and an on-demand
 view. Design rules apply to the **view**.
 
 - Every CSS token above is injected automatically, along with the real Satoshi
-  and JetBrains Mono files. `var(--bg-primary)`, `var(--font-ui)` etc. just
+  and JetBrains Mono files. `var(--color-bg)`, `var(--font-ui)` etc. just
   work. **The same "never hardcode a colour" rule applies**, and so does the
   voice/fill split.
 - Icons come from the `<launcher-icon>` web component: call `registerIconElement()`
@@ -692,7 +692,7 @@ Run `pnpm check:design`. It fails on:
 | `undefined-token`      | `var(--x)` where `--x` is defined nowhere — the declaration is dead      |
 | `token-fallback`       | `var(--x, something)`                                                    |
 | `hardcoded-color`      | A hex, `rgb()`, `white` or `black` in a colour property                  |
-| `voice-as-fill`        | `--accent-*` as a background under `--text-on-accent`                    |
+| `voice-as-fill`        | `--accent-*` as a background under `--color-on-solid`                    |
 | `space-as-size`        | `--space-*` on a width or height where a `--size-*` holds the same value |
 | `deprecated-token`     | A new use of `--space-1-5`/`-2-5`/`-5-5`/`-7-5`                          |
 | `tailwind-palette`     | `bg-red-500` and friends                                                 |

@@ -291,7 +291,7 @@
 </script>
 
 <div
-  class="extension-detail-view bg-[var(--bg-primary)] h-full w-full flex flex-col overflow-hidden focus:outline-none"
+  class="extension-detail-view bg-[var(--color-bg)] h-full w-full flex flex-col overflow-hidden focus:outline-none"
   tabindex="-1"
 >
   <div
@@ -306,7 +306,7 @@
       <div class="p-6">
         <EmptyState message={t('common.error')} description={error}>
           {#snippet icon()}
-            <span style="color: var(--accent-danger);">⚠️</span>
+            <span style="color: var(--color-danger);">⚠️</span>
           {/snippet}
         </EmptyState>
       </div>
@@ -321,9 +321,9 @@
               {extensionDetail.name}
             </h1>
             <div class="flex flex-wrap items-center gap-3 text-caption mb-6">
-              <span class="flex items-center gap-1.5 text-[var(--text-primary)]">
+              <span class="flex items-center gap-1.5 text-[var(--color-text)]">
                 <span
-                  class="w-5 h-5 rounded-full bg-[var(--bg-tertiary)] flex items-center justify-center"
+                  class="w-5 h-5 rounded-full bg-[var(--color-surface)] flex items-center justify-center"
                   style="font-size: var(--font-size-2xs);">👤</span
                 >
                 {extensionDetail?.author?.name || 'Unknown'}
@@ -392,7 +392,7 @@
               {#if isInstalled && isTheme}
                 <div
                   class="flex items-center gap-2 px-4 py-2 rounded-lg text-caption"
-                  style="background: color-mix(in srgb, var(--accent-primary) 10%, transparent); color: var(--accent-primary);"
+                  style="background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--color-accent);"
                 >
                   <svg
                     class="w-4 h-4 flex-shrink-0"
@@ -458,7 +458,7 @@
               <section>
                 <div class="flex items-center justify-between mb-4">
                   <h3 class="text-section">{t('features.store.ui.commands_actions')}</h3>
-                  <span class="text-caption text-[var(--text-tertiary)]">
+                  <span class="text-caption text-[var(--color-text-faint)]">
                     {declaredCommands.length}
                     {declaredCommands.length === 1 ? 'command' : 'commands'}
                   </span>
@@ -474,7 +474,7 @@
                           {/if}
                           <div class="min-w-0">
                             <div class="flex items-center gap-2 flex-wrap">
-                              <span class="text-title font-medium text-[var(--text-primary)]"
+                              <span class="text-title font-medium text-[var(--color-text)]"
                                 >{cmd.name}</span
                               >
                               {#if cmd.mode}
@@ -506,14 +506,14 @@
                       </div>
 
                       {#if cmd.description}
-                        <p class="text-caption text-[var(--text-secondary)] mt-2">
+                        <p class="text-caption text-[var(--color-text-muted)] mt-2">
                           {cmd.description}
                         </p>
                       {/if}
 
                       {#if cmd.arguments && cmd.arguments.length > 0}
                         <div class="command-args mt-3 pt-2.5 border-t border-[var(--separator)]">
-                          <span class="text-caption text-[var(--text-tertiary)] mr-2"
+                          <span class="text-caption text-[var(--color-text-faint)] mr-2"
                             >{t('features.store.ui.arguments_label')}</span
                           >
                           <div class="inline-flex flex-wrap gap-1.5 align-middle">
@@ -537,7 +537,7 @@
                   <h3 class="text-section">{t('features.store.ui.docs')}</h3>
                 </div>
                 <div
-                  class="prose max-w-none text-body bg-[var(--bg-secondary)] rounded-2xl p-6 border border-[var(--separator)] overflow-x-auto markdown-body"
+                  class="prose max-w-none text-body bg-[var(--color-bg-subtle)] rounded-2xl p-6 border border-[var(--separator)] overflow-x-auto markdown-body"
                   onclick={handleMarkdownCopyClick}
                 >
                   {@html readmeHtml}
@@ -560,13 +560,13 @@
                   {#each declaredPreferences as pref}
                     <div class="preference-item">
                       <div class="flex items-center justify-between">
-                        <span class="text-label font-medium text-[var(--text-primary)]">
+                        <span class="text-label font-medium text-[var(--color-text)]">
                           {pref.title || pref.name}
                         </span>
                         <Badge text={pref.type} variant="default" mono />
                       </div>
                       {#if pref.description}
-                        <p class="text-caption text-[var(--text-secondary)] mt-1">
+                        <p class="text-caption text-[var(--color-text-muted)] mt-1">
                           {pref.description}
                         </p>
                       {/if}
@@ -581,7 +581,7 @@
           <div class="space-y-8">
             {#if listedPermissions.length > 0}
               <section
-                class="bg-[var(--bg-secondary)] rounded-2xl p-6 border border-[var(--separator)]"
+                class="bg-[var(--color-bg-subtle)] rounded-2xl p-6 border border-[var(--separator)]"
               >
                 <h3 class="text-section mb-6">{t('features.store.ui.permissions')}</h3>
                 <PermissionList
@@ -592,7 +592,7 @@
             {/if}
 
             <section
-              class="bg-[var(--bg-secondary)] rounded-2xl p-6 border border-[var(--separator)]"
+              class="bg-[var(--color-bg-subtle)] rounded-2xl p-6 border border-[var(--separator)]"
             >
               <h3 class="text-section mb-6">{t('features.store.ui.details')}</h3>
 
@@ -600,20 +600,20 @@
                 <div
                   class="flex justify-between items-center pb-3 border-b border-[var(--separator)]"
                 >
-                  <dt class="text-[var(--text-secondary)] font-medium">
+                  <dt class="text-[var(--color-text-muted)] font-medium">
                     {t('features.store.ui.version')}
                   </dt>
-                  <dd class="font-semibold text-[var(--text-primary)]">
+                  <dd class="font-semibold text-[var(--color-text)]">
                     {extensionDetail?.version || '1.0.0'}
                   </dd>
                 </div>
                 <div
                   class="flex justify-between items-center pb-3 border-b border-[var(--separator)]"
                 >
-                  <dt class="text-[var(--text-secondary)] font-medium">
+                  <dt class="text-[var(--color-text-muted)] font-medium">
                     {t('features.store.ui.updated')}
                   </dt>
-                  <dd class="font-semibold text-[var(--text-primary)]">
+                  <dd class="font-semibold text-[var(--color-text)]">
                     {extensionDetail?.updatedAt
                       ? new Date(extensionDetail.updatedAt).toLocaleDateString(undefined, {
                           year: 'numeric',
@@ -626,22 +626,22 @@
                 <div
                   class="flex justify-between items-center pb-3 border-b border-[var(--separator)]"
                 >
-                  <dt class="text-[var(--text-secondary)] font-medium">
+                  <dt class="text-[var(--color-text-muted)] font-medium">
                     {t('features.store.ui.status')}
                   </dt>
                   <dd
                     class="font-semibold flex items-center gap-1.5 align-middle"
-                    style="color: var(--accent-success);"
+                    style="color: var(--color-success);"
                   >
                     <StatusDot color="success" />
                     {extensionDetail?.status}
                   </dd>
                 </div>
                 <div class="flex justify-between items-center pb-1">
-                  <dt class="text-[var(--text-secondary)] font-medium">
+                  <dt class="text-[var(--color-text-muted)] font-medium">
                     {t('features.store.ui.added')}
                   </dt>
-                  <dd class="font-semibold text-[var(--text-primary)]">
+                  <dd class="font-semibold text-[var(--color-text)]">
                     {extensionDetail?.createdAt
                       ? new Date(extensionDetail.createdAt).toLocaleDateString(undefined, {
                           year: 'numeric',
@@ -670,15 +670,15 @@
   }
 
   .command-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-4);
     transition: background var(--dur-instant) var(--ease-travel);
   }
 
   .command-card:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .command-header {
@@ -700,22 +700,22 @@
     display: inline-block;
     padding: var(--space-0-5) var(--space-2);
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .preference-item {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-3) var(--space-4);
   }
 
   .preferences-link {
     font-size: var(--font-size-xs);
-    color: var(--accent-primary);
+    color: var(--color-accent);
     background: none;
     border: none;
     cursor: pointer;

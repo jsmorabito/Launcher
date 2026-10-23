@@ -12,8 +12,8 @@
     onchange?: (v: Theme) => void;
     /** Background token for the unselected circle. Default `'tertiary'`
      *  matches this component's onboarding usage (inside a `Card`, which is
-     *  `--bg-secondary`). Settings' `GeneralTab` passes `'secondary'` since
-     *  it sits inside a `SettingsCard`, which is `--bg-tertiary` — using the
+     *  `--color-bg-subtle`). Settings' `GeneralTab` passes `'secondary'` since
+     *  it sits inside a `SettingsCard`, which is `--color-surface` — using the
      *  same token there would make the circle disappear into its card. */
     wellBackground?: 'tertiary' | 'secondary';
   } = $props();
@@ -103,12 +103,12 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     transition: color var(--transition-normal);
   }
 
   .theme-option.selected {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .theme-option:focus-visible {
@@ -123,7 +123,7 @@
     width: 44px;
     height: 44px;
     border-radius: var(--radius-full);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border: 2px solid transparent;
     display: flex;
     align-items: center;
@@ -134,18 +134,18 @@
   }
 
   .theme-circle.well-secondary {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
 
   .theme-option:hover .theme-circle {
-    background: var(--bg-hover);
-    border-color: var(--border-color);
+    background: var(--color-hover);
+    border-color: var(--color-border);
   }
 
   .theme-option.selected .theme-circle {
-    background: var(--text-primary);
-    border-color: var(--text-primary);
-    color: var(--bg-primary);
+    background: var(--color-text);
+    border-color: var(--color-text);
+    color: var(--color-bg);
   }
 
   .theme-label {

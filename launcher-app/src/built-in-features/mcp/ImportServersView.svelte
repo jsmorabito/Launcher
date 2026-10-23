@@ -252,7 +252,7 @@
 
   .config-path {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-family: var(--font-mono);
   }
 
@@ -270,7 +270,7 @@
   }
 
   .srv-desc {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-xs);
   }
 
@@ -290,7 +290,7 @@
   }
 
   .parse-error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-xs);
     margin: 0;
   }
@@ -304,7 +304,7 @@
 
   .parsed-count {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin: 0;
   }
 
@@ -321,24 +321,24 @@
     gap: var(--space-1);
     padding: var(--space-2) var(--space-3);
     border-radius: var(--radius-sm);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     font-size: var(--font-size-xs);
   }
 
   .import-result-fail {
-    border-left: 2px solid var(--accent-danger);
+    border-left: 2px solid var(--color-danger);
   }
 
   .result-name {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .result-ok {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .result-fail-text {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

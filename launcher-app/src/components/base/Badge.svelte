@@ -35,28 +35,28 @@
   }
 
   .badge-default {
-    background-color: var(--bg-secondary);
-    color: var(--text-secondary);
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-muted);
   }
 
   .badge-success {
-    background-color: color-mix(in srgb, var(--accent-success) 12%, transparent);
-    color: var(--accent-success);
+    background-color: color-mix(in srgb, var(--color-success) 12%, transparent);
+    color: var(--color-success);
   }
 
   .badge-warning {
-    background-color: color-mix(in srgb, var(--accent-warning) 12%, transparent);
-    color: var(--accent-warning);
+    background-color: color-mix(in srgb, var(--color-warning) 12%, transparent);
+    color: var(--color-warning);
   }
 
   .badge-danger {
-    background-color: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-    color: var(--accent-danger);
+    background-color: color-mix(in srgb, var(--color-danger) 12%, transparent);
+    color: var(--color-danger);
   }
 
   .badge-info {
-    background-color: var(--launcher-brand-subtle);
-    color: var(--accent-primary);
+    background-color: var(--color-accent-faint);
+    color: var(--color-accent);
   }
 
   .mono {
@@ -64,6 +64,6 @@
   }
 
   .bordered {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 </style>

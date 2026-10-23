@@ -253,11 +253,11 @@
   .shortcut-name {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
   .shortcut-meta-dim {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .hero-block {
@@ -265,7 +265,7 @@
     align-items: center;
     justify-content: center;
     padding: var(--space-7) var(--space-5);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
   }
 
@@ -277,13 +277,13 @@
   }
   .meta-label {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
   .meta-value {
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     word-break: break-all;
   }
   .meta-value.mono {
@@ -302,12 +302,12 @@
   .form-title {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
   .form-subtitle {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin: var(--space-2) 0 var(--space-6);
   }
   .form-body {

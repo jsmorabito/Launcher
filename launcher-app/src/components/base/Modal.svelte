@@ -150,10 +150,10 @@
     width: 100%;
     max-width: min(var(--modal-width), 90vw);
     max-height: 90vh;
-    background: var(--bg-popup);
+    background: var(--color-surface-raised);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-popup);
-    color: var(--text-primary);
+    color: var(--color-text);
     opacity: 1;
     transform: scale(1);
     transition:
@@ -191,7 +191,7 @@
 
   .modal-subtitle {
     margin: -var(--space-5) 0 var(--space-7);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
     text-align: center;
   }

@@ -12,10 +12,10 @@
     onchange?: (v: LaunchView) => void;
     /** Background token for the thumbnail's outer "desktop" area. Default
      *  `'tertiary'` matches this component's onboarding usage (inside a
-     *  `Card`, which is `--bg-secondary`). Settings' `GeneralTab` passes
-     *  `'primary'` since it sits inside a `SettingsCard` (`--bg-tertiary`) —
+     *  `Card`, which is `--color-bg-subtle`). Settings' `GeneralTab` passes
+     *  `'primary'` since it sits inside a `SettingsCard` (`--color-surface`) —
      *  `'secondary'` isn't an option here because the thumbnail's own inner
-     *  window already uses `--bg-secondary`. */
+     *  window already uses `--color-bg-subtle`. */
     wellBackground?: 'tertiary' | 'primary';
   } = $props();
 
@@ -83,12 +83,12 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     transition: color var(--transition-normal);
   }
 
   .mode-option.selected {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .mode-option:focus-visible {
@@ -104,9 +104,9 @@
     width: 96px;
     height: 76px;
     border-radius: var(--radius-lg);
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--color-border);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     transition: border-color var(--transition-normal);
     display: flex;
     align-items: flex-start;
@@ -114,15 +114,15 @@
   }
 
   .mode-thumbnail.well-primary {
-    background: var(--bg-primary);
+    background: var(--color-bg);
   }
 
   .mode-option:hover .mode-thumbnail {
-    border-color: var(--text-secondary);
+    border-color: var(--color-text-muted);
   }
 
   .mode-option.selected .mode-thumbnail {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   /* Inner window — floats inside the outer container */
@@ -130,16 +130,16 @@
     width: 100%;
     border-radius: var(--radius-sm);
     overflow: hidden;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     box-shadow: var(--shadow-xs);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
   }
 
   .win-search-bar {
     height: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     margin: var(--space-1) var(--space-2);
     border-radius: var(--radius-xs);
     border: 1px solid var(--separator);
@@ -156,12 +156,12 @@
 
   .win-row {
     height: var(--space-2);
-    background: var(--bg-hover);
+    background: var(--color-hover);
     border-radius: var(--radius-xs);
   }
 
   .win-row.win-row-selected {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
 
   .win-footer {
@@ -182,7 +182,7 @@
     width: var(--space-1);
     height: var(--space-1);
     border-radius: var(--radius-full);
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   .mode-label {

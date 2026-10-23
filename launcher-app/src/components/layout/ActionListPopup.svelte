@@ -238,7 +238,7 @@
     padding: var(--space-4);
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     user-select: none;
   }
 
@@ -289,7 +289,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     flex-shrink: 0;
     border-radius: var(--radius-xs);
@@ -298,11 +298,11 @@
   /* Flat glyph in the popup — no filled tile. */
   .action-popup :global(.builtin-icon-tile) {
     background-color: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .action-destructive :global(.result-title),
   .action-destructive :global(.builtin-icon-tile) {
-    color: var(--accent-danger) !important;
+    color: var(--color-danger) !important;
   }
 </style>

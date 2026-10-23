@@ -23,7 +23,7 @@ export async function initMermaid() {
       primaryBorderColor: '#2EC4B6',
       lineColor: '#637777',
       secondaryColor: '#28B0A3',
-      tertiaryColor: 'var(--bg-tertiary)',
+      tertiaryColor: 'var(--color-surface)',
     },
   });
 

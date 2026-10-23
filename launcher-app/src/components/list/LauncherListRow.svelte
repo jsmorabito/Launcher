@@ -87,7 +87,7 @@
       {/if}
       {#if subtitle}
         <span
-          class="font-medium text-[var(--text-secondary)] truncate flex-shrink"
+          class="font-medium text-[var(--color-text-muted)] truncate flex-shrink"
           style="font-size: var(--font-size-md)">{subtitle}</span
         >
       {/if}
@@ -107,7 +107,7 @@
       </div>
     {:else if typeLabel}
       <span
-        class="font-medium text-[var(--text-secondary)] flex-shrink-0 ml-auto"
+        class="font-medium text-[var(--color-text-muted)] flex-shrink-0 ml-auto"
         style="font-size: var(--font-size-md)">{typeLabel}</span
       >
     {/if}
@@ -144,7 +144,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     flex-shrink: 0;
     border-radius: var(--radius-xs);
@@ -158,8 +158,8 @@
     justify-content: center;
     flex-shrink: 0;
     border-radius: var(--radius-sm);
-    background-color: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background-color: var(--color-accent-solid);
+    color: var(--color-on-solid);
   }
 
   .alias-chip {
@@ -170,9 +170,9 @@
     min-width: var(--size-md);
     padding: 0 var(--space-2);
     border-radius: var(--radius-xs);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     background-color: transparent;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
     font-weight: 500;
     line-height: 1;

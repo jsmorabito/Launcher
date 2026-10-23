@@ -7,7 +7,7 @@
 <style>
   .inline-error {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     margin: 0;
   }
 </style>

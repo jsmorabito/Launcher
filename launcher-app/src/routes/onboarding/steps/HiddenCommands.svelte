@@ -111,24 +111,24 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .step__title {
     margin: 0;
     font-size: var(--font-size-display);
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .step__lede {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xl);
     line-height: 1.6;
   }
   .step__warn {
     margin: 0;
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-md);
   }
   .step__setup {
@@ -141,11 +141,11 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .step__error {
     margin: var(--space-2) 0 0;
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-md);
   }
   .examples {
@@ -158,12 +158,12 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .examples__list {
     margin: 0;
     padding-left: var(--space-4);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
     line-height: 1.9;
   }

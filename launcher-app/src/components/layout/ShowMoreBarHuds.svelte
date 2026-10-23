@@ -69,7 +69,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-5);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     min-width: 0;
   }
@@ -77,7 +77,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-3);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .hud-pair {
     display: inline-flex;
@@ -85,7 +85,7 @@
     gap: var(--space-2);
   }
   .hud-text {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
   }
 </style>

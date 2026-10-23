@@ -56,7 +56,7 @@
       {#if ActiveComponent}
         <ActiveComponent {extensionManager} />
       {:else}
-        <div class="p-4 text-center text-[var(--accent-danger)] font-mono text-sm">
+        <div class="p-4 text-center text-[var(--color-danger)] font-mono text-sm">
           Error: Built-in feature {extensionId} has no export matching '{viewName}'
         </div>
       {/if}

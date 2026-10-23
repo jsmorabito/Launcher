@@ -233,8 +233,8 @@ if (viewName === 'BookmarksView') {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--color-bg);
+    color: var(--color-text);
     font-family: system-ui, sans-serif;
   }
   header {
@@ -269,7 +269,7 @@ if (viewName === 'BookmarksView') {
     margin: 0 0.5rem;
   }
   li:hover {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
   li button {
     background: none;
@@ -277,7 +277,7 @@ if (viewName === 'BookmarksView') {
     cursor: pointer;
     opacity: 0.4;
     font-size: 0.75rem;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   li button:hover {
     opacity: 1;
@@ -294,16 +294,16 @@ if (viewName === 'BookmarksView') {
   input {
     width: 100%;
     padding: 0.5rem 0.75rem;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border: 1px solid var(--separator);
     border-radius: 6px;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: 0.875rem;
     outline: none;
     box-sizing: border-box;
   }
   input:focus {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 </style>
 ```

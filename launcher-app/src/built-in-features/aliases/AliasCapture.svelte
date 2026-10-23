@@ -94,10 +94,10 @@
   {#snippet children()}
     <form onsubmit={handleFormSubmit} class="flex flex-col gap-4">
       <div>
-        <h2 id="alias-capture-title" class="text-xl font-semibold text-[var(--text-primary)]">
+        <h2 id="alias-capture-title" class="text-xl font-semibold text-[var(--color-text)]">
           {currentAlias ? t('features.aliases.change_alias') : t('features.aliases.assign_alias')}
         </h2>
-        <p class="text-sm text-[var(--text-secondary)] mt-1">{itemName}</p>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1">{itemName}</p>
       </div>
 
       <FormField

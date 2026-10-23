@@ -36,13 +36,13 @@
 
 <Modal bind:isOpen labelledBy="confirm-dialog-title" onEscape={cancel} onEnter={confirm}>
   {#snippet children()}
-    <h2 id="confirm-dialog-title" class="text-xl font-semibold mb-4 text-[var(--text-primary)]">
+    <h2 id="confirm-dialog-title" class="text-xl font-semibold mb-4 text-[var(--color-text)]">
       {#if variant === 'danger'}
         <span class="mr-2">⚠️</span>
       {/if}
       {title}
     </h2>
-    <p class="text-[var(--text-secondary)]">{message}</p>
+    <p class="text-[var(--color-text-muted)]">{message}</p>
   {/snippet}
   {#snippet actions()}
     <Button onclick={cancel}>{cancelButtonText}</Button>
@@ -54,8 +54,8 @@
 
 <style>
   :global(.btn-confirm-danger) {
-    background: var(--accent-danger-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-danger-solid) !important;
+    color: var(--color-on-solid) !important;
     border: none !important;
   }
 

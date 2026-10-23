@@ -28,7 +28,7 @@
     position: relative;
     width: 2.75rem;
     height: 1.5rem;
-    background-color: var(--bg-hover);
+    background-color: var(--color-hover);
     border-radius: var(--radius-full);
     transition: background-color var(--transition-normal);
   }
@@ -42,13 +42,13 @@
     width: 1.25rem;
     height: 1.25rem;
     background-color: var(--control-knob);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
     transition: transform var(--transition-normal);
   }
 
   :global(.peer:checked) ~ .toggle-track {
-    background-color: var(--accent-primary-fill);
+    background-color: var(--color-accent-solid);
   }
   :global(.peer:checked) ~ .toggle-track::after {
     transform: translateX(100%);

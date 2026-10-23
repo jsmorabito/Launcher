@@ -216,20 +216,22 @@
 
         <Card title={t('features.scripts.ui.config')}>
           <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-4 text-body">
-            <dt class="text-label text-[var(--text-secondary)]">{t('features.scripts.ui.file')}</dt>
-            <dd class="text-mono break-all text-[var(--text-primary)]">
+            <dt class="text-label text-[var(--color-text-muted)]">
+              {t('features.scripts.ui.file')}
+            </dt>
+            <dd class="text-mono break-all text-[var(--color-text)]">
               {selectedScript.fileName}
             </dd>
-            <dt class="text-label text-[var(--text-secondary)]">
+            <dt class="text-label text-[var(--color-text-muted)]">
               {t('features.scripts.ui.directory')}
             </dt>
-            <dd class="text-mono break-all text-[var(--text-primary)]">
+            <dd class="text-mono break-all text-[var(--color-text)]">
               {selectedScript.directoryPath}
             </dd>
-            <dt class="text-label text-[var(--text-secondary)]">
+            <dt class="text-label text-[var(--color-text-muted)]">
               {t('features.scripts.ui.arguments')}
             </dt>
-            <dd class="text-[var(--text-primary)]">
+            <dd class="text-[var(--color-text)]">
               {#if selectedScript.header.arguments.length === 0}
                 None
               {:else}
@@ -241,8 +243,8 @@
               {/if}
             </dd>
             {#if selectedScript.header.mode === 'inline'}
-              <dt class="text-label text-[var(--text-secondary)]">{t('common.refresh')}</dt>
-              <dd class="text-[var(--text-primary)]">
+              <dt class="text-label text-[var(--color-text-muted)]">{t('common.refresh')}</dt>
+              <dd class="text-[var(--color-text)]">
                 {selectedScript.header.refreshTimeSeconds
                   ? `${selectedScript.header.refreshTimeSeconds}s`
                   : 'Manual'}
@@ -273,7 +275,7 @@
 
         <div class="mt-6">
           <Card title={t('features.scripts.ui.file')}>
-            <div class="text-mono break-all text-body text-[var(--text-primary)]">
+            <div class="text-mono break-all text-body text-[var(--color-text)]">
               {selectedIssue.absolutePath}
             </div>
           </Card>

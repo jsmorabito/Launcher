@@ -98,9 +98,9 @@
   Non-macOS: hidden via CSS since the window really shrinks.
 -->
 <div
-  class="fixed bottom-0 left-0 right-0 border-t border-[var(--border-color)] flex items-center justify-between px-3 bottom-action-bar"
+  class="fixed bottom-0 left-0 right-0 border-t border-[var(--color-border)] flex items-center justify-between px-3 bottom-action-bar"
   class:is-compact={isCompactIdle}
-  style="height: var(--shell-footer-h); z-index: var(--z-footer); background-color: var(--bg-secondary-full-opacity);"
+  style="height: var(--shell-footer-h); z-index: var(--z-footer); background-color: var(--color-bg-subtle-opaque);"
 >
   <div class="flex-1 min-w-0 flex items-center gap-3">
     {#if argumentValidationError}
@@ -173,7 +173,7 @@
 <div
   class="fixed left-0 right-0 flex items-center justify-between gap-3 px-3 show-more-bar"
   class:is-visible={isCompactIdle}
-  style="top: var(--shell-header-h); height: var(--shell-footer-h); z-index: var(--z-footer); background-color: var(--bg-secondary-full-opacity);"
+  style="top: var(--shell-header-h); height: var(--shell-footer-h); z-index: var(--z-footer); background-color: var(--color-bg-subtle-opaque);"
 >
   <ShowMoreBarHuds />
   <div class="flex items-center gap-3">
@@ -218,8 +218,8 @@
     min-width: 0;
     padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-    color: var(--accent-danger);
+    background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+    color: var(--color-danger);
     font-size: var(--font-size-xs);
   }
   /* pre, not nowrap: same single line, but the double space after the bold
@@ -246,8 +246,8 @@
     gap: var(--space-2);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
-    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-accent);
     border: none;
     font-family: var(--font-ui);
     font-size: var(--font-size-xs);
@@ -259,7 +259,7 @@
   }
 
   .update-ready-pill:hover {
-    background: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
   }
 
   .update-ready-pill:focus-visible {

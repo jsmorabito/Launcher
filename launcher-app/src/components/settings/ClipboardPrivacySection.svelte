@@ -150,7 +150,7 @@
   }
 
   .denylist-row {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .user-row {

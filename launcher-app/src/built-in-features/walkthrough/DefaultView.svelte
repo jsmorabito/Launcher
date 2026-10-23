@@ -174,13 +174,13 @@
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-weight: 600;
   }
 
   .head-count {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .list {
@@ -196,12 +196,12 @@
     height: var(--size-sm);
     border-radius: var(--radius-full);
     border: 1px solid var(--separator);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .check.done {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .detail {
@@ -219,7 +219,7 @@
 
   .detail-title {
     font-size: var(--font-size-lg);
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
     flex: 1;
   }
@@ -233,7 +233,7 @@
 
   .row-progress-label {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     white-space: nowrap;
   }
 
@@ -251,7 +251,7 @@
 
   .detail-progress-label {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .detail-image {
@@ -262,7 +262,7 @@
 
   .detail-body {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.6;
   }
 </style>

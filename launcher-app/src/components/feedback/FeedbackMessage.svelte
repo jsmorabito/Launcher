@@ -75,10 +75,10 @@
     transition: background-color var(--transition-fast);
   }
   .message-trigger:hover {
-    background-color: var(--bg-hover);
+    background-color: var(--color-hover);
   }
   .message-trigger:active {
-    background-color: var(--bg-selected);
+    background-color: var(--color-accent-subtle);
   }
   .message-trigger:focus-visible {
     box-shadow: var(--shadow-focus);

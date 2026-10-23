@@ -67,7 +67,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
     font-weight: 500;
     padding: var(--space-1) 0;
@@ -77,7 +77,7 @@
   }
 
   .group-header:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .group-items {
@@ -93,6 +93,6 @@
     gap: var(--space-2);
     cursor: pointer;
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 </style>

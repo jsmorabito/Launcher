@@ -86,18 +86,18 @@
   }
 
   .dialog-title.danger {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .dialog-body {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-bottom: var(--space-2);
     font-family: var(--font-ui);
   }
 
   .dialog-body.primary {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .dialog-actions {
@@ -110,11 +110,11 @@
   .text-caption {
     font-size: var(--font-size-xs);
     font-family: var(--font-ui);
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .text-caption.error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .mt-2 {
@@ -122,8 +122,8 @@
   }
 
   :global(.btn-danger) {
-    background: var(--accent-danger-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-danger-solid) !important;
+    color: var(--color-on-solid) !important;
     border-color: transparent !important;
   }
 

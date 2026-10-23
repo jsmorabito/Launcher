@@ -50,7 +50,7 @@
   }
 
   .ranked-row:hover {
-    background-color: var(--bg-hover);
+    background-color: var(--color-hover);
   }
 
   .rank {
@@ -60,7 +60,7 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     font-size: var(--font-size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .lead {
@@ -88,7 +88,7 @@
     min-width: 0;
     font-size: var(--font-size-base);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .value {
@@ -97,13 +97,13 @@
     font-variant-numeric: tabular-nums;
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .subtitle {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .truncate {

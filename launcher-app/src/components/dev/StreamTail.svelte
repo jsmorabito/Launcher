@@ -38,6 +38,6 @@
     font-size: var(--font-size-xs);
     line-height: 1.5;
     padding: var(--space-0-5) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 </style>

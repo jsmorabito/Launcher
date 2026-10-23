@@ -10,8 +10,8 @@
 
 <style>
   .settings-card {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     overflow: hidden;
   }

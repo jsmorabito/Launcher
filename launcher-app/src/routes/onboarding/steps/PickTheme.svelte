@@ -312,16 +312,16 @@
   .grid__item {
     display: flex;
     padding: 0;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border: 1px solid transparent;
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
   }
   .grid__item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .grid__item--active {
-    border-color: var(--launcher-brand);
+    border-color: var(--color-accent);
   }
   .grid__tile {
     display: flex;
@@ -357,19 +357,19 @@
   }
   .grid__hint {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .grid__status {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     flex-shrink: 0;
     white-space: nowrap;
   }
   .grid__status--applied {
-    color: var(--launcher-brand);
+    color: var(--color-accent);
     font-weight: 600;
   }
   .grid__tile :global(.btn) {
@@ -383,11 +383,11 @@
     gap: var(--space-3);
     padding: var(--space-3);
     margin-top: var(--space-3);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
   }
   .theme-empty__hint {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

@@ -29,23 +29,23 @@
   {#snippet children()}
     <h2
       id="ext-builder-runtime-consent-title"
-      class="text-xl font-semibold mb-4 text-[var(--text-primary)]"
+      class="text-xl font-semibold mb-4 text-[var(--color-text)]"
     >
       {t('features.create_extension.ui.runtimes_title')}
     </h2>
-    <p class="text-[var(--text-secondary)] mb-3">
+    <p class="text-[var(--color-text-muted)] mb-3">
       {t(
         runtimes.length > 1
           ? 'features.create_extension.ui.runtimes_desc_other'
           : 'features.create_extension.ui.runtimes_desc_one',
       )}
     </p>
-    <ul class="mb-3 list-disc pl-5 text-[var(--text-secondary)]">
+    <ul class="mb-3 list-disc pl-5 text-[var(--color-text-muted)]">
       {#each runtimes as runtime (runtime.name)}
         <li><strong>{runtime.name}</strong> ({formatBytes(runtime.sizeBytes)})</li>
       {/each}
     </ul>
-    <p class="text-[var(--text-secondary)] mb-3">
+    <p class="text-[var(--color-text-muted)] mb-3">
       {t('features.create_extension.ui.runtimes_total')} <strong>{formatBytes(totalBytes)}</strong>
     </p>
   {/snippet}
@@ -59,8 +59,8 @@
 
 <style>
   :global(.btn-confirm-primary) {
-    background: var(--accent-primary-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-accent-solid) !important;
+    color: var(--color-on-solid) !important;
     border: none !important;
   }
 

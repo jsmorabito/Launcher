@@ -94,9 +94,9 @@
   .permissions-table th {
     text-align: left;
     padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
   }
 
@@ -111,6 +111,6 @@
   }
 
   .cell-secondary {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

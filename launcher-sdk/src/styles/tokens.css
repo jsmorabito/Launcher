@@ -12,47 +12,46 @@
  */
 
 :root {
-  /* Backgrounds. Deep navy rather than neutral grey, and translucent — an
-     Launcher surface lets the desktop read through it. */
-  --bg-primary: rgba(14, 16, 28, 0.72);
-  --bg-secondary: rgba(24, 27, 42, 0.7);
-  --bg-tertiary: rgba(32, 36, 54, 0.7);
-  --bg-hover: rgba(56, 63, 92, 0.5);
+  /* Backgrounds. Shared design-token values (light default, dark below). */
+  --color-bg: rgb(247, 247, 248);
+  --color-bg-subtle: rgb(239, 239, 242);
+  --color-surface: rgb(255, 255, 255);
+  --color-hover: rgba(15, 15, 25, 0.05);
   /* Selection carries chroma; hover does not. That difference is what keeps
      the two apart at a glance. */
-  --bg-selected: rgba(61, 107, 245, 0.18);
-  --bg-popup: rgb(16, 18, 31);
-  --bg-secondary-full-opacity: rgb(24, 27, 42);
+  --color-accent-subtle: #e9e8fd;
+  --color-surface-raised: rgb(255, 255, 255);
+  --color-bg-subtle-opaque: rgb(239, 239, 242);
 
   /* Text */
-  --text-primary: rgba(237, 240, 252, 0.96);
-  --text-secondary: rgba(196, 203, 227, 0.68);
-  --text-tertiary: rgba(170, 179, 209, 0.58);
+  --color-text: #1b1b22;
+  --color-text-muted: #5b5b6b;
+  --color-text-faint: #8a8a99;
   /* Text/icons on any filled saturated surface. Constant across themes, and
      guaranteed to reach 4.5:1 on every --accent-*-fill below. */
-  --text-on-accent: #ffffff;
+  --color-on-solid: #ffffff;
 
   /* Borders */
-  --border-color: rgba(140, 152, 200, 0.18);
+  --color-border: #dcdce2;
   --separator: rgba(140, 152, 200, 0.13);
   --divider-soft: rgba(160, 172, 220, 0.06);
 
   /* Accent — THE VOICE. Use for text, icons, strokes, and as the source for
      a tinted background via color-mix. Reaches 4.5:1 on Launcher surfaces. */
-  --accent-primary: #7b9cff;
-  --accent-primary-rgb: 123, 156, 255;
-  --accent-success: #3ed18f;
-  --accent-warning: #e9a83f;
-  --accent-danger: #ff6b77;
+  --color-accent: #4f46e5;
+  --color-accent-rgb: 79, 70, 229;
+  --color-success: #2e7d32;
+  --color-warning: #a15c00;
+  --color-danger: #c62828;
 
   /* Accent — THE GROUND. Use ONLY as the background of a filled surface that
-     carries --text-on-accent. A colour bright enough to read as text on a
+     carries --color-on-solid. A colour bright enough to read as text on a
      dark surface is too bright to carry white text on top of it, so these are
      deliberately deeper than the voice values above. */
-  --accent-primary-fill: #3d6bf5;
-  --accent-success-fill: #0f7f58;
-  --accent-warning-fill: #8f5d0a;
-  --accent-danger-fill: #c0303e;
+  --color-accent-solid: #4f46e5;
+  --color-success-solid: #2e7d32;
+  --color-warning-solid: #a15c00;
+  --color-danger-solid: #c62828;
 
   /* Edge highlight and edge shade, used inside the launcher's popup shadow
      and its filled-button gradients so a surface does not read as a flat
@@ -61,17 +60,17 @@
   --rim-shade: rgba(0, 0, 0, 0.4);
 
   /* Code colour — use these for anything syntax-highlighted. */
-  --syntax-comment: #637777;
-  --syntax-keyword: #c792ea;
-  --syntax-string: #c3e88d;
-  --syntax-number: #f07178;
-  --syntax-function: #82aaff;
+  --color-syntax-comment: #6b7280;
+  --color-syntax-keyword: #7c3aed;
+  --color-syntax-string: #0f7b3f;
+  --color-syntax-number: #b45309;
+  --color-syntax-title: #1d4ed8;
 
   /* Brand === accent. One identity colour, not two. */
-  --launcher-brand: #7b9cff;
-  --launcher-brand-hover: #9db4ff;
-  --launcher-brand-muted: rgba(123, 156, 255, 0.18);
-  --launcher-brand-subtle: rgba(123, 156, 255, 0.09);
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+  --color-accent-subtle: #e9e8fd;
+  --color-accent-faint: rgba(79, 70, 229, 0.08);
 
   /* Shadows. Every drop shadow casts straight down — `0 Ypx`, no horizontal
      component — and height is carried by blur and negative spread rather
@@ -84,7 +83,7 @@
   --shadow-lg: 0 12px 28px -6px var(--shadow-color);
   --shadow-xl: 0 24px 56px -12px var(--shadow-color);
   --shadow-popup: 0 12px 40px -8px var(--shadow-color), 0 3px 10px -3px var(--shadow-color);
-  --shadow-focus: 0 0 0 2px var(--launcher-brand-muted);
+  --shadow-focus: 0 0 0 2px var(--color-accent-subtle);
 
   /* Scrollbar */
   --scrollbar-thumb: rgba(150, 162, 205, 0.4);
@@ -172,4 +171,38 @@
   --transition-normal: var(--dur-quick) var(--ease-travel);
   --transition-smooth: var(--dur-travel) var(--ease-travel);
   --transition-slow: var(--dur-emerge) var(--ease-emerge);
+}
+
+/* Dark: follows the system, like the shared tokens. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-bg: rgb(21, 21, 27);
+    --color-bg-subtle: rgb(28, 28, 36);
+    --color-bg-subtle-opaque: rgb(28, 28, 36);
+    --color-surface: rgb(31, 31, 40);
+    --color-surface-raised: rgb(39, 39, 50);
+    --color-hover: rgba(255, 255, 255, 0.07);
+    --color-accent-subtle: #2a2a4a;
+    --color-accent-faint: rgba(129, 140, 248, 0.1);
+    --color-accent-rgb: 129, 140, 248;
+    --color-text: #ececf1;
+    --color-text-muted: #a9a9b8;
+    --color-text-faint: #7a7a8a;
+    --color-border: #33333f;
+    --color-accent: #818cf8;
+    --color-accent-hover: #a5b4fc;
+    --color-success: #6cc070;
+    --color-warning: #f0a54a;
+    --color-danger: #ef6b6b;
+    --color-accent-solid: #5b54e8;
+    --color-success-solid: #0f7f58;
+    --color-warning-solid: #8f5d0a;
+    --color-danger-solid: #c0303e;
+    --color-syntax-comment: #8b8b9c;
+    --color-syntax-keyword: #c4a5ff;
+    --color-syntax-string: #7ed69a;
+    --color-syntax-number: #f4b56a;
+    --color-syntax-title: #8ab4ff;
+  }
 }

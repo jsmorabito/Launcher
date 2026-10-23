@@ -211,53 +211,53 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   .browser-label {
     flex: 1;
     min-width: 0;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-md);
   }
 
   .pending-tag {
     font-size: var(--font-size-2xs);
     font-weight: 700;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
 
   .status {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
   }
 
   .status.connected {
-    color: var(--accent-success);
+    color: var(--color-success);
   }
 
-  /* Uses --bg-secondary, not --bg-tertiary — this button sits inside a
-     SettingsCard, which is itself --bg-tertiary; matching that token here
+  /* Uses --color-bg-subtle, not --color-surface — this button sits inside a
+     SettingsCard, which is itself --color-surface; matching that token here
      would make the button invisible (see Global Constraints). */
   .action-btn {
     padding: var(--space-1) var(--space-3);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     cursor: pointer;
     transition: background-color var(--transition-fast);
   }
 
   .action-btn:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .action-btn-danger {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .install-links {
@@ -269,7 +269,7 @@
 
   .companion-intro {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     line-height: 1.5;
   }
@@ -281,7 +281,7 @@
 
   .companion-note {
     margin: 0;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
   }
 </style>

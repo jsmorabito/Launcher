@@ -447,7 +447,7 @@
     width: 12px;
     height: 12px;
     flex-shrink: 0;
-    color: var(--accent-primary);
+    color: var(--color-accent);
     opacity: 0.7;
   }
 
@@ -458,7 +458,7 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     opacity: 0.4;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .preview-pane {
@@ -482,7 +482,7 @@
     max-height: 100%;
     object-fit: contain;
     border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 
   .text-pane {
@@ -491,7 +491,7 @@
 
   .text-preview {
     font-family: var(--font-mono);
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: pre-wrap;
     word-break: break-word;
     font-size: var(--font-size-sm);

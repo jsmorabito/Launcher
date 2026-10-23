@@ -1186,8 +1186,8 @@ mod tests {
     fn test_theme_definition_deserializes_from_json() {
         let json = r#"{
             "variables": {
-                "--bg-primary": "rgba(25, 25, 35, 0.85)",
-                "--accent-primary": "rgb(138, 43, 226)"
+                "--color-bg": "rgba(25, 25, 35, 0.85)",
+                "--color-accent": "rgb(138, 43, 226)"
             },
             "fonts": [
                 {
@@ -1201,7 +1201,7 @@ mod tests {
         let def: ThemeDefinition = serde_json::from_str(json).unwrap();
         assert_eq!(def.variables.len(), 2);
         assert_eq!(
-            def.variables.get("--bg-primary").unwrap(),
+            def.variables.get("--color-bg").unwrap(),
             "rgba(25, 25, 35, 0.85)"
         );
         assert_eq!(def.fonts.len(), 1);
@@ -1211,7 +1211,7 @@ mod tests {
 
     #[test]
     fn test_theme_definition_empty_fonts_optional() {
-        let json = r#"{"variables": {"--bg-primary": "red"}}"#;
+        let json = r#"{"variables": {"--color-bg": "red"}}"#;
         let def: ThemeDefinition = serde_json::from_str(json).unwrap();
         assert!(def.fonts.is_empty());
     }
@@ -1220,12 +1220,12 @@ mod tests {
     fn test_read_theme_definition_from_dir() {
         let tmp = TempDir::new().unwrap();
         let theme_json = r#"{
-            "variables": {"--bg-primary": "blue"},
+            "variables": {"--color-bg": "blue"},
             "fonts": []
         }"#;
         fs::write(tmp.path().join("theme.json"), theme_json).unwrap();
         let def = read_theme_definition(tmp.path()).unwrap();
-        assert_eq!(def.variables.get("--bg-primary").unwrap(), "blue");
+        assert_eq!(def.variables.get("--color-bg").unwrap(), "blue");
     }
 
     #[test]

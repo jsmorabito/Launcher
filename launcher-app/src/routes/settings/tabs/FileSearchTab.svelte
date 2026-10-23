@@ -256,12 +256,12 @@
   .section-description {
     margin: 0 0 var(--space-3) 0;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
   /* Deliberately NOT a SettingsCard: it holds a Badge (variant="default")
-     and a Button, both of which default to var(--bg-tertiary) — the same
+     and a Button, both of which default to var(--color-surface) — the same
      token SettingsCard uses. Nesting either inside a SettingsCard here would
      make it blend invisibly into the card (see Global Constraints). */
   .index-status {
@@ -270,19 +270,19 @@
     gap: var(--space-3);
     margin-top: var(--space-3);
     padding: var(--space-4) var(--space-6);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    background: var(--bg-secondary-full-opacity);
+    background: var(--color-bg-subtle-opaque);
     flex-wrap: wrap;
   }
 
   .warning {
     margin-top: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    background: color-mix(in srgb, var(--accent-warning) 10%, transparent);
+    background: color-mix(in srgb, var(--color-warning) 10%, transparent);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .add-row {
@@ -302,8 +302,8 @@
     padding: var(--space-2) var(--space-3);
     border: 1px solid var(--separator);
     border-radius: var(--radius-sm);
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: var(--color-bg-subtle);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
   }
 
@@ -316,10 +316,10 @@
   .error {
     margin-bottom: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .path-list {
@@ -345,11 +345,11 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   :global(.path-icon) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -357,7 +357,7 @@
     flex: 1;
     min-width: 0;
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -56,21 +56,21 @@
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
   }
   .axgate__text {
     margin: 0;
     font-size: var(--font-size-md);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .axgate__hint {
     margin: 0;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .axgate__ok {
     font-size: var(--font-size-md);
-    color: var(--launcher-brand);
+    color: var(--color-accent);
     margin: 0;
   }
 </style>

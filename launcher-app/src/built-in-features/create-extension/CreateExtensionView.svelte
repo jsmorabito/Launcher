@@ -307,7 +307,7 @@
     gap: var(--space-4);
     padding: var(--space-5);
     border-radius: var(--radius-md);
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--color-border);
     cursor: pointer;
     transition:
       border-color var(--transition-fast),
@@ -315,13 +315,13 @@
   }
 
   .type-card:hover {
-    border-color: var(--accent-primary);
-    background: var(--bg-hover);
+    border-color: var(--color-accent);
+    background: var(--color-hover);
   }
 
   .type-card.selected {
-    border-color: var(--accent-primary);
-    background: var(--bg-selected);
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
   }
 
   .type-info {
@@ -333,18 +333,18 @@
   .type-label {
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.2;
   }
 
   .type-desc {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     line-height: 1.4;
   }
 
   :global(.field-input.error) {
-    border-color: var(--accent-danger);
+    border-color: var(--color-danger);
   }
 
   .location-row {
@@ -366,11 +366,11 @@
     height: 52px;
     flex-shrink: 0;
     border-top: 1px solid var(--separator);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
 
   .status-text {
     font-size: var(--font-size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

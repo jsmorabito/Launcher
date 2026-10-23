@@ -399,17 +399,17 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-5) var(--space-6);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
   .chat-header h2 {
     margin: 0;
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .streaming-tag {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-style: italic;
   }
   .messages-container {
@@ -448,18 +448,18 @@
     margin-top: var(--space-0-5);
   }
   .assistant-avatar {
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
   }
   .user-avatar {
-    background: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background: var(--color-accent-solid);
+    color: var(--color-on-solid);
   }
   .tool-avatar {
-    background: var(--bg-tertiary);
-    color: var(--text-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    color: var(--color-text-faint);
+    border: 1px solid var(--color-border);
   }
 
   .message-bubble {
@@ -473,18 +473,18 @@
     word-break: break-word;
   }
   .message-bubble.assistant {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: var(--color-bg-subtle);
+    color: var(--color-text);
     border-top-left-radius: var(--radius-xs);
   }
   .message-bubble.user {
-    background: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background: var(--color-accent-solid);
+    color: var(--color-on-solid);
     border-top-right-radius: var(--radius-xs);
   }
   .message-bubble.tool {
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     font-family: var(--font-mono);
     font-size: var(--font-size-sm);
     border-top-left-radius: var(--radius-xs);
@@ -525,19 +525,19 @@
     font-size: var(--font-size-sm);
   }
   .grounding-sources a {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .tool-use-chip {
     margin-top: var(--space-3);
     padding: var(--space-2) var(--space-3);
-    background: var(--bg-hover);
+    background: var(--color-hover);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
   }
   .chip-name {
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .chip-input,
   .tool-result {
@@ -548,12 +548,12 @@
 
   .streaming-cursor {
     display: inline-block;
-    color: var(--accent-primary);
+    color: var(--color-accent);
     font-weight: bold;
     animation: blink 0.8s step-end infinite;
   }
   .activity-status {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   .activity-label {
     font-style: italic;
@@ -569,7 +569,7 @@
   }
 
   .error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     padding: var(--space-6);
     margin: 0;
   }

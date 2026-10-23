@@ -109,10 +109,10 @@
     gap: var(--space-6);
   }
   .role-block {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--space-4) var(--space-5);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
   .role-block header {
     display: flex;
@@ -126,7 +126,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   dl {
     margin: 0;
@@ -140,26 +140,26 @@
     font-size: var(--font-size-xs);
   }
   dt {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   dd {
     margin: 0;
     font-family: var(--font-mono);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .actions {
     margin-top: var(--space-4);
   }
   .remount-btn {
     padding: var(--space-1) var(--space-4);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+    background: var(--color-surface);
+    color: var(--color-text);
     font-size: var(--font-size-xs);
     cursor: pointer;
   }
   .remount-btn:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 </style>

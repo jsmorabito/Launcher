@@ -357,7 +357,7 @@
     border: none;
     border-radius: inherit;
     /* Greyed until the user weighs in: what shows is a value chosen for them. */
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
     font-weight: 500;
@@ -371,7 +371,7 @@
     box-shadow: none;
   }
   .arg-trigger--touched {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .arg-trigger-label {
     overflow: hidden;
@@ -419,7 +419,7 @@
   .arg-popover :global(.empty-state-message) {
     font-size: var(--font-size-md);
     font-weight: 400;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .arg-popover-list {
     /* ~4 rows before it scrolls, matching the action popup's row height. */

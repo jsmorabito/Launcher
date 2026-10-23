@@ -91,7 +91,7 @@
 <style>
   .remove-btn {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     background: none;
     border: none;
     cursor: pointer;

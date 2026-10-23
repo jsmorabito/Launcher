@@ -19,7 +19,7 @@
   .meter-track {
     width: 100%;
     height: var(--space-1);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border-radius: var(--radius-full);
     overflow: hidden;
   }
@@ -31,10 +31,10 @@
   }
 
   .meter-fill.brand {
-    background: var(--accent-primary);
+    background: var(--color-accent);
   }
 
   .meter-fill.neutral {
-    background: var(--text-tertiary);
+    background: var(--color-text-faint);
   }
 </style>

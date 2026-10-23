@@ -485,11 +485,11 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   :global(.path-icon) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -497,7 +497,7 @@
     flex: 1;
     min-width: 0;
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-mono);
     white-space: nowrap;
     overflow: hidden;
@@ -507,7 +507,7 @@
   .default-tag {
     font-size: var(--font-size-2xs);
     font-weight: 700;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
@@ -543,11 +543,11 @@
 
   :global(.add-directory-btn) {
     background: transparent;
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   :global(.add-directory-btn:hover) {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   :global(.add-directory-btn:disabled) {
@@ -576,12 +576,12 @@
     margin-left: auto;
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-md);
-    background: var(--bg-secondary-full-opacity);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle-opaque);
+    border: 1px solid var(--color-border);
   }
 
   :global(.filter-icon) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -592,12 +592,12 @@
     border: none;
     outline: none;
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
   }
 
   .filter-input::placeholder {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .app-table {
@@ -615,15 +615,15 @@
   }
 
   .app-table-head {
-    /* One step darker than --bg-tertiary so the header row stays visible
-       against its parent SettingsCard (also --bg-tertiary). */
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-color);
+    /* One step darker than --color-surface so the header row stays visible
+       against its parent SettingsCard (also --color-surface). */
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-2xs);
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .app-row {
@@ -632,7 +632,7 @@
   }
 
   .app-row:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .app-row:not(:last-child)::after {
@@ -642,7 +642,7 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   .col-name {
@@ -670,7 +670,7 @@
 
   .app-name {
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -688,12 +688,12 @@
     padding: 0;
     font-size: var(--font-size-sm);
     font-family: var(--font-mono);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     cursor: pointer;
   }
 
   .row-action:hover {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .alias-pill {
@@ -704,8 +704,8 @@
     min-width: 18px;
     padding: 0 var(--space-2);
     border-radius: var(--radius-xs);
-    background-color: color-mix(in srgb, var(--text-primary) 8%, transparent);
-    color: var(--text-primary);
+    background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
+    color: var(--color-text);
     font-size: var(--font-size-2xs);
     font-weight: 500;
     line-height: 1;
@@ -725,13 +725,13 @@
     border: none;
     padding: var(--space-0-5) var(--space-2);
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     cursor: pointer;
     border-radius: var(--radius-xs);
   }
   .clear-btn:hover {
-    color: var(--accent-danger);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    color: var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
   }
 
   .col-enabled {
@@ -742,7 +742,7 @@
   .empty {
     padding: var(--space-4);
     text-align: center;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
   }
 </style>

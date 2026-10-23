@@ -31,8 +31,8 @@
     left: var(--space-5);
     right: var(--space-5);
     z-index: var(--z-overlay);
-    background: color-mix(in srgb, var(--bg-popup) 97%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent-warning) 60%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 97%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 60%, transparent);
     border-radius: var(--radius-md);
     padding: var(--space-5);
     display: flex;
@@ -50,14 +50,14 @@
   .usage-share-prompt-title {
     font-size: var(--font-size-md);
     font-family: var(--font-ui);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-weight: 600;
   }
 
   .usage-share-prompt-subtitle {
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .usage-share-prompt-actions {

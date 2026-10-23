@@ -50,18 +50,18 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .done__title {
     margin: 0;
     font-size: var(--font-size-display);
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .done__lede {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xl);
     line-height: 1.6;
   }
@@ -81,15 +81,15 @@
   .done__sheet kbd {
     min-width: 84px;
     text-align: center;
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-0-5) var(--space-3);
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .done__sheet span {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
   }
 </style>

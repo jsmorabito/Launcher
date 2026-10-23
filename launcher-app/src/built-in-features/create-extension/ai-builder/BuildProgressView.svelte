@@ -454,7 +454,7 @@
   /* ── confirm question prompt ───────────────────────────────────────────── */
   .confirm-prompt {
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.5;
     margin: 0;
   }
@@ -468,8 +468,8 @@
   /* ── inline error (idle state) ─────────────────────────────────────────── */
   .inline-error {
     font-size: var(--font-size-sm);
-    color: var(--accent-danger);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    color: var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
     border-radius: var(--radius-sm);
     padding: var(--space-3) var(--space-4);
   }
@@ -490,7 +490,7 @@
     gap: var(--space-1);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-left: 2px solid var(--separator);
     opacity: 0.7;
     transition: opacity var(--transition-fast);
@@ -498,19 +498,19 @@
 
   .step-item.step-latest {
     opacity: 1;
-    border-left-color: var(--accent-primary);
-    background: var(--bg-selected);
+    border-left-color: var(--color-accent);
+    background: var(--color-accent-subtle);
   }
 
   .step-label {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .step-detail {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   /* ── done state: result card ───────────────────────────────────────────── */
@@ -518,7 +518,7 @@
     display: flex;
     flex-direction: column;
     border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     overflow: hidden;
   }
 
@@ -532,14 +532,14 @@
 
   .result-label {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-weight: 500;
     flex-shrink: 0;
   }
 
   .result-value {
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     text-align: right;
     overflow-wrap: anywhere;
   }
@@ -560,8 +560,8 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     line-height: 1.6;
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
+    color: var(--color-text-muted);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-sm);
     padding: var(--space-4) var(--space-5);
     margin: 0;

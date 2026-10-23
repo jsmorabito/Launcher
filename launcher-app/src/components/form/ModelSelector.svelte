@@ -362,10 +362,10 @@
     justify-content: space-between;
     width: 100%;
     padding: var(--space-2) var(--space-3);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
     line-height: 1.4;
@@ -378,7 +378,7 @@
   }
 
   .ms-trigger:focus-visible {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
     box-shadow: var(--shadow-focus);
     outline: none;
   }
@@ -389,7 +389,7 @@
   }
 
   .ms-trigger.is-empty .ms-trigger-label {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .ms-trigger-label {
@@ -411,7 +411,7 @@
   .ms-caret-icon {
     width: 10px;
     height: 6px;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .ms-popover {
@@ -420,8 +420,8 @@
     left: 0;
     right: 0;
     z-index: var(--z-dropdown);
-    background: var(--bg-popup);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-popup);
     overflow: hidden;
@@ -442,7 +442,7 @@
   .ms-search-icon {
     width: var(--size-sm);
     height: var(--size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -452,7 +452,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
     padding: var(--space-1) 0;
@@ -461,13 +461,13 @@
   }
 
   .ms-search-input::placeholder {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .ms-clear-btn {
     background: none;
     border: none;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-md);
     line-height: 1;
     cursor: pointer;
@@ -480,7 +480,7 @@
   }
 
   .ms-clear-btn:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .ms-options-list {
@@ -498,17 +498,17 @@
     padding: var(--space-2) var(--space-3);
     cursor: pointer;
     gap: var(--space-2);
-    color: var(--text-primary);
+    color: var(--color-text);
     transition: background var(--dur-instant) var(--ease-travel);
   }
 
   .ms-option-item:hover,
   .ms-option-item.highlighted {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .ms-option-item.selected {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
 
   .ms-option-details {
@@ -522,7 +522,7 @@
   .ms-option-label {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -531,7 +531,7 @@
   .ms-option-id {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -540,29 +540,29 @@
   .ms-check-icon {
     width: var(--size-sm);
     height: var(--size-sm);
-    color: var(--accent-primary);
+    color: var(--color-accent);
     flex-shrink: 0;
   }
 
   .ms-custom-action {
-    background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
   }
 
   .ms-custom-action:hover,
   .ms-custom-action.highlighted {
-    background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
   }
 
   .ms-custom-prompt {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .ms-custom-badge {
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-tertiary);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    color: var(--color-text-faint);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--space-0-5) var(--space-1);
     line-height: 1;
@@ -572,7 +572,7 @@
   .ms-empty-message {
     padding: var(--space-4) var(--space-3);
     text-align: center;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-xs);
   }
 </style>

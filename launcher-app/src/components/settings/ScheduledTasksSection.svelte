@@ -76,13 +76,13 @@
   }
 
   .badge-active {
-    background: color-mix(in srgb, var(--accent-success) 12%, transparent);
-    color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 12%, transparent);
+    color: var(--color-success);
   }
 
   .badge-paused {
-    background: color-mix(in srgb, var(--text-tertiary) 12%, transparent);
-    color: var(--text-tertiary);
+    background: color-mix(in srgb, var(--color-text-faint) 12%, transparent);
+    color: var(--color-text-faint);
   }
 
   .badge-dot {

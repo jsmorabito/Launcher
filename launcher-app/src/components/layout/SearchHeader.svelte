@@ -238,7 +238,7 @@
   }
 
   let hintLabel = $derived(contextHint?.type === 'ai' ? 'Ask AI' : 'Tab');
-  let chipColor = $derived(activeContext?.color ?? 'var(--accent-primary)');
+  let chipColor = $derived(activeContext?.color ?? 'var(--color-accent)');
   let aiHintMuted = $derived(contextHint?.type === 'ai' && !looksLikeAIIntent(value));
   let isScopedCommandSearch = $derived(value.startsWith('@'));
 
@@ -489,15 +489,15 @@
     border: none;
     outline: none;
     background: transparent;
-    color: var(--text-primary);
-    caret-color: var(--accent-primary) !important;
+    color: var(--color-text);
+    caret-color: var(--color-accent) !important;
     font-size: var(--font-size-2xl);
     font-weight: 500;
     letter-spacing: var(--tracking-tight);
     padding: 0;
   }
   :global(.search-input-clean::placeholder) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-weight: 500;
     letter-spacing: var(--tracking-tight);
   }
@@ -517,8 +517,8 @@
       color var(--transition-normal);
   }
   .back-button-new:hover :global(kbd) {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
   /* Mirrors .search-input-clean typography so offsetWidth matches the
      rendered query the chips trail. These four declarations must stay in
@@ -569,7 +569,7 @@
     align-items: center;
     gap: var(--space-3);
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     white-space: nowrap;
     flex-shrink: 0;
     user-select: none;
@@ -583,7 +583,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   .hint-icon {
     font-size: var(--font-size-md);
@@ -607,7 +607,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     border-radius: var(--radius-md);
     padding: var(--space-1) var(--space-1) var(--space-1) var(--space-3);
     font-size: var(--font-size-sm);
@@ -629,7 +629,7 @@
   .chip-dismiss {
     background: none;
     border: none;
-    color: color-mix(in srgb, var(--text-on-accent) 75%, transparent);
+    color: color-mix(in srgb, var(--color-on-solid) 75%, transparent);
     cursor: pointer;
     padding: 0 var(--space-1);
     font-size: var(--font-size-lg);
@@ -640,8 +640,8 @@
     margin-left: var(--space-0-5);
   }
   .chip-dismiss:hover {
-    color: var(--text-on-accent);
-    background: color-mix(in srgb, var(--text-on-accent) 15%, transparent);
+    color: var(--color-on-solid);
+    background: color-mix(in srgb, var(--color-on-solid) 15%, transparent);
   }
   /* The context query is the command line wearing a chip — same type, so
      entering a context does not resize the text the user is looking at. */
@@ -650,8 +650,8 @@
     border: none;
     outline: none;
     background: transparent;
-    color: var(--text-primary);
-    caret-color: var(--accent-primary) !important;
+    color: var(--color-text);
+    caret-color: var(--color-accent) !important;
     font-size: var(--font-size-2xl);
     font-weight: 500;
     letter-spacing: var(--tracking-tight);
@@ -659,6 +659,6 @@
     min-width: 0;
   }
   :global(.context-query-input::placeholder) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

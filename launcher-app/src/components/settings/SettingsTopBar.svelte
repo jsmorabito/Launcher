@@ -44,7 +44,7 @@
     position: relative;
     padding: var(--space-4) var(--space-6);
     border-bottom: 1px solid var(--separator);
-    background: var(--bg-primary);
+    background: var(--color-bg);
   }
 
   .settings-tabs {
@@ -72,15 +72,15 @@
     background: transparent;
     transition: background-color var(--transition-normal);
     border-radius: var(--radius-md);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .tab-item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .tab-item.active {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .icon-container {
@@ -95,7 +95,7 @@
   }
 
   .tab-item.active .icon-container {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
 
   .label {

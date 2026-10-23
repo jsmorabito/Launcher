@@ -54,7 +54,7 @@ Launcher's is executable:
 | Mechanism                | Enforces                                                                                                                                                                                   |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `pnpm check:design`      | Tokens only — no hardcoded colours, raw pixels, bare z-indexes, Tailwind palette classes, voice tokens used as fills, spacing tokens used as dimensions, or new uses of a deprecated token |
-| `themePalettes.test.ts`  | The two copies of each palette agree; every accent fill carries `--text-on-accent` at ≥ 4.5:1                                                                                              |
+| `themePalettes.test.ts`  | The two copies of each palette agree; every accent fill carries `--color-on-solid` at ≥ 4.5:1                                                                                              |
 | `themeVariables.test.ts` | Spacing, size, type, tracking and easing stay design-system-owned and cannot be overridden by a theme                                                                                      |
 
 ```bash

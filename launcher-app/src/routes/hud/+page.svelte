@@ -114,7 +114,7 @@
     - One large soft drop shadow lifts it off the desktop.
 
     design-ok-file: standalone Tauri webview with no theme injection, so
-    anything depending on `--bg-popup`, `--text-primary`, etc. would render as
+    anything depending on `--color-surface-raised`, `--color-text`, etc. would render as
     the unstyled fallback. Every literal below is deliberate; this is the one
     file in the app exempt from the design-token rules.
   */

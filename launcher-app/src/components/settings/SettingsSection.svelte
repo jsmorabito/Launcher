@@ -28,7 +28,7 @@
   .settings-section {
     border: 1px solid var(--separator);
     border-radius: var(--radius-lg);
-    background-color: var(--bg-secondary);
+    background-color: var(--color-bg-subtle);
     box-shadow: var(--shadow-xs);
     overflow: hidden;
   }
@@ -41,13 +41,13 @@
   .settings-section-title {
     font-size: var(--font-size-base);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
 
   .settings-section-description {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin: var(--space-2) 0 0;
   }
 

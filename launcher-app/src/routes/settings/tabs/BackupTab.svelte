@@ -268,11 +268,11 @@
   .status-text {
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--accent-success);
+    color: var(--color-success);
   }
 
   .status-text.error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .import-password-row {
@@ -295,7 +295,7 @@
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-3) 0;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .import-preview-copy {
@@ -306,38 +306,38 @@
   .import-preview-title {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .import-preview-meta {
     margin-top: var(--space-0-5);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .conflict-text {
-    color: var(--accent-warning);
+    color: var(--color-warning);
   }
 
   .strategy-select {
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-subtle);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
     cursor: pointer;
   }
 
   .strategy-select:disabled {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     cursor: not-allowed;
   }
 
   .modal-error {
     margin: var(--space-3) 0 0;
     font-size: var(--font-size-sm);
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

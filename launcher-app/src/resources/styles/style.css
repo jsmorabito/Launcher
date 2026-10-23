@@ -54,7 +54,7 @@
           one. Borders, fills, shadows and animations all start at zero and
           have to be argued in.
      III. ONE CANDIDATE. At any instant exactly one element is the thing
-          Enter will act on. --bg-selected is the only surface token
+          Enter will act on. --color-accent-subtle is the only surface token
           carrying chroma, and that is this principle as a value.
      IV.  EVERY AFFORDANCE NAMES ITS KEY. The key chip is the most repeated
           element in the product because of it.
@@ -132,12 +132,10 @@
   --transition-smooth: var(--dur-travel) var(--ease-travel);
 
   /* ── Brand ─────────────────────────────────────────────────────────────
-     Brand and accent are one colour. They were not: --launcher-brand was a teal
-     that appeared almost nowhere while --accent-primary was Apple's system
-     blue, so the app's most-used colour belonged to Apple and the brand
-     token was decorative. Two identity colours is one more than the product
-     can spend (Principle III). --launcher-brand and its three variants now
-     resolve per theme alongside the accent ramp below.
+     Brand and accent are one colour. They used to be two (a teal brand token
+     that appeared almost nowhere, and Apple's system blue as the accent);
+     both are now the shared indigo, --color-accent, with its variants
+     (--color-accent-hover, -subtle, -faint) resolved per theme below.
 
      Canvas surface for external content (URL previews, embedded HTML) that
      assumes a white page. Constant across themes — it is someone else's
@@ -150,11 +148,11 @@
      colour at 4.5:1 or better, in both themes. That guarantee is the entire
      reason the -fill ramp is separate from the voice ramp.
      Never hardcode #fff or `white` for this. */
-  --text-on-accent: #ffffff;
+  --color-on-solid: #ffffff;
 
   /* The moving part of a switch — the Toggle knob. White in both themes, the
      way a native platform switch is, so it reads against both the off-state
-     track (--bg-hover) and the on-state track (--accent-primary). */
+     track (--color-hover) and the on-state track (--color-accent). */
   --control-knob: #ffffff;
 
   /* Modal / overlay scrim. Constant across themes — a dimming layer is dark
@@ -271,7 +269,7 @@
     0 12px 28px -10px rgba(10, 14, 32, 0.18), 0 3px 8px -4px rgba(10, 14, 32, 0.1);
   /* The focus ring is the accent at full strength — focus is the one lit
      thing whenever the keyboard is driving. */
-  --shadow-focus: 0 0 0 2px var(--launcher-brand-muted);
+  --shadow-focus: 0 0 0 2px var(--color-accent-subtle);
 
   /* Corner and hairline of those surfaces. The radius matches the launcher
      shell above, so a popup reads as the same material. */
@@ -305,29 +303,29 @@
    below swap in the dark set following the same not([data-theme]) /
    [data-theme='dark'] pattern the surface tokens use. */
 :root {
-  --syntax-comment: #90a4ae;
-  --syntax-keyword: #7c4dff;
-  --syntax-string: #558b2f;
-  --syntax-number: #e53935;
-  --syntax-function: #6182b8;
+  --color-syntax-comment: #8b8b9c;
+  --color-syntax-keyword: #c4a5ff;
+  --color-syntax-string: #7ed69a;
+  --color-syntax-number: #f4b56a;
+  --color-syntax-title: #8ab4ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --syntax-comment: #637777;
-    --syntax-keyword: #c792ea;
-    --syntax-string: #c3e88d;
-    --syntax-number: #f07178;
-    --syntax-function: #82aaff;
+    --color-syntax-comment: #8b8b9c;
+    --color-syntax-keyword: #c4a5ff;
+    --color-syntax-string: #7ed69a;
+    --color-syntax-number: #f4b56a;
+    --color-syntax-title: #8ab4ff;
   }
 }
 
 :root[data-theme='dark'] {
-  --syntax-comment: #637777;
-  --syntax-keyword: #c792ea;
-  --syntax-string: #c3e88d;
-  --syntax-number: #f07178;
-  --syntax-function: #82aaff;
+  --color-syntax-comment: #8b8b9c;
+  --color-syntax-keyword: #c4a5ff;
+  --color-syntax-string: #7ed69a;
+  --color-syntax-number: #f4b56a;
+  --color-syntax-title: #8ab4ff;
 }
 
 /* Satoshi renders on every platform, macOS included — there is deliberately
@@ -349,7 +347,7 @@
    Derived from the text colour rather than the system accent, so the
    highlight stays neutral and inverts with the theme on its own. */
 ::selection {
-  background: color-mix(in srgb, var(--text-primary) 22%, transparent);
+  background: color-mix(in srgb, var(--color-text) 22%, transparent);
   color: inherit;
 }
 
@@ -422,7 +420,7 @@ html[data-platform='macos'] .app-root {
    Every surface here is tinted toward the system hue (~225°) rather than
    neutral grey, and every accent value is contrast-verified: the voice ramp
    (--accent-*) reaches 4.5:1 on its own surfaces, and the fill ramp
-   (--accent-*-fill) carries --text-on-accent at 4.5:1. See the "Chromatic
+   (--accent-*-fill) carries --color-on-solid at 4.5:1. See the "Chromatic
    system" section of docs/reference/design-system/design-language.md for the
    derivation and the numbers. */
 
@@ -433,47 +431,45 @@ html[data-platform='macos'] .app-root {
     /* Surfaces — deep navy ground, translucent so the wallpaper reads
        through. Opacity climbs with elevation: the further forward a surface
        sits, the less of the desktop it lets past. */
-    --bg-primary: rgba(30, 30, 32, 0.65);
-    --bg-secondary: rgba(40, 40, 42, 0.65);
-    --bg-tertiary: rgba(50, 50, 52, 0.65);
-    --bg-hover: rgba(64, 64, 66, 0.55);
+    --color-bg: rgba(21, 21, 27, 0.65);
+    --color-bg-subtle: rgba(28, 28, 36, 0.65);
+    --color-surface: rgba(31, 31, 40, 0.65);
+    --color-hover: rgba(255, 255, 255, 0.07);
     /* Selection carries chroma; hover does not. That difference is what keeps
        the two apart at a glance, and it is the only surface token with any
        chroma in it (Principle III — one candidate). */
-    --bg-selected: rgba(74, 74, 76, 0.6);
-    --bg-secondary-full-opacity: rgba(40, 40, 42);
-    --bg-popup: rgb(30, 30, 32);
+    --color-accent-subtle: #2a2a4a;
+    --color-bg-subtle-opaque: rgb(28, 28, 36);
+    --color-surface-raised: rgb(39, 39, 50);
 
     /* Text */
-    --text-primary: rgba(255, 255, 255, 0.95);
-    --text-secondary: rgba(235, 235, 245, 0.65);
-    --text-tertiary: rgba(235, 235, 245, 0.4);
+    --color-text: #ececf1;
+    --color-text-muted: #a9a9b8;
+    --color-text-faint: #7a7a8a;
 
     /* Lines. Cool rather than neutral, so a hairline reads as a lit edge
        rather than a grey rule. */
-    --border-color: rgba(90, 90, 95, 0.5);
+    --color-border: #33333f;
     --separator: rgba(90, 90, 95, 0.5);
     --divider-soft: rgba(255, 255, 255, 0.04);
 
     /* The voice — accent as text, icon, stroke, or tint source. */
-    --accent-primary: #007aff;
-    --accent-success: #28cd41;
-    --accent-warning: #ff9500;
-    --accent-danger: #ff3b30;
-    --accent-primary-rgb: 46, 196, 182;
+    --color-accent: #818cf8;
+    --color-success: #6cc070;
+    --color-warning: #f0a54a;
+    --color-danger: #ef6b6b;
+    --color-accent-rgb: 129, 140, 248;
 
-    /* The ground — filled surfaces carrying --text-on-accent. Deeper than
+    /* The ground — filled surfaces carrying --color-on-solid. Deeper than
        the voice, because white text has to survive on top of them. */
-    --accent-primary-fill: #0071ed;
-    --accent-success-fill: #1b892c;
-    --accent-warning-fill: #ad6500;
-    --accent-danger-fill: #de332a;
+    --color-accent-solid: #5b54e8;
+    --color-success-solid: #0f7f58;
+    --color-warning-solid: #8f5d0a;
+    --color-danger-solid: #c0303e;
 
     /* Brand === accent. One identity colour, not two. */
-    --launcher-brand: #2ec4b6;
-    --launcher-brand-hover: #28b0a3;
-    --launcher-brand-muted: rgba(46, 196, 182, 0.15);
-    --launcher-brand-subtle: rgba(46, 196, 182, 0.08);
+    --color-accent-hover: #a5b4fc;
+    --color-accent-faint: rgba(129, 140, 248, 0.1);
 
     /* Edge highlight and edge shade, used inside --shadow-launcher-popup and
        the filled-button gradients to keep a surface from reading as a flat
@@ -492,21 +488,21 @@ html[data-platform='macos'] .app-root {
     --scrollbar-thumb: rgba(155, 155, 155, 0.5);
     --kbd-rim: rgba(255, 255, 255, 0.03);
 
-    background-color: var(--bg-primary);
+    background-color: var(--color-bg);
   }
 
   /* Settings window: opaque surfaces. The launcher composites translucent
      vibrancy over the desktop; the settings window sits on the platform's
      own backdrop and needs solid elevation to read. */
   :root:not([data-theme]):not([data-custom-theme]) .settings-page {
-    --bg-primary: rgb(30, 30, 32);
-    --bg-secondary: rgb(37, 37, 40);
-    --bg-tertiary: rgb(47, 47, 50);
-    --bg-hover: rgb(54, 54, 58);
-    --bg-selected: rgb(61, 61, 66);
-    --bg-secondary-full-opacity: rgb(37, 37, 40);
+    --color-bg: rgb(21, 21, 27);
+    --color-bg-subtle: rgb(28, 28, 36);
+    --color-surface: rgb(31, 31, 40);
+    --color-hover: rgba(255, 255, 255, 0.07);
+    --color-accent-subtle: #2a2a4a;
+    --color-bg-subtle-opaque: rgb(28, 28, 36);
 
-    --border-color: rgba(255, 255, 255, 0.09);
+    --color-border: #33333f;
     --separator: rgba(255, 255, 255, 0.07);
     --divider-soft: rgba(255, 255, 255, 0.04);
     --shadow-color: rgba(0, 0, 0, 0.45);
@@ -514,37 +510,35 @@ html[data-platform='macos'] .app-root {
 }
 
 :root[data-theme='dark'] {
-  --bg-primary: rgba(30, 30, 32, 0.65);
-  --bg-secondary: rgba(40, 40, 42, 0.65);
-  --bg-tertiary: rgba(50, 50, 52, 0.65);
-  --bg-hover: rgba(64, 64, 66, 0.55);
-  --bg-selected: rgba(74, 74, 76, 0.6);
-  --bg-secondary-full-opacity: rgba(40, 40, 42);
-  --bg-popup: rgb(30, 30, 32);
+  --color-bg: rgba(21, 21, 27, 0.65);
+  --color-bg-subtle: rgba(28, 28, 36, 0.65);
+  --color-surface: rgba(31, 31, 40, 0.65);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-accent-subtle: #2a2a4a;
+  --color-bg-subtle-opaque: rgb(28, 28, 36);
+  --color-surface-raised: rgb(39, 39, 50);
 
-  --text-primary: rgba(255, 255, 255, 0.95);
-  --text-secondary: rgba(235, 235, 245, 0.65);
-  --text-tertiary: rgba(235, 235, 245, 0.4);
+  --color-text: #ececf1;
+  --color-text-muted: #a9a9b8;
+  --color-text-faint: #7a7a8a;
 
-  --border-color: rgba(90, 90, 95, 0.5);
+  --color-border: #33333f;
   --separator: rgba(90, 90, 95, 0.5);
   --divider-soft: rgba(255, 255, 255, 0.04);
 
-  --accent-primary: #007aff;
-  --accent-success: #28cd41;
-  --accent-warning: #ff9500;
-  --accent-danger: #ff3b30;
-  --accent-primary-rgb: 46, 196, 182;
+  --color-accent: #818cf8;
+  --color-success: #6cc070;
+  --color-warning: #f0a54a;
+  --color-danger: #ef6b6b;
+  --color-accent-rgb: 129, 140, 248;
 
-  --accent-primary-fill: #0071ed;
-  --accent-success-fill: #1b892c;
-  --accent-warning-fill: #ad6500;
-  --accent-danger-fill: #de332a;
+  --color-accent-solid: #5b54e8;
+  --color-success-solid: #0f7f58;
+  --color-warning-solid: #8f5d0a;
+  --color-danger-solid: #c0303e;
 
-  --launcher-brand: #2ec4b6;
-  --launcher-brand-hover: #28b0a3;
-  --launcher-brand-muted: rgba(46, 196, 182, 0.15);
-  --launcher-brand-subtle: rgba(46, 196, 182, 0.08);
+  --color-accent-hover: #a5b4fc;
+  --color-accent-faint: rgba(129, 140, 248, 0.1);
 
   --rim-light: rgba(255, 255, 255, 0.04);
   --rim-shade: rgba(0, 0, 0, 0.4);
@@ -559,19 +553,19 @@ html[data-platform='macos'] .app-root {
   --scrollbar-thumb: rgba(155, 155, 155, 0.5);
   --kbd-rim: rgba(255, 255, 255, 0.03);
 
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg);
   color-scheme: dark;
 }
 
 :root[data-theme='dark']:not([data-custom-theme]) .settings-page {
-  --bg-primary: rgb(30, 30, 32);
-  --bg-secondary: rgb(37, 37, 40);
-  --bg-tertiary: rgb(47, 47, 50);
-  --bg-hover: rgb(54, 54, 58);
-  --bg-selected: rgb(61, 61, 66);
-  --bg-secondary-full-opacity: rgb(37, 37, 40);
+  --color-bg: rgb(21, 21, 27);
+  --color-bg-subtle: rgb(28, 28, 36);
+  --color-surface: rgb(31, 31, 40);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-accent-subtle: #2a2a4a;
+  --color-bg-subtle-opaque: rgb(28, 28, 36);
 
-  --border-color: rgba(255, 255, 255, 0.09);
+  --color-border: #33333f;
   --separator: rgba(255, 255, 255, 0.07);
   --divider-soft: rgba(255, 255, 255, 0.04);
   --shadow-color: rgba(0, 0, 0, 0.45);
@@ -581,39 +575,37 @@ html[data-platform='macos'] .app-root {
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
-    --bg-primary: rgba(240, 240, 245, 0.65);
-    --bg-secondary: rgba(230, 230, 235, 0.65);
-    --bg-tertiary: rgba(245, 245, 247, 0.65);
-    --bg-hover: rgba(220, 220, 225, 0.5);
-    --bg-selected: rgba(140, 140, 148, 0.22);
-    --bg-secondary-full-opacity: rgb(230, 230, 235);
-    --bg-popup: rgb(240, 240, 245);
+    --color-bg: rgba(247, 247, 248, 0.65);
+    --color-bg-subtle: rgba(239, 239, 242, 0.65);
+    --color-surface: rgba(255, 255, 255, 0.65);
+    --color-hover: rgba(15, 15, 25, 0.05);
+    --color-accent-subtle: #e9e8fd;
+    --color-bg-subtle-opaque: rgb(239, 239, 242);
+    --color-surface-raised: rgb(255, 255, 255);
 
-    --text-primary: rgba(15, 23, 42, 0.9);
-    --text-secondary: rgba(60, 60, 67, 0.7);
-    --text-tertiary: rgba(60, 60, 67, 0.35);
+    --color-text: #1b1b22;
+    --color-text-muted: #5b5b6b;
+    --color-text-faint: #8a8a99;
 
-    --border-color: rgba(60, 60, 67, 0.15);
+    --color-border: #dcdce2;
     --separator: rgba(60, 60, 67, 0.12);
     --divider-soft: rgba(60, 60, 67, 0.06);
 
     /* In light mode the voice and the fill converge: a colour dark enough to
        read as text on paper is already dark enough to carry white. */
-    --accent-primary: #007aff;
-    --accent-success: #28cd41;
-    --accent-warning: #ff9500;
-    --accent-danger: #ff3b30;
-    --accent-primary-rgb: 46, 196, 182;
+    --color-accent: #4f46e5;
+    --color-success: #2e7d32;
+    --color-warning: #a15c00;
+    --color-danger: #c62828;
+    --color-accent-rgb: 79, 70, 229;
 
-    --accent-primary-fill: #0071ed;
-    --accent-success-fill: #1b892c;
-    --accent-warning-fill: #ad6500;
-    --accent-danger-fill: #de332a;
+    --color-accent-solid: #4f46e5;
+    --color-success-solid: #2e7d32;
+    --color-warning-solid: #a15c00;
+    --color-danger-solid: #c62828;
 
-    --launcher-brand: #2ec4b6;
-    --launcher-brand-hover: #28b0a3;
-    --launcher-brand-muted: rgba(46, 196, 182, 0.15);
-    --launcher-brand-subtle: rgba(46, 196, 182, 0.08);
+    --color-accent-hover: #4338ca;
+    --color-accent-faint: rgba(79, 70, 229, 0.08);
 
     --rim-light: rgba(255, 255, 255, 0.8);
     --rim-shade: rgba(0, 0, 0, 0.06);
@@ -628,18 +620,18 @@ html[data-platform='macos'] .app-root {
     --scrollbar-thumb: rgba(100, 116, 132, 0.3);
     --kbd-rim: rgba(0, 0, 0, 0.025);
 
-    background-color: var(--bg-primary);
+    background-color: var(--color-bg);
   }
 
   :root:not([data-theme]):not([data-custom-theme]) .settings-page {
-    --bg-primary: rgb(240, 240, 245);
-    --bg-secondary: rgb(230, 230, 235);
-    --bg-tertiary: rgb(245, 245, 247);
-    --bg-hover: rgb(220, 220, 225);
-    --bg-selected: rgba(140, 140, 148, 0.22);
-    --bg-secondary-full-opacity: rgb(230, 230, 235);
+    --color-bg: rgb(247, 247, 248);
+    --color-bg-subtle: rgb(239, 239, 242);
+    --color-surface: rgb(255, 255, 255);
+    --color-hover: rgba(15, 15, 25, 0.05);
+    --color-accent-subtle: #e9e8fd;
+    --color-bg-subtle-opaque: rgb(239, 239, 242);
 
-    --border-color: rgba(60, 60, 67, 0.15);
+    --color-border: #dcdce2;
     --separator: rgba(60, 60, 67, 0.12);
     --divider-soft: rgba(60, 60, 67, 0.06);
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -647,37 +639,35 @@ html[data-platform='macos'] .app-root {
 }
 
 :root[data-theme='light'] {
-  --bg-primary: rgba(240, 240, 245, 0.65);
-  --bg-secondary: rgba(230, 230, 235, 0.65);
-  --bg-tertiary: rgba(245, 245, 247, 0.65);
-  --bg-hover: rgba(220, 220, 225, 0.5);
-  --bg-selected: rgba(140, 140, 148, 0.22);
-  --bg-secondary-full-opacity: rgb(230, 230, 235);
-  --bg-popup: rgb(240, 240, 245);
+  --color-bg: rgba(247, 247, 248, 0.65);
+  --color-bg-subtle: rgba(239, 239, 242, 0.65);
+  --color-surface: rgba(255, 255, 255, 0.65);
+  --color-hover: rgba(15, 15, 25, 0.05);
+  --color-accent-subtle: #e9e8fd;
+  --color-bg-subtle-opaque: rgb(239, 239, 242);
+  --color-surface-raised: rgb(255, 255, 255);
 
-  --text-primary: rgba(15, 23, 42, 0.9);
-  --text-secondary: rgba(60, 60, 67, 0.7);
-  --text-tertiary: rgba(60, 60, 67, 0.35);
+  --color-text: #1b1b22;
+  --color-text-muted: #5b5b6b;
+  --color-text-faint: #8a8a99;
 
-  --border-color: rgba(60, 60, 67, 0.15);
+  --color-border: #dcdce2;
   --separator: rgba(60, 60, 67, 0.12);
   --divider-soft: rgba(60, 60, 67, 0.06);
 
-  --accent-primary: #007aff;
-  --accent-success: #28cd41;
-  --accent-warning: #ff9500;
-  --accent-danger: #ff3b30;
-  --accent-primary-rgb: 46, 196, 182;
+  --color-accent: #4f46e5;
+  --color-success: #2e7d32;
+  --color-warning: #a15c00;
+  --color-danger: #c62828;
+  --color-accent-rgb: 79, 70, 229;
 
-  --accent-primary-fill: #0071ed;
-  --accent-success-fill: #1b892c;
-  --accent-warning-fill: #ad6500;
-  --accent-danger-fill: #de332a;
+  --color-accent-solid: #4f46e5;
+  --color-success-solid: #2e7d32;
+  --color-warning-solid: #a15c00;
+  --color-danger-solid: #c62828;
 
-  --launcher-brand: #2ec4b6;
-  --launcher-brand-hover: #28b0a3;
-  --launcher-brand-muted: rgba(46, 196, 182, 0.15);
-  --launcher-brand-subtle: rgba(46, 196, 182, 0.08);
+  --color-accent-hover: #4338ca;
+  --color-accent-faint: rgba(79, 70, 229, 0.08);
 
   --rim-light: rgba(255, 255, 255, 0.8);
   --rim-shade: rgba(0, 0, 0, 0.06);
@@ -692,19 +682,19 @@ html[data-platform='macos'] .app-root {
   --scrollbar-thumb: rgba(100, 116, 132, 0.3);
   --kbd-rim: rgba(0, 0, 0, 0.025);
 
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg);
   color-scheme: light;
 }
 
 :root[data-theme='light']:not([data-custom-theme]) .settings-page {
-  --bg-primary: rgb(240, 240, 245);
-  --bg-secondary: rgb(230, 230, 235);
-  --bg-tertiary: rgb(245, 245, 247);
-  --bg-hover: rgb(220, 220, 225);
-  --bg-selected: rgba(140, 140, 148, 0.22);
-  --bg-secondary-full-opacity: rgb(230, 230, 235);
+  --color-bg: rgb(247, 247, 248);
+  --color-bg-subtle: rgb(239, 239, 242);
+  --color-surface: rgb(255, 255, 255);
+  --color-hover: rgba(15, 15, 25, 0.05);
+  --color-accent-subtle: #e9e8fd;
+  --color-bg-subtle-opaque: rgb(239, 239, 242);
 
-  --border-color: rgba(60, 60, 67, 0.15);
+  --color-border: #dcdce2;
   --separator: rgba(60, 60, 67, 0.12);
   --divider-soft: rgba(60, 60, 67, 0.06);
   --shadow-color: rgba(0, 0, 0, 0.1);
@@ -718,22 +708,22 @@ html[data-platform='macos'] .app-root {
    .macos-panel had no remaining markup and are gone entirely. */
 
 .search-input {
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 .search-input::placeholder {
-  color: var(--text-tertiary);
+  color: var(--color-text-faint);
 }
 
 .result-title {
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .back-button {
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
   transition: color var(--transition-normal);
 }
 .back-button:hover {
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 /* ── Component Layer ────────────────────────────────────── */
@@ -764,7 +754,7 @@ html[data-platform='macos'] .app-root {
      argument list. Defined once so they cannot drift apart; each caller
      supplies only its own position and size. */
   .launcher-popup {
-    background: color-mix(in srgb, var(--bg-popup) 80%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 80%, transparent);
     backdrop-filter: blur(60px) saturate(200%);
     -webkit-backdrop-filter: blur(60px) saturate(200%);
     border: 1px solid var(--popup-border-color);
@@ -774,7 +764,7 @@ html[data-platform='macos'] .app-root {
 
   html[data-platform='linux'] .launcher-popup {
     backdrop-filter: none;
-    background-color: var(--bg-popup);
+    background-color: var(--color-surface-raised);
   }
 
   /* Search row of a launcher popup. Matches the launcher's own search field
@@ -799,15 +789,15 @@ html[data-platform='macos'] .app-root {
     border: none;
     background: transparent;
     border-radius: 0;
-    color: var(--text-primary);
+    color: var(--color-text);
     caret-color: color-mix(
       in srgb,
-      var(--text-primary) 60%,
-      var(--bg-secondary-full-opacity) 40%
+      var(--color-text) 60%,
+      var(--color-bg-subtle-opaque) 40%
     ) !important;
   }
   .launcher-popup-search .input::placeholder {
-    color: color-mix(in srgb, var(--text-primary) 50%, var(--bg-secondary-full-opacity) 50%);
+    color: color-mix(in srgb, var(--color-text) 50%, var(--color-bg-subtle-opaque) 50%);
     font-weight: 500;
   }
   .launcher-popup-search .input:focus {
@@ -816,13 +806,13 @@ html[data-platform='macos'] .app-root {
   }
 
   .search-input {
-    @apply w-full text-base outline-none bg-transparent px-8 py-4 text-[var(--text-primary)] disabled:opacity-50;
+    @apply w-full text-base outline-none bg-transparent px-8 py-4 text-[var(--color-text)] disabled:opacity-50;
     font-family: var(--font-ui);
     font-size: var(--font-size-xl);
     transition: color var(--transition-fast);
 
     &::placeholder {
-      color: var(--text-tertiary);
+      color: var(--color-text-faint);
       font-weight: 300;
     }
   }
@@ -848,23 +838,23 @@ html[data-platform='macos'] .app-root {
     margin-bottom: 1px;
 
     &:active {
-      background-color: var(--bg-selected);
+      background-color: var(--color-accent-subtle);
     }
   }
 
   .result-title {
     font-size: var(--font-size-md);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .result-subtitle {
     @apply text-xs;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .selected-result {
-    background-color: var(--bg-selected);
+    background-color: var(--color-accent-subtle);
     box-shadow: inset 0 0 2px 0.5px var(--kbd-rim);
   }
 
@@ -872,26 +862,26 @@ html[data-platform='macos'] .app-root {
      of .selected-result (the single keyboard cursor); a row can carry either
      or both classes at once. */
   .multi-selected-result {
-    background-color: var(--bg-tertiary);
-    box-shadow: inset 3px 0 0 0 var(--accent-primary);
+    background-color: var(--color-surface);
+    box-shadow: inset 3px 0 0 0 var(--color-accent);
   }
 
   .btn {
     @apply inline-flex items-center justify-center px-4 py-1.5 text-sm font-medium outline-none;
     font-family: var(--font-ui);
     border-radius: var(--radius-sm);
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
     transition: all var(--transition-fast);
 
     &:hover {
-      background-color: var(--bg-hover);
+      background-color: var(--color-hover);
     }
 
     &:active {
       transform: scale(0.98);
-      background-color: var(--bg-selected);
+      background-color: var(--color-accent-subtle);
     }
 
     &:focus-visible {
@@ -909,16 +899,16 @@ html[data-platform='macos'] .app-root {
   }
 
   .input {
-    @apply w-full px-3 py-1.5 outline-none text-[var(--text-primary)] placeholder-[var(--text-tertiary)] border border-[var(--border-color)];
+    @apply w-full px-3 py-1.5 outline-none text-[var(--color-text)] placeholder-[var(--color-text-faint)] border border-[var(--color-border)];
     font-family: var(--font-ui);
     border-radius: var(--radius-sm);
-    background-color: var(--bg-tertiary);
+    background-color: var(--color-surface);
     transition:
       border-color var(--transition-fast),
       box-shadow var(--transition-fast);
 
     &:focus {
-      border-color: var(--accent-primary);
+      border-color: var(--color-accent);
       box-shadow: var(--shadow-focus);
     }
 
@@ -975,7 +965,7 @@ html[data-platform='macos'] .app-root {
       border-radius: 3px;
 
       &:hover {
-        background-color: color-mix(in srgb, var(--scrollbar-thumb) 100%, var(--text-primary) 20%);
+        background-color: color-mix(in srgb, var(--scrollbar-thumb) 100%, var(--color-text) 20%);
       }
     }
 
@@ -986,25 +976,25 @@ html[data-platform='macos'] .app-root {
   .btn-primary {
     background: linear-gradient(
       to bottom,
-      var(--accent-primary-fill),
-      color-mix(in srgb, var(--accent-primary-fill) 88%, var(--rim-shade))
+      var(--color-accent-solid),
+      color-mix(in srgb, var(--color-accent-solid) 88%, var(--rim-shade))
     );
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     border: none;
 
     &:hover {
       background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--accent-primary-fill) 92%, var(--rim-light)),
-        var(--accent-primary-fill)
+        color-mix(in srgb, var(--color-accent-solid) 92%, var(--rim-light)),
+        var(--color-accent-solid)
       );
     }
 
     &:active {
       background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--accent-primary) 90%, black),
-        var(--accent-primary)
+        color-mix(in srgb, var(--color-accent) 90%, black),
+        var(--color-accent)
       );
     }
   }
@@ -1012,17 +1002,17 @@ html[data-platform='macos'] .app-root {
   .btn-success {
     background: linear-gradient(
       to bottom,
-      var(--accent-success-fill),
-      color-mix(in srgb, var(--accent-success-fill) 88%, var(--rim-shade))
+      var(--color-success-solid),
+      color-mix(in srgb, var(--color-success-solid) 88%, var(--rim-shade))
     );
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     border: none;
 
     &:hover {
       background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--accent-success-fill) 92%, var(--rim-light)),
-        var(--accent-success-fill)
+        color-mix(in srgb, var(--color-success-solid) 92%, var(--rim-light)),
+        var(--color-success-solid)
       );
     }
   }
@@ -1030,17 +1020,17 @@ html[data-platform='macos'] .app-root {
   .btn-danger {
     background: linear-gradient(
       to bottom,
-      var(--accent-danger-fill),
-      color-mix(in srgb, var(--accent-danger-fill) 88%, var(--rim-shade))
+      var(--color-danger-solid),
+      color-mix(in srgb, var(--color-danger-solid) 88%, var(--rim-shade))
     );
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     border: none;
 
     &:hover {
       background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--accent-danger-fill) 92%, var(--rim-light)),
-        var(--accent-danger-fill)
+        color-mix(in srgb, var(--color-danger-solid) 92%, var(--rim-light)),
+        var(--color-danger-solid)
       );
     }
   }
@@ -1054,7 +1044,7 @@ html[data-platform='macos'] .app-root {
       background-color var(--transition-fast);
 
     &:hover {
-      background-color: var(--accent-primary);
+      background-color: var(--color-accent);
     }
   }
 
@@ -1064,34 +1054,34 @@ html[data-platform='macos'] .app-root {
   }
 
   .badge-primary {
-    background-color: var(--launcher-brand-muted);
-    color: var(--accent-primary);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
   }
 
   .badge-secondary {
-    background-color: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
   }
 
   .badge-success {
-    background-color: color-mix(in srgb, var(--accent-success) 12%, transparent);
-    color: var(--accent-success);
+    background-color: color-mix(in srgb, var(--color-success) 12%, transparent);
+    color: var(--color-success);
   }
 
   .badge-warning {
-    background-color: color-mix(in srgb, var(--accent-warning) 12%, transparent);
-    color: var(--accent-warning);
+    background-color: color-mix(in srgb, var(--color-warning) 12%, transparent);
+    color: var(--color-warning);
   }
 
   .badge-danger {
-    background-color: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-    color: var(--accent-danger);
+    background-color: color-mix(in srgb, var(--color-danger) 12%, transparent);
+    color: var(--color-danger);
   }
 
   .card {
     @apply p-5 border border-[var(--separator)];
     border-radius: var(--radius-lg);
-    background-color: var(--bg-secondary);
+    background-color: var(--color-bg-subtle);
     box-shadow: var(--shadow-xs);
     transition: box-shadow var(--transition-normal);
 
@@ -1101,7 +1091,7 @@ html[data-platform='macos'] .app-root {
   }
 
   .card-elevated {
-    background-color: var(--bg-primary);
+    background-color: var(--color-bg);
     box-shadow: var(--shadow-lg);
   }
 
@@ -1110,16 +1100,16 @@ html[data-platform='macos'] .app-root {
     font-family: var(--font-mono);
     min-width: 20px;
     height: 18px;
-    background-color: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
     border-radius: var(--radius-xs);
-    border: 0.5px solid var(--border-color);
+    border: 0.5px solid var(--color-border);
     box-shadow: 0 1px 0 var(--shadow-color);
   }
 
   .macos-toolbar {
     @apply flex items-center px-3 py-2 gap-2 border-b border-[var(--separator)];
-    background-color: var(--bg-secondary);
+    background-color: var(--color-bg-subtle);
     backdrop-filter: blur(10px);
   }
 
@@ -1145,24 +1135,24 @@ html[data-platform='macos'] .app-root {
 
   .macos-sidebar {
     @apply w-48 border-r border-[var(--separator)] overflow-y-auto;
-    background-color: var(--bg-secondary);
+    background-color: var(--color-bg-subtle);
   }
 
   .sidebar-item {
     @apply flex items-center gap-2 px-4 py-2 text-sm;
     border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     transition:
       background-color var(--transition-fast),
       color var(--transition-fast);
 
     &:hover {
-      background-color: var(--bg-hover);
+      background-color: var(--color-hover);
     }
 
     &.active {
-      background-color: var(--bg-selected);
-      color: var(--accent-primary);
+      background-color: var(--color-accent-subtle);
+      color: var(--color-accent);
     }
   }
 }
@@ -1179,11 +1169,11 @@ html[data-platform='windows'] .macos-panel {
   html[data-platform='win32']:not([data-theme]),
   html[data-platform='windows']:not([data-theme]) {
     background-color: transparent;
-    --bg-primary: rgba(247, 249, 251, 0.25);
-    --bg-secondary: rgba(238, 242, 246, 0.2);
-    --bg-tertiary: rgba(243, 246, 249, 0.2);
-    --bg-hover: rgba(228, 233, 238, 0.3);
-    --bg-selected: rgba(140, 140, 148, 0.22);
+    --color-bg: rgba(247, 247, 248, 0.25);
+    --color-bg-subtle: rgba(239, 239, 242, 0.2);
+    --color-surface: rgba(255, 255, 255, 0.2);
+    --color-hover: rgba(15, 15, 25, 0.05);
+    --color-accent-subtle: #e9e8fd;
     /* Themed translucent overlay over the DWM Acrylic backdrop. ~85% opaque
        so the theme reads regardless of the desktop wallpaper behind, while a
        hint of system blur still shows through. */
@@ -1194,11 +1184,11 @@ html[data-platform='windows'] .macos-panel {
 html[data-platform='win32'][data-theme='light'],
 html[data-platform='windows'][data-theme='light'] {
   background-color: transparent;
-  --bg-primary: rgba(247, 249, 251, 0.25);
-  --bg-secondary: rgba(238, 242, 246, 0.2);
-  --bg-tertiary: rgba(243, 246, 249, 0.2);
-  --bg-hover: rgba(228, 233, 238, 0.3);
-  --bg-selected: rgba(140, 140, 148, 0.22);
+  --color-bg: rgba(247, 247, 248, 0.25);
+  --color-bg-subtle: rgba(239, 239, 242, 0.2);
+  --color-surface: rgba(255, 255, 255, 0.2);
+  --color-hover: rgba(15, 15, 25, 0.05);
+  --color-accent-subtle: #e9e8fd;
   --win-acrylic-tint: rgba(240, 240, 245, 0.85);
 }
 
@@ -1206,11 +1196,11 @@ html[data-platform='windows'][data-theme='light'] {
   html[data-platform='win32']:not([data-theme]),
   html[data-platform='windows']:not([data-theme]) {
     background-color: transparent;
-    --bg-primary: rgba(14, 17, 20, 0.25);
-    --bg-secondary: rgba(20, 24, 28, 0.2);
-    --bg-tertiary: rgba(28, 33, 38, 0.2);
-    --bg-hover: rgba(36, 42, 48, 0.3);
-    --bg-selected: rgba(74, 74, 78, 0.65);
+    --color-bg: rgba(21, 21, 27, 0.25);
+    --color-bg-subtle: rgba(28, 28, 36, 0.2);
+    --color-surface: rgba(31, 31, 40, 0.2);
+    --color-hover: rgba(255, 255, 255, 0.07);
+    --color-accent-subtle: #2a2a4a;
     --win-acrylic-tint: rgba(28, 28, 32, 0.85);
   }
 }
@@ -1218,11 +1208,11 @@ html[data-platform='windows'][data-theme='light'] {
 html[data-platform='win32'][data-theme='dark'],
 html[data-platform='windows'][data-theme='dark'] {
   background-color: transparent;
-  --bg-primary: rgba(14, 17, 20, 0.25);
-  --bg-secondary: rgba(20, 24, 28, 0.2);
-  --bg-tertiary: rgba(28, 33, 38, 0.2);
-  --bg-hover: rgba(36, 42, 48, 0.3);
-  --bg-selected: rgba(74, 74, 78, 0.65);
+  --color-bg: rgba(21, 21, 27, 0.25);
+  --color-bg-subtle: rgba(28, 28, 36, 0.2);
+  --color-surface: rgba(31, 31, 40, 0.2);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-accent-subtle: #2a2a4a;
   --win-acrylic-tint: rgba(28, 28, 32, 0.85);
 }
 
@@ -1253,62 +1243,62 @@ html[data-platform='windows'] body {
 
 @media (prefers-color-scheme: light) {
   html[data-platform='linux']:not([data-theme]) {
-    --bg-primary: rgb(247, 249, 251);
-    --bg-secondary: rgb(238, 242, 246);
-    --bg-tertiary: rgb(243, 246, 249);
-    --bg-hover: rgba(228, 233, 238, 0.8);
-    --bg-selected: rgba(140, 140, 148, 0.22);
+    --color-bg: rgb(247, 247, 248);
+    --color-bg-subtle: rgb(239, 239, 242);
+    --color-surface: rgb(255, 255, 255);
+    --color-hover: rgba(15, 15, 25, 0.05);
+    --color-accent-subtle: #e9e8fd;
     --shadow-color: rgba(0, 0, 0, 0.1);
   }
 
   html[data-platform='linux']:not([data-theme]) .macos-panel {
     backdrop-filter: none;
-    background-color: var(--bg-primary);
+    background-color: var(--color-bg);
   }
 }
 
 html[data-platform='linux'][data-theme='light'] {
-  --bg-primary: rgb(247, 249, 251);
-  --bg-secondary: rgb(238, 242, 246);
-  --bg-tertiary: rgb(243, 246, 249);
-  --bg-hover: rgba(228, 233, 238, 0.8);
-  --bg-selected: rgba(140, 140, 148, 0.22);
+  --color-bg: rgb(247, 247, 248);
+  --color-bg-subtle: rgb(239, 239, 242);
+  --color-surface: rgb(255, 255, 255);
+  --color-hover: rgba(15, 15, 25, 0.05);
+  --color-accent-subtle: #e9e8fd;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 html[data-platform='linux'][data-theme='light'] .macos-panel {
   backdrop-filter: none;
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg);
 }
 
 @media (prefers-color-scheme: dark) {
   html[data-platform='linux']:not([data-theme]) {
-    --bg-primary: rgb(14, 17, 20);
-    --bg-secondary: rgb(20, 24, 28);
-    --bg-tertiary: rgb(28, 33, 38);
-    --bg-hover: rgba(36, 42, 48, 0.8);
-    --bg-selected: rgba(74, 74, 78, 0.65);
+    --color-bg: rgb(21, 21, 27);
+    --color-bg-subtle: rgb(28, 28, 36);
+    --color-surface: rgb(31, 31, 40);
+    --color-hover: rgba(255, 255, 255, 0.07);
+    --color-accent-subtle: #2a2a4a;
     --shadow-color: rgba(0, 0, 0, 0.35);
   }
 
   html[data-platform='linux']:not([data-theme]) .macos-panel {
     backdrop-filter: none;
-    background-color: var(--bg-primary);
+    background-color: var(--color-bg);
   }
 }
 
 html[data-platform='linux'][data-theme='dark'] {
-  --bg-primary: rgb(14, 17, 20);
-  --bg-secondary: rgb(20, 24, 28);
-  --bg-tertiary: rgb(28, 33, 38);
-  --bg-hover: rgba(36, 42, 48, 0.8);
-  --bg-selected: rgba(74, 74, 78, 0.65);
+  --color-bg: rgb(21, 21, 27);
+  --color-bg-subtle: rgb(28, 28, 36);
+  --color-surface: rgb(31, 31, 40);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-accent-subtle: #2a2a4a;
   --shadow-color: rgba(0, 0, 0, 0.35);
 }
 
 html[data-platform='linux'][data-theme='dark'] .macos-panel {
   backdrop-filter: none;
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg);
 }
 
 /* ── Typography utilities ─────────────────────────────── */
@@ -1317,21 +1307,21 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .text-page-title {
     font-size: var(--font-size-3xl);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     letter-spacing: var(--tracking-display);
     line-height: 1.2;
   }
   .text-section {
     font-size: var(--font-size-section);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     letter-spacing: var(--tracking-tight);
     line-height: 1.35;
   }
   .text-subtitle {
     font-size: var(--font-size-md);
     font-weight: 400;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
@@ -1339,22 +1329,22 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .text-title {
     font-size: var(--font-size-base);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .text-body {
     font-size: var(--font-size-base);
     font-weight: 400;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .text-label {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .text-caption {
     font-size: var(--font-size-xs);
     font-weight: 400;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   .text-mono {
     font-family: var(--font-mono);
@@ -1364,14 +1354,14 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
 
   /* ── Surface utilities ────────────────────────────────── */
   .surface-primary {
-    background: var(--bg-primary);
+    background: var(--color-bg);
   }
   .surface-secondary {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
   .surface-popup {
-    background: var(--bg-popup);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }
 
@@ -1381,7 +1371,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     padding: var(--space-3) var(--space-6) var(--space-1);
     user-select: none;
   }
@@ -1391,7 +1381,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     padding: var(--space-6) var(--space-3) var(--space-1);
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     user-select: none;
   }
   .list-section:first-child {
@@ -1403,7 +1393,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     flex-direction: column;
     height: 100%;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-base);
   }
@@ -1431,24 +1421,24 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
      number nothing derives (Principle I). A selected row is a reading
      position, not a place to spend craft (Principle II). */
   .list-row.selected {
-    background-color: var(--bg-selected);
+    background-color: var(--color-accent-subtle);
     box-shadow: inset 0 0 2px 0.5px var(--kbd-rim);
   }
   .list-row.selected * {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .list-row.selected .text-caption,
   .list-row.selected .text-tertiary {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   /* ── Input field ─────────────────────────────────────── */
   .field-input {
     padding: 7px 10px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary-full-opacity);
-    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-subtle-opaque);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-base);
     outline: none;
@@ -1456,15 +1446,15 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     transition: border-color var(--transition-fast);
   }
   .field-input:focus {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .field-select {
     padding: 7px 10px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary-full-opacity);
-    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-subtle-opaque);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-base);
     outline: none;
@@ -1474,15 +1464,15 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     cursor: pointer;
   }
   .field-select:focus {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .field-textarea {
     padding: 7px 10px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary-full-opacity);
-    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-subtle-opaque);
+    color: var(--color-text);
     font-family: var(--font-ui);
     font-size: var(--font-size-base);
     outline: none;
@@ -1492,12 +1482,12 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     min-height: 70px;
   }
   .field-textarea:focus {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .field-range {
     width: 100%;
-    accent-color: var(--accent-primary);
+    accent-color: var(--color-accent);
   }
 
   /* ── Primary button ───────────────────────────────────── */
@@ -1505,8 +1495,8 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     padding: 6px 14px;
     border-radius: var(--radius-sm);
     border: none;
-    background: var(--accent-primary-fill);
-    color: var(--text-on-accent);
+    background: var(--color-accent-solid);
+    color: var(--color-on-solid);
     font-family: var(--font-ui);
     font-size: var(--font-size-md);
     font-weight: 500;
@@ -1525,23 +1515,23 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .btn-secondary {
     padding: 6px 14px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     background: transparent;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     font-size: var(--font-size-md);
     cursor: pointer;
     transition: background var(--transition-fast);
   }
   .btn-secondary:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   /* ── Danger button ────────────────────────────────────── */
   .btn-danger {
     background: transparent;
     border: none;
-    color: var(--accent-danger);
+    color: var(--color-danger);
     cursor: pointer;
     padding: 4px 8px;
     border-radius: var(--radius-sm);
@@ -1549,7 +1539,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     transition: background var(--transition-fast);
   }
   .btn-danger:hover {
-    background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
+    background: color-mix(in srgb, var(--color-danger) 12%, transparent);
   }
 
   /* ── Empty state ──────────────────────────────────────── */
@@ -1561,13 +1551,13 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     padding: 60px 24px;
     text-align: center;
     gap: 8px;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
   }
 
   /* ── Onboarding gradient highlight ──────────────────── */
   .onb-hl {
-    background: linear-gradient(90deg, var(--launcher-brand), var(--accent-primary));
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1585,7 +1575,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     font-size: var(--font-size-base);
     line-height: 1.6;
     overflow-wrap: break-word;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .md-content h1,
@@ -1594,14 +1584,14 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content h4,
   .md-content h5,
   .md-content h6 {
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 1.5em 0 0.5em;
     line-height: 1.3;
     font-weight: 600;
   }
   .md-content h1 {
     font-size: 1.5em;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.3em;
   }
   .md-content h2 {
@@ -1626,7 +1616,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   }
 
   .md-content a {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     text-decoration: none;
   }
   .md-content a:hover {
@@ -1645,26 +1635,26 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content blockquote {
     margin: 1em 0;
     padding: 0.5em 1em;
-    border-left: 4px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-left: 4px solid var(--color-border);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   /* Inline code */
   .md-content code {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    background: var(--bg-hover);
+    background: var(--color-hover);
     padding: 2px 5px;
     border-radius: var(--radius-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   /* Fenced code blocks with copy button */
   .md-content .md-code-block {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     margin: 1.25em 0;
     overflow: hidden;
@@ -1675,8 +1665,8 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border);
   }
   .md-content .md-code-lang {
     font-family: var(--font-mono);
@@ -1684,23 +1674,23 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
   .md-content .md-copy-btn {
     font-size: 11px;
     font-weight: 500;
-    color: var(--text-secondary);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     padding: 3px 10px;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all var(--transition-fast);
   }
   .md-content .md-copy-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-    border-color: var(--text-tertiary);
+    background: var(--color-hover);
+    color: var(--color-text);
+    border-color: var(--color-text-faint);
   }
   .md-content .md-code-block pre {
     margin: 0;
@@ -1724,11 +1714,11 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content .token.prolog,
   .md-content .token.doctype,
   .md-content .token.cdata {
-    color: var(--syntax-comment);
+    color: var(--color-syntax-comment);
     font-style: italic;
   }
   .md-content .token.punctuation {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .md-content .token.namespace {
     opacity: 0.7;
@@ -1740,7 +1730,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content .token.constant,
   .md-content .token.symbol,
   .md-content .token.deleted {
-    color: var(--syntax-number);
+    color: var(--color-syntax-number);
   }
   .md-content .token.selector,
   .md-content .token.attr-name,
@@ -1748,23 +1738,23 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content .token.char,
   .md-content .token.builtin,
   .md-content .token.inserted {
-    color: var(--syntax-string);
+    color: var(--color-syntax-string);
   }
   .md-content .token.operator,
   .md-content .token.entity,
   .md-content .token.url,
   .md-content .language-css .token.string,
   .md-content .style .token.string {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
   .md-content .token.atrule,
   .md-content .token.attr-value,
   .md-content .token.keyword {
-    color: var(--syntax-keyword);
+    color: var(--color-syntax-keyword);
   }
   .md-content .token.function,
   .md-content .token.class-name {
-    color: var(--syntax-function);
+    color: var(--color-syntax-title);
   }
   .md-content .token.regex,
   .md-content .token.important,
@@ -1774,7 +1764,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
 
   .md-content hr {
     border: none;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--color-border);
     margin: 2em 0;
   }
 
@@ -1786,14 +1776,14 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   }
   .md-content th,
   .md-content td {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     padding: 10px 14px;
     text-align: left;
     word-break: normal;
     overflow-wrap: normal;
   }
   .md-content th {
-    background-color: var(--bg-secondary);
+    background-color: var(--color-bg-subtle);
     font-weight: 600;
   }
 
@@ -1807,7 +1797,7 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
 
   /* Mermaid Diagrams */
   .md-content .mermaid {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     padding: 1.5em;
     border-radius: var(--radius-md);
     margin: 1.5em 0;
@@ -1839,8 +1829,8 @@ html[data-platform='linux'][data-theme='dark'] .macos-panel {
   .md-content .katex-error {
     font-family: var(--font-mono);
     font-size: 0.85em;
-    color: var(--accent-danger);
-    background: var(--bg-hover);
+    color: var(--color-danger);
+    background: var(--color-hover);
     padding: 2px 6px;
     border-radius: var(--radius-xs);
   }

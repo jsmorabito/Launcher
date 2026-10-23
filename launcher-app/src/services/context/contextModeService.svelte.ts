@@ -7,7 +7,7 @@ export interface ContextModeProvider {
   display: {
     name: string;
     icon: string;
-    /** CSS color for the chip background. Defaults to var(--accent-primary). */
+    /** CSS color for the chip background. Defaults to var(--color-accent). */
     color?: string;
   };
   /**

@@ -66,9 +66,9 @@
   }
 
   .empty-state.bordered {
-    border: 1px dashed var(--border-color);
+    border: 1px dashed var(--color-border);
     border-radius: var(--radius-md);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     padding: var(--space-6) var(--space-4);
   }
 
@@ -76,7 +76,7 @@
     margin-bottom: var(--space-3);
     font-size: var(--font-size-display);
     opacity: 0.6;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .empty-state.compact .empty-state-icon {
@@ -85,15 +85,15 @@
   }
 
   .empty-state-message {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .empty-state.compact .empty-state-message {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .empty-state-description {
     max-width: 240px;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

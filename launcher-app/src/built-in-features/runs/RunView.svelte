@@ -152,7 +152,7 @@
           <div class="run-status-panel run-status-failed">
             <div class="run-status-header">
               <span>❌</span>
-              <span class="text-title" style="color: var(--accent-danger);"
+              <span class="text-title" style="color: var(--color-danger);"
                 >{t('features.runs.ui.failed')}</span
               >
             </div>
@@ -167,7 +167,7 @@
           <div class="run-status-panel run-status-success">
             <div class="run-status-header">
               <span>✅</span>
-              <span class="text-title" style="color: var(--accent-success);"
+              <span class="text-title" style="color: var(--color-success);"
                 >{t('features.runs.ui.succeeded')}</span
               >
             </div>
@@ -228,7 +228,7 @@
   }
 
   .run-detail-subtitle {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .run-detail-actions {
@@ -239,8 +239,8 @@
   .run-output {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    color: var(--text-primary);
-    background: var(--bg-secondary);
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
     padding: var(--space-3);
     flex: 1;
@@ -253,7 +253,7 @@
   .run-output-line {
     white-space: pre-wrap;
     word-break: break-word;
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.5;
   }
 
@@ -262,7 +262,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
     padding: var(--space-4);
   }
@@ -281,11 +281,11 @@
   }
 
   .run-status-error-box {
-    background: color-mix(in srgb, var(--accent-danger) 8%, var(--bg-primary));
-    border: 1px solid color-mix(in srgb, var(--accent-danger) 20%, transparent);
+    background: color-mix(in srgb, var(--color-danger) 8%, var(--color-bg));
+    border: 1px solid color-mix(in srgb, var(--color-danger) 20%, transparent);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     white-space: pre-wrap;

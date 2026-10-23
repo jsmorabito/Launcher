@@ -262,14 +262,14 @@
     font-size: var(--font-size-lg);
     font-weight: 700;
     font-family: var(--font-ui);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .app-version {
     margin-top: var(--space-1);
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     user-select: none;
   }
 
@@ -283,21 +283,21 @@
   .update-status {
     font-size: var(--font-size-xs);
     font-family: var(--font-ui);
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .update-status.status-success {
-    color: var(--accent-success);
+    color: var(--color-success);
   }
 
   .update-status.status-error {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .info-text {
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .links-row {

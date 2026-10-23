@@ -33,6 +33,6 @@
   .ts-rel {
     font-family: var(--font-mono);
     font-size: var(--font-size-2xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

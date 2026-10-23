@@ -427,7 +427,7 @@
                 {dateFormat.format(selectedSnippet.createdAt)}
               </span>
               {#if !selectedSnippet.redactedKinds?.length}
-                <span class="text-caption" style="color: var(--text-tertiary)"
+                <span class="text-caption" style="color: var(--color-text-faint)"
                   >{selectedSnippet.expansion.length} chars</span
                 >
               {/if}
@@ -495,7 +495,7 @@
   .snippet-name {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
   .keyword-row {
@@ -507,10 +507,10 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-md);
     line-height: 1.6;
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: pre-wrap;
     word-break: break-word;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-sm);
     padding: var(--space-6);
     margin: 0;
@@ -534,7 +534,7 @@
   .form-title {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0 0 var(--space-6);
   }
   .form-body {
@@ -558,8 +558,8 @@
     font-size: var(--font-size-sm);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
-    color: var(--accent-danger);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    color: var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
   }
 
   .textarea-wrapper {
@@ -578,7 +578,7 @@
     font-size: var(--font-size-sm);
   }
   .code-inline {
-    background: var(--bg-hover);
+    background: var(--color-hover);
     padding: var(--space-0-5) var(--space-1);
     border-radius: var(--radius-xs);
     font-family: var(--font-mono);
@@ -600,10 +600,10 @@
   .toggle-label {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .toggle-hint {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

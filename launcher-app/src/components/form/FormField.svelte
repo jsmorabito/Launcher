@@ -38,7 +38,7 @@
   .form-field-label {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .form-field-control {
@@ -48,13 +48,13 @@
 
   .form-field-hint {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     margin: 0;
   }
 
   .form-field-error {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     margin: 0;
   }
 </style>

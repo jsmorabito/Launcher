@@ -141,7 +141,7 @@
     font-family: var(--font-ui);
     font-size: var(--font-size-lg);
     font-weight: 600; /* font-semibold */
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.2;
     white-space: nowrap;
     overflow: hidden;
@@ -152,7 +152,7 @@
     font-family: var(--font-ui);
     font-size: var(--font-size-xs);
     font-weight: 500; /* font-medium */
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.2;
     margin-top: var(--space-0-5);
   }
@@ -163,8 +163,8 @@
     flex-direction: column;
     border-radius: var(--radius-md);
     overflow: hidden;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-tertiary);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
     box-shadow: var(--shadow-sm);
   }
 
@@ -174,8 +174,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg-hover);
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--color-hover);
+    border-bottom: 1px solid var(--color-border);
     user-select: none;
   }
 
@@ -191,15 +191,15 @@
   }
 
   .control.close {
-    background-color: var(--accent-danger);
+    background-color: var(--color-danger);
     opacity: 0.8;
   }
   .control.minimize {
-    background-color: var(--accent-warning);
+    background-color: var(--color-warning);
     opacity: 0.8;
   }
   .control.maximize {
-    background-color: var(--accent-success);
+    background-color: var(--color-success);
     opacity: 0.8;
   }
 
@@ -207,7 +207,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-2xs);
     font-weight: 600;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -229,13 +229,13 @@
   }
 
   .prompt {
-    color: var(--accent-success);
+    color: var(--color-success);
     font-weight: 600;
     user-select: none;
   }
 
   .command {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     font-weight: 600;
     word-break: break-all;
   }
@@ -247,7 +247,7 @@
     flex-direction: column;
     gap: var(--space-0-5);
     font-size: var(--font-size-2xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .path {
@@ -261,24 +261,24 @@
   }
 
   .alias-label {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     user-select: none;
   }
 
   .alias-value {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .warning-content {
     font-family: var(--font-ui);
     font-size: var(--font-size-xs);
     line-height: 1.4;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .warning-title {
     font-weight: 600;
-    color: var(--accent-warning);
+    color: var(--color-warning);
     margin-right: var(--space-1);
     text-transform: uppercase;
     font-size: var(--font-size-2xs);
@@ -290,7 +290,7 @@
     padding: 0 var(--space-0-5);
     font-family: var(--font-ui);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.4;
     user-select: none;
   }

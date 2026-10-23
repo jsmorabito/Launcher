@@ -306,9 +306,9 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-1) var(--space-3);
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
@@ -318,23 +318,23 @@
       box-shadow var(--transition-normal);
   }
   .accessory-button:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .accessory-button:focus-visible {
     box-shadow: var(--shadow-focus);
     outline: none;
   }
   .accessory-button.open {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
   .accessory-title {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .accessory-chevron {
     width: var(--size-xs);
     height: var(--size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     flex-shrink: 0;
   }
 
@@ -345,8 +345,8 @@
     min-width: 180px;
     max-height: 320px;
     overflow-y: auto;
-    background: var(--bg-popup);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-popup);
     padding: var(--space-1);
@@ -362,7 +362,7 @@
   :global(.accessory-filter-input) {
     width: 100%;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     border: none;
     outline: none;
     padding: var(--space-1) var(--space-2);
@@ -371,7 +371,7 @@
   }
 
   :global(.accessory-filter-input)::placeholder {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .accessory-option {
@@ -383,7 +383,7 @@
     background: transparent;
     border: none;
     border-radius: var(--radius-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
     text-align: left;
     cursor: pointer;
     transition: background var(--transition-fast);
@@ -392,10 +392,10 @@
   }
   .accessory-option.highlighted,
   .accessory-option:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .accessory-option.selected {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
   .accessory-check {
     width: var(--size-xs);
@@ -403,7 +403,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-primary);
+    color: var(--color-accent);
     flex-shrink: 0;
   }
   .accessory-check svg {

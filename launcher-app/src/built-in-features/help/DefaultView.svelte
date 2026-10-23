@@ -98,7 +98,7 @@
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     margin: 0 0 var(--space-2);
     font-weight: 600;
   }
@@ -131,14 +131,14 @@
     font-size: var(--font-size-xs);
     padding: var(--space-0-5) var(--space-2);
     border-radius: var(--radius-xs);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border: 1px solid var(--separator);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .label {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .topic-row {
@@ -151,7 +151,7 @@
   }
 
   .topic-row.selected {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
 
   .topic-text {
@@ -162,17 +162,17 @@
 
   .topic-title {
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .topic-subtitle {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .empty {
     font-size: var(--font-size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     padding: var(--space-3) var(--space-2);
   }
 </style>

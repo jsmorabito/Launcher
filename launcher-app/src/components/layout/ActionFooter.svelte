@@ -34,11 +34,11 @@
     background-color: transparent;
     flex-shrink: 0;
     z-index: var(--z-raised);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   :global(.action-footer .text-caption) {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   :global(.action-footer .opacity-70) {
     opacity: 1;
@@ -55,8 +55,8 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     padding: var(--space-0-5) var(--space-1-5);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border-radius: var(--radius-xs);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 </style>

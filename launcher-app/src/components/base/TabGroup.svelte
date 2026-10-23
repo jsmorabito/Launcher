@@ -60,13 +60,13 @@
     cursor: pointer;
     transition: all var(--transition-smooth);
     transform: scale(1);
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
   }
 
   .tab-group--pills .tab-item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
     transform: scale(1.05);
   }
 
@@ -75,9 +75,9 @@
   }
 
   .tab-group--pills .tab-item.active {
-    background: var(--accent-primary-fill);
-    color: var(--text-on-accent);
-    box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+    background: var(--color-accent-solid);
+    color: var(--color-on-solid);
+    box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--color-accent) 20%, transparent);
   }
 
   /* ── Sidebar variant (vertical, icon + label + count) ─ */
@@ -100,7 +100,7 @@
     border: none;
     cursor: pointer;
     background: transparent;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     transition:
       background-color var(--transition-fast),
@@ -108,12 +108,12 @@
   }
 
   .tab-group--sidebar .tab-item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .tab-group--sidebar .tab-item.active {
-    background: var(--bg-selected);
-    color: var(--text-primary);
+    background: var(--color-accent-subtle);
+    color: var(--color-text);
     font-weight: 600;
   }
 
@@ -133,7 +133,7 @@
 
   .tab-group--sidebar .tab-item-count {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-variant-numeric: tabular-nums;
     flex-shrink: 0;
   }
@@ -141,7 +141,7 @@
   /* ── Underline variant (horizontal, accent bar under active) ─ */
   .tab-group--underline {
     display: flex;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .tab-group--underline .tab-item {
@@ -151,7 +151,7 @@
     border-bottom: 2px solid transparent;
     cursor: pointer;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     transition:
       color var(--transition-fast),
@@ -159,12 +159,12 @@
   }
 
   .tab-group--underline .tab-item:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .tab-group--underline .tab-item.active {
-    color: var(--text-primary);
-    border-bottom-color: var(--accent-primary);
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
     font-weight: 500;
   }
 </style>

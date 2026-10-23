@@ -184,7 +184,7 @@
   }
 
   .trust-note {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
@@ -218,20 +218,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
+    background: var(--color-bg-subtle);
+    color: var(--color-text-muted);
     font-size: var(--font-size-2xs);
     font-weight: 600;
   }
 
   .trust-name {
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     font-weight: 600;
   }
 
   .trust-id {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-2xs);
     min-width: 0;
     overflow: hidden;
@@ -253,12 +253,12 @@
     padding: var(--space-3);
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     transition: border-color var(--transition-fast);
   }
 
   .trust-binary-row:hover {
-    border-color: var(--border-color);
+    border-color: var(--color-border);
   }
 
   .trust-binary-text {
@@ -269,7 +269,7 @@
   }
 
   .trust-binary-path {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     font-size: var(--font-size-xs);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -277,6 +277,6 @@
   }
 
   .trust-binary-meta {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

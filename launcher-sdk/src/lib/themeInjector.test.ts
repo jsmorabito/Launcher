@@ -9,35 +9,35 @@ describe('themeInjector', () => {
   });
 
   it('injectThemeVariables creates a <style id="launcher-theme-vars"> in document.head', () => {
-    injectThemeVariables({ '--bg-primary': 'red' });
+    injectThemeVariables({ '--color-bg': 'red' });
 
     const style = document.getElementById('launcher-theme-vars') as HTMLStyleElement;
     expect(style).toBeTruthy();
     expect(style.parentElement).toBe(document.head);
-    expect(style.textContent).toContain('--bg-primary: red;');
+    expect(style.textContent).toContain('--color-bg: red;');
   });
 
   it('injectThemeVariables populates it with :root declarations', () => {
     injectThemeVariables({
-      '--bg-primary': 'red',
-      '--text-primary': 'white',
+      '--color-bg': 'red',
+      '--color-text': 'white',
     });
 
     const style = document.getElementById('launcher-theme-vars')!;
     expect(style.textContent).toContain(':root {');
-    expect(style.textContent).toContain('--bg-primary: red;');
-    expect(style.textContent).toContain('--text-primary: white;');
+    expect(style.textContent).toContain('--color-bg: red;');
+    expect(style.textContent).toContain('--color-text: white;');
   });
 
   it('calling injectThemeVariables twice updates the existing style element', () => {
-    injectThemeVariables({ '--bg-primary': 'red' });
+    injectThemeVariables({ '--color-bg': 'red' });
     const initialStyle = document.getElementById('launcher-theme-vars');
 
-    injectThemeVariables({ '--bg-primary': 'blue' });
+    injectThemeVariables({ '--color-bg': 'blue' });
     const updatedStyle = document.getElementById('launcher-theme-vars');
 
     expect(initialStyle).toBe(updatedStyle);
-    expect(updatedStyle?.textContent).toContain('--bg-primary: blue;');
+    expect(updatedStyle?.textContent).toContain('--color-bg: blue;');
   });
 
   it('injectThemeVariables with empty object produces an empty :root {} block', () => {
@@ -49,7 +49,7 @@ describe('themeInjector', () => {
   it('receiving launcher:theme:variables message triggers injection', () => {
     setupThemeInjection();
 
-    const themeVars = { '--bg-primary': 'green' };
+    const themeVars = { '--color-bg': 'green' };
     const event = new MessageEvent('message', {
       data: {
         type: 'launcher:theme:variables',
@@ -60,7 +60,7 @@ describe('themeInjector', () => {
     window.dispatchEvent(event);
 
     const style = document.getElementById('launcher-theme-vars');
-    expect(style?.textContent).toContain('--bg-primary: green;');
+    expect(style?.textContent).toContain('--color-bg: green;');
   });
 
   it('injectFontFaceCSS creates a <style id="launcher-theme-fonts"> in document.head', () => {

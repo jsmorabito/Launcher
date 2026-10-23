@@ -248,7 +248,7 @@
             type="button"
             title={t('features.portals.ui.insert_placeholder')}
             onclick={openPickerViaButton}
-            style="margin-left: auto; padding: 2px 6px; font-size: 11px; background: var(--bg-hover); border-radius: var(--radius-xs); border: 1px solid var(--border-color); cursor: pointer;"
+            style="margin-left: auto; padding: 2px 6px; font-size: 11px; background: var(--color-hover); border-radius: var(--radius-xs); border: 1px solid var(--color-border); cursor: pointer;"
             >{'{ }'}</button
           >
         </label>
@@ -271,7 +271,7 @@
           {t('features.agents.edit.type')}
           <code
             class="code-inline"
-            style="background: var(--bg-hover); padding: 1px 4px; border-radius: var(--radius-xs);"
+            style="background: var(--color-hover); padding: 1px 4px; border-radius: var(--radius-xs);"
             >{'{'}</code
           >
           or use placeholders: {tokenList}
@@ -483,7 +483,7 @@
     margin: 0;
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .agent-edit-form {
@@ -501,15 +501,15 @@
   .field-label {
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   :global(.agent-field-textarea) {
     padding: var(--space-2);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     font-family: inherit;
     resize: vertical;
@@ -520,15 +520,15 @@
 
   :global(.agent-field-textarea):focus {
     outline: none;
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .field-select {
     padding: var(--space-2);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     width: 100%;
     box-sizing: border-box;
@@ -537,17 +537,17 @@
 
   .field-error {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     margin: 0;
   }
 
   .field-hint {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin: 0;
     padding: var(--space-2);
-    background: var(--bg-primary);
-    border: 1px dashed var(--border-color);
+    background: var(--color-bg);
+    border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
   }
 
@@ -572,7 +572,7 @@
     align-items: center;
     gap: var(--space-2);
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     cursor: pointer;
   }
 
@@ -595,8 +595,8 @@
     gap: var(--space-2);
     margin-top: var(--space-2);
     padding: var(--space-3);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
   }
 
@@ -606,9 +606,9 @@
     gap: var(--space-1);
     max-height: 150px;
     overflow-y: auto;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    background: var(--bg-primary);
+    background: var(--color-bg);
   }
 
   .cache-item {
@@ -616,7 +616,7 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-2);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .cache-item:last-child {
@@ -634,7 +634,7 @@
   }
 
   .cache-input {
-    color: var(--text-primary);
+    color: var(--color-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -642,11 +642,11 @@
   }
 
   .cache-arrow {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .cache-output {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -669,14 +669,14 @@
   }
 
   .icon-button:hover {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
 
   .clear-button {
     align-self: flex-end;
     background: none;
-    border: 1px solid var(--accent-danger);
-    color: var(--accent-danger);
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-sm);
@@ -685,7 +685,7 @@
   }
 
   .clear-button:hover {
-    background: var(--accent-danger-fill);
-    color: var(--text-on-accent);
+    background: var(--color-danger-solid);
+    color: var(--color-on-solid);
   }
 </style>

@@ -13,13 +13,13 @@ export function formatRelativeTime(timestampMillis: number, now: number = Date.n
 export function statusBadgeColor(status: 'starting' | 'connected' | 'failed' | 'disabled'): string {
   switch (status) {
     case 'connected':
-      return 'var(--accent-success)';
+      return 'var(--color-success)';
     case 'starting':
-      return 'var(--accent-warning)';
+      return 'var(--color-warning)';
     case 'failed':
-      return 'var(--accent-danger)';
+      return 'var(--color-danger)';
     case 'disabled':
-      return 'var(--text-tertiary)';
+      return 'var(--color-text-faint)';
   }
 }
 

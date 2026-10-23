@@ -17,8 +17,8 @@
     <ul class="flex flex-col gap-1">
       {#each runtimes as runtime (runtime.name)}
         <li class="flex items-baseline gap-2">
-          <code class="font-mono text-xs text-[var(--text-primary)]">{runtime.name}</code>
-          <span class="text-xs text-[var(--text-secondary)]"
+          <code class="font-mono text-xs text-[var(--color-text)]">{runtime.name}</code>
+          <span class="text-xs text-[var(--color-text-muted)]"
             >({formatBytes(runtime.sizeBytes)})</span
           >
         </li>

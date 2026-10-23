@@ -12,7 +12,7 @@ order: 4
 - **Set `viewPath` on search results.** The `action` closure is ignored for installed extensions; `viewPath` is what actually controls navigation.
 - **Bundle everything.** Svelte's runtime, component libraries, utility packages — all of it must be in `dist/`.
 - **Use `logger.debug()` aggressively during development.** Strip or convert to `logger.info()` before publishing.
-- **Use `var(--bg-primary)` and friends** for all background and text colors to support light/dark theming.
+- **Use `var(--color-bg)` and friends** for all background and text colors to support light/dark theming.
 - **Validate before publishing.** `launcher validate` catches manifest errors before they reach reviewers.
 
 ### Don't

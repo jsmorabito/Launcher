@@ -96,18 +96,18 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .welcome__title {
     margin: 0;
     font-size: var(--font-size-display);
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .welcome__lede {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xl);
     line-height: 1.6;
   }
@@ -121,18 +121,18 @@
     display: inline-flex;
     align-items: center;
     padding: var(--space-1) var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border: 1px solid var(--separator);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .welcome__tag-pill {
     margin-left: var(--space-2);
     padding: var(--space-0-5) var(--space-2);
-    background: color-mix(in srgb, var(--accent-warning) 14%, transparent);
-    color: var(--accent-warning);
+    background: color-mix(in srgb, var(--color-warning) 14%, transparent);
+    color: var(--color-warning);
     border-radius: var(--radius-xs);
     font-size: var(--font-size-2xs);
     font-weight: 600;
@@ -145,7 +145,7 @@
     justify-content: space-between;
     gap: var(--space-4);
     padding: var(--space-3) var(--space-4);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     margin: var(--space-2) 0;
@@ -162,23 +162,23 @@
   }
   .welcome__migration-badge {
     padding: var(--space-0-5) var(--space-2);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border: 1px solid var(--separator);
     border-radius: var(--radius-xs);
     font-size: var(--font-size-2xs);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .welcome__migration-title {
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .welcome__migration-hint {
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .welcome__row {
     display: flex;
@@ -199,10 +199,10 @@
   .welcome__row-title {
     font-size: var(--font-size-md);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .welcome__row-hint {
     font-size: var(--font-size-md);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

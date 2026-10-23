@@ -273,7 +273,7 @@
       </div>
       <ActionFooter>
         {#snippet left()}
-          <span class="text-caption" style="color: var(--text-tertiary)">
+          <span class="text-caption" style="color: var(--color-text-faint)">
             Edited {relativeTime(selectedNote.updatedAt)} · {wordCount}
             {wordCount === 1 ? 'word' : 'words'}
           </span>
@@ -322,7 +322,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .note-editor {
@@ -336,7 +336,7 @@
   :global(.note-title-input) {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     border: none;
     background: transparent;
     padding: 0 0 var(--space-3);
@@ -347,7 +347,7 @@
     resize: none;
     border: none;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-md);
     line-height: 1.7;
     padding: 0 0 var(--space-6);
@@ -380,7 +380,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     margin-bottom: var(--space-2);
   }
   .backlink-item {
@@ -391,7 +391,7 @@
     border: none;
     padding: var(--space-2) 0;
     font-size: var(--font-size-sm);
-    color: var(--accent-primary);
+    color: var(--color-accent);
     cursor: pointer;
   }
   .backlink-item:hover {

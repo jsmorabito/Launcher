@@ -248,6 +248,6 @@
   }
 
   .error-text {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

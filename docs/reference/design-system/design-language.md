@@ -21,8 +21,8 @@ and more corrosive: **a large number of values that nobody could account for.**
 The evidence was all in the codebase, and it is worth listing because it is
 what the thesis below is a response to:
 
-- The brand token `--launcher-brand` was a teal that appeared almost nowhere,
-  while `--accent-primary` — the app's most-used colour by an order of
+- The brand token `--color-accent` was a teal that appeared almost nowhere,
+  while `--color-accent` — the app's most-used colour by an order of
   magnitude — was Apple's system blue. The product's identity colour was
   decorative and its working colour belonged to someone else.
 - The spacing scale had grown values of **11px, 13px and 23px**. Those are not
@@ -31,7 +31,7 @@ what the thesis below is a response to:
   there was no size scale for them to live on.
 - Result rows were inset by **9px**, which set every result one pixel to the
   right of the text the user had just typed, and sat off the 2px grid besides.
-- `--text-tertiary` composited to **2.7:1**, below the 3:1 floor for incidental
+- `--color-text-faint` composited to **2.7:1**, below the 3:1 floor for incidental
   text, which made every timestamp and placeholder hard to read on a busy
   wallpaper. Nobody had measured it.
 - Shadows cast **down and to the left** (`-28px 20px 80px`) while everything
@@ -182,7 +182,7 @@ is open, the dialog is.
 
 Note what this principle does **not** say. It does not say the candidate should
 be dramatic. Being the only thing that carries chroma on a monochrome ground is
-already total — `--bg-selected` is the only surface token in the system with
+already total — `--color-accent-subtle` is the only surface token in the system with
 any chroma in it, and that is this principle expressed as a value. Turning it
 up past that point buys nothing and costs Principle II.
 
@@ -293,7 +293,7 @@ keyboard.
 
 ### What is deliberately not a signature
 
-**The selected row.** It is a flat band of `--bg-selected` with a faint inset
+**The selected row.** It is a flat band of `--color-accent-subtle` with a faint inset
 rim, identical to what `.selected-result` has always drawn, and it is the same
 treatment in every list in the app — launcher results, clipboard history,
 walkthrough, and every `ListItem`.
@@ -318,12 +318,12 @@ alignment.
 There are exactly **four** elevations. Not a scale you extend — a list you
 choose from.
 
-| Level | Name       | What it is                                | Transmission        | Shadow                    |
-| ----- | ---------- | ----------------------------------------- | ------------------- | ------------------------- |
-| 0     | The Ground | The user's desktop. Launcher never draws it. | —                   | —                         |
-| 1     | The Shell  | The launcher window itself                | `--bg-primary`, 72% | `--shadow-launcher-popup` |
-| 2     | The Raised | Cards, sidebars, panels within the shell  | `--bg-secondary`    | `--shadow-sm` … `-md`     |
-| 3     | The Near   | Popups, menus, the ⌘K palette, dialogs    | `--bg-popup`, ~80%  | `--shadow-launcher-popup` |
+| Level | Name       | What it is                                   | Transmission                   | Shadow                    |
+| ----- | ---------- | -------------------------------------------- | ------------------------------ | ------------------------- |
+| 0     | The Ground | The user's desktop. Launcher never draws it. | —                              | —                         |
+| 1     | The Shell  | The launcher window itself                   | `--color-bg`, 72%              | `--shadow-launcher-popup` |
+| 2     | The Raised | Cards, sidebars, panels within the shell     | `--color-bg-subtle`            | `--shadow-sm` … `-md`     |
+| 3     | The Near   | Popups, menus, the ⌘K palette, dialogs       | `--color-surface-raised`, ~80% | `--shadow-launcher-popup` |
 
 Two rules govern the whole model:
 
@@ -349,7 +349,7 @@ The blur is that material. `.launcher-popup` carries
 `backdrop-filter: blur(60px) saturate(200%)` — the saturation boost is what
 keeps the wallpaper's colour alive through 60px of blur instead of turning it to
 grey mud. On Linux, where `backdrop-filter` is unreliable, surfaces fall back to
-opaque `--bg-popup`, and that is a supported outcome rather than a degraded one.
+opaque `--color-surface-raised`, and that is a supported outcome rather than a degraded one.
 
 **Every drop shadow casts straight down.** Every offset in the elevation scale
 is `0 Ypx`; height is carried by blur radius and negative spread, never by
@@ -675,7 +675,7 @@ Launcher therefore ships two ramps:
 | Ramp           | Token             | Use for                                                                      |
 | -------------- | ----------------- | ---------------------------------------------------------------------------- |
 | **The Voice**  | `--accent-*`      | Text, icons, strokes, focus rings, and as the source for a tinted background |
-| **The Ground** | `--accent-*-fill` | The background of a filled surface carrying `--text-on-accent`               |
+| **The Ground** | `--accent-*-fill` | The background of a filled surface carrying `--color-on-solid`               |
 
 The voice ramp keeps the unsuffixed names because that is what the codebase
 overwhelmingly means — text usage outnumbers fill usage 172 to 27. In light mode
@@ -687,35 +687,35 @@ numbers:
 
 | Pairing                                       | Dark   | Light  |
 | --------------------------------------------- | ------ | ------ |
-| `--accent-primary` on its own ground          | 7.25:1 | 5.67:1 |
-| `--accent-success` on its own ground          | 9.66:1 | 4.85:1 |
-| `--accent-warning` on its own ground          | 9.14:1 | 5.59:1 |
-| `--accent-danger` on its own ground           | 6.87:1 | 5.12:1 |
-| `--text-on-accent` on `--accent-primary-fill` | 4.55:1 | 6.23:1 |
-| `--text-on-accent` on `--accent-success-fill` | 5.00:1 | 5.34:1 |
-| `--text-on-accent` on `--accent-warning-fill` | 5.62:1 | 6.15:1 |
-| `--text-on-accent` on `--accent-danger-fill`  | 5.62:1 | 5.63:1 |
+| `--color-accent` on its own ground            | 7.25:1 | 5.67:1 |
+| `--color-success` on its own ground           | 9.66:1 | 4.85:1 |
+| `--color-warning` on its own ground           | 9.14:1 | 5.59:1 |
+| `--color-danger` on its own ground            | 6.87:1 | 5.12:1 |
+| `--color-on-solid` on `--color-accent-solid`  | 4.55:1 | 6.23:1 |
+| `--color-on-solid` on `--color-success-solid` | 5.00:1 | 5.34:1 |
+| `--color-on-solid` on `--color-warning-solid` | 5.62:1 | 6.15:1 |
+| `--color-on-solid` on `--color-danger-solid`  | 5.62:1 | 5.63:1 |
 
 `themePalettes.test.ts` recomputes the fill column on every run and fails the
 build if any pairing drops below 4.5:1. `check:design` rejects a voice token
-used as a background in the same rule as `--text-on-accent`. The guarantee is
+used as a background in the same rule as `--color-on-solid`. The guarantee is
 mechanical; it is not a promise anyone has to remember.
 
 ### Surfaces
 
 Named by depth, not by lightness, so the same name works in both modes.
 
-| Token            | Role                                          | Dark                   | Light                   |
-| ---------------- | --------------------------------------------- | ---------------------- | ----------------------- |
-| `--bg-primary`   | The window. You rarely set this yourself.     | `rgba(14,16,28,.72)`   | `rgba(242,244,250,.72)` |
-| `--bg-secondary` | Cards, sidebars, panels sitting on the window | `rgba(24,27,42,.7)`    | `rgba(233,236,246,.7)`  |
-| `--bg-tertiary`  | Inputs, wells, insets inside a card           | `rgba(32,36,54,.7)`    | `rgba(248,250,253,.72)` |
-| `--bg-hover`     | Hover on any interactive row                  | `rgba(56,63,92,.5)`    | `rgba(206,214,236,.55)` |
-| `--bg-selected`  | The selected row. Accent-tinted, not grey.    | `rgba(61,107,245,.18)` | `rgba(42,85,214,.13)`   |
-| `--bg-popup`     | Opaque popups and menus                       | `rgb(16,18,31)`        | `rgb(246,248,252)`      |
+| Token                    | Role                                          | Dark                   | Light                   |
+| ------------------------ | --------------------------------------------- | ---------------------- | ----------------------- |
+| `--color-bg`             | The window. You rarely set this yourself.     | `rgba(14,16,28,.72)`   | `rgba(242,244,250,.72)` |
+| `--color-bg-subtle`      | Cards, sidebars, panels sitting on the window | `rgba(24,27,42,.7)`    | `rgba(233,236,246,.7)`  |
+| `--color-surface`        | Inputs, wells, insets inside a card           | `rgba(32,36,54,.7)`    | `rgba(248,250,253,.72)` |
+| `--color-hover`          | Hover on any interactive row                  | `rgba(56,63,92,.5)`    | `rgba(206,214,236,.55)` |
+| `--color-accent-subtle`  | The selected row. Accent-tinted, not grey.    | `rgba(61,107,245,.18)` | `rgba(42,85,214,.13)`   |
+| `--color-surface-raised` | Opaque popups and menus                       | `rgb(16,18,31)`        | `rgb(246,248,252)`      |
 
-`--bg-selected` is the only surface token carrying chroma, and that is
-Principle III expressed as a colour value. **`--bg-hover` deliberately carries
+`--color-accent-subtle` is the only surface token carrying chroma, and that is
+Principle III expressed as a colour value. **`--color-hover` deliberately carries
 none** — that difference is the entire mechanism keeping hover from reading as
 selection, so do not "improve" hover by tinting it.
 
@@ -723,11 +723,11 @@ selection, so do not "improve" hover by tinting it.
 
 Three tiers. If you want a fourth, you want a different layout.
 
-| Token              | Composited contrast (dark / light) | For                                         |
-| ------------------ | ---------------------------------- | ------------------------------------------- |
-| `--text-primary`   | 15.3:1 / 14.4:1                    | Headings, labels, the content they came for |
-| `--text-secondary` | 5.9:1 / 5.2:1                      | Subtitles, metadata, supporting detail      |
-| `--text-tertiary`  | 3.8:1 / 3.4:1                      | Placeholders, hints, timestamps             |
+| Token                | Composited contrast (dark / light) | For                                         |
+| -------------------- | ---------------------------------- | ------------------------------------------- |
+| `--color-text`       | 15.3:1 / 14.4:1                    | Headings, labels, the content they came for |
+| `--color-text-muted` | 5.9:1 / 5.2:1                      | Subtitles, metadata, supporting detail      |
+| `--color-text-faint` | 3.8:1 / 3.4:1                      | Placeholders, hints, timestamps             |
 
 The tertiary tier was raised by this specification — it previously composited to
 2.7:1, below the 3:1 floor for incidental text, which made timestamps and
@@ -769,8 +769,8 @@ it, and see whether you can still read the state.**
 There is one house formula. Do not invent a second token for a tinted state:
 
 ```css
-background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-color: var(--accent-danger);
+background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+color: var(--color-danger);
 ```
 
 The voice ramp is the source for the tint _and_ the text, which is why they
@@ -989,7 +989,7 @@ subtitle the active view publishes.
   piece of context needs two lines, it is not a glance and belongs in the result
   list.
 - **The icon tile is the one place a saturated fill appears in the chrome**, and
-  it uses `--accent-primary-fill` with `--text-on-accent` precisely because it
+  it uses `--color-accent-solid` with `--color-on-solid` precisely because it
   carries a glyph on top of colour.
 - **It exists only inside an extension view.** In the root search state there is
   no "where" to report, so it renders nothing rather than rendering a
@@ -1034,17 +1034,17 @@ Principle II in the codebase, because what makes it right is what is not in it.
 /* The candidate. A flat band, identical to `.selected-result` in style.css,
    which is the treatment every list in the app uses. */
 .list-row.selected {
-  background-color: var(--bg-selected);
+  background-color: var(--color-accent-subtle);
   box-shadow: inset 0 0 2px 0.5px var(--kbd-rim);
 }
 
 /* Selection promotes the whole row's type one tier: the candidate is fully
    legible, and its metadata stops being incidental. */
 .list-row.selected * {
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 .list-row.selected .text-caption {
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
 }
 ```
 
@@ -1128,7 +1128,7 @@ commit.
 | Mechanism                         | Enforces                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm check:design`               | Tokens only: no hardcoded colours, raw pixels, bare z-indexes, Tailwind palette classes, voice tokens used as fills, spacing tokens used as dimensions, or new uses of a deprecated token |
-| `themePalettes.test.ts`           | The two copies of each palette agree; every fill carries `--text-on-accent` at ≥4.5:1                                                                                                     |
+| `themePalettes.test.ts`           | The two copies of each palette agree; every fill carries `--color-on-solid` at ≥4.5:1                                                                                                     |
 | `themeVariables.test.ts`          | Spacing, size, type, tracking and easing stay design-system-owned and un-overridable by themes                                                                                            |
 | `.agents/skills/design-language/` | What an agent loads before touching any UI                                                                                                                                                |
 

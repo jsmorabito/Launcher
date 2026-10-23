@@ -155,7 +155,7 @@ const LINE_RULES = [
         line,
       ),
     message: 'hardcoded colour',
-    fix: 'Use a colour token. Text on a filled surface is var(--text-on-accent); a code colour is var(--syntax-*).',
+    fix: 'Use a colour token. Text on a filled surface is var(--color-on-solid); a code colour is var(--syntax-*).',
   },
   {
     id: 'tailwind-palette',
@@ -263,7 +263,7 @@ for (const file of files) {
   // The voice/fill split. --accent-* is the voice: bright enough to read as
   // text on an Launcher surface, and therefore too bright to carry white text on
   // top of it. --accent-*-fill is the ground: verified to carry
-  // --text-on-accent at 4.5:1. Pairing a voice background with --text-on-accent
+  // --color-on-solid at 4.5:1. Pairing a voice background with --color-on-solid
   // produces text at roughly 2:1, which is the exact defect this split exists
   // to prevent — and it is invisible to the line-based rules above, because
   // every individual declaration is a legitimate token reference.
@@ -276,7 +276,7 @@ for (const file of files) {
     const fill =
       /(?:^|\s)(?:background|background-color)\s*:\s*var\(\s*(--accent-[a-z]+)\s*\)/.exec(body);
     if (!fill || fill[1].endsWith('-fill')) continue;
-    if (!/color\s*:\s*var\(\s*(?:--text-on-accent|--control-knob)\s*\)/.test(body)) continue;
+    if (!/color\s*:\s*var\(\s*(?:--color-on-solid|--control-knob)\s*\)/.test(body)) continue;
     const line = text.slice(0, m.index + m[0].indexOf(fill[0])).split('\n').length;
     if (suppressed(lines, line - 1)) continue;
     record(
@@ -284,7 +284,7 @@ for (const file of files) {
       line,
       {
         id: 'voice-as-fill',
-        message: `${fill[1]} is the voice ramp — it cannot carry --text-on-accent`,
+        message: `${fill[1]} is the voice ramp — it cannot carry --color-on-solid`,
         fix: `Use var(${fill[1]}-fill) for a filled surface. The voice value is deliberately too light to carry white text.`,
       },
       fill[0].trim().slice(0, 100),

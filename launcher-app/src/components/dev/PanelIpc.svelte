@@ -61,22 +61,22 @@
     align-items: center;
     gap: var(--space-5);
     padding: var(--space-3) var(--space-5);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .toolbar button {
     margin-left: auto;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
     cursor: pointer;
     padding: var(--space-0-5) var(--space-3);
     font-size: var(--font-size-xs);
   }
   .time {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-right: var(--space-3);
   }
   .phase {
@@ -91,23 +91,23 @@
     text-align: center;
   }
   .phase.phase-invoke {
-    background: color-mix(in srgb, var(--accent-primary) 22%, transparent);
-    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    color: var(--color-accent);
   }
   .phase.phase-response {
-    background: color-mix(in srgb, var(--accent-success) 20%, transparent);
-    color: var(--accent-success);
+    background: color-mix(in srgb, var(--color-success) 20%, transparent);
+    color: var(--color-success);
   }
   .cmd {
-    color: var(--text-primary);
+    color: var(--color-text);
     margin-right: var(--space-2);
   }
   .ms {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-variant-numeric: tabular-nums;
     margin-right: var(--space-2);
   }
   .err {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 </style>

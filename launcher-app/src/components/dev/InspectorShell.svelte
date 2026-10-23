@@ -176,9 +176,9 @@
     z-index: var(--z-overlay);
     display: flex;
     flex-direction: column;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border-left: 1px solid var(--border-color);
+    background: var(--color-bg);
+    color: var(--color-text);
+    border-left: 1px solid var(--color-border);
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
   }
@@ -187,27 +187,27 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--space-3) var(--space-5);
-    border-bottom: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-subtle);
   }
   .title {
     font-weight: 600;
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .close-btn {
     border: 0;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     cursor: pointer;
     padding: var(--space-0-5) var(--space-2);
     font-size: var(--font-size-sm);
     border-radius: var(--radius-xs);
   }
   .close-btn:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .body {
     flex: 1;
@@ -216,11 +216,11 @@
     min-height: 0;
   }
   .sidebar {
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--color-border);
     min-width: 0;
     min-height: 0;
     overflow: hidden;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
   .main {
     display: flex;
@@ -232,25 +232,25 @@
     display: flex;
     gap: var(--space-0-5);
     padding: var(--space-1) var(--space-1) 0;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
   .tabs button {
     border: 0;
     background: transparent;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     padding: var(--space-2) var(--space-4);
     font-size: var(--font-size-xs);
     cursor: pointer;
     border-radius: var(--radius-xs) var(--radius-xs) 0 0;
   }
   .tabs button:hover {
-    color: var(--text-primary);
-    background: var(--bg-hover);
+    color: var(--color-text);
+    background: var(--color-hover);
   }
   .tabs button.active {
-    color: var(--text-primary);
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--bg-secondary);
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-bg-subtle);
     margin-bottom: -var(--space-0-5);
   }
   .panel-body {
@@ -260,7 +260,7 @@
   }
   .empty-state {
     padding: var(--space-6);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-style: italic;
     font-size: var(--font-size-sm);
   }

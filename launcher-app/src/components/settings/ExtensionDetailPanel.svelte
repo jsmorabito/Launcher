@@ -421,20 +421,20 @@
     align-items: flex-start;
     gap: var(--space-5);
     padding: var(--space-8) var(--space-7) var(--space-6);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .panel-icon {
     width: 44px;
     height: 44px;
     border-radius: var(--radius-xl);
-    background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: var(--font-size-2xl);
     font-weight: 700;
-    color: var(--accent-primary);
+    color: var(--color-accent);
     flex-shrink: 0;
     overflow: hidden;
   }
@@ -454,7 +454,7 @@
   .panel-icon-letter {
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .icon-img {
@@ -470,12 +470,12 @@
   .panel-title {
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .panel-parent {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     margin-top: var(--space-1);
   }
 
@@ -489,7 +489,7 @@
 
   .uninstall-btn {
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     background: none;
     border: none;
     cursor: pointer;
@@ -528,7 +528,7 @@
 
   .reset-link {
     font-size: var(--font-size-2xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     background: none;
     border: none;
     cursor: pointer;
@@ -537,13 +537,13 @@
   }
 
   .reset-link:hover {
-    color: var(--accent-danger);
+    color: var(--color-danger);
     text-decoration: underline;
   }
 
   .review-link {
     font-size: var(--font-size-2xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     background: none;
     border: none;
     cursor: pointer;
@@ -562,7 +562,7 @@
 
   .revoke-link {
     font-size: var(--font-size-2xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     background: none;
     border: none;
     cursor: pointer;
@@ -576,7 +576,7 @@
 
   .panel-desc {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
@@ -584,15 +584,15 @@
     display: inline-block;
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .placeholder-action {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-style: italic;
   }
 </style>

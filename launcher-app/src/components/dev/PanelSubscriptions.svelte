@@ -62,15 +62,15 @@
   th {
     text-align: left;
     padding: var(--space-1) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-2xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   td {
     padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
   }
   .count-col {
     width: 80px;
@@ -83,7 +83,7 @@
   }
   code {
     font-family: var(--font-mono);
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
   .role {
     display: inline-block;
@@ -95,11 +95,11 @@
     text-transform: uppercase;
   }
   .role-worker {
-    background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
-    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color: var(--color-accent);
   }
   .role-view {
-    background: var(--launcher-brand-muted);
-    color: var(--launcher-brand);
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
   }
 </style>

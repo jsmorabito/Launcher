@@ -52,11 +52,11 @@ my-dark-theme.launcher  (renamed ZIP)
 ```json
 {
   "variables": {
-    "--bg-primary": "rgba(25, 25, 35, 0.85)",
-    "--bg-secondary": "rgba(35, 35, 50, 0.75)",
-    "--accent-primary": "rgb(168, 116, 245)",
-    "--accent-primary-fill": "rgb(112, 48, 200)",
-    "--text-primary": "rgba(255, 255, 255, 0.92)",
+    "--color-bg": "rgba(25, 25, 35, 0.85)",
+    "--color-bg-subtle": "rgba(35, 35, 50, 0.75)",
+    "--color-accent": "rgb(168, 116, 245)",
+    "--color-accent-solid": "rgb(112, 48, 200)",
+    "--color-text": "rgba(255, 255, 255, 0.92)",
     "--font-ui": "\"Inter\", system-ui, sans-serif"
   },
   "fonts": [
@@ -83,7 +83,7 @@ my-dark-theme.launcher  (renamed ZIP)
 
 **Override the accent in pairs.** Launcher has two accent ramps: `--accent-*` is
 the _voice_ (text, icons, strokes) and `--accent-*-fill` is the _ground_ (the
-background of a filled surface carrying `--text-on-accent`, which is white).
+background of a filled surface carrying `--color-on-solid`, which is white).
 Overriding only the voice leaves every filled button in Launcher's own blue.
 Overriding only the fill leaves accent text unchanged. Set both, and make sure
 your fill reaches 4.5:1 against white — the host verifies its own values but

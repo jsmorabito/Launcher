@@ -90,14 +90,14 @@
     margin: 0 0 var(--space-2) 0;
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
   }
 
   .modal-subtitle {
     margin: 0 0 var(--space-4) 0;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.5;
     font-family: var(--font-ui);
   }

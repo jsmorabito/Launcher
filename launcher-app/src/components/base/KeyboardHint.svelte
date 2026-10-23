@@ -34,7 +34,7 @@
     align-items: center;
     gap: var(--space-3);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     user-select: none;
   }
 
@@ -51,8 +51,8 @@
     min-width: 24px;
     height: 21px;
     padding: 0 var(--space-2);
-    background-color: var(--bg-selected);
-    color: var(--text-secondary);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-text-muted);
     border-radius: var(--radius-sm);
     border: none;
     /* Soft inset rim. */
@@ -61,7 +61,7 @@
   }
 
   .action {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-weight: 400;
   }
 

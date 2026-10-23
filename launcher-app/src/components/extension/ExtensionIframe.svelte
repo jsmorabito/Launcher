@@ -195,10 +195,10 @@
       class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center"
       role="alert"
     >
-      <p class="text-[var(--text-primary)] font-medium">
+      <p class="text-[var(--color-text)] font-medium">
         {t('dialogs.extension_load_failed.title')}
       </p>
-      <p class="text-[var(--text-secondary)] text-sm max-w-sm">
+      <p class="text-[var(--color-text-muted)] text-sm max-w-sm">
         {t('dialogs.extension_load_failed.body', { name: manifest?.name || extensionId })}
       </p>
       <Button onclick={reloadView} class="btn-primary">

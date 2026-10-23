@@ -392,15 +392,15 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   .theme-item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
 
   .theme-item.theme-active .theme-item-name {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .theme-item-body {
@@ -410,13 +410,13 @@
   .theme-item-name {
     font-weight: 500;
     font-size: var(--font-size-md);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
   }
 
   .theme-item-meta {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     margin-top: var(--space-1);
   }

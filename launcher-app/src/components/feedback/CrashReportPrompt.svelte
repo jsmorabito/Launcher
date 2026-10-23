@@ -79,8 +79,8 @@
     left: var(--space-5);
     right: var(--space-5);
     z-index: var(--z-overlay);
-    background: color-mix(in srgb, var(--bg-popup) 97%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent-warning) 60%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 97%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 60%, transparent);
     border-radius: var(--radius-md);
     padding: var(--space-5);
     display: flex;
@@ -98,14 +98,14 @@
   .crash-prompt-title {
     font-size: var(--font-size-md);
     font-family: var(--font-ui);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-weight: 600;
   }
 
   .crash-prompt-subtitle {
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .crash-prompt-email {
@@ -119,13 +119,13 @@
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     text-align: left;
     text-decoration: underline;
   }
 
   .crash-prompt-details-toggle:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .crash-prompt-details-toggle:focus-visible {
@@ -136,7 +136,7 @@
   .crash-prompt-pre {
     max-height: calc(var(--space-11) * 3);
     overflow-y: auto;
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     border-radius: var(--radius-sm);
     padding: var(--space-3);
     margin: 0;
@@ -147,7 +147,7 @@
   .crash-prompt-error {
     font-size: var(--font-size-sm);
     font-family: var(--font-ui);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     margin: 0;
   }
 

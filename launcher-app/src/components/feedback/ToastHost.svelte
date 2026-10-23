@@ -56,9 +56,9 @@
     gap: var(--space-4);
     max-width: min(560px, calc(100vw - 32px));
     padding: var(--space-3) var(--space-5-5);
-    background: color-mix(in srgb, var(--bg-popup) 92%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 92%, transparent);
     backdrop-filter: blur(20px);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-popup);
     z-index: var(--z-floating);
@@ -67,11 +67,11 @@
 
   :global(html[data-platform='linux']) .toast-host {
     backdrop-filter: none;
-    background-color: var(--bg-popup);
+    background-color: var(--color-surface-raised);
   }
 
   .toast-clickable:hover {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .toast-action {
@@ -98,7 +98,7 @@
   }
 
   .toast-icon {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .toast-text {
@@ -111,7 +111,7 @@
   .toast-title {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
@@ -120,7 +120,7 @@
 
   .toast-message {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;

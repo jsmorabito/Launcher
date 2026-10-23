@@ -89,9 +89,9 @@
     align-items: center;
     gap: var(--space-5);
     padding: var(--space-3) var(--space-5);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .toolbar label {
     cursor: pointer;
@@ -102,23 +102,23 @@
     font-variant-numeric: tabular-nums;
   }
   .toolbar button {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
     cursor: pointer;
     padding: var(--space-0-5) var(--space-3);
     font-size: var(--font-size-xs);
   }
   .time {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     margin-right: var(--space-2);
   }
   .name {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     margin-right: var(--space-2);
   }
   .summary {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 </style>

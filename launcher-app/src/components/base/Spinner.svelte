@@ -44,8 +44,8 @@
   }
 
   .spinner.accent {
-    border-color: var(--border-color);
-    border-top-color: var(--accent-primary);
+    border-color: var(--color-border);
+    border-top-color: var(--color-accent);
   }
 
   .spinner--inline {

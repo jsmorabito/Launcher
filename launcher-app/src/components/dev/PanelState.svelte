@@ -62,15 +62,15 @@
   th {
     text-align: left;
     padding: var(--space-1) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     font-size: var(--font-size-2xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   td {
     padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     vertical-align: top;
   }
   .key-col {
@@ -83,6 +83,6 @@
   }
   code {
     font-family: var(--font-mono);
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 </style>

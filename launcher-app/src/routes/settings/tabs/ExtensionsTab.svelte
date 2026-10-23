@@ -479,9 +479,9 @@
     <div
       class="install-banner"
       style="background: color-mix(in srgb, {installError
-        ? 'var(--accent-danger)'
-        : 'var(--accent-success)'} 12%, transparent);
-             color: {installError ? 'var(--accent-danger)' : 'var(--accent-success)'};"
+        ? 'var(--color-danger)'
+        : 'var(--color-success)'} 12%, transparent);
+             color: {installError ? 'var(--color-danger)' : 'var(--color-success)'};"
     >
       {installMessage}
     </div>
@@ -708,13 +708,13 @@
     padding: var(--space-3) var(--space-4);
     margin: var(--space-3) var(--space-4) 0;
     border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--accent-warning) 12%, transparent);
+    background: color-mix(in srgb, var(--color-warning) 12%, transparent);
   }
 
   .update-banner-text {
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   /* ── Toolbar row (search + chips + plus) ─────────── */
@@ -739,8 +739,8 @@
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: 0 var(--space-3);
     height: 26px;
@@ -752,12 +752,12 @@
   }
 
   .search-box:focus-within {
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
     box-shadow: var(--shadow-focus);
   }
 
   :global(.search-icon) {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     flex-shrink: 0;
   }
 
@@ -768,7 +768,7 @@
     border: none;
     outline: none;
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-family: var(--font-ui);
     line-height: 1;
     height: 100%;
@@ -776,7 +776,7 @@
   }
 
   :global(.search-input)::placeholder {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .filter-chip {
@@ -784,22 +784,22 @@
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     background: none;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition-fast);
   }
 
   .filter-chip:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
   .filter-chip.active {
-    background: var(--bg-selected);
-    color: var(--text-primary);
-    border-color: var(--border-color);
+    background: var(--color-accent-subtle);
+    color: var(--color-text);
+    border-color: var(--color-border);
   }
 
   /* ── Plus button + dropdown ───────────────────────── */
@@ -813,19 +813,19 @@
     width: 26px;
     height: 26px;
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     transition: var(--transition-fast);
   }
 
   .plus-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
   .plus-btn:focus-visible {
     box-shadow: var(--shadow-focus);
@@ -838,8 +838,8 @@
 
   .plus-dropdown {
     position: fixed;
-    background: var(--bg-popup);
-    border: 1px solid var(--border-color);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-1) 0;
     min-width: 180px;
@@ -853,7 +853,7 @@
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .dd-item {
@@ -863,7 +863,7 @@
     width: 100%;
     padding: var(--space-2) var(--space-3);
     font-size: var(--font-size-xs);
-    color: var(--text-primary);
+    color: var(--color-text);
     background: none;
     border: none;
     cursor: pointer;
@@ -873,7 +873,7 @@
   }
 
   .dd-item:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .dd-item:focus-visible {
     box-shadow: var(--shadow-focus);
@@ -881,12 +881,12 @@
   .dd-item svg {
     width: 13px;
     height: 13px;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     flex-shrink: 0;
   }
 
   .dd-item-disabled {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     cursor: not-allowed;
   }
 
@@ -908,7 +908,7 @@
     border-bottom: 1px solid var(--separator);
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .col-on {
@@ -933,13 +933,13 @@
   }
 
   .ext-row:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .ext-row.selected {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
   .ext-row:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--accent-primary);
+    box-shadow: inset 0 0 0 2px var(--color-accent);
   }
 
   .row-name-cell {
@@ -961,13 +961,13 @@
   }
 
   .cmd-row:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .cmd-row.selected {
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
   }
   .cmd-row:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--accent-primary);
+    box-shadow: inset 0 0 0 2px var(--color-accent);
   }
 
   .cmd-indent {
@@ -985,7 +985,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     padding: 0;
     transition: var(--transition-fast);
   }
@@ -1007,13 +1007,13 @@
     width: 30px;
     height: 30px;
     border-radius: var(--radius-md);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: var(--font-size-md);
     font-weight: 700;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     overflow: hidden;
   }
 
@@ -1031,14 +1031,14 @@
   .ext-icon-letter {
     font-size: var(--font-size-sm);
     font-weight: 700;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .cmd-icon {
     width: 24px;
     height: 24px;
     border-radius: var(--radius-xs);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1049,7 +1049,7 @@
   .cmd-icon svg {
     width: 12px;
     height: 12px;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .cmd-icon-img {
@@ -1069,7 +1069,7 @@
     gap: var(--space-2);
     padding: var(--space-3) var(--space-3) var(--space-1);
     border-bottom: 1px solid var(--separator);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     position: sticky;
     top: 0;
     z-index: var(--z-base);
@@ -1080,14 +1080,14 @@
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .section-count {
     font-size: var(--font-size-2xs);
     font-weight: 500;
-    color: var(--text-tertiary);
-    background: var(--bg-tertiary);
+    color: var(--color-text-faint);
+    background: var(--color-surface);
     border-radius: var(--radius-full);
     padding: 2px 6px; /* design-ok: compact pill needs tighter vertical padding than --space-0-5 */
     min-width: 18px;
@@ -1096,7 +1096,7 @@
 
   .ext-title {
     font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1104,23 +1104,23 @@
 
   .row-type {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .row-muted {
     font-size: var(--font-size-sm);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .row-check {
     font-size: var(--font-size-sm);
-    color: var(--accent-primary);
+    color: var(--color-accent);
     text-align: center;
   }
 
   .update-link {
     font-size: var(--font-size-xs);
-    color: var(--accent-warning);
+    color: var(--color-warning);
     background: none;
     border: none;
     cursor: pointer;
@@ -1146,12 +1146,12 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xs);
   }
 
   .row-action-btn:hover {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     text-decoration: underline;
   }
 
@@ -1161,13 +1161,13 @@
     padding: 0;
     margin-left: var(--space-1);
     cursor: pointer;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-xs);
     line-height: 1;
   }
 
   .clear-btn:hover {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .alias-pill {
@@ -1178,8 +1178,8 @@
     min-width: 18px;
     padding: 0 var(--space-2);
     border-radius: var(--radius-xs);
-    background-color: color-mix(in srgb, var(--text-primary) 8%, transparent);
-    color: var(--text-secondary);
+    background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
+    color: var(--color-text-muted);
     font-size: var(--font-size-2xs);
     font-weight: 500;
     line-height: 1;

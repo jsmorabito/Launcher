@@ -1309,7 +1309,7 @@
   }
 
   .external-link {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     text-decoration: underline;
   }
 
@@ -1330,26 +1330,26 @@
 
   .providers-hint {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     line-height: 1.4;
   }
 
   .hint-star {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   /* Provider rows */
   .provider-row {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     overflow: hidden;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     transition: border-color var(--transition-smooth);
   }
 
   .provider-row.is-default {
-    border-color: color-mix(in srgb, var(--accent-primary) 40%, var(--border-color));
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
   }
 
   .row-header {
@@ -1376,14 +1376,14 @@
   }
 
   .row-chevron {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-sm);
     width: 1ch;
     flex: 0 0 auto;
   }
 
   .row-summary {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     margin-left: var(--space-2);
     overflow: hidden;
@@ -1395,15 +1395,15 @@
   .provider-label {
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .provider-type-badge {
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-tertiary);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
+    color: var(--color-text-faint);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--space-0-5) var(--space-1);
   }
@@ -1421,7 +1421,7 @@
     cursor: pointer;
     font-size: var(--font-size-xl);
     line-height: 1;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     transition:
       color var(--transition-smooth),
       opacity var(--transition-smooth);
@@ -1429,11 +1429,11 @@
   }
 
   .star-btn:hover:not(:disabled) {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .star-btn.is-filled {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .star-btn:disabled {
@@ -1448,7 +1448,7 @@
     cursor: pointer;
     font-size: var(--font-size-xl);
     line-height: 1;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     border-radius: var(--radius-sm);
     transition:
       color var(--transition-smooth),
@@ -1456,8 +1456,8 @@
   }
 
   .remove-btn:hover {
-    color: var(--accent-danger);
-    background: color-mix(in srgb, var(--accent-danger) 10%, transparent);
+    color: var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
   }
 
   .row-body {
@@ -1465,7 +1465,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--color-border);
   }
 
   .card-field {
@@ -1483,12 +1483,12 @@
 
   .field-label {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-weight: 500;
   }
 
   .field-hint {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-weight: 400;
   }
 
@@ -1508,17 +1508,17 @@
 
   .field-description {
     margin: 0;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-size: var(--font-size-xs);
     line-height: 1.4;
   }
 
   :global(.card-input) {
     padding: var(--space-2);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     width: 100%;
     box-sizing: border-box;
@@ -1527,15 +1527,15 @@
 
   :global(.card-input):focus {
     outline: none;
-    border-color: var(--accent-primary);
+    border-color: var(--color-accent);
   }
 
   .card-select {
     padding: var(--space-2);
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     width: 100%;
     box-sizing: border-box;
@@ -1566,9 +1566,9 @@
   /* Add provider button */
   .add-provider-btn {
     background: none;
-    border: 1px dashed var(--border-color);
+    border: 1px dashed var(--color-border);
     border-radius: var(--radius-md);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     padding: var(--space-2) var(--space-3);
     cursor: pointer;
@@ -1580,8 +1580,8 @@
   }
 
   .add-provider-btn:hover {
-    color: var(--text-primary);
-    border-color: var(--accent-primary);
+    color: var(--color-text);
+    border-color: var(--color-accent);
   }
 
   .model-manual-row {
@@ -1597,7 +1597,7 @@
   .text-btn {
     background: none;
     border: none;
-    color: var(--accent-primary);
+    color: var(--color-accent);
     font-size: var(--font-size-xs);
     cursor: pointer;
     padding: 0;
@@ -1610,8 +1610,8 @@
     flex-direction: column;
     gap: var(--space-2);
     padding: var(--space-3);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
   }
 
@@ -1636,27 +1636,27 @@
     font-weight: 600;
     padding: var(--space-0-5) var(--space-2);
     border-radius: var(--radius-full);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 
   .cli-status-pill.installed {
-    color: var(--accent-success);
-    background: var(--bg-primary);
+    color: var(--color-success);
+    background: var(--color-bg);
   }
 
   .cli-status-pill.not-installed {
-    color: var(--accent-danger);
-    background: var(--bg-primary);
+    color: var(--color-danger);
+    background: var(--color-bg);
   }
 
   .cli-status-pill.checking {
-    color: var(--text-tertiary);
-    background: var(--bg-primary);
+    color: var(--color-text-faint);
+    background: var(--color-bg);
   }
 
   .cli-version {
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-mono);
   }
 
@@ -1666,25 +1666,25 @@
     gap: var(--space-1);
     font-size: var(--font-size-xs);
     font-weight: 500;
-    color: var(--text-secondary);
-    background: var(--bg-primary);
+    color: var(--color-text-muted);
+    background: var(--color-bg);
     padding: var(--space-0-5) var(--space-2);
     border-radius: var(--radius-full);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
   }
 
   .cli-plan-badge {
     text-transform: capitalize;
     font-weight: 600;
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .cli-experimental-badge {
     display: inline-flex;
     align-items: center;
     padding: var(--space-0-5) var(--space-2);
-    background: color-mix(in srgb, var(--accent-warning) 14%, transparent);
-    color: var(--accent-warning);
+    background: color-mix(in srgb, var(--color-warning) 14%, transparent);
+    color: var(--color-warning);
     border-radius: var(--radius-xs);
     font-size: var(--font-size-2xs);
     font-weight: 600;
@@ -1696,25 +1696,25 @@
     display: inline-flex;
     align-items: center;
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     font-family: var(--font-mono);
   }
 
   .cli-path-note {
     margin: 0;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .cli-path-note code {
     font-family: var(--font-mono);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .cli-path-error {
     margin: 0;
     font-size: var(--font-size-xs);
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .anchor-group {

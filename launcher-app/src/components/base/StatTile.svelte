@@ -45,12 +45,12 @@
     font-weight: 600;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-variant-numeric: tabular-nums;
   }
 
   .stat-value.accent {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   .stat-label {
@@ -61,6 +61,6 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

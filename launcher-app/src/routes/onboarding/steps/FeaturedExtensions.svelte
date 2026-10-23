@@ -185,18 +185,18 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .step__title {
     margin: 0;
     font-size: var(--font-size-display);
     font-weight: 600;
     letter-spacing: var(--tracking-display);
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .step__lede {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-xl);
     line-height: 1.6;
   }
@@ -213,12 +213,12 @@
   }
   .hint {
     margin-left: var(--space-2);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
   }
   .error {
     margin-left: var(--space-2);
-    color: var(--accent-danger);
+    color: var(--color-danger);
     font-size: var(--font-size-sm);
   }
   .step__tip {
@@ -228,17 +228,17 @@
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
   }
   .step__tip-badge {
     align-self: flex-start;
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .step__tip-text {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-md);
     line-height: 1.5;
   }

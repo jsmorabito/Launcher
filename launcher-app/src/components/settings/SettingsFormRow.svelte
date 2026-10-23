@@ -52,7 +52,7 @@
     text-align: right;
     flex-shrink: 0;
     font-size: var(--font-size-sm);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-weight: 500;
     font-family: var(--font-ui);
   }
@@ -67,7 +67,7 @@
     padding: 0 var(--space-6) var(--space-2) calc(var(--space-6) + 9rem + var(--space-6));
     border-bottom: 1px solid var(--separator);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-family: var(--font-ui);
     line-height: 1.5;
   }

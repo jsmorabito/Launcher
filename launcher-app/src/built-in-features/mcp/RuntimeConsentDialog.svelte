@@ -25,13 +25,10 @@
   onEnter={() => onDecide(true)}
 >
   {#snippet children()}
-    <h2
-      id="mcp-runtime-consent-title"
-      class="text-xl font-semibold mb-4 text-[var(--text-primary)]"
-    >
+    <h2 id="mcp-runtime-consent-title" class="text-xl font-semibold mb-4 text-[var(--color-text)]">
       {t('features.mcp.ui.runtime_title')}
     </h2>
-    <p class="text-[var(--text-secondary)] mb-3">
+    <p class="text-[var(--color-text-muted)] mb-3">
       {t('features.mcp.ui.runtime_pre')} <strong>{name}</strong>
       {t('features.mcp.ui.runtime_post', { size: sizeLabel })}
     </p>
@@ -46,8 +43,8 @@
 
 <style>
   :global(.btn-confirm-primary) {
-    background: var(--accent-primary-fill) !important;
-    color: var(--text-on-accent) !important;
+    background: var(--color-accent-solid) !important;
+    color: var(--color-on-solid) !important;
     border: none !important;
   }
 

@@ -99,8 +99,8 @@
     display: flex;
     flex-direction: column;
     /* Fully opaque surface — content does NOT show the desktop through it. */
-    background: var(--bg-popup);
-    color: var(--text-primary);
+    background: var(--color-surface-raised);
+    color: var(--color-text);
     border-radius: var(--radius-xl);
     overflow: hidden;
   }
@@ -130,9 +130,9 @@
     -webkit-user-select: none;
   }
   .onboarding-frame__close {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     cursor: pointer;
     font-size: var(--font-size-sm);
     width: var(--size-md);
@@ -144,8 +144,8 @@
     transition: var(--transition-normal);
   }
   .onboarding-frame__close:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--color-hover);
+    color: var(--color-text);
   }
   .onboarding-frame__main {
     flex: 1;

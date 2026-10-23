@@ -329,11 +329,11 @@
   .portal-name {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0;
   }
   .portal-meta-dim {
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .field-group {
@@ -343,7 +343,7 @@
   }
   .field-label {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -351,10 +351,10 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-md);
     line-height: 1.6;
-    color: var(--text-primary);
+    color: var(--color-text);
     white-space: pre-wrap;
     word-break: break-all;
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-sm);
     padding: var(--space-4) var(--space-5);
     margin: 0;
@@ -377,7 +377,7 @@
   .form-title {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--color-text);
     margin: 0 0 var(--space-6);
   }
   .form-body {

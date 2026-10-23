@@ -27,7 +27,7 @@
   <!-- Upsell overlay — only shown when user IS logged in but lacks the entitlement -->
   <div
     class="relative rounded-lg overflow-hidden"
-    style="border: 1px solid var(--separator); background: var(--bg-secondary);"
+    style="border: 1px solid var(--separator); background: var(--color-bg-subtle);"
     role="region"
     aria-label="{featureName} — upgrade required"
   >
@@ -39,9 +39,9 @@
     <!-- Overlay -->
     <div
       class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center"
-      style="background: color-mix(in srgb, var(--bg-primary) 85%, transparent);"
+      style="background: color-mix(in srgb, var(--color-bg) 85%, transparent);"
     >
-      <div style="color: var(--text-secondary)" aria-hidden="true">
+      <div style="color: var(--color-text-muted)" aria-hidden="true">
         <svg
           width="28"
           height="28"
@@ -56,15 +56,15 @@
           <path d="M7 11V7a5 5 0 0110 0v4" />
         </svg>
       </div>
-      <p class="text-sm font-medium" style="color: var(--text-primary)">
+      <p class="text-sm font-medium" style="color: var(--color-text)">
         {t('entitlement.requires_subscription', { feature: featureName })}
       </p>
       {#if !authService.isLoggedIn}
-        <p class="text-xs" style="color: var(--text-secondary)">{t('entitlement.sign_in')}</p>
+        <p class="text-xs" style="color: var(--color-text-muted)">{t('entitlement.sign_in')}</p>
       {/if}
       <button
         class="mt-1 px-4 py-2 rounded-lg text-sm font-medium"
-        style="background: var(--bg-tertiary); border: 1px solid var(--separator); color: var(--text-primary); cursor: pointer;"
+        style="background: var(--color-surface); border: 1px solid var(--separator); color: var(--color-text); cursor: pointer;"
         onclick={() => openUrl('https://asyar.org/pricing')}
       >
         {t('entitlement.view_plans')}

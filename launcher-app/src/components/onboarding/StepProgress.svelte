@@ -21,12 +21,12 @@
     width: 6px;
     height: 6px;
     border-radius: var(--radius-full);
-    background: var(--border-color);
+    background: var(--color-border);
     transition: var(--transition-smooth);
   }
   .dot--active {
     width: 22px;
-    background: var(--launcher-brand);
-    box-shadow: 0 0 12px var(--launcher-brand);
+    background: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent);
   }
 </style>

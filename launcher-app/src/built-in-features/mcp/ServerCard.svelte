@@ -59,13 +59,13 @@
 
 <style>
   .server-card {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-3);
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
   }
 
   .card-title-row {
@@ -90,7 +90,7 @@
   .server-description {
     margin: 0;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .card-meta {
@@ -100,7 +100,7 @@
 
   .meta-item {
     font-size: var(--font-size-xs);
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 
   .card-actions {

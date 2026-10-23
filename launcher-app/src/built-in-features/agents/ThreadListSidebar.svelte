@@ -45,7 +45,7 @@
   .thread-sidebar {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--color-border);
     flex-shrink: 0;
   }
   .thread-list {

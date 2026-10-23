@@ -32,7 +32,7 @@
     padding: var(--space-5);
     font-size: var(--font-size-sm);
     line-height: 1.5;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
   .help-panel h3 {
     margin: 0 0 var(--space-3);
@@ -40,7 +40,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   .help-panel p {
     margin: 0 0 var(--space-3);
@@ -55,18 +55,18 @@
   .help-panel kbd {
     display: inline-block;
     padding: var(--space-0-5) var(--space-1-5);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
   }
   .help-panel code {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
   .muted {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

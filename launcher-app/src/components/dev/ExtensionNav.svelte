@@ -64,7 +64,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   ul {
     list-style: none;
@@ -80,17 +80,17 @@
     padding: var(--space-2) var(--space-5);
     border: 0;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     text-align: left;
     cursor: pointer;
   }
   .nav-row:hover {
-    background: var(--bg-hover);
+    background: var(--color-hover);
   }
   .nav-row.selected {
-    background: var(--bg-selected);
-    color: var(--accent-primary);
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
   }
   .name {
     overflow: hidden;
@@ -114,11 +114,11 @@
     line-height: 14px;
   }
   .role-badge.w {
-    background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
-    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color: var(--color-accent);
   }
   .role-badge.v {
-    background: var(--launcher-brand-muted);
-    color: var(--launcher-brand);
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
   }
 </style>

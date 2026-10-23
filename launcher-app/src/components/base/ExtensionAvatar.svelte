@@ -35,15 +35,15 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     flex-shrink: 0;
     letter-spacing: -0.02em;
     user-select: none;
   }
 
   .image-container {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
     padding: 0;
     overflow: hidden;
   }

@@ -24,8 +24,8 @@ pnpm add launcher-sdk
 
 The `launcher` CLI drives the full extension development workflow:
 
-| Command           | Description                                                     |
-| ----------------- | --------------------------------------------------------------- |
+| Command              | Description                                                     |
+| -------------------- | --------------------------------------------------------------- |
 | `launcher dev`       | Start development mode with hot reload                          |
 | `launcher build`     | Production build of your extension                              |
 | `launcher validate`  | Check manifest and project structure                            |
@@ -33,7 +33,7 @@ The `launcher` CLI drives the full extension development workflow:
 | `launcher unlink`    | Remove symlink and unregister from dev extensions               |
 | `launcher attach`    | Register an extension directory for dev loading in the launcher |
 | `launcher detach`    | Unregister a dev extension from the launcher                    |
-| `launcher publish`   | Build, package, and publish to the Launcher Store                  |
+| `launcher publish`   | Build, package, and publish to the Launcher Store               |
 | `launcher doctor`    | Diagnose environment issues                                     |
 | `launcher --version` | Show CLI version                                                |
 
@@ -95,11 +95,11 @@ Refer to the [Create an Extension Tutorial](../docs/tutorials/create-an-extensio
 
 ### Subpath exports
 
-| Subpath               | Asserts                                             | Surface                                                                                                                                                                                                                                                                        | Use from                                                                                                                                               |
-| --------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Subpath                  | Asserts                                                | Surface                                                                                                                                                                                                                                                                        | Use from                                                                                                                                               |
+| ------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `launcher-sdk/worker`    | `window.__LAUNCHER_ROLE__ === "worker"` at module load | `ExtensionContext` bound to the **worker proxy bag** (no DOM-dependent helpers) — `log`, `notifications`, `storage`, `cache`, `search`, `network`, `shell`, `ai`, `oauth`, `fs`, `application`, `power`, `systemEvents`, `timers`, `statusBar`, `state`, `commands`, `actions` | A Tier 2 extension's `worker.html` (the always-on hidden iframe).                                                                                      |
 | `launcher-sdk/view`      | `window.__LAUNCHER_ROLE__ === "view"` at module load   | Re-exports the full SDK surface plus DOM helpers (`registerIconElement`, theme injector). `ExtensionContext` is bound to the **full proxy bag** including view-only services: `clipboard`, `selection`, `interop`, `feedback`, plus the worker-shared services above.          | A Tier 2 extension's `view.html` (the on-demand UI iframe).                                                                                            |
-| `launcher-sdk/contracts` | Nothing — neutral, launcher-safe                    | Types, namespace constants, `MessageBroker`, `ExtensionBridge`, `ExtensionContextCore`. **No role assertion**, no top-level DOM requirement.                                                                                                                                   | Launcher code (Tier 1 host, built-in features), SDK-internal modules, anything that needs types + IPC primitives without committing to an iframe role. |
+| `launcher-sdk/contracts` | Nothing — neutral, launcher-safe                       | Types, namespace constants, `MessageBroker`, `ExtensionBridge`, `ExtensionContextCore`. **No role assertion**, no top-level DOM requirement.                                                                                                                                   | Launcher code (Tier 1 host, built-in features), SDK-internal modules, anything that needs types + IPC primitives without committing to an iframe role. |
 
 The role assertion fires at module load. If a worker bundle imports
 `launcher-sdk/view` (or vice-versa), execution stops with a clear error
@@ -256,8 +256,8 @@ No setup needed — just use the variables in your CSS.
 
 ```css
 .card {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--color-bg-subtle);
+  color: var(--color-text);
   border: 1px solid var(--separator);
   border-radius: var(--radius-md);
   padding: var(--space-6);
@@ -273,19 +273,19 @@ import 'launcher-sdk/tokens.css';
 
 Available token categories
 
-| Category      | Variables                                                                          |
-| ------------- | ---------------------------------------------------------------------------------- |
-| Backgrounds   | --bg-primary, --bg-secondary, --bg-tertiary, --bg-hover, --bg-selected, --bg-popup |
-| Text          | --text-primary, --text-secondary, --text-tertiary                                  |
-| Borders       | --border-color, --separator                                                        |
-| Accent        | --accent-primary, --accent-success, --accent-warning, --accent-danger              |
-| Brand         | --launcher-brand, --launcher-brand-hover, --launcher-brand-muted, --launcher-brand-subtle      |
-| Shadows       | --shadow-xs → --shadow-xl, --shadow-popup, --shadow-focus                          |
-| Radius        | --radius-xs → --radius-full                                                        |
-| Spacing       | --space-1 (4px) → --space-11 (48px)                                                |
-| Font sizes    | --font-size-2xs (10px) → --font-size-display (2.25rem)                             |
-| Font families | --font-ui (Satoshi), --font-mono (JetBrains Mono)                                  |
-| Transitions   | --transition-fast, --transition-normal, --transition-smooth, --transition-slow     |
+| Category      | Variables                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| Backgrounds   | --color-bg, --color-bg-subtle, --color-surface, --color-hover, --color-accent-subtle, --color-surface-raised |
+| Text          | --color-text, --color-text-muted, --color-text-faint                                                         |
+| Borders       | --color-border, --separator                                                                                  |
+| Accent        | --color-accent, --color-success, --color-warning, --color-danger                                             |
+| Brand         | --color-accent, --color-accent-hover, --color-accent-subtle, --color-accent-faint                            |
+| Shadows       | --shadow-xs → --shadow-xl, --shadow-popup, --shadow-focus                                                    |
+| Radius        | --radius-xs → --radius-full                                                                                  |
+| Spacing       | --space-1 (4px) → --space-11 (48px)                                                                          |
+| Font sizes    | --font-size-2xs (10px) → --font-size-display (2.25rem)                                                       |
+| Font families | --font-ui (Satoshi), --font-mono (JetBrains Mono)                                                            |
+| Transitions   | --transition-fast, --transition-normal, --transition-smooth, --transition-slow                               |
 
 See tokens.css for the full list with fallback values.
 

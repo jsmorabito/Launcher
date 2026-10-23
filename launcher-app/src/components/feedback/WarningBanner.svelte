@@ -27,8 +27,8 @@
     display: flex;
     gap: var(--space-5);
     padding: var(--space-5);
-    background: color-mix(in srgb, var(--accent-warning) 10%, transparent);
-    border: 1px solid var(--accent-warning);
+    background: color-mix(in srgb, var(--color-warning) 10%, transparent);
+    border: 1px solid var(--color-warning);
     border-radius: var(--radius-md);
     align-items: flex-start;
   }

@@ -217,7 +217,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    background: var(--bg-selected);
+    background: var(--color-accent-subtle);
     border: 1px solid transparent;
     border-radius: var(--radius-md);
     padding: var(--space-1) calc(var(--space-3) - var(--space-1)) var(--space-1) var(--space-3);
@@ -237,26 +237,26 @@
      the field the caret is in, always the selection colour. */
   .arg-chip[data-border='seeded'] {
     border-style: dashed;
-    border-color: var(--text-tertiary);
+    border-color: var(--color-text-faint);
   }
   .arg-chip[data-border='selected'] {
-    border-color: var(--text-tertiary);
+    border-color: var(--color-text-faint);
   }
   .arg-chip[data-border='selected-dashed'] {
     border-style: dashed;
-    border-color: var(--text-tertiary);
+    border-color: var(--color-text-faint);
   }
   .arg-chip[data-border='needs-value'] {
-    border-color: color-mix(in srgb, var(--accent-danger) 45%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 45%, transparent);
   }
   .arg-chip[data-border='needs-any'] {
     border-style: dashed;
-    border-color: color-mix(in srgb, var(--accent-danger) 45%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 45%, transparent);
   }
   /* The complaint tint is orthogonal to the border: it marks the field even
      while the caret is in it and the border shows the selection colour. */
   .arg-chip--complaint {
-    background: color-mix(in srgb, var(--accent-danger) 12%, var(--bg-selected));
+    background: color-mix(in srgb, var(--color-danger) 12%, var(--color-accent-subtle));
   }
   /* The hint row itself is click-through so the gaps still focus the query;
      the chips opt back in, and a dropdown's trigger defers to the chip. */
@@ -272,7 +272,7 @@
     border: none;
     outline: none;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     font-weight: 500;
     font-family: var(--font-ui);
@@ -284,14 +284,14 @@
     outline: none;
   }
   :global(.arg-input::placeholder) {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   /* A value the author supplied rather than the user. Grey like the
      placeholder, because neither is the user's own; the chip's dashed border
      is what says this one is a real value that will be sent. */
   :global(.arg-input--seeded),
   .arg-ghost-text--seeded {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
   /* Mirrors the field's type so offsetWidth is the width the value renders
      at. Out of flow, so it cannot widen the chip it is measured inside. */
@@ -309,7 +309,7 @@
   /* Same type as the real field, so the preview and the chip the user tabs
      into are the same width. */
   .arg-ghost-text {
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-sm);
     font-weight: 500;
     font-family: var(--font-ui);
@@ -319,6 +319,6 @@
     white-space: nowrap;
   }
   .arg-ghost-text--hint {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 </style>

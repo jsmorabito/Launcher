@@ -35,56 +35,56 @@ Surfaces are deep navy rather than neutral grey, and translucent — an Launcher
 surface lets the desktop read through it. Opacity rises with elevation: the
 nearer a surface is, the less of the ground it lets past.
 
-| Token                         | Dark default              | Use for                             |
-| :---------------------------- | :------------------------ | :---------------------------------- |
-| `--bg-primary`                | `rgba(14, 16, 28, 0.72)`  | Main panel/window background        |
-| `--bg-secondary`              | `rgba(24, 27, 42, 0.7)`   | Cards, sidebars, secondary surfaces |
-| `--bg-tertiary`               | `rgba(32, 36, 54, 0.7)`   | Input fields, subtle backgrounds    |
-| `--bg-hover`                  | `rgba(56, 63, 92, 0.5)`   | Hover state on interactive elements |
-| `--bg-selected`               | `rgba(61, 107, 245, .18)` | Active/selected state in lists      |
-| `--bg-popup`                  | `rgb(16, 18, 31)`         | Opaque popups and modals            |
-| `--bg-secondary-full-opacity` | `rgb(24, 27, 42)`         | bg-secondary without transparency   |
+| Token                      | Dark default              | Use for                             |
+| :------------------------- | :------------------------ | :---------------------------------- |
+| `--color-bg`               | `rgba(14, 16, 28, 0.72)`  | Main panel/window background        |
+| `--color-bg-subtle`        | `rgba(24, 27, 42, 0.7)`   | Cards, sidebars, secondary surfaces |
+| `--color-surface`          | `rgba(32, 36, 54, 0.7)`   | Input fields, subtle backgrounds    |
+| `--color-hover`            | `rgba(56, 63, 92, 0.5)`   | Hover state on interactive elements |
+| `--color-accent-subtle`    | `rgba(61, 107, 245, .18)` | Active/selected state in lists      |
+| `--color-surface-raised`   | `rgb(16, 18, 31)`         | Opaque popups and modals            |
+| `--color-bg-subtle-opaque` | `rgb(24, 27, 42)`         | bg-secondary without transparency   |
 
-`--bg-selected` is the only surface token carrying chroma, and that is what
-keeps selection distinct from hover at a glance. Keep `--bg-hover` neutral —
+`--color-accent-subtle` is the only surface token carrying chroma, and that is what
+keeps selection distinct from hover at a glance. Keep `--color-hover` neutral —
 that difference is load-bearing, not stylistic.
 
-The selected row is a **flat band**: `--bg-selected` plus a faint inset rim,
+The selected row is a **flat band**: `--color-accent-subtle` plus a faint inset rim,
 and nothing else. No gradient, no border, no accent seam.
 
 ```css
 .card {
-  background: var(--bg-secondary);
+  background: var(--color-bg-subtle);
 }
 .input {
-  background: var(--bg-tertiary);
+  background: var(--color-surface);
 }
 .item:hover {
-  background: var(--bg-hover);
+  background: var(--color-hover);
 }
 .item.selected {
-  background: var(--bg-selected);
+  background: var(--color-accent-subtle);
 }
 ```
 
 ### Text
 
-| Token              | Dark default                | Use for                                                                                                                                                  |
-| :----------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--text-primary`   | `rgba(237, 240, 252, 0.96)` | Headings, labels, primary content                                                                                                                        |
-| `--text-secondary` | `rgba(196, 203, 227, 0.68)` | Subtitles, metadata, descriptions                                                                                                                        |
-| `--text-tertiary`  | `rgba(170, 179, 209, 0.58)` | Placeholders, hints, disabled text                                                                                                                       |
-| `--text-on-accent` | `#ffffff`                   | Text/icons **on** an `--accent-*-fill` surface. Constant across themes, and every fill is verified to carry it at 4.5:1, so never hardcode `#fff` for it |
+| Token                | Dark default                | Use for                                                                                                                                                  |
+| :------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--color-text`       | `rgba(237, 240, 252, 0.96)` | Headings, labels, primary content                                                                                                                        |
+| `--color-text-muted` | `rgba(196, 203, 227, 0.68)` | Subtitles, metadata, descriptions                                                                                                                        |
+| `--color-text-faint` | `rgba(170, 179, 209, 0.58)` | Placeholders, hints, disabled text                                                                                                                       |
+| `--color-on-solid`   | `#ffffff`                   | Text/icons **on** an `--accent-*-fill` surface. Constant across themes, and every fill is verified to carry it at 4.5:1, so never hardcode `#fff` for it |
 
 ```css
 h2 {
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 p {
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
 }
 ::placeholder {
-  color: var(--text-tertiary);
+  color: var(--color-text-faint);
 }
 ```
 
@@ -92,7 +92,7 @@ p {
 
 | Token            | Dark default               | Use for                                           |
 | :--------------- | :------------------------- | :------------------------------------------------ |
-| `--border-color` | `rgba(140, 152, 200, .18)` | Borders on interactive elements (inputs, buttons) |
+| `--color-border` | `rgba(140, 152, 200, .18)` | Borders on interactive elements (inputs, buttons) |
 | `--separator`    | `rgba(140, 152, 200, .13)` | Dividers between list items and sections          |
 | `--divider-soft` | `rgba(160, 172, 220, .06)` | The faintest hairline                             |
 | `--rim-light`    | `rgba(255, 255, 255, .1)`  | Edge highlight, inside a shadow or gradient       |
@@ -100,7 +100,7 @@ p {
 
 **Prefer alignment to a border.** Two things sharing a left edge already read
 as one column, and a border on top of that is a line the layout has already
-drawn. Reach for `--border-color` when the job is genuinely "this is an
+drawn. Reach for `--color-border` when the job is genuinely "this is an
 interactive control with an outline".
 
 `--rim-light` and `--rim-shade` are ingredients rather than standalone
@@ -114,7 +114,7 @@ direction read as a rendering mistake.
 
 ```css
 .input {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
 }
 .divider {
   border-top: 1px solid var(--separator);
@@ -134,48 +134,48 @@ Launcher ships both.
 
 **The voice** — text, icons, strokes, focus rings, and the source for a tint:
 
-| Token                  | Dark value      | Use for                                            |
-| :--------------------- | :-------------- | :------------------------------------------------- |
-| `--accent-primary`     | `#7B9CFF`       | Primary actions, focus rings, highlights           |
-| `--accent-primary-rgb` | `123, 156, 255` | When you need rgba(var(--accent-primary-rgb), 0.2) |
-| `--accent-success`     | `#3ED18F`       | Success states, confirmations                      |
-| `--accent-warning`     | `#E9A83F`       | Warnings, caution states                           |
-| `--accent-danger`      | `#FF6B77`       | Errors, destructive actions                        |
+| Token                | Dark value      | Use for                                          |
+| :------------------- | :-------------- | :----------------------------------------------- |
+| `--color-accent`     | `#7B9CFF`       | Primary actions, focus rings, highlights         |
+| `--color-accent-rgb` | `123, 156, 255` | When you need rgba(var(--color-accent-rgb), 0.2) |
+| `--color-success`    | `#3ED18F`       | Success states, confirmations                    |
+| `--color-warning`    | `#E9A83F`       | Warnings, caution states                         |
+| `--color-danger`     | `#FF6B77`       | Errors, destructive actions                      |
 
-**The ground** — the background of a filled surface carrying `--text-on-accent`:
+**The ground** — the background of a filled surface carrying `--color-on-solid`:
 
-| Token                   | Dark value | Contrast with `--text-on-accent` |
+| Token                   | Dark value | Contrast with `--color-on-solid` |
 | :---------------------- | :--------- | :------------------------------- |
-| `--accent-primary-fill` | `#3D6BF5`  | 4.55:1                           |
-| `--accent-success-fill` | `#0F7F58`  | 5.00:1                           |
-| `--accent-warning-fill` | `#8F5D0A`  | 5.62:1                           |
-| `--accent-danger-fill`  | `#C0303E`  | 5.62:1                           |
+| `--color-accent-solid`  | `#3D6BF5`  | 4.55:1                           |
+| `--color-success-solid` | `#0F7F58`  | 5.00:1                           |
+| `--color-warning-solid` | `#8F5D0A`  | 5.62:1                           |
+| `--color-danger-solid`  | `#C0303E`  | 5.62:1                           |
 
-The test is mechanical: **does this surface have `--text-on-accent` on it?**
+The test is mechanical: **does this surface have `--color-on-solid` on it?**
 Yes → `-fill`. No → the voice.
 
 ```css
 /* A filled button, a checked box, a coloured tile — carries white text */
 .button-primary {
-  background: var(--accent-primary-fill);
-  color: var(--text-on-accent);
+  background: var(--color-accent-solid);
+  color: var(--color-on-solid);
 }
 
 /* A status dot, a meter bar, an accent seam — carries no text */
 .status-dot {
-  background: var(--accent-success);
+  background: var(--color-success);
 }
 
 /* An accent label or link */
 .link {
-  color: var(--accent-primary);
+  color: var(--color-accent);
 }
 
 /* A tinted state background — the house formula. Voice ramp for both, so
    the tint and the text always agree. */
 .error-banner {
-  background: color-mix(in srgb, var(--accent-danger) 12%, transparent);
-  color: var(--accent-danger);
+  background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+  color: var(--color-danger);
 }
 ```
 
@@ -189,24 +189,24 @@ product can spend. (Brand was a teal before this design system, while the
 accent was Apple's system blue — so the app's most-used colour belonged to
 Apple and the brand token was decorative.)
 
-| Token                  | Dark value                  |
-| :--------------------- | :-------------------------- |
-| `--launcher-brand`        | `#7B9CFF`                   |
-| `--launcher-brand-hover`  | `#9DB4FF`                   |
-| `--launcher-brand-muted`  | `rgba(123, 156, 255, 0.18)` |
-| `--launcher-brand-subtle` | `rgba(123, 156, 255, 0.09)` |
+| Token                   | Dark value                  |
+| :---------------------- | :-------------------------- |
+| `--color-accent`        | `#7B9CFF`                   |
+| `--color-accent-hover`  | `#9DB4FF`                   |
+| `--color-accent-subtle` | `rgba(123, 156, 255, 0.18)` |
+| `--color-accent-faint`  | `rgba(123, 156, 255, 0.09)` |
 
 ### Shadows
 
-| Token            | Use for                                         |
-| :--------------- | :---------------------------------------------- |
-| `--shadow-xs`    | Subtle lift on small elements                   |
-| `--shadow-sm`    | Cards, list items                               |
-| `--shadow-md`    | Dropdowns, popovers                             |
-| `--shadow-lg`    | Modals, elevated panels                         |
-| `--shadow-xl`    | Large overlays                                  |
-| `--shadow-popup` | Fixed popups and command palettes               |
-| `--shadow-focus` | Focus ring (0 0 0 2px var(--launcher-brand-muted)) |
+| Token            | Use for                                           |
+| :--------------- | :------------------------------------------------ |
+| `--shadow-xs`    | Subtle lift on small elements                     |
+| `--shadow-sm`    | Cards, list items                                 |
+| `--shadow-md`    | Dropdowns, popovers                               |
+| `--shadow-lg`    | Modals, elevated panels                           |
+| `--shadow-xl`    | Large overlays                                    |
+| `--shadow-popup` | Fixed popups and command palettes                 |
+| `--shadow-focus` | Focus ring (0 0 0 2px var(--color-accent-subtle)) |
 
 ```css
 .card {
@@ -430,13 +430,13 @@ Kept as convenience shorthands over the motion tokens above.
 Use these for anything syntax-highlighted, so a snippet in your extension
 matches one rendered by the host.
 
-| Token               | Dark default | Use for                                 |
-| :------------------ | :----------- | :-------------------------------------- |
-| `--syntax-comment`  | `#637777`    | Comments                                |
-| `--syntax-keyword`  | `#c792ea`    | Keywords, at-rules, booleans            |
-| `--syntax-string`   | `#c3e88d`    | Strings, attribute names, inserted text |
-| `--syntax-number`   | `#f07178`    | Numbers, properties, tags, constants    |
-| `--syntax-function` | `#82aaff`    | Function and class names, object keys   |
+| Token                    | Dark default | Use for                                 |
+| :----------------------- | :----------- | :-------------------------------------- |
+| `--color-syntax-comment` | `#637777`    | Comments                                |
+| `--color-syntax-keyword` | `#c792ea`    | Keywords, at-rules, booleans            |
+| `--color-syntax-string`  | `#c3e88d`    | Strings, attribute names, inserted text |
+| `--color-syntax-number`  | `#f07178`    | Numbers, properties, tags, constants    |
+| `--color-syntax-title`   | `#82aaff`    | Function and class names, object keys   |
 
 ### Controls
 
@@ -459,7 +459,7 @@ A realistic card component using only design tokens:
 
 <style>
   .card {
-    background: var(--bg-secondary);
+    background: var(--color-bg-subtle);
     border-radius: var(--radius-md);
     padding: var(--space-6);
     font-family: var(--font-ui);
@@ -485,20 +485,20 @@ A realistic card component using only design tokens:
   }
 
   .title {
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: var(--font-size-base);
   }
 
   .badge {
-    background: var(--launcher-brand-muted);
-    color: var(--launcher-brand);
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
     font-size: var(--font-size-xs);
     padding: var(--space-0-5) var(--space-2);
     border-radius: var(--radius-full);
   }
 
   .description {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-sm);
   }
 </style>

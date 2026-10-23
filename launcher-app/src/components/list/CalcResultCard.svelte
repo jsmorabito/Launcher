@@ -22,7 +22,7 @@
   // Keys are the icons emitted by the calculator extension (one per CalcKind).
   const CALC_ICONS = $derived<Record<string, CalcIconMeta>>({
     '🧮': {
-      color: 'var(--accent-primary)',
+      color: 'var(--color-accent)',
       label: t('components.calc_card.calculator'),
       name: 'calculator',
     },
@@ -44,7 +44,7 @@
     '➗': { color: 'rgb(0,199,190)', label: t('components.calc_card.ratio'), name: 'calc-ratio' },
   });
   const CALC_ICON_FALLBACK: CalcIconMeta = {
-    color: 'var(--accent-primary)',
+    color: 'var(--color-accent)',
     label: '',
     name: 'calculator',
   };
@@ -111,7 +111,7 @@
         color-mix(in srgb, var(--cat-color) 10%, transparent),
         transparent 65%
       ),
-      var(--bg-secondary);
+      var(--color-bg-subtle);
     border: 1px solid color-mix(in srgb, var(--cat-color) 12%, var(--separator));
     box-shadow:
       0 1px 3px color-mix(in srgb, var(--cat-color) 6%, transparent),
@@ -129,7 +129,7 @@
         color-mix(in srgb, var(--cat-color) 14%, transparent),
         transparent 65%
       ),
-      var(--bg-secondary);
+      var(--color-bg-subtle);
     box-shadow:
       0 2px 6px color-mix(in srgb, var(--cat-color) 10%, transparent),
       0 6px 16px rgba(0, 0, 0, 0.06);
@@ -142,7 +142,7 @@
         color-mix(in srgb, var(--cat-color) 16%, transparent),
         transparent 65%
       ),
-      var(--bg-secondary);
+      var(--color-bg-subtle);
     border-color: color-mix(in srgb, var(--cat-color) 35%, transparent);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--cat-color) 15%, transparent),
@@ -181,7 +181,7 @@
       var(--cat-color),
       color-mix(in srgb, var(--cat-color) 72%, black)
     );
-    color: var(--text-on-accent);
+    color: var(--color-on-solid);
     box-shadow:
       0 2px 6px color-mix(in srgb, var(--cat-color) 35%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -190,7 +190,7 @@
   .calc-header-label {
     font-size: var(--font-size-xs);
     font-weight: 600;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -232,7 +232,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-display);
     font-weight: 300;
-    color: var(--text-primary);
+    color: var(--color-text);
     line-height: 1.1;
     white-space: nowrap;
     overflow: hidden;
@@ -253,6 +253,6 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
   }
 </style>

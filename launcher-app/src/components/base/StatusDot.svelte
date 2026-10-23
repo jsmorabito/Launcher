@@ -23,16 +23,16 @@
   }
 
   .dot-success {
-    background-color: var(--accent-success);
+    background-color: var(--color-success);
   }
   .dot-warning {
-    background-color: var(--accent-warning);
+    background-color: var(--color-warning);
   }
   .dot-danger {
-    background-color: var(--accent-danger);
+    background-color: var(--color-danger);
   }
   .dot-info {
-    background-color: var(--accent-primary);
+    background-color: var(--color-accent);
   }
 
   .pulse {

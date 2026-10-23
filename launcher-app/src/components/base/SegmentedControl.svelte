@@ -45,8 +45,8 @@
     gap: var(--space-1);
     padding: var(--space-1);
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary-full-opacity);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-subtle-opaque);
   }
 
   .segment {
@@ -57,7 +57,7 @@
     font-family: var(--font-ui);
     font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--text-tertiary);
+    color: var(--color-text-faint);
     background: transparent;
     cursor: pointer;
     white-space: nowrap;
@@ -66,12 +66,12 @@
   }
 
   .segment:hover:not(.active) {
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
   }
 
   .segment.active {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+    background: var(--color-surface);
+    color: var(--color-text);
     box-shadow: var(--shadow-xs);
   }
 

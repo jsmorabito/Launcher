@@ -18,7 +18,7 @@
     border: 1px solid var(--separator);
     border-radius: var(--radius-md);
     padding: var(--space-3);
-    background: var(--bg-tertiary);
+    background: var(--color-surface);
   }
   .lhint__badge {
     align-self: flex-start;
@@ -26,12 +26,12 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--launcher-brand);
+    color: var(--color-accent);
   }
   .lhint__steps {
     margin: 0;
     padding-left: var(--space-4);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     font-size: var(--font-size-lg);
     line-height: 1.8;
   }

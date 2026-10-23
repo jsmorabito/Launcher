@@ -47,11 +47,11 @@
   }
 
   .error-state-icon {
-    color: var(--accent-danger);
+    color: var(--color-danger);
   }
 
   .error-state-message {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .error-state-action {

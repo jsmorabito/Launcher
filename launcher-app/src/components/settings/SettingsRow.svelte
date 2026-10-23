@@ -43,7 +43,7 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--border-color);
+    background: var(--color-border);
   }
 
   .settings-row-text {
@@ -54,13 +54,13 @@
   .settings-row-label {
     font-size: var(--font-size-md);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .settings-row-description {
     margin-top: var(--space-1);
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
+    color: var(--color-text-muted);
     line-height: 1.45;
   }
 
