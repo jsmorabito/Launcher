@@ -144,7 +144,7 @@ try {
     console.log('\n[dry-run] no changes pushed.');
   } else {
     console.log(`\n✓ ${tag} pushed.${prUrl ? ` PR: ${prUrl}` : ' Open a PR manually.'}`);
-    console.log('  release-launcher.yml will build all 6 targets, publish, and notify asyar.org.');
+    console.log('  release-launcher.yml will build all 6 targets, publish.');
   }
 } catch (e) {
   console.error(`\n✖ ${e.message}`);

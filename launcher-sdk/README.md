@@ -1,6 +1,6 @@
 # Launcher SDK
 
-This package (`launcher-sdk`) provides the Software Development Kit (SDK) for building extensions for the [Launcher Launcher](https://github.com/Xoshbin/asyar). It defines the core interfaces, types, and services that extensions interact with.
+This package (`launcher-sdk`) provides the Software Development Kit (SDK) for building extensions for the [Launcher Launcher](https://github.com/jsmorabito/Launcher). It defines the core interfaces, types, and services that extensions interact with.
 
 ## Purpose
 
@@ -56,7 +56,7 @@ Unlike `launcher link`, which uses symlinks/copying into a specialized system di
 
 ## For Core Developers
 
-If you are contributing to the SDK itself, use the workspace setup described in the [Launcher README](https://github.com/Xoshbin/asyar#development-setup).
+If you are contributing to the SDK itself, use the workspace setup described in the [Launcher README](https://github.com/jsmorabito/Launcher#development-setup).
 
 ### Building
 

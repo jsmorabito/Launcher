@@ -7,7 +7,7 @@ description: Reference for the Launcher monorepo structure, SDK workspace linkin
 
 ## Repository Structure
 
-Launcher lives in a single monorepo at **`github.com/Xoshbin/asyar`** (cloned locally at `~/develop/Launcher-Project/`):
+Launcher lives in a single monorepo at **`github.com/jsmorabito/Launcher`** (cloned locally at `~/develop/Launcher-Project/`):
 
 ```
 launcher/                       ← monorepo root (this IS the GitHub repo)

@@ -8,7 +8,7 @@ import { logService } from '../log/logService';
 export const FEEDBACK_NUDGE_DAYS = 3;
 export const SPREAD_NUDGE_DAYS = 14;
 
-const LAUNCHER_REPO_URL = 'https://github.com/Xoshbin/asyar-launcher';
+const LAUNCHER_REPO_URL = 'https://github.com/jsmorabito/Launcher';
 
 async function markSeen(): Promise<void> {
   await settingsService.updateSettings('feedback', { promptSeen: true });

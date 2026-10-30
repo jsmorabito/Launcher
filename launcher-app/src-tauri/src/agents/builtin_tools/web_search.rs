@@ -21,7 +21,7 @@ const SERPLY_MAX_NUM: usize = 10;
 pub const LAUNCHER_API_USER_AGENT: &str = concat!(
     "launcher/",
     env!("CARGO_PKG_VERSION"),
-    " (https://github.com/Xoshbin/asyar)"
+    " (https://github.com/jsmorabito/Launcher)"
 );
 
 static HTML_TAG_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"<[^>]+>").unwrap());

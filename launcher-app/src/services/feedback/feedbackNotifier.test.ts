@@ -200,7 +200,7 @@ describe('checkAndNotifySpread', () => {
 
     expect(openerService.open).toHaveBeenCalledWith(
       null,
-      'https://github.com/Xoshbin/asyar-launcher',
+      'https://github.com/jsmorabito/Launcher',
     );
     expect(settingsService.updateSettings).toHaveBeenCalledWith('feedback', {
       spreadPromptSeen: true,

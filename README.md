@@ -77,19 +77,12 @@ Don't take my word for it: [`benchmarks/bench.sh`](benchmarks/README.md) measure
 **macOS / Linux:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Xoshbin/asyar/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/jsmorabito/Launcher/main/install.sh | sh
 ```
-
-**macOS, via Homebrew:**
-
-```bash
-brew tap Xoshbin/asyar
-brew trust --tap xoshbin/launcher   # one-time — Homebrew 6+ requires trusting third-party taps
-brew install --cask launcher
 ```
 
 **Windows, or a manual download for any OS:** grab the installer for your platform from
-[Releases](https://github.com/Xoshbin/asyar/releases).
+[Releases](https://github.com/jsmorabito/Launcher/releases).
 
 **Linux (Wayland) Shortcut Setup:**
 
@@ -517,8 +510,8 @@ Contributions are always welcome! Check out the [Contributing Guide](CONTRIBUTIN
 To set up the full development environment:
 
 ```bash
-git clone https://github.com/Xoshbin/asyar.git
-cd launcher
+git clone https://github.com/jsmorabito/Launcher.git
+cd Launcher
 node setup.mjs
 ```
 

@@ -71,7 +71,7 @@ describe('checkAndNotifyWhatsNew', () => {
     const options = vi.mocked(feedbackService.announceFromHost).mock.calls[0][0];
     await options.onClick!();
 
-    expect(openUrl).toHaveBeenCalledWith('https://github.com/Xoshbin/asyar/releases/tag/v0.1.1');
+    expect(openUrl).toHaveBeenCalledWith('https://github.com/jsmorabito/Launcher/releases/tag/v0.1.1');
     expect(settingsService.updateSettings).toHaveBeenCalledWith('updates', {
       lastSeenVersion: '0.1.1',
     });

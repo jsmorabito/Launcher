@@ -58,7 +58,7 @@ community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the project maintainer at **xoshbin@gmail.com** or privately via the
+reported to the project maintainer at **jmorabito10@gmail.com** or privately via the
 [official Discord server](https://discord.gg/vvYRXrs7Xa). All complaints will be
 reviewed and investigated promptly and fairly.
 

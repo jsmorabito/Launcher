@@ -7,8 +7,8 @@ Thank you for your interest in contributing to Launcher! Whether you're fixing a
 ## Community & Questions
 
 - **Discord**: Join our [Discord Server](https://discord.gg/vvYRXrs7Xa) for live discussions, brainstorming, and developer support.
-- **GitHub Discussions**: Use [Discussions](https://github.com/Xoshbin/asyar/discussions) for Q&A, general inquiries, and feature proposals.
-- **GitHub Issues**: Use [Issues](https://github.com/Xoshbin/asyar/issues) to report bugs and track roadmap items.
+- **GitHub Discussions**: Use [Discussions](https://github.com/jsmorabito/Launcher/discussions) for Q&A, general inquiries, and feature proposals.
+- **GitHub Issues**: Use [Issues](https://github.com/jsmorabito/Launcher/issues) to report bugs and track roadmap items.
 - **Code of Conduct**: We expect all community members to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
@@ -30,7 +30,7 @@ Thank you for your interest in contributing to Launcher! Whether you're fixing a
 Clone the repository and run the setup script:
 
 ```bash
-git clone https://github.com/Xoshbin/asyar.git
+git clone https://github.com/jsmorabito/Launcher.git
 cd launcher
 node setup.mjs
 ```
@@ -141,7 +141,7 @@ If you want to contribute but aren't sure where to start:
    - Clarify developer guides or tutorials in `docs/`.
    - Improve error messages or help text.
 4. **Check Open Issues & Discussions**:
-   - Browse [open issues](https://github.com/Xoshbin/asyar/issues) and [discussions](https://github.com/Xoshbin/asyar/discussions).
+   - Browse [open issues](https://github.com/jsmorabito/Launcher/issues) and [discussions](https://github.com/jsmorabito/Launcher/discussions).
    - If an issue seems interesting, leave a comment asking for context or confirmation before starting significant work.
 
 ---
@@ -149,7 +149,7 @@ If you want to contribute but aren't sure where to start:
 ## Proposing Features & UI Changes
 
 1. **Discuss Before Implementing**:
-   - For any new feature, major architectural change, or cross-cutting functionality, open a [GitHub Issue](https://github.com/Xoshbin/asyar/issues) or [Discussion](https://github.com/Xoshbin/asyar/discussions) first to agree on scope and direction.
+   - For any new feature, major architectural change, or cross-cutting functionality, open a [GitHub Issue](https://github.com/jsmorabito/Launcher/issues) or [Discussion](https://github.com/jsmorabito/Launcher/discussions) first to agree on scope and direction.
 2. **Prototype-First for UI & View Changes**:
    - If you are proposing a redesign, new layout, or visual change to an existing view, share a mockup, wireframe, or prototype first. Aligning on UX upfront ensures the design fits Launcher's design system before anyone spends time writing code.
 

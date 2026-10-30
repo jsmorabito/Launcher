@@ -2,16 +2,15 @@
 # Installs the latest Launcher launcher release for macOS or Linux.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/Xoshbin/asyar/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/jsmorabito/Launcher/main/install.sh | sh
 #
 # Install a specific version instead of the newest one:
-#   LAUNCHER_VERSION=0.1.1-38 curl -fsSL https://raw.githubusercontent.com/Xoshbin/asyar/main/install.sh | sh
+#   LAUNCHER_VERSION=0.1.1-38 curl -fsSL https://raw.githubusercontent.com/jsmorabito/Launcher/main/install.sh | sh
 #
-# Windows: use `winget install Xoshbin.Launcher` (once a stable release ships) or
-# grab the MSI directly from https://github.com/Xoshbin/asyar/releases.
+# Windows: grab the MSI directly from https://github.com/jsmorabito/Launcher/releases.
 set -eu
 
-REPO="Xoshbin/asyar"
+REPO="jsmorabito/Launcher"
 INSTALL_DIR="${LAUNCHER_INSTALL_DIR:-$HOME/.local/bin}"
 VERSION="${LAUNCHER_VERSION:-${1:-}}"
 
@@ -28,7 +27,7 @@ case "$os" in
   Darwin) platform=macos ;;
   Linux) platform=linux ;;
   MINGW* | MSYS* | CYGWIN*)
-    err "Windows isn't supported by this script. Use 'winget install Xoshbin.Launcher' (once a stable release ships) or download the MSI from https://github.com/${REPO}/releases."
+    err "Windows isn't supported by this script. Download the MSI from https://github.com/${REPO}/releases."
     ;;
   *)
     err "Unsupported OS: $os"

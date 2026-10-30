@@ -6,7 +6,7 @@
  * and verifies the setup.
  *
  * Usage:
- *   git clone https://github.com/Xoshbin/asyar.git
+ *   git clone https://github.com/jsmorabito/Launcher.git
  *   cd launcher
  *   node setup.mjs
  *
@@ -57,7 +57,7 @@ for (const check of checks) {
 }
 
 if (!preflight) {
-  console.error('\nMissing prerequisites. See https://github.com/Xoshbin/asyar#prerequisites');
+  console.error('\nMissing prerequisites. See https://github.com/jsmorabito/Launcher#prerequisites');
   process.exit(1);
 }
 
@@ -134,7 +134,7 @@ ${'─'.repeat(64)}
     pnpm check        Run doctor + type checks
 
   Docs:
-    https://github.com/Xoshbin/asyar
+    https://github.com/jsmorabito/Launcher
 
 ${'─'.repeat(64)}
 `);

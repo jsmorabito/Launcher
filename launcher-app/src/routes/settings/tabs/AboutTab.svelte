@@ -215,14 +215,14 @@
       >
         {#snippet children()}
           <div class="links-row">
-            <Button onclick={() => openUrl('https://github.com/Xoshbin/asyar-launcher')}>
+            <Button onclick={() => openUrl('https://github.com/jsmorabito/Launcher')}>
               GitHub
             </Button>
             <Button onclick={() => openUrl('https://discord.gg/vvYRXrs7Xa')}>Discord</Button>
             <Button onclick={() => openUrl('https://asyar.org/privacy')}
               >{t('settings.about.privacy_policy')}</Button
             >
-            <Button onclick={() => openUrl('https://github.com/Xoshbin/asyar/blob/main/LICENSE')}>
+            <Button onclick={() => openUrl('https://github.com/jsmorabito/Launcher/blob/main/LICENSE')}>
               {t('settings.about.license')}
             </Button>
           </div>
