@@ -87,9 +87,12 @@ impl LauncherDbusEndpoint {
 }
 
 /// Owns the connection so its well-known name and object remain registered
-/// until application shutdown.
+/// until application shutdown. It also holds the strong handler reference: the
+/// endpoint only keeps a `Weak`, so without this every D-Bus call would fail
+/// with "launcher handler is unavailable" once `start`'s caller dropped its Arc.
 pub struct LauncherDbusService {
     _connection: zbus::blocking::Connection,
+    _handler: Arc<dyn LauncherActionHandler>,
 }
 
 pub fn start(
@@ -117,6 +120,7 @@ pub fn start(
 
     Ok(LauncherDbusService {
         _connection: connection,
+        _handler: Arc::clone(handler),
     })
 }
 
