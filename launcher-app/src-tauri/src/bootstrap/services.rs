@@ -587,7 +587,11 @@ pub fn init_daemons(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Erro
                     }
                 }
             });
-            crate::event_bridge::bridge_emit(&app_handle_for_fs_watch, "launcher:fs-watch", &payload);
+            crate::event_bridge::bridge_emit(
+                &app_handle_for_fs_watch,
+                "launcher:fs-watch",
+                &payload,
+            );
         }));
     }
 

@@ -12,10 +12,10 @@
 //! launcher start rebuilds the FTS index from the seeded rows (~300-900ms
 //! background task) and ages-cleanup runs naturally from then on.
 
+use keyring::Entry;
 use launcher_lib::crypto::keystore::{KEYCHAIN_ACCOUNT, KEYCHAIN_SERVICE};
 use launcher_lib::storage::clipboard::{add_item, init_table, ClipboardItem};
 use launcher_lib::storage::cloud_sync_state;
-use keyring::Entry;
 use rusqlite::Connection;
 use std::path::PathBuf;
 use std::time::{Instant, SystemTime, UNIX_EPOCH};
@@ -61,9 +61,9 @@ fn default_db_path() -> PathBuf {
 fn load_master_key() -> [u8; 32] {
     let entry =
         Entry::new(KEYCHAIN_SERVICE, KEYCHAIN_ACCOUNT).expect("keychain entry construction");
-    let value = entry
-        .get_password()
-        .expect("master key not found in OS keychain — launch Launcher at least once to generate one");
+    let value = entry.get_password().expect(
+        "master key not found in OS keychain — launch Launcher at least once to generate one",
+    );
     // The keystore stores the 32-byte key as base64. Match the launcher's load_or_create logic:
     use base64::Engine;
     let bytes = base64::engine::general_purpose::STANDARD

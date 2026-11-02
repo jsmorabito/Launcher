@@ -323,7 +323,11 @@ describe('ExtensionIframeManager', () => {
       const sentMessageId = mockPostMessage.mock.calls[0][0].messageId;
 
       manager.handleSearchResponse({
-        data: { type: 'launcher:search:response', messageId: sentMessageId, error: 'Search failed' },
+        data: {
+          type: 'launcher:search:response',
+          messageId: sentMessageId,
+          error: 'Search failed',
+        },
       } as MessageEvent);
 
       const result = await promise;

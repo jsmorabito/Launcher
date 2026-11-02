@@ -211,7 +211,10 @@ describe('ShellServiceProxy', () => {
         code: 'ABORTED',
         message: 'Process was aborted by the extension',
       });
-      expect(spy).toHaveBeenCalledWith({ type: 'launcher:stream:abort', streamId: capturedId! }, '*');
+      expect(spy).toHaveBeenCalledWith(
+        { type: 'launcher:stream:abort', streamId: capturedId! },
+        '*',
+      );
     });
 
     it('abort after done is a no-op', async () => {
@@ -370,7 +373,10 @@ describe('ShellServiceProxy', () => {
       handle.onError(onError);
       handle.abort();
 
-      expect(spy).toHaveBeenCalledWith({ type: 'launcher:stream:abort', streamId: 'abort-me' }, '*');
+      expect(spy).toHaveBeenCalledWith(
+        { type: 'launcher:stream:abort', streamId: 'abort-me' },
+        '*',
+      );
       expect(onError).toHaveBeenCalledWith({
         code: 'ABORTED',
         message: 'Process was aborted by the extension',

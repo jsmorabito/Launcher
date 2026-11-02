@@ -6,17 +6,17 @@ order: 2
 
 ### Available CLI commands
 
-| Command                     | Description                                                |
-| --------------------------- | ---------------------------------------------------------- |
+| Command                        | Description                                                |
+| ------------------------------ | ---------------------------------------------------------- |
 | `launcher validate`            | Validate `manifest.json` against all rules                 |
 | `launcher build`               | Validate + run `vite build` + verify output                |
 | `launcher dev`                 | Validate + build + link + watch for changes                |
-| `launcher dev --dev`           | Same as `dev`, but links to the dev flavor of Launcher        |
+| `launcher dev --dev`           | Same as `dev`, but links to the dev flavor of Launcher     |
 | `launcher link`                | Build + create symlink + register in `dev_extensions.json` |
 | `launcher link --watch`        | `link` + continuous file watching and rebuild              |
-| `launcher link --dev`          | `link` targeting the dev flavor of Launcher                   |
+| `launcher link --dev`          | `link` targeting the dev flavor of Launcher                |
 | `launcher unlink`              | Remove symlink and unregister from `dev_extensions.json`   |
-| `launcher unlink --dev`        | `unlink` targeting the dev flavor of Launcher                 |
+| `launcher unlink --dev`        | `unlink` targeting the dev flavor of Launcher              |
 | `launcher attach [path]`       | Register extension directory in `dev_extensions.json`      |
 | `launcher attach --all [path]` | Scan directory for extensions and attach each one          |
 | `launcher detach [id-or-path]` | Unregister a dev extension from `dev_extensions.json`      |

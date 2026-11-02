@@ -42,7 +42,10 @@ describe('feedback facade boundary', () => {
   });
 
   it('does not expose a notification child service or namespace', () => {
-    const namespaces = readFileSync(resolve(repoRoot, 'launcher-sdk/src/ipc/namespaces.ts'), 'utf8');
+    const namespaces = readFileSync(
+      resolve(repoRoot, 'launcher-sdk/src/ipc/namespaces.ts'),
+      'utf8',
+    );
     const contracts = readFileSync(resolve(repoRoot, 'launcher-sdk/src/contracts.ts'), 'utf8');
 
     expect(namespaces).not.toMatch(/^\s*'notifications',/m);

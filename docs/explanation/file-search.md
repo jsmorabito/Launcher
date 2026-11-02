@@ -13,21 +13,21 @@ work is bounded by construction, not by how many files exist on disk.
 
 All of it lives under `launcher-app/src-tauri/src/file_index/`:
 
-| File                                                  | Responsibility                                                                                                     |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `types.rs`                                            | Wire types (`FileHit`, `FileSearchResponse`, `IndexStatus`, `FileIndexConfig`, `FileType`, `WorkMeter`)            |
-| `index.rs`                                            | `FileIndex` — the arena (struct-of-arrays), `apply_batch` for incremental updates, snapshot (de)serialization      |
-| `query.rs`                                            | The bounded query engine — memmem prefiltering, incremental narrowing, bounded fuzzy fallback, top-N heap          |
-| `matcher.rs`                                          | Reused `nucleo` fuzzy matcher (never allocated per query)                                                          |
-| `ranking.rs`                                          | Pure scoring functions (match quality, frecency, depth, type prior)                                                |
-| `file_id.rs`                                          | Stable file id: FNV hash of `(dev, inode)` (Unix) / `(volume, file_index)` (Windows) — survives renames            |
-| `walker.rs`                                           | Parallel initial scan (`ignore` crate), exclusion patterns, hard entry cap, bundle-as-leaf handling                |
+| File                                                  | Responsibility                                                                                                        |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `types.rs`                                            | Wire types (`FileHit`, `FileSearchResponse`, `IndexStatus`, `FileIndexConfig`, `FileType`, `WorkMeter`)               |
+| `index.rs`                                            | `FileIndex` — the arena (struct-of-arrays), `apply_batch` for incremental updates, snapshot (de)serialization         |
+| `query.rs`                                            | The bounded query engine — memmem prefiltering, incremental narrowing, bounded fuzzy fallback, top-N heap             |
+| `matcher.rs`                                          | Reused `nucleo` fuzzy matcher (never allocated per query)                                                             |
+| `ranking.rs`                                          | Pure scoring functions (match quality, frecency, depth, type prior)                                                   |
+| `file_id.rs`                                          | Stable file id: FNV hash of `(dev, inode)` (Unix) / `(volume, file_index)` (Windows) — survives renames               |
+| `walker.rs`                                           | Parallel initial scan (`ignore` crate), exclusion patterns, hard entry cap, bundle-as-leaf handling                   |
 | `watcher.rs`                                          | Raw `notify` watcher + Launcher-owned coalescer (exclusion check first, flush every 500 ms), `FileIndexWatcherHandle` |
-| `snapshot.rs`                                         | Versioned bincode snapshot — instant restart without a full rescan                                                 |
-| `learning.rs`                                         | In-memory per-query selection/pin boosts, loaded once at startup (never queried on the keystroke path)             |
-| `service.rs`                                          | `FileIndexState` — the lifecycle/state machine tying everything together, Tauri-agnostic by design                 |
-| `provider.rs` + `deep/{mdfind,everything,plocate}.rs` | On-demand "Deep Search" escalation to the OS-native search tool                                                    |
-| `commands.rs`                                         | Thin `#[tauri::command]` wrappers — no logic beyond extract/delegate/map-error                                     |
+| `snapshot.rs`                                         | Versioned bincode snapshot — instant restart without a full rescan                                                    |
+| `learning.rs`                                         | In-memory per-query selection/pin boosts, loaded once at startup (never queried on the keystroke path)                |
+| `service.rs`                                          | `FileIndexState` — the lifecycle/state machine tying everything together, Tauri-agnostic by design                    |
+| `provider.rs` + `deep/{mdfind,everything,plocate}.rs` | On-demand "Deep Search" escalation to the OS-native search tool                                                       |
+| `commands.rs`                                         | Thin `#[tauri::command]` wrappers — no logic beyond extract/delegate/map-error                                        |
 
 `launcher-app/src-tauri/src/thumbnail/` is a separate, related subsystem
 (§7).
@@ -229,7 +229,7 @@ every write once over budget.
 | `file_search_clear_history`             | `{}`                           | `()`                                          |
 | `deep_search_availability`              | `{}`                           | `string \| null` (provider id)                |
 | `deep_search`                           | `{query, limit?}`              | `FileHit[]`                                   |
-| `get_file_thumbnail`                    | `{path, maxDim?}`              | `string \| null` (an `launcher-thumb://` URL)    |
+| `get_file_thumbnail`                    | `{path, maxDim?}`              | `string \| null` (an `launcher-thumb://` URL) |
 | `read_text_preview`                     | `{pathStr, maxBytes?}`         | `string` (bounded, lossy-UTF8)                |
 | `open_in_terminal` / `quick_look_path`  | `{pathStr}`                    | `()`                                          |
 

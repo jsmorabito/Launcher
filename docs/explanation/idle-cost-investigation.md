@@ -79,7 +79,7 @@ Monitor figure):
 
 | process                             | MB (deep idle) | CPU ms/s | wakeups/s |
 | ----------------------------------- | -------------: | -------: | --------: |
-| launcher (main, Rust)                  |          193.1 |      3.2 |      17.9 |
+| launcher (main, Rust)               |          193.1 |      3.2 |      17.9 |
 | WebContent (launcher)               |            ~70 |      8.1 |       6.9 |
 | WebContent (settings, hidden)       |            ~52 |       ~0 |         — |
 | WebContent (hud, hidden)            |            ~17 |       ~0 |         — |
@@ -134,7 +134,7 @@ Raycast stable is no longer installed here (another reason the July table
 cannot be re-verified); Raycast Beta 0.71.3.0 stands in. Full table in
 `benchmarks/results/table.md`; highlights:
 
-| metric                                 |     Launcher 0.1.1-40 |                      Raycast Beta |
+| metric                                 |  Launcher 0.1.1-40 |                      Raycast Beta |
 | -------------------------------------- | -----------------: | --------------------------------: |
 | hotkey → visible p50 / p95             | **17.4 / 22.0 ms** |                    39.1 / 42.5 ms |
 | keystroke → results painted p50 / p95  |     62.0 / 76.8 ms |           n/a (fixed-size window) |

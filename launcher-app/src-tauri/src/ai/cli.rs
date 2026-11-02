@@ -1241,7 +1241,10 @@ mod tests {
             doc["mcpServers"]["other-server"]["command"], "node",
             "Existing server must be preserved"
         );
-        assert_eq!(doc["mcpServers"]["launcher"]["command"], "/path/to/launcher");
+        assert_eq!(
+            doc["mcpServers"]["launcher"]["command"],
+            "/path/to/launcher"
+        );
         assert_eq!(
             doc["mcpServers"]["launcher"]["args"],
             serde_json::json!(["mcp-server"])

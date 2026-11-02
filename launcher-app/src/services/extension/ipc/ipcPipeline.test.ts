@@ -132,7 +132,12 @@ type MatrixRow = {
 
 const MATRIX: MatrixRow[] = [
   { label: 'non-launcher frame', data: { type: 'webpack:hmr' }, gate: false, reply: false },
-  { label: 'launcher:window:hide', data: { type: 'launcher:window:hide' }, gate: false, reply: false },
+  {
+    label: 'launcher:window:hide',
+    data: { type: 'launcher:window:hide' },
+    gate: false,
+    reply: false,
+  },
   {
     label: 'launcher:response',
     data: { type: 'launcher:response', messageId: 'm-response', result: 1 },
@@ -476,7 +481,10 @@ describe('IPC pipeline — trust boundary', () => {
       }),
     );
 
-    expect(commands.checkExtensionPermission).toHaveBeenCalledWith(EXT_ID, 'launcher:api:storage:get');
+    expect(commands.checkExtensionPermission).toHaveBeenCalledWith(
+      EXT_ID,
+      'launcher:api:storage:get',
+    );
     expect(storageGet).toHaveBeenCalledWith(EXT_ID, 'secret');
     expect(storageGet).not.toHaveBeenCalledWith('org.launcher.malicious', expect.anything());
   });
@@ -651,7 +659,11 @@ describe('IPC pipeline — denial and error envelopes', () => {
     });
 
     await makeRouter({ storage: { get } }).handleMessage(
-      frameEvent({ type: 'launcher:api:storage:get', payload: { key: 'k' }, messageId: 'm-handled' }),
+      frameEvent({
+        type: 'launcher:api:storage:get',
+        payload: { key: 'k' },
+        messageId: 'm-handled',
+      }),
     );
 
     expect(responsesTo(viewPost)).toEqual([

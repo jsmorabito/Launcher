@@ -57,7 +57,9 @@ for (const check of checks) {
 }
 
 if (!preflight) {
-  console.error('\nMissing prerequisites. See https://github.com/jsmorabito/Launcher#prerequisites');
+  console.error(
+    '\nMissing prerequisites. See https://github.com/jsmorabito/Launcher#prerequisites',
+  );
   process.exit(1);
 }
 

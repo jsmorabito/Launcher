@@ -171,7 +171,9 @@ describe('ExtensionIpcRouter — auto-inject extensionId for fsWatcher', () => {
       false,
     );
 
-    expect(create).toHaveBeenCalledWith('ext.demo', ['/tmp/launcher-fs-watch'], { recursive: true });
+    expect(create).toHaveBeenCalledWith('ext.demo', ['/tmp/launcher-fs-watch'], {
+      recursive: true,
+    });
   });
 
   it('fsWatcher:dispose from an iframe receives extensionId, handleId in that order', async () => {
@@ -835,7 +837,8 @@ describe('ExtensionIpcRouter — protocol frames bypass the permission gate', ()
 
   afterEach(() => iframeEl?.remove());
 
-  const getManifestById = (id: string) => (id === 'org.launcher.demo' ? ({ id } as any) : undefined);
+  const getManifestById = (id: string) =>
+    id === 'org.launcher.demo' ? ({ id } as any) : undefined;
 
   it('answers launcher:extension:loaded with the preferences bundle instead of denying it', async () => {
     vi.mocked(extensionPreferencesService.getEffectivePreferences).mockResolvedValue({
@@ -948,7 +951,8 @@ describe('ExtensionIpcRouter — protocol frames bypass the permission gate', ()
     // The reason already names the call, and the toast header shows it too —
     // don't echo it a second time.
     for (const msg of errors) {
-      const mentions = msg.error?.split('launcher:api:snippets:setInlineFallbackEnabled').length ?? 1;
+      const mentions =
+        msg.error?.split('launcher:api:snippets:setInlineFallbackEnabled').length ?? 1;
       expect(mentions - 1).toBeLessThanOrEqual(1);
     }
 
@@ -1365,7 +1369,12 @@ describe('ExtensionIpcRouter — runs platform service dispatch with injected ca
     const router = new ExtensionIpcRouter(registry, vi.fn(), vi.fn(), vi.fn());
 
     const tool = { id: 'search-api', name: 'Search API', description: 'Search' };
-    await dispatchAs(router)('launcher:api:tools:registerTool', { tool }, 'org.example.tools', false);
+    await dispatchAs(router)(
+      'launcher:api:tools:registerTool',
+      { tool },
+      'org.example.tools',
+      false,
+    );
 
     expect(registerTool).toHaveBeenCalledWith('org.example.tools', tool);
   });

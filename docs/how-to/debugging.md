@@ -66,9 +66,9 @@ If your extension declares permissions or updates its declared permission set (e
 | Symptom                                 | Cause                                                   | Fix                                                                                               |
 | --------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | Extension not appearing in search       | Manifest `id` doesn't match directory name              | Rename directory to exactly match `id`                                                            |
-| Extension not appearing in search       | Not registered in dev registry                          | Run `launcher link`                                                                                  |
+| Extension not appearing in search       | Not registered in dev registry                          | Run `launcher link`                                                                               |
 | Blank white iframe panel                | `main.ts` throws before mounting                        | Open DevTools, check Console for errors                                                           |
-| `launcher:extension:loaded` never fired    | `window.parent.postMessage` call missing from `main.ts` | Add the loaded signal (see template)                                                              |
+| `launcher:extension:loaded` never fired | `window.parent.postMessage` call missing from `main.ts` | Add the loaded signal (see template)                                                              |
 | Permission review dialog on launch      | Freshly linked or updated permissions require review    | Accept the consent dialog to grant permissions and proceed                                        |
 | Service call hangs for 10s then rejects | Missing permission or consent declined                  | Declare permission in `manifest.json` and approve consent upon launch or in Settings > Extensions |
 | External URL fetch blocked              | Using `window.fetch()` directly                         | Use `NetworkService` instead                                                                      |

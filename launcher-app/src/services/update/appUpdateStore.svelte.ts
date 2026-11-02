@@ -47,10 +47,13 @@ export async function initAppUpdateStore(): Promise<void> {
     appUpdateState.phase = 'idle';
   });
 
-  const downloading = await appListen<{ version: string }>('launcher:app-update:downloading', (e) => {
-    appUpdateState.phase = 'downloading';
-    appUpdateState.pendingVersion = e.payload.version;
-  });
+  const downloading = await appListen<{ version: string }>(
+    'launcher:app-update:downloading',
+    (e) => {
+      appUpdateState.phase = 'downloading';
+      appUpdateState.pendingVersion = e.payload.version;
+    },
+  );
 
   const ready = await appListen<{ version: string }>('launcher:app-update:ready', (e) => {
     appUpdateState.phase = 'ready';

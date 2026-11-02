@@ -552,8 +552,9 @@ mod tests {
     // 9. nonexistent directory skipped — no panic
     #[test]
     fn nonexistent_directory_skipped() {
-        let result =
-            scan_directories(&[PathBuf::from("/this/does/not/exist/launcher_test_dir_12345")]);
+        let result = scan_directories(&[PathBuf::from(
+            "/this/does/not/exist/launcher_test_dir_12345",
+        )]);
         assert!(result.scripts.is_empty());
     }
 

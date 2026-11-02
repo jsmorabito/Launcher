@@ -108,7 +108,10 @@ describe('NetworkServiceProxy', () => {
       url: 'wss://echo.websocket.org',
     });
 
-    expect(mockOn).toHaveBeenCalledWith('launcher:event:network:wsMessage:push', expect.any(Function));
+    expect(mockOn).toHaveBeenCalledWith(
+      'launcher:event:network:wsMessage:push',
+      expect.any(Function),
+    );
 
     // Test listener callbacks
     const onOpenCb = vi.fn();

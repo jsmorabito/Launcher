@@ -191,7 +191,8 @@ mod tests {
 
     #[test]
     fn parses_valid_deeplink_without_args() {
-        let result = parse_extension_deeplink("launcher://extensions/com.example.calc/run", "launcher");
+        let result =
+            parse_extension_deeplink("launcher://extensions/com.example.calc/run", "launcher");
         let payload = result.expect("should parse successfully");
         assert_eq!(payload.extension_id, "com.example.calc");
         assert_eq!(payload.command_id, "run");
@@ -200,7 +201,10 @@ mod tests {
 
     #[test]
     fn rejects_missing_command_id() {
-        assert!(parse_extension_deeplink("launcher://extensions/com.example.calc", "launcher").is_none());
+        assert!(
+            parse_extension_deeplink("launcher://extensions/com.example.calc", "launcher")
+                .is_none()
+        );
     }
 
     #[test]
@@ -214,20 +218,27 @@ mod tests {
         // slashes or percent-encoded slashes would be caught by the URL parser
         // or the character allowlist. Test that special chars are rejected:
         assert!(
-            parse_extension_deeplink("launcher://extensions/ext%2F..%2Fetc/run", "launcher").is_none()
+            parse_extension_deeplink("launcher://extensions/ext%2F..%2Fetc/run", "launcher")
+                .is_none()
         );
-        assert!(parse_extension_deeplink("launcher://extensions/ext%00id/run", "launcher").is_none());
+        assert!(
+            parse_extension_deeplink("launcher://extensions/ext%00id/run", "launcher").is_none()
+        );
     }
 
     #[test]
     fn rejects_non_extension_deeplinks() {
-        assert!(parse_extension_deeplink("launcher://auth/callback?code=abc", "launcher").is_none());
+        assert!(
+            parse_extension_deeplink("launcher://auth/callback?code=abc", "launcher").is_none()
+        );
     }
 
     #[test]
     fn handles_url_encoded_args() {
-        let result =
-            parse_extension_deeplink("launcher://extensions/ext/cmd?q=hello%20world&n=42", "launcher");
+        let result = parse_extension_deeplink(
+            "launcher://extensions/ext/cmd?q=hello%20world&n=42",
+            "launcher",
+        );
         let payload = result.expect("should parse successfully");
         assert_eq!(payload.args.get("q"), Some(&"hello world".to_string()));
         assert_eq!(payload.args.get("n"), Some(&"42".to_string()));
@@ -235,12 +246,15 @@ mod tests {
 
     #[test]
     fn rejects_non_launcher_scheme() {
-        assert!(parse_extension_deeplink("https://extensions/com.example/cmd", "launcher").is_none());
+        assert!(
+            parse_extension_deeplink("https://extensions/com.example/cmd", "launcher").is_none()
+        );
     }
 
     #[test]
     fn accepts_hyphenated_and_underscored_ids() {
-        let result = parse_extension_deeplink("launcher://extensions/my-ext_v2/do-thing_now", "launcher");
+        let result =
+            parse_extension_deeplink("launcher://extensions/my-ext_v2/do-thing_now", "launcher");
         let payload = result.expect("should parse successfully");
         assert_eq!(payload.extension_id, "my-ext_v2");
         assert_eq!(payload.command_id, "do-thing_now");
@@ -276,8 +290,10 @@ mod tests {
 
     #[test]
     fn accepts_dev_scheme_when_expected() {
-        let result =
-            parse_extension_deeplink("launcher-dev://extensions/com.example.calc/run", "launcher-dev");
+        let result = parse_extension_deeplink(
+            "launcher-dev://extensions/com.example.calc/run",
+            "launcher-dev",
+        );
         let payload = result.expect("should parse the dev-flavor scheme");
         assert_eq!(payload.extension_id, "com.example.calc");
         assert_eq!(payload.command_id, "run");
@@ -287,10 +303,11 @@ mod tests {
     fn rejects_prod_scheme_when_dev_expected() {
         // A link for the installed production app must not be accepted by a
         // dev-flavor instance, and vice versa — the two must stay isolated.
-        assert!(
-            parse_extension_deeplink("launcher://extensions/com.example.calc/run", "launcher-dev")
-                .is_none()
-        );
+        assert!(parse_extension_deeplink(
+            "launcher://extensions/com.example.calc/run",
+            "launcher-dev"
+        )
+        .is_none());
     }
 
     #[test]
@@ -326,7 +343,10 @@ mod tests {
 
     #[test]
     fn ignores_foreign_scheme() {
-        assert_eq!(classify_deeplink("https://evil.example/x", "launcher"), None);
+        assert_eq!(
+            classify_deeplink("https://evil.example/x", "launcher"),
+            None
+        );
         assert_eq!(classify_deeplink("launcher://auth/x", "launcher-dev"), None);
     }
 

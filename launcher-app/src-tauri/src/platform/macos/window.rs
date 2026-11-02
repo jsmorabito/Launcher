@@ -130,7 +130,9 @@ pub fn set_window_alpha<R: Runtime>(window: &WebviewWindow<R>, alpha: f64) {
 pub fn set_ignores_mouse_events<R: Runtime>(window: &WebviewWindow<R>, ignores: bool) {
     if let Ok(ptr) = window.ns_window() {
         // SAFETY: ns_window() returns a valid NSWindow pointer on success.
-        unsafe { launcher_platform::macos::set_ignores_mouse_events(ptr as *mut AnyObject, ignores) };
+        unsafe {
+            launcher_platform::macos::set_ignores_mouse_events(ptr as *mut AnyObject, ignores)
+        };
     }
 }
 
@@ -181,7 +183,9 @@ pub fn disable_occlusion_detection<R: Runtime>(window: &WebviewWindow<R>) {
 pub fn configure_launcher_webkit_features<R: Runtime>(window: &WebviewWindow<R>) {
     if let Ok(ptr) = window.ns_window() {
         // SAFETY: ns_window() returns a valid NSWindow pointer on success.
-        unsafe { launcher_platform::macos::configure_launcher_webkit_features(ptr as *mut AnyObject) };
+        unsafe {
+            launcher_platform::macos::configure_launcher_webkit_features(ptr as *mut AnyObject)
+        };
     }
 }
 

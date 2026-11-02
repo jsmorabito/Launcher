@@ -198,10 +198,7 @@ describe('checkAndNotifySpread', () => {
     const options = vi.mocked(feedbackService.announceFromHost).mock.calls[0][0];
     await options.onClick!();
 
-    expect(openerService.open).toHaveBeenCalledWith(
-      null,
-      'https://github.com/jsmorabito/Launcher',
-    );
+    expect(openerService.open).toHaveBeenCalledWith(null, 'https://github.com/jsmorabito/Launcher');
     expect(settingsService.updateSettings).toHaveBeenCalledWith('feedback', {
       spreadPromptSeen: true,
     });

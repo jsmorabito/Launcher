@@ -24,7 +24,8 @@ pub fn rect_to_bounds(rect: &RECT) -> WindowBounds {
 pub fn get_window_bounds(previous_hwnd: isize) -> Result<WindowBounds, AppError> {
     if previous_hwnd == 0 {
         return Err(AppError::NotFound(
-            "No previous window captured. Open Launcher via its launcher shortcut first.".to_string(),
+            "No previous window captured. Open Launcher via its launcher shortcut first."
+                .to_string(),
         ));
     }
     unsafe {

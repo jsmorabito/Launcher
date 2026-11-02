@@ -222,7 +222,9 @@
             <Button onclick={() => openUrl('https://asyar.org/privacy')}
               >{t('settings.about.privacy_policy')}</Button
             >
-            <Button onclick={() => openUrl('https://github.com/jsmorabito/Launcher/blob/main/LICENSE')}>
+            <Button
+              onclick={() => openUrl('https://github.com/jsmorabito/Launcher/blob/main/LICENSE')}
+            >
               {t('settings.about.license')}
             </Button>
           </div>

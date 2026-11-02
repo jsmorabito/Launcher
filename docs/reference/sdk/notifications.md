@@ -28,8 +28,8 @@ Use background feedback only when no Launcher window needs to remain visible whi
 
 ## IPC contract
 
-| Facade method                   | Wire command                           | Permission           |
-| ------------------------------- | -------------------------------------- | -------------------- |
+| Facade method                   | Wire command                              | Permission           |
+| ------------------------------- | ----------------------------------------- | -------------------- |
 | `sendBackground(options)`       | `launcher:api:feedback:sendBackground`    | `notifications:send` |
 | `dismissBackground(feedbackId)` | `launcher:api:feedback:dismissBackground` | `notifications:send` |
 

@@ -54,12 +54,12 @@ Concrete commands:
 
 | You changed                                 | Run (from this directory)                                   |
 | ------------------------------------------- | ----------------------------------------------------------- |
-| `permissions.rs::get_required_permission`   | `pnpm gen:permission-catalog` — in `launcher-app/`        |
-| `AppError` / `SearchError` variants         | `pnpm gen:diagnostic-kinds` — in `launcher-app/`          |
-| `runtimes/catalog.fallback.json`            | `npm run gen:known-runtimes` — in `launcher-sdk/`              |
+| `permissions.rs::get_required_permission`   | `pnpm gen:permission-catalog` — in `launcher-app/`          |
+| `AppError` / `SearchError` variants         | `pnpm gen:diagnostic-kinds` — in `launcher-app/`            |
+| `runtimes/catalog.fallback.json`            | `npm run gen:known-runtimes` — in `launcher-sdk/`           |
 | any of the above (blanket)                  | `pnpm gen:all` — in that package                            |
 | a `specta::Type` struct, or the export list | `cargo test export_bindings -- --ignored` — in `src-tauri/` |
-| emoji dataset                               | `pnpm --filter org.launcher.emoji run gen:data` — anywhere     |
+| emoji dataset                               | `pnpm --filter org.launcher.emoji run gen:data` — anywhere  |
 
 Note the launcher's package name is **`launcher`**, not `launcher-app` — so a
 `--filter launcher-app` will not resolve. `cd` into the package instead.
@@ -162,8 +162,8 @@ lists, not mirrors:
 
 | File                                                            | Why it stays hand-written                                                                                                                                                                               |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `launcher-sdk/cli/lib/manifest.ts` `VALID_PERMISSIONS`             | Deliberately broader than the Rust gate — includes declarative-only permissions (`store:read`, `tools:register`, `runs:track`) that `get_required_permission` never sees. No single Rust source exists. |
-| `launcher-app/src/services/extension/permissionCatalog.ts`    | Human-written display copy (title + description) for the consent dialog. Prose, not data.                                                                                                               |
+| `launcher-sdk/cli/lib/manifest.ts` `VALID_PERMISSIONS`          | Deliberately broader than the Rust gate — includes declarative-only permissions (`store:read`, `tools:register`, `runs:track`) that `get_required_permission` never sees. No single Rust source exists. |
+| `launcher-app/src/services/extension/permissionCatalog.ts`      | Human-written display copy (title + description) for the consent dialog. Prose, not data.                                                                                                               |
 | `docs/reference/permissions.md`, `docs/reference/sdk/README.md` | Hand-written developer docs that mirror the lists in prose. Known to drift; grep them when adding a permission.                                                                                         |
 
 ### Adding a new permission — the full checklist

@@ -107,7 +107,11 @@ export function checkWorkerCompatibility(cwd: string): CheckResult | null {
   const distDir = path.join(cwd, 'dist');
   const resolved = path.resolve(distDir, toPackagedPath(main));
   if (!resolved.startsWith(path.resolve(distDir) + path.sep) || !fs.existsSync(resolved)) {
-    return { name: 'Worker bundle', status: 'warn', message: 'not built yet — run "launcher build"' };
+    return {
+      name: 'Worker bundle',
+      status: 'warn',
+      message: 'not built yet — run "launcher build"',
+    };
   }
 
   const rel = path.relative(cwd, resolved);

@@ -48,13 +48,7 @@ try {
   // red until a launcher release happens to resync it. Carry the constant in
   // the same commit instead; the launcher's own release script rewrites it
   // again from the same source of truth, so the two can't disagree.
-  const envServicePath = resolve(
-    monorepoRoot,
-    'launcher-app',
-    'src',
-    'services',
-    'envService.ts',
-  );
+  const envServicePath = resolve(monorepoRoot, 'launcher-app', 'src', 'services', 'envService.ts');
   const files = ['launcher-sdk/package.json', 'pnpm-lock.yaml'];
 
   if (dryRun) {

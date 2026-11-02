@@ -1265,7 +1265,9 @@ describe('CommandArgumentsService', () => {
     });
 
     it('seed "none" starts empty even with a saved value and a default', async () => {
-      const args: CommandArgument[] = [{ name: 'q', type: 'text', default: 'launcher', seed: 'none' }];
+      const args: CommandArgument[] = [
+        { name: 'q', type: 'text', default: 'launcher', seed: 'none' },
+      ];
       commandArgDefaultsGet.mockResolvedValueOnce({ q: 'previous' });
       const d = makeDeps({ args });
       const svc = new CommandArgumentsService(d);

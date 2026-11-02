@@ -126,13 +126,13 @@ Historical SDK tags from before the migration (`v1.x.x`, `v2.x.x`) were renamed 
 
 ## Quick Reference
 
-| Question                                                                                              | Answer                                                                                                                  |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Where to run `pnpm install`                                                                           | Always the monorepo root                                                                                                |
+| Question                                                                                                 | Answer                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Where to run `pnpm install`                                                                              | Always the monorepo root                                                                                                |
 | Why does the launcher's `package.json` say `"launcher-sdk": "^4.6.0"` but I see workspace-linked source? | `overrides` in `pnpm-workspace.yaml` forces `workspace:*`                                                               |
-| `ERR_PNPM_OUTDATED_LOCKFILE` in CI                                                                    | Run `pnpm install` at the monorepo root, commit the root `pnpm-lock.yaml`                                               |
-| How to release the launcher                                                                           | `pnpm --filter launcher-app run release patch` (or `minor`/`major`/`beta`)                                            |
-| How to release the SDK                                                                                | `pnpm release:sdk patch` (or `minor`/`major`/`beta`)                                                                    |
-| Where are the CI workflows                                                                            | `.github/workflows/` at the monorepo root                                                                               |
-| Where are the launcher's old workflows                                                                | Removed during migration — `release-launcher.yml` replaced them; the launcher's nested `.github/workflows/` was deleted |
-| Old `launcher-sdk` or `launcher-meta` GitHub repos                                                          | Archived; do not push to them. All work happens in `Xoshbin/asyar`.                                                     |
+| `ERR_PNPM_OUTDATED_LOCKFILE` in CI                                                                       | Run `pnpm install` at the monorepo root, commit the root `pnpm-lock.yaml`                                               |
+| How to release the launcher                                                                              | `pnpm --filter launcher-app run release patch` (or `minor`/`major`/`beta`)                                              |
+| How to release the SDK                                                                                   | `pnpm release:sdk patch` (or `minor`/`major`/`beta`)                                                                    |
+| Where are the CI workflows                                                                               | `.github/workflows/` at the monorepo root                                                                               |
+| Where are the launcher's old workflows                                                                   | Removed during migration — `release-launcher.yml` replaced them; the launcher's nested `.github/workflows/` was deleted |
+| Old `launcher-sdk` or `launcher-meta` GitHub repos                                                       | Archived; do not push to them. All work happens in `Xoshbin/asyar`.                                                     |

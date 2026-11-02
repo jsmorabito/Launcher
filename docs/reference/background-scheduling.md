@@ -144,8 +144,8 @@ The `lastSeenDeployId` field persists in memory between ticks. To persist it acr
 | Extension enabled     | Timer starts.                                                                                                |
 | Extension disabled    | Timer stops.                                                                                                 |
 | Extension uninstalled | Timer stops and is removed permanently.                                                                      |
-| Launcher quits           | All timers stop — tokio runtime shuts down.                                                                  |
-| Launcher restarts        | `discover_extensions` runs on startup, restarting timers for all enabled extensions with scheduled commands. |
+| Launcher quits        | All timers stop — tokio runtime shuts down.                                                                  |
+| Launcher restarts     | `discover_extensions` runs on startup, restarting timers for all enabled extensions with scheduled commands. |
 
 The platform skips the first tokio tick (fires immediately by default) — your command is first called one full interval after load, not instantly.
 

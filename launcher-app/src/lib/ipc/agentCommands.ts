@@ -129,7 +129,9 @@ export async function agentsToolsUnregisterTier2(extensionId: string): Promise<v
   await invokeSafe('agents_tools_unregister_tier2', { extensionId });
 }
 
-export async function agentsToolsList(): Promise<import('launcher-sdk/contracts').ToolDescriptor[]> {
+export async function agentsToolsList(): Promise<
+  import('launcher-sdk/contracts').ToolDescriptor[]
+> {
   return invokeSafe('agents_tools_list');
 }
 

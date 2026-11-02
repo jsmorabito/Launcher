@@ -38,7 +38,9 @@ describe('fileNameOf', () => {
 
 describe('loadFileThumbnails', () => {
   it('resolves a thumbnail URL per path', async () => {
-    const load = vi.fn((p: string) => Promise.resolve(`launcher-thumb://localhost/${fileNameOf(p)}`));
+    const load = vi.fn((p: string) =>
+      Promise.resolve(`launcher-thumb://localhost/${fileNameOf(p)}`),
+    );
     const result = await loadFileThumbnails(['/a/one.png', '/a/two.png'], 800, load);
     expect(result).toEqual({
       '/a/one.png': 'launcher-thumb://localhost/one.png',

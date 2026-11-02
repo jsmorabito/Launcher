@@ -66,7 +66,10 @@ describe('ExtensionEventSubscriptions', () => {
       expect(listen).toHaveBeenCalledTimes(3);
       expect(listen).toHaveBeenCalledWith('launcher:scheduler:tick', expect.any(Function));
       expect(listen).toHaveBeenCalledWith('launcher:preferences-changed', expect.any(Function));
-      expect(listen).toHaveBeenCalledWith('launcher:extension-enabled-changed', expect.any(Function));
+      expect(listen).toHaveBeenCalledWith(
+        'launcher:extension-enabled-changed',
+        expect.any(Function),
+      );
     });
   });
 

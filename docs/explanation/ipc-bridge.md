@@ -49,15 +49,15 @@ as data from
 [`launcher-app/src/services/extension/ipc/`](../../launcher-app/src/services/extension/ipc/)
 so tests can assert them directly:
 
-| Stage                 | Responsibility                                                                          |
-| --------------------- | --------------------------------------------------------------------------------------- |
-| `tap`                 | Hands every frame — `launcher:` or not — to the search-response bridge                     |
+| Stage                 | Responsibility                                                                                |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `tap`                 | Hands every frame — `launcher:` or not — to the search-response bridge                        |
 | `protocolFilter`      | Drops non-`launcher:` frames, `launcher:response`, and response envelopes another bridge owns |
-| `preIdentityHandlers` | Terminates frames that carry no identity claim (see below)                              |
-| `identify`            | Resolves the caller's `extensionId` + `role`, then validates the manifest               |
-| `permissionGate`      | Consults the Rust gate — **only** for `launcher:api:*`                                     |
-| `replyEnvelope`       | Wraps dispatch: turns a throw into `{ error }` and reports the diagnostic               |
-| `dispatch`            | Runs the terminal handler and posts `{ result }` if that handler replies                |
+| `preIdentityHandlers` | Terminates frames that carry no identity claim (see below)                                    |
+| `identify`            | Resolves the caller's `extensionId` + `role`, then validates the manifest                     |
+| `permissionGate`      | Consults the Rust gate — **only** for `launcher:api:*`                                        |
+| `replyEnvelope`       | Wraps dispatch: turns a throw into `{ error }` and reports the diagnostic                     |
+| `dispatch`            | Runs the terminal handler and posts `{ result }` if that handler replies                      |
 
 A stage that does not call `next()` ends the message there. Terminal handlers
 live in `IPC_HANDLERS`, keyed by exact message type, and each one **declares**
@@ -181,11 +181,11 @@ Declarative extension preferences (see [Preferences](../reference/sdk/preference
 
 The SDK's `MessageBroker` inside the context only dispatches messages to registered listeners when the type begins with one of three prefixes:
 
-| Prefix           | Purpose                                                             |
-| ---------------- | ------------------------------------------------------------------- |
-| `launcher:response` | Resolves a pending `invoke()` request by `messageId`                |
+| Prefix              | Purpose                                                                |
+| ------------------- | ---------------------------------------------------------------------- |
+| `launcher:response` | Resolves a pending `invoke()` request by `messageId`                   |
 | `launcher:event:*`  | Fires all listeners registered via `broker.on('launcher:event:…', cb)` |
-| `launcher:invoke:*` | Host calling an extension-provided function                         |
+| `launcher:invoke:*` | Host calling an extension-provided function                            |
 
 Anything else is silently dropped. The preferences listener is registered via `broker.on('launcher:event:preferences:set-all', …)`, so the host MUST post with that exact type. A plain `launcher:preferences:set-all` would land in the iframe, match no branch in `handleMessage`, and vanish.
 

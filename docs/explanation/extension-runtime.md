@@ -281,15 +281,15 @@ view: abortController.abort()
 These rules follow from the lifecycle model. They are enforced by code
 review.
 
-| Belongs in worker                                                                            | Belongs in view                                                            |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Push subscriptions (`appEvents`, `applicationIndex`, `systemEvents`, `state:*`)              | Svelte components                                                          |
-| `commands.onCommand(id, handler)` registrations                                              | `commands.onCommand(...)` for handlers that need DOM (rare)                |
-| `timers:*` schedules and callbacks                                                           | Anything reading the document, focus, selection                            |
-| `statusBar:*` writes (tray icons)                                                            | `feedback`, `interop`, `clipboard-history`, `selection` calls              |
-| Notification action callbacks (declared via `actions.registerActionHandler` from the worker) | UI-bound action handlers                                                   |
+| Belongs in worker                                                                            | Belongs in view                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Push subscriptions (`appEvents`, `applicationIndex`, `systemEvents`, `state:*`)              | Svelte components                                                                |
+| `commands.onCommand(id, handler)` registrations                                              | `commands.onCommand(...)` for handlers that need DOM (rare)                      |
+| `timers:*` schedules and callbacks                                                           | Anything reading the document, focus, selection                                  |
+| `statusBar:*` writes (tray icons)                                                            | `feedback`, `interop`, `clipboard-history`, `selection` calls                    |
+| Notification action callbacks (declared via `actions.registerActionHandler` from the worker) | UI-bound action handlers                                                         |
 | `search()` for `searchable: true` extensions                                                 | View-search keystroke handling (`launcher:view:search` / `launcher:view:submit`) |
-| RPC handlers (`context.onRequest`)                                                           | RPC callers (`context.request`)                                            |
+| RPC handlers (`context.onRequest`)                                                           | RPC callers (`context.request`)                                                  |
 
 If something needs to keep working while the launcher is closed (the user
 hit Escape), it must live in the worker. The view iframe is gone within

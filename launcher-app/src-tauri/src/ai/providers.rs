@@ -1019,7 +1019,10 @@ fn build_openrouter_request(
     let mut headers = HashMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     headers.insert("Authorization".to_string(), format!("Bearer {api_key}"));
-    headers.insert("HTTP-Referer".to_string(), "https://launcher.app".to_string());
+    headers.insert(
+        "HTTP-Referer".to_string(),
+        "https://launcher.app".to_string(),
+    );
     headers.insert("X-Title".to_string(), "Launcher".to_string());
 
     let mut msgs = Vec::new();

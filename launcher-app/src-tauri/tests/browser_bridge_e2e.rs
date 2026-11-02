@@ -1,3 +1,4 @@
+use futures_util::{SinkExt, StreamExt};
 use launcher_lib::browser::bridge::{
     cache::TabSnapshotCache, connections::CompanionRegistry, pairing::PairingRegistry,
     rate_limit::ConnectionRateLimiter, server::start_server, token_store::InMemoryTokenStore,
@@ -5,7 +6,6 @@ use launcher_lib::browser::bridge::{
 };
 use launcher_lib::browser::service::BrowserService;
 use launcher_lib::browser::types::{BrowserFamily, BrowserId, BrowserKey, PairDecision};
-use futures_util::{SinkExt, StreamExt};
 use std::sync::Arc;
 use tokio_tungstenite::tungstenite::client::IntoClientRequest;
 use tokio_tungstenite::tungstenite::http::HeaderValue;

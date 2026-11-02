@@ -873,7 +873,11 @@ describe('ExtensionManager Characterization Tests', () => {
       extensionManager.initialized = false; // Force re-init
       await extensionManager.init();
 
-      expect(listen).toHaveBeenCalledWith('launcher:scheduler:tick', expect.any(Function), undefined);
+      expect(listen).toHaveBeenCalledWith(
+        'launcher:scheduler:tick',
+        expect.any(Function),
+        undefined,
+      );
     });
 
     it('calls scheduler unlisten during unloadExtensions', async () => {
@@ -922,7 +926,9 @@ describe('ExtensionManager Characterization Tests', () => {
         requireAnyOf: ['hours', 'minutes'],
       });
 
-      const meta = await extensionManager.getCommandArgMeta('cmd_org.launcher.shortcuts_dyn_uuid-1');
+      const meta = await extensionManager.getCommandArgMeta(
+        'cmd_org.launcher.shortcuts_dyn_uuid-1',
+      );
       expect(meta?.requireAnyOf).toEqual(['hours', 'minutes']);
       expect(meta?.args[0].seed).toBe('lastUsed');
       expect(meta?.args[1].seed).toBe('none');

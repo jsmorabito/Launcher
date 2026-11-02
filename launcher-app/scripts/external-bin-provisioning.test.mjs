@@ -130,8 +130,16 @@ describe('Linux build wrapper', () => {
 
 describe('standalone summon release assets', () => {
   it.each([
-    ['x86_64-unknown-linux-gnu', 'launcher-summon-x86_64-unknown-linux-gnu', 'launcher-summon_amd64'],
-    ['aarch64-unknown-linux-gnu', 'launcher-summon-aarch64-unknown-linux-gnu', 'launcher-summon_aarch64'],
+    [
+      'x86_64-unknown-linux-gnu',
+      'launcher-summon-x86_64-unknown-linux-gnu',
+      'launcher-summon_amd64',
+    ],
+    [
+      'aarch64-unknown-linux-gnu',
+      'launcher-summon-aarch64-unknown-linux-gnu',
+      'launcher-summon_aarch64',
+    ],
   ])('keeps the source and public name together for %s', (target, source, asset) => {
     const workflow = readFileSync(RELEASE_WORKFLOW, 'utf8');
 

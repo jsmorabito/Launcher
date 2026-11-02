@@ -50,7 +50,9 @@ impl fmt::Display for SummonError {
             Self::UnsupportedPlatform => {
                 write!(formatter, "launcher-summon is only supported on Linux")
             }
-            Self::ServiceUnavailable => write!(formatter, "Launcher launcher service is unavailable"),
+            Self::ServiceUnavailable => {
+                write!(formatter, "Launcher launcher service is unavailable")
+            }
             Self::BusUnavailable(error) => {
                 write!(formatter, "session bus is unavailable: {error}")
             }
@@ -633,8 +635,9 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn missing_explicit_launch_target_returns_launch_failed() {
-        let target =
-            LaunchTarget::Sibling(PathBuf::from("/definitely/missing/launcher-stage-four-test"));
+        let target = LaunchTarget::Sibling(PathBuf::from(
+            "/definitely/missing/launcher-stage-four-test",
+        ));
 
         assert!(matches!(
             spawn_cold_start(&target),

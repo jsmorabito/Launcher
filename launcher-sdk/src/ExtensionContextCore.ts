@@ -116,7 +116,10 @@ export class ExtensionContextCore {
         window.parent !== window &&
         typeof window.parent.postMessage === 'function'
       ) {
-        window.parent.postMessage({ type: 'launcher:extension:loaded', extensionId: id, role }, '*');
+        window.parent.postMessage(
+          { type: 'launcher:extension:loaded', extensionId: id, role },
+          '*',
+        );
       } else if (typeof self !== 'undefined' && typeof (self as any).postMessage === 'function') {
         (self as any).postMessage({ type: 'launcher:extension:loaded', extensionId: id, role });
       }

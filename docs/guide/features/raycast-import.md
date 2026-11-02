@@ -17,7 +17,7 @@ It accepts three kinds of files:
 
 Each Raycast item type maps to an Launcher equivalent:
 
-| Raycast                          | Becomes in Launcher                             |
+| Raycast                          | Becomes in Launcher                          |
 | -------------------------------- | -------------------------------------------- |
 | Snippets (with keyword and text) | [Snippets](./snippets.md)                    |
 | Quicklinks                       | [Portals](./portals.md)                      |

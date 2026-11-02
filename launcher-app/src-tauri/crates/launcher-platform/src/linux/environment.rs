@@ -219,7 +219,10 @@ mod tests {
             ("APPIMAGE", "/home/test/Launcher.AppImage"),
             ("APPDIR", "/tmp/.mount_Launcher123"),
             ("LD_LIBRARY_PATH", "/tmp/.mount_Launcher123/usr/lib"),
-            ("GIO_MODULE_DIR", "/tmp/.mount_Launcher123/usr/lib/gio/modules"),
+            (
+                "GIO_MODULE_DIR",
+                "/tmp/.mount_Launcher123/usr/lib/gio/modules",
+            ),
         ]);
 
         let mods = calculate_sanitized_environment(|k| env.get(k).map(|s| s.to_string()));
@@ -321,7 +324,10 @@ mod tests {
             ("APPDIR", "/tmp/.mount_Launcher123"),
             ("OWD", "/home/test"),
             ("ARGV0", "launcher"),
-            ("GIO_MODULE_DIR", "/tmp/.mount_Launcher123/usr/lib/gio/modules"),
+            (
+                "GIO_MODULE_DIR",
+                "/tmp/.mount_Launcher123/usr/lib/gio/modules",
+            ),
             ("GIO_EXTRA_MODULES", "/tmp/.mount_Launcher123/usr/lib/gio"),
             (
                 "GDK_PIXBUF_MODULE_FILE",

@@ -61,7 +61,9 @@ try {
   ];
 
   if (dryRun) {
-    console.log(`[dry-run] would bump package.json → ${version}, pin launcher-sdk → ^${sdkVersion}`);
+    console.log(
+      `[dry-run] would bump package.json → ${version}, pin launcher-sdk → ^${sdkVersion}`,
+    );
     console.log(
       '[dry-run] would update scaffoldService.ts offline fallback, Cargo.toml, Cargo.lock',
     );
@@ -69,7 +71,8 @@ try {
     // 1. package.json: version + declared SDK dep
     pkg.version = version;
     if (pkg.dependencies?.['launcher-sdk']) pkg.dependencies['launcher-sdk'] = `^${sdkVersion}`;
-    if (pkg.devDependencies?.['launcher-sdk']) pkg.devDependencies['launcher-sdk'] = `^${sdkVersion}`;
+    if (pkg.devDependencies?.['launcher-sdk'])
+      pkg.devDependencies['launcher-sdk'] = `^${sdkVersion}`;
     writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
     console.log('✓ package.json');
 

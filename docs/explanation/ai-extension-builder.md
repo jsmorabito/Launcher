@@ -19,10 +19,10 @@ sidecar process**.
 The feature is split across a process boundary because the two halves live in
 different worlds:
 
-| Half                              | Where it runs                                                                                                                                          | Responsibility                                                                             |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| **Orchestrator** (Tier 1)         | The launcher WebView ([`src/built-in-features/create-extension/ai-builder/`](../../launcher-app/src/built-in-features/create-extension/ai-builder/)) | UI, job state, notifications, deep-links, secret-scan, register + activate                 |
-| **Sidecar** (`launcher-ext-builder`) | Its own OS process ([`launcher-ext-builder/`](../../launcher-ext-builder/))                                                                                  | Runs the Claude Agent SDK: feasibility gate, scaffold, code, `pnpm` build loop, smoke test |
+| Half                                 | Where it runs                                                                                                                                        | Responsibility                                                                             |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Orchestrator** (Tier 1)            | The launcher WebView ([`src/built-in-features/create-extension/ai-builder/`](../../launcher-app/src/built-in-features/create-extension/ai-builder/)) | UI, job state, notifications, deep-links, secret-scan, register + activate                 |
+| **Sidecar** (`launcher-ext-builder`) | Its own OS process ([`launcher-ext-builder/`](../../launcher-ext-builder/))                                                                          | Runs the Claude Agent SDK: feasibility gate, scaffold, code, `pnpm` build loop, smoke test |
 
 The WebView cannot spawn native processes, run `pnpm`, or do raw filesystem/shell
 work — so the coding muscle has to be a child process. This mirrors how MCP ships
@@ -156,16 +156,16 @@ feature is dead.
 
 ## Source map
 
-| Concern                             | File                                          |
-| ----------------------------------- | --------------------------------------------- |
-| Job state machine                   | `ai-builder/buildJobStore.svelte.ts`          |
-| Event routing                       | `ai-builder/orchestrator.ts`                  |
-| Question ⇄ notification ⇄ stdin     | `ai-builder/questionBridge.ts`                |
-| Progress view                       | `ai-builder/BuildProgressView.svelte`         |
-| Protocol types                      | `ai-builder/buildProtocol.ts`                 |
-| Sidecar spawn / stream / stdin      | `src-tauri/src/ext_builder/process.rs`        |
-| Tauri commands                      | `src-tauri/src/ext_builder/commands.rs`       |
-| Enumerate / search built extensions | `src-tauri/src/ext_builder/created.rs`        |
-| Secret scan (Rust)                  | `src-tauri/src/ext_builder/secret_scan.rs`    |
+| Concern                             | File                                             |
+| ----------------------------------- | ------------------------------------------------ |
+| Job state machine                   | `ai-builder/buildJobStore.svelte.ts`             |
+| Event routing                       | `ai-builder/orchestrator.ts`                     |
+| Question ⇄ notification ⇄ stdin     | `ai-builder/questionBridge.ts`                   |
+| Progress view                       | `ai-builder/BuildProgressView.svelte`            |
+| Protocol types                      | `ai-builder/buildProtocol.ts`                    |
+| Sidecar spawn / stream / stdin      | `src-tauri/src/ext_builder/process.rs`           |
+| Tauri commands                      | `src-tauri/src/ext_builder/commands.rs`          |
+| Enumerate / search built extensions | `src-tauri/src/ext_builder/created.rs`           |
+| Secret scan (Rust)                  | `src-tauri/src/ext_builder/secret_scan.rs`       |
 | Sidecar entry + Agent SDK           | `launcher-ext-builder/src/main.ts`, `builder.ts` |
 | Bash allowlist                      | `launcher-ext-builder/src/utils.ts`              |

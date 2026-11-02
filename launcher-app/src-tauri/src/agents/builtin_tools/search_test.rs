@@ -140,7 +140,9 @@ async fn invoke_returns_empty_for_no_matches() {
     state.index_one(app("app_safari", "Safari")).unwrap();
 
     let tool = SearchTool::new(state);
-    let result = tool.invoke(json!({"query": "xyznomatch_launchertest"})).await;
+    let result = tool
+        .invoke(json!({"query": "xyznomatch_launchertest"}))
+        .await;
 
     assert!(result.is_ok(), "expected Ok, got {result:?}");
     let val = result.unwrap();

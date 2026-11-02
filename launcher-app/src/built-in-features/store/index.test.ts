@@ -127,20 +127,30 @@ describe('StoreExtension lifecycle and commands', () => {
     await storeExtension.deactivate();
 
     expect(window.removeEventListener).toHaveBeenCalledWith('keydown', expect.any(Function), true);
-    expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:install-detail');
-    expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:uninstall-detail');
+    expect(actionService.unregisterAction).toHaveBeenCalledWith(
+      'app.launcher.store:install-detail',
+    );
+    expect(actionService.unregisterAction).toHaveBeenCalledWith(
+      'app.launcher.store:uninstall-detail',
+    );
     expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:update-detail');
-    expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:install-selected');
+    expect(actionService.unregisterAction).toHaveBeenCalledWith(
+      'app.launcher.store:install-selected',
+    );
     expect(actionService.unregisterAction).toHaveBeenCalledWith(
       'app.launcher.store:uninstall-selected',
     );
-    expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:update-selected');
+    expect(actionService.unregisterAction).toHaveBeenCalledWith(
+      'app.launcher.store:update-selected',
+    );
     expect(setActiveViewActionLabel).toHaveBeenCalledWith(null);
   });
 
   it('deactivate() is safe and idempotent when not in view', async () => {
     await storeExtension.deactivate();
-    expect(actionService.unregisterAction).toHaveBeenCalledWith('app.launcher.store:install-detail');
+    expect(actionService.unregisterAction).toHaveBeenCalledWith(
+      'app.launcher.store:install-detail',
+    );
   });
 
   it('discovers installed files before checking consent without an initialized manager', async () => {

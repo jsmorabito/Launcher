@@ -1098,7 +1098,10 @@ pub(crate) fn extract_app_icon(app_path: &str, cache_dir: &Path) -> Option<Strin
         };
         let _ = std::fs::write(&chosen_file, bytes);
         #[cfg(target_os = "windows")]
-        return Some(format!("http://launcher-icon.localhost/{}", chosen_filename));
+        return Some(format!(
+            "http://launcher-icon.localhost/{}",
+            chosen_filename
+        ));
         #[cfg(not(target_os = "windows"))]
         return Some(format!("launcher-icon://localhost/{}", chosen_filename));
     }

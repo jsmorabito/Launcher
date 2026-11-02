@@ -729,9 +729,11 @@ mod tests {
 
         #[test]
         fn rejects_nonexistent_path() {
-            let err =
-                validate_macos_bundle_path("/tmp/__launcher_nonexistent_uninstall_test__.app", None)
-                    .unwrap_err();
+            let err = validate_macos_bundle_path(
+                "/tmp/__launcher_nonexistent_uninstall_test__.app",
+                None,
+            )
+            .unwrap_err();
             assert!(matches!(err, AppError::NotFound(_)), "got: {err:?}");
         }
 
@@ -1211,9 +1213,11 @@ mod tests {
 
         #[test]
         fn ensure_allowed_rejects_whitespace_uninstall_string() {
-            let err =
-                ensure_windows_entry_allowed(&entry("SomeApp", "   "), LAUNCHER_WINDOWS_DISPLAY_NAME)
-                    .unwrap_err();
+            let err = ensure_windows_entry_allowed(
+                &entry("SomeApp", "   "),
+                LAUNCHER_WINDOWS_DISPLAY_NAME,
+            )
+            .unwrap_err();
             assert!(matches!(err, AppError::Validation(_)), "got: {err:?}");
         }
 

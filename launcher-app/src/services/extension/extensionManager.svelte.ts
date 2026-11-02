@@ -532,7 +532,8 @@ export class ExtensionManager implements IExtensionManager {
         isBuiltIn: isBuiltInFeature(manifest.id),
         icon: (cmd as { icon?: string }).icon ?? (manifest as { icon?: string }).icon,
         args:
-          (cmd as { arguments?: import('launcher-sdk/contracts').CommandArgument[] }).arguments ?? [],
+          (cmd as { arguments?: import('launcher-sdk/contracts').CommandArgument[] }).arguments ??
+          [],
         mode: (cmd as { mode?: 'view' | 'background' }).mode,
         requireAnyOf: (cmd as { requireAnyOf?: string[] }).requireAnyOf,
         isDynamic: false,

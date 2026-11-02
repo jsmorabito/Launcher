@@ -6,8 +6,8 @@ order: 5
 
 When your extension's panel is open and `searchable: true`, the Launcher search bar becomes your extension's input field. Two messages are dispatched:
 
-| Message             | When fired         | Payload             |
-| ------------------- | ------------------ | ------------------- |
+| Message                | When fired         | Payload             |
+| ---------------------- | ------------------ | ------------------- |
 | `launcher:view:search` | On every keystroke | `{ query: string }` |
 | `launcher:view:submit` | On Enter key       | `{ query: string }` |
 

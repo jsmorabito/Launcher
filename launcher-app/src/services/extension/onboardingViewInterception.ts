@@ -74,7 +74,9 @@ export function installOnboardingCompletionListener(
         },
       );
     } catch (err) {
-      logService.warn(`[onboarding] failed to install launcher:extension-onboarded listener: ${err}`);
+      logService.warn(
+        `[onboarding] failed to install launcher:extension-onboarded listener: ${err}`,
+      );
     }
   })();
   return () => {

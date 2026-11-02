@@ -7,7 +7,9 @@ use tauri::{AppHandle, Manager, Runtime, WebviewWindow};
 pub fn apply_panel_appearance<R: Runtime>(window: &WebviewWindow<R>, pref: crate::ThemePreference) {
     if let Ok(ptr) = window.ns_window() {
         // SAFETY: ns_window() returns a valid NSWindow pointer on success.
-        unsafe { launcher_platform::macos::appearance::apply_panel_appearance(ptr as *mut _, pref) };
+        unsafe {
+            launcher_platform::macos::appearance::apply_panel_appearance(ptr as *mut _, pref)
+        };
     } else {
         log::warn!("[apply_panel_appearance] ns_window() failed");
     }

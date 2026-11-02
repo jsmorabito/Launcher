@@ -51,14 +51,20 @@ describe('SearchBarAccessoryServiceProxy', () => {
     const handler = vi.fn();
     const off = proxy.onChange(handler);
 
-    expect(onSpy).toHaveBeenCalledWith('launcher:event:searchBar:filterChange', expect.any(Function));
+    expect(onSpy).toHaveBeenCalledWith(
+      'launcher:event:searchBar:filterChange',
+      expect.any(Function),
+    );
 
     const registeredListener = onSpy.mock.calls[0][1] as (p: unknown) => void;
     registeredListener({ commandId: 'cmd-1', value: 'images' });
     expect(handler).toHaveBeenCalledWith('images');
 
     off();
-    expect(offSpy).toHaveBeenCalledWith('launcher:event:searchBar:filterChange', registeredListener);
+    expect(offSpy).toHaveBeenCalledWith(
+      'launcher:event:searchBar:filterChange',
+      registeredListener,
+    );
   });
 
   it('onChange() ignores malformed payloads', () => {

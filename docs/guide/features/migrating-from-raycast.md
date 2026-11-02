@@ -59,7 +59,7 @@ You can trigger the import through any of these entry points:
 
 Here is how Raycast commands and concepts translate to Launcher:
 
-| Raycast Feature         | Launcher Equivalent                            | Why It's Better in Launcher                                                                                                                                      |
+| Raycast Feature         | Launcher Equivalent                         | Why It's Better in Launcher                                                                                                                                   |
 | :---------------------- | :------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Snippets**            | [Snippets](./snippets.md)                   | Encrypted at rest with AES-256-GCM in your OS Keychain. Automatic regex secret redaction prevents accidental credential leaks.                                |
 | **Quicklinks**          | [Portals](./portals.md)                     | Support dynamic `{query}` and `{Clipboard Text}` arguments with zero webview overhead.                                                                        |
@@ -68,7 +68,7 @@ Here is how Raycast commands and concepts translate to Launcher:
 | **Switch Windows**      | Switch Windows                              | Fast fuzzy search across all active application windows with instant focus switching and no telemetry.                                                        |
 | **Screen OCR**          | Screen OCR                                  | Native offline text recognition powered by Apple Vision on macOS. Copies extracted text straight to your clipboard with automatic secret redaction.           |
 | **Window Management**   | [Window Management](./window-management.md) | 17 built-in layout presets, multi-display cycling, custom layout saving, and instant keyboard undo ("Restore Previous").                                      |
-| **Scripts**             | [Scripts](./scripts.md)                     | Watched folder execution with rich `@launcher.*` metadata headers and live progress tracking dots.                                                               |
+| **Scripts**             | [Scripts](./scripts.md)                     | Watched folder execution with rich `@launcher.*` metadata headers and live progress tracking dots.                                                            |
 | **Clipboard History**   | [Clipboard History](./clipboard-history.md) | Local encrypted database, configurable password manager denylist, and automatic credit card/API key redaction before storage.                                 |
 | **File Search**         | [File Search](./file-search.md)             | Bounded per-keystroke cost with a Rust arena index; Quick Look-style previews without loading heavy file payloads into memory.                                |
 | **Extensions Store**    | [Extensions](./extensions.md)               | Double-gated security model. Extensions run in sandboxed iframes with explicit permissions enforced at both the IPC router and Rust kernel levels.            |

@@ -367,7 +367,10 @@ describe('BackupHandler', () => {
 
     it('opens modal and clears importNeedsPassword on success', async () => {
       await handler.handleFileWithPassword();
-      expect(commands.importProfile).toHaveBeenCalledWith('/path/backup.launcher', 'correct-password');
+      expect(commands.importProfile).toHaveBeenCalledWith(
+        '/path/backup.launcher',
+        'correct-password',
+      );
       expect(handler.importModalOpen).toBe(true);
       expect(handler.importNeedsPassword).toBe(false);
       expect(handler.importStatus).toBe('idle');

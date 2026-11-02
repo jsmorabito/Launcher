@@ -147,7 +147,10 @@ describe('link command', () => {
       'existing.ext': '/path/to/existing',
       'com.test.worker-only': process.cwd(),
     });
-    expect(fs.renameSync).toHaveBeenCalledWith(devExtWrite![0], '/tmp/launcher/dev_extensions.json');
+    expect(fs.renameSync).toHaveBeenCalledWith(
+      devExtWrite![0],
+      '/tmp/launcher/dev_extensions.json',
+    );
   });
 
   it('registers theme in dev_extensions.json too', async () => {
@@ -207,7 +210,10 @@ describe('unlink command', () => {
     expect(writtenJson).toEqual({
       'keep.ext': '/path/to/keep',
     });
-    expect(fs.renameSync).toHaveBeenCalledWith(devExtWrite![0], '/tmp/launcher/dev_extensions.json');
+    expect(fs.renameSync).toHaveBeenCalledWith(
+      devExtWrite![0],
+      '/tmp/launcher/dev_extensions.json',
+    );
   });
 
   it('handles non-symlink target directory with rmSync', async () => {

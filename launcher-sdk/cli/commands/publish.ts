@@ -80,7 +80,9 @@ export function registerPublish(program: Command) {
         if (distMtime > 0 && Math.max(srcMtime, manifestMtime) > distMtime) {
           console.error(chalk.red('\n✗ Source files are newer than the build output.'));
           console.error(chalk.gray('  The build may have failed or produced stale output.'));
-          console.error(chalk.gray('  Run "launcher build" and check for errors before publishing.'));
+          console.error(
+            chalk.gray('  Run "launcher build" and check for errors before publishing.'),
+          );
           process.exit(1);
         }
       } else {

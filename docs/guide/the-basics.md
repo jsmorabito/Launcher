@@ -42,7 +42,7 @@ Launcher is designed to be used entirely with the keyboard:
 | `Tab`     | Fill command arguments, or switch to AI / context mode                  |
 | `⌘P`      | Toggle the search-bar dropdown (when one is shown)                      |
 | `⌘,`      | Open Settings                                                           |
-| `Esc`     | Clear the search → go back from a view → hide Launcher                     |
+| `Esc`     | Clear the search → go back from a view → hide Launcher                  |
 | `⌫`       | Go back from an open view, or exit AI mode when the search bar is empty |
 
 Launcher keeps focus in the search bar automatically. You can click a result to select it, but you do not have to.

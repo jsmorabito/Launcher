@@ -108,13 +108,13 @@ actionService.registerAction(refreshAction);
 
 ### Action context reference
 
-| `ActionContext`  | When shown                                        |
-| ---------------- | ------------------------------------------------- |
-| `GLOBAL`         | Always — regardless of what's open                |
-| `EXTENSION_VIEW` | Only while an extension panel is open             |
-| `SEARCH_VIEW`    | While the main search result list is active       |
-| `RESULT`         | When a specific result item is highlighted        |
-| `COMMAND_RESULT` | After a command has returned a result             |
+| `ActionContext`  | When shown                                           |
+| ---------------- | ---------------------------------------------------- |
+| `GLOBAL`         | Always — regardless of what's open                   |
+| `EXTENSION_VIEW` | Only while an extension panel is open                |
+| `SEARCH_VIEW`    | While the main search result list is active          |
+| `RESULT`         | When a specific result item is highlighted           |
+| `COMMAND_RESULT` | After a command has returned a result                |
 | `CORE`           | Built-in Launcher actions — do not use in extensions |
 
 ---
@@ -149,7 +149,7 @@ A `shortcut` is a declaration, not just a hint: the launcher shows it next to th
 | `ActionCategory.EDIT`        | Edit           | Create, update, delete operations           |
 | `ActionCategory.SHARE`       | Share          | Export, copy to clipboard, send             |
 | `ActionCategory.DESTRUCTIVE` | Destructive    | Irreversible actions — delete, clear, reset |
-| `ActionCategory.SYSTEM`      | System         | Reserved for built-in Launcher actions         |
+| `ActionCategory.SYSTEM`      | System         | Reserved for built-in Launcher actions      |
 
 Custom category strings are fully supported — use them for domain-specific grouping.
 

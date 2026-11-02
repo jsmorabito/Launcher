@@ -11,7 +11,7 @@ These shortcuts work anywhere inside the Launcher launcher window.
 
 | Shortcut                          | What it does                                           |
 | --------------------------------- | ------------------------------------------------------ |
-| The hotkey you chose during setup | Show or hide Launcher from anywhere on your computer      |
+| The hotkey you chose during setup | Show or hide Launcher from anywhere on your computer   |
 | `⌘,`                              | Open Settings                                          |
 | `⌘K`                              | Toggle the action panel                                |
 | `⌘P`                              | Toggle the search-bar dropdown (when one is shown)     |
@@ -19,7 +19,7 @@ These shortcuts work anywhere inside the Launcher launcher window.
 | `Tab`                             | Fill command arguments, or switch to AI / context mode |
 | `↑` / `↓`                         | Move between results                                   |
 | `Enter`                           | Run the selected result                                |
-| `Esc`                             | Clear the search → go back from a view → hide Launcher    |
+| `Esc`                             | Clear the search → go back from a view → hide Launcher |
 
 The show/hide hotkey is user-configurable in **Settings → Shortcuts**.
 
@@ -104,7 +104,7 @@ A few built-in features add extra shortcuts while their view is active. Each one
 | `⌘⌥C`        | Copy Name                                 |
 | `⌘T`         | Open in Terminal                          |
 | `⌘⇧P`        | Toggle Pin                                |
-| `Tab` / `⌘I` | Send to Launcher AI                          |
+| `Tab` / `⌘I` | Send to Launcher AI                       |
 | `⌘⇧F`        | Search Everywhere (deep OS-native search) |
 
 **Screen OCR**

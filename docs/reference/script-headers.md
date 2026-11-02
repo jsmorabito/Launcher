@@ -270,7 +270,7 @@ open "$URL"
 | Kind                    | When                                                                                                      | Severity                                                                    |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `script_header_invalid` | Header JSON malformed, duplicate argument index, out-of-range index, unknown mode, malformed refreshTime. | `warning` — file skipped, not registered.                                   |
-| `inline_script_clamped` | A script declared `@launcher.refreshTime` below 10s. Fired once per script.                                  | `warning` — value raised to 10s, ticking proceeds.                          |
+| `inline_script_clamped` | A script declared `@launcher.refreshTime` below 10s. Fired once per script.                               | `warning` — value raised to 10s, ticking proceeds.                          |
 | `inline_script_capped`  | More than 10 inline scripts present after a rescan. Fired once per newly-overflowed script.               | `warning` — capped scripts still run on manual Enter, just don't auto-tick. |
 
 All three flow through the unified `feedbackService` channel — they

@@ -6,11 +6,11 @@ order: 1
 
 ### Runtime requirements
 
-| Requirement | Minimum Version          |
-| ----------- | ------------------------ |
-| Node.js     | 18 or later              |
-| pnpm        | 8 or later (recommended) |
-| Launcher app   | Installed and running    |
+| Requirement  | Minimum Version          |
+| ------------ | ------------------------ |
+| Node.js      | 18 or later              |
+| pnpm         | 8 or later (recommended) |
+| Launcher app | Installed and running    |
 
 ### Install the Launcher CLI
 

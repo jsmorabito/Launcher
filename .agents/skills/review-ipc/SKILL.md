@@ -90,8 +90,8 @@ When auditing services that branch on iframe role:
 
 The host sends two push message types directly into extension iframes. These are **not** extension API calls — they originate from the host and require no permission gate:
 
-| Message type            | Direction     | Purpose                                                           |
-| ----------------------- | ------------- | ----------------------------------------------------------------- |
+| Message type               | Direction     | Purpose                                                           |
+| -------------------------- | ------------- | ----------------------------------------------------------------- |
 | `launcher:theme:variables` | host → iframe | Injects all CSS custom properties on load and on theme change     |
 | `launcher:theme:fonts`     | host → iframe | Sends Satoshi + JetBrains Mono as base64 `@font-face` CSS on load |
 

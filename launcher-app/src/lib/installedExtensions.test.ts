@@ -38,7 +38,9 @@ describe('isExtensionInstalled', () => {
       slug: 'browser',
       manifest: { id: 'org.launcher.browser' },
     };
-    const paths = ['C:\\Users\\User\\AppData\\Roaming\\org.launcher\\extensions\\org.launcher.browser'];
+    const paths = [
+      'C:\\Users\\User\\AppData\\Roaming\\org.launcher\\extensions\\org.launcher.browser',
+    ];
     expect(isExtensionInstalled(ext, paths)).toBe(true);
   });
 
