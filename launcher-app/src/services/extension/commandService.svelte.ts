@@ -2,6 +2,8 @@ import type { CommandHandler, DynamicCommandRegistration } from 'launcher-sdk/co
 import { logService } from '../log/logService';
 import { extensionPreferencesService } from './extensionPreferencesService.svelte';
 import { preferencesPromptStore } from './preferencesPromptStore.svelte';
+import { connectPromptStore } from '../connectors/connectPromptStore.svelte';
+import { connectorsService } from '../connectors';
 import * as commands from '../../lib/ipc/commands';
 
 interface RegisteredCommand {
@@ -120,6 +122,23 @@ export class CommandService {
         });
         throw new Error(
           `Extension '${command.extensionId}' requires preferences before running command '${shortCommandId}'`,
+        );
+      }
+    }
+
+    // Same bypass rules as the preference gate: no user to prompt on a timer
+    // tick or an external deep link.
+    if (!bypassPreferenceGate && shortCommandId) {
+      const missingConnectors = await connectorsService.missingRequired(command.extensionId);
+      if (missingConnectors.length > 0) {
+        connectPromptStore.open({
+          extensionId: command.extensionId,
+          commandId: shortCommandId,
+          commandObjectId,
+          missing: missingConnectors,
+        });
+        throw new Error(
+          `Extension '${command.extensionId}' requires a connected account before running command '${shortCommandId}'`,
         );
       }
     }

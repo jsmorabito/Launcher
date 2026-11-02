@@ -30,6 +30,64 @@ export interface DropdownOption {
 }
 
 /**
+ * A third-party account the extension uses. Launcher runs the connect flow in
+ * Settings → Extensions and gives the extension tokens through
+ * `IConnectorsService`; no extension code runs during sign-in. Requires the
+ * `connectors:use` permission to read accounts and tokens.
+ */
+export interface ConnectorDeclaration {
+  /** Unique within the extension. Matches /^[a-z][a-z0-9-]*$/. */
+  id: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  /** Commands ask the user to connect before they run. */
+  required?: boolean;
+  /** More than one account (e.g. several workspaces) may be connected. */
+  multiAccount?: boolean;
+  /**
+   * Fixed provider (e.g. Linear): OAuth 2.0 PKCE endpoints. `clientId` is
+   * public and must be hardcoded here. Declare with `account`, or declare
+   * `server` instead — never both.
+   */
+  oauth?: {
+    clientId: string;
+    authorizationUrl: string;
+    tokenUrl: string;
+    scopes: string[];
+  };
+  /**
+   * One HTTPS request Launcher makes with the new token to learn who signed in.
+   * Must target a host used by `oauth.authorizationUrl` or `oauth.tokenUrl`.
+   */
+  account?: {
+    url: string;
+    method?: 'GET' | 'POST';
+    /** JSON request body. */
+    body?: string;
+    /** Dot path to the stable account id in the JSON response. */
+    idPath: string;
+    /** Dot path to the account's display name. */
+    namePath: string;
+  };
+  /**
+   * A server the user supplies (self-hosted, or one of many deployments).
+   * The user enters its address when connecting; Launcher reads the server's
+   * OAuth metadata (RFC 8414), registers itself as a client (RFC 7591) and runs
+   * PKCE, so no client id is declared. The account is the server itself, and
+   * its address is exposed as `ConnectorAccount.serverUrl`.
+   */
+  server?: {
+    /** Prefilled in the connect dialog, e.g. `http://localhost:4100`. */
+    defaultUrl?: string;
+    placeholder?: string;
+    scopes?: string[];
+    /** Shown on the server's consent screen. Defaults to "Launcher". */
+    clientName?: string;
+  };
+}
+
+/**
  * A single preference declared by an extension in its manifest.
  * Preferences can live at the extension level (apply to all commands) or
  * on a specific command (apply only to that command). Values are auto-
@@ -132,6 +190,8 @@ export interface ExtensionManifest {
   permissionArgs?: Record<string, unknown>;
   /** Extension-level preferences (apply to all commands). */
   preferences?: PreferenceDeclaration[];
+  /** Accounts Launcher connects on the extension's behalf. */
+  connectors?: ConnectorDeclaration[];
   /**
    * On-demand sidecar runtimes (e.g. a future `yt-dlp`/`ffmpeg`) this
    * extension needs. Downloaded once and shared across consumers; declared

@@ -16,10 +16,13 @@ use std::time::Duration;
 /// download.
 const METADATA_REQUEST_TIMEOUT_SECS: u64 = 30;
 
-// TODO: confirm final catalog repo URL with owner — this org/repo is a
-// placeholder until the catalog is actually published.
-pub(crate) const CATALOG_URL: &str =
-    "https://raw.githubusercontent.com/Xoshbin/asyar-runtime-catalog/main/catalog.json";
+/// Remote catalog URL, opt-in via `LAUNCHER_RUNTIME_CATALOG_URL`. Unset (the
+/// default) means no remote fetch: the bundled fallback catalog is used.
+fn remote_catalog_url() -> Option<String> {
+    std::env::var("LAUNCHER_RUNTIME_CATALOG_URL")
+        .ok()
+        .filter(|u| !u.trim().is_empty())
+}
 
 const FALLBACK_CATALOG_JSON: &str = include_str!("catalog.fallback.json");
 
@@ -126,7 +129,8 @@ pub(crate) fn build_metadata_client() -> reqwest::Client {
 /// Best-effort fetch of the remote catalog. Returns `None` on any network,
 /// HTTP, or parse failure so callers always have the fallback to lean on.
 pub(crate) async fn fetch_remote_catalog(client: &reqwest::Client) -> Option<RuntimeCatalog> {
-    let response = client.get(CATALOG_URL).send().await.ok()?;
+    let url = remote_catalog_url()?;
+    let response = client.get(url).send().await.ok()?;
     if !response.status().is_success() {
         return None;
     }

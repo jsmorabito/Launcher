@@ -128,6 +128,11 @@ export const PERMISSION_CATALOG: Record<string, PermissionInfo> = {
     title: 'Sign in to services',
     description: 'Run OAuth authorization flows with third-party providers.',
   },
+  'connectors:use': {
+    title: 'Use connected accounts',
+    description:
+      'Read the accounts you connected to this extension in Settings and request access tokens for them.',
+  },
   'extension:invoke': {
     title: 'Invoke other extensions',
     description: 'Launch commands in other installed extensions.',

@@ -9,7 +9,9 @@ use serde::{Deserialize, Serialize};
 // Override at runtime by setting LAUNCHER_API_BASE in the launcher's environment when doing
 // local end-to-end testing (e.g. LAUNCHER_API_BASE=http://launcher-website.test to point at a
 // local Valet host, or LAUNCHER_API_BASE=http://localhost:8000 for `php artisan serve`).
-const DEFAULT_API_BASE: &str = "https://asyar.org";
+// Empty by default: no backend is configured, so account/feedback/usage requests
+// fail locally (relative URL) instead of reaching a third-party server.
+const DEFAULT_API_BASE: &str = "";
 
 // ── Request/Response types ────────────────────────────────────────────────────
 

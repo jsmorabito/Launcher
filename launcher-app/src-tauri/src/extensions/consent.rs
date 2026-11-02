@@ -767,6 +767,7 @@ mod tests {
                 tools: None,
                 runtimes: None,
                 walkthrough: None,
+                connectors: None,
             },
             enabled,
             is_built_in,

@@ -62,6 +62,7 @@ expands the placement guidance.
 | `ToolsService`             | `IToolsService`             | worker                         | `tools:register`                                  | Register tools your extension exports to the agent runtime                                                                             |
 | `SnippetsService`          | `ISnippetsService`          | worker                         | `snippets:contribute`                             | Contribute `:shortcode:` → expansion pairs to the global keystroke matcher (system-wide replacement)                                   |
 | `OAuthService`             | `IOAuthService`             | both                           | `oauth:use`                                       | OAuth 2.0 PKCE flow — authorize with third-party providers, cache & revoke tokens                                                      |
+| `ConnectorsService`        | `IConnectorsService`        | both                           | `connectors:use`                                  | Accounts the user connected in Settings — list accounts, get a fresh access token. Launcher runs the sign-in flow.                     |
 | `ShellService`             | `IShellService`             | both                           | `shell:spawn`                                     | Spawn OS processes and stream stdout/stderr — wraps CLI tools like ffmpeg, git, docker                                                 |
 | `InteropService`           | `IInteropService`           | view                           | `extension:invoke`                                | Invoke a command in another installed extension                                                                                        |
 | `CacheService`             | `ICacheService`             | both                           | `cache:read/write`                                | General-purpose persistent cache with TTL support                                                                                      |
@@ -76,8 +77,8 @@ expands the placement guidance.
 | `RunService`               | `IRunService`               | worker                         | `runs:track`                                      | Track long-running work in the launcher's runs UI and compact HUD badge                                                                |
 | `FilesService`             | `IFilesService`             | both                           | `files:search`                                    | Search the same bounded, cached local file index that backs the host's "Search Files" view                                             |
 | `ScreenService`            | `IScreenService`            | both                           | `screen:pick-color`, `screen:capture`             | Sample screen pixel colors with native eyedropper and extract screen text with on-device OCR                                           |
-| `CalculatorService`        | `ICalculatorService`        | both                           | `calculator:evaluate`                             | Evaluate math expressions, unit conversions, and currency conversions via Launcher's calculation engine                                   |
-| `BrowserService`           | `IBrowserService`           | both                           | `browser:*` (per method)                          | Read bookmarks / history / open tabs and drive page content in paired browsers — requires the Launcher browser companion                  |
+| `CalculatorService`        | `ICalculatorService`        | both                           | `calculator:evaluate`                             | Evaluate math expressions, unit conversions, and currency conversions via Launcher's calculation engine                                |
+| `BrowserService`           | `IBrowserService`           | both                           | `browser:*` (per method)                          | Read bookmarks / history / open tabs and drive page content in paired browsers — requires the Launcher browser companion               |
 | `OpenerService`            | `IOpenerService`            | both                           | `shell:open-url`, `shell:open-path`, `fs:read`    | Open URLs, local paths in external applications, or reveal files/folders in the system file manager                                    |
 | `OnboardingService`        | `IOnboardingService`        | both                           | None (implicit)                                   | Signal first-run onboarding completion and trigger automatic re-dispatch of pending commands                                           |
 | `AiService`                | `IAiService`                | both                           | `ai`                                              | Prompt the host's configured AI model for one-shot completions or streamed responses                                                   |
@@ -115,6 +116,7 @@ expands the placement guidance.
 - **[ToolsService](./tools-service.md)**
 - **[SnippetsService](./snippets-service.md)**
 - **[OAuthService](./oauth-service.md)**
+- **[ConnectorsService](./connectors-service.md)**
 - **[ShellService](./shell-service.md)**
 - **[InteropService](./interop-service.md)**
 - **[CacheService](./cache-service.md)**

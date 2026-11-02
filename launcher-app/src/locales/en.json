@@ -327,7 +327,23 @@
       "required_setup_mid": "to run",
       "coming_soon": "Coming soon",
       "uninstall_title": "Uninstall Extension",
-      "uninstall_message": "Are you sure you want to uninstall \"{title}\"? This action cannot be undone."
+      "uninstall_message": "Are you sure you want to uninstall \"{title}\"? This action cannot be undone.",
+      "connectors": {
+        "connections_title": "Connections",
+        "connect": "Connect",
+        "connect_another": "Connect another",
+        "connecting": "Waiting for {name}…",
+        "disconnect": "Disconnect",
+        "not_connected": "Not connected",
+        "required_badge": "Required",
+        "connect_error": "Couldn't connect: {error}",
+        "already_connected": "{name} is already connected.",
+        "prompt_title": "Connect {name}",
+        "prompt_body": "{extension} needs a connected {name} account to run {command}.",
+        "prompt_connect": "Connect {name}",
+        "server_label": "Server address",
+        "server_placeholder": "https://tasks.example.com"
+      }
     },
     "ai": {
       "google_search": "Google Search",

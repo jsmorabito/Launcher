@@ -20,6 +20,7 @@ import {
   ApplicationServiceProxy,
 } from './services';
 import { OAuthServiceProxy } from './services/OAuthServiceProxy';
+import { ConnectorsServiceProxy } from './services/ConnectorsServiceProxy';
 import { FileManagerServiceProxy } from './services/FileManagerServiceProxy';
 import { InteropServiceProxy } from './services/InteropServiceProxy';
 import { WindowManagementServiceProxy } from './services/WindowManagementService';
@@ -65,6 +66,7 @@ function buildFullProxyBag(): Partial<Record<Namespace, BaseServiceProxy>> {
     feedback: new FeedbackServiceProxy(),
     selection: new SelectionServiceProxy(),
     oauth: new OAuthServiceProxy(),
+    connectors: new ConnectorsServiceProxy(),
     shell: new ShellServiceProxy(),
     fs: new FileManagerServiceProxy(),
     interop: new InteropServiceProxy(),

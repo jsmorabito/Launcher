@@ -327,7 +327,23 @@
       "required_setup_mid": "以运行",
       "coming_soon": "即将推出",
       "uninstall_title": "卸载扩展",
-      "uninstall_message": "确定要卸载“{title}”吗？此操作无法撤销。"
+      "uninstall_message": "确定要卸载“{title}”吗？此操作无法撤销。",
+      "connectors": {
+        "connections_title": "连接",
+        "connect": "连接",
+        "connect_another": "连接另一个",
+        "connecting": "正在等待 {name}…",
+        "disconnect": "断开连接",
+        "not_connected": "未连接",
+        "required_badge": "必需",
+        "connect_error": "无法连接：{error}",
+        "already_connected": "{name} 已连接。",
+        "prompt_title": "连接 {name}",
+        "prompt_body": "{extension} 需要已连接的 {name} 账户才能运行 {command}。",
+        "prompt_connect": "连接 {name}",
+        "server_label": "服务器地址",
+        "server_placeholder": "https://tasks.example.com"
+      }
     },
     "ai": {
       "google_search": "Google 搜索",

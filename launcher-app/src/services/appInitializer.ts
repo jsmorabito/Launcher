@@ -27,6 +27,8 @@ import { clipboardHistoryStore } from './clipboard/stores/clipboardHistoryStore.
 import { profileService } from './profile/profileService';
 import { extensionUpdateService } from './extension/extensionUpdateService.svelte';
 import { extensionOAuthService } from './oauth/extensionOAuthService.svelte';
+import { connectorsService } from './connectors';
+import { startConnectorsHost } from './connectors/connectorsHost';
 import { SnippetsSyncProvider } from './profile/providers/snippetsSyncProvider';
 import { NotesSyncProvider } from './profile/providers/notesSyncProvider';
 import { ShortcutsSyncProvider } from './profile/providers/shortcutsSyncProvider';
@@ -107,6 +109,9 @@ export const appInitializer = {
 
       await extensionOAuthService.init();
       logService.info('Extension OAuth service initialized.');
+
+      await startConnectorsHost(connectorsService);
+      logService.info('Connectors host started.');
 
       // Register profile sync providers before cloud sync so the initial upload has all providers
       registerProfileProviders();

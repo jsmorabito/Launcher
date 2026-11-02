@@ -15,6 +15,7 @@
   import { settingsService } from '../../services/settings/settingsService.svelte';
   import { applyThemePreference } from '../../services/theme/themeMode';
   import PreferencesPromptHost from '../settings/PreferencesPromptHost.svelte';
+  import ConnectPromptHost from '../settings/ConnectPromptHost.svelte';
   import DialogHost from '../feedback/DialogHost.svelte';
 
   let { children }: { children: Snippet } = $props();
@@ -88,6 +89,7 @@
   {@render children()}
 </svelte:boundary>
 <PreferencesPromptHost />
+<ConnectPromptHost />
 <DialogHost />
 
 {#if mcpService.permissionPrompt}

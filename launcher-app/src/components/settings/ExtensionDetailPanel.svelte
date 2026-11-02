@@ -4,6 +4,7 @@
   import Toggle from '../base/Toggle.svelte';
   import ExtensionPreferencesForm from './ExtensionPreferencesForm.svelte';
   import PermissionList from './PermissionList.svelte';
+  import ExtensionConnectors from './ExtensionConnectors.svelte';
   import type { ExtensionItem } from '../../routes/settings/settingsHandlers.svelte';
   import type { ExtensionCommand } from 'launcher-sdk/contracts';
   import { t } from '../../services/i18n';
@@ -388,6 +389,13 @@
           permissions={extension.permissions}
           permissionArgs={extension.permissionArgs ?? {}}
         />
+      </div>
+    {/if}
+
+    {#if !extension.isBuiltIn && extension.id && extension.connectors && extension.connectors.length > 0}
+      <div class="panel-section">
+        <div class="section-header">{t('settings.extensions.connectors.connections_title')}</div>
+        <ExtensionConnectors extensionId={extension.id} connectors={extension.connectors} />
       </div>
     {/if}
 

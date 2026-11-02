@@ -27,6 +27,7 @@ import { extensionCacheService } from '../storage/extensionCacheService';
 import { feedbackService } from '../feedback/feedbackService.svelte';
 import { selectionService } from '../selection/selectionService';
 import { extensionOAuthService } from '../oauth/extensionOAuthService.svelte';
+import { connectorsService, setConnectorsLookup } from '../connectors';
 import { shellService } from '../shell/shellService.svelte';
 import { fileManagerService } from '../fileManager/fileManagerService';
 import { InteropService } from '../interop/interopService.svelte';
@@ -62,6 +63,8 @@ export function buildServiceRegistry(deps: {
   // Maintained in TS so we can replace-by-id on registerTool and remove-by-id
   // on unregisterTool, then push the full set to Rust atomically.
   const toolMap = new Map<string, ManifestTool[]>();
+
+  setConnectorsLookup((id) => deps.getManifestById(id)?.connectors);
 
   return defineServiceRegistry({
     log: logService,
@@ -141,6 +144,19 @@ export function buildServiceRegistry(deps: {
     },
     selection: selectionService,
     oauth: extensionOAuthService,
+    connectors: {
+      getAccounts: (extensionId: string, connectorId: string) =>
+        connectorsService.getAccounts(extensionId, connectorId),
+      getToken: (extensionId: string, connectorId: string, accountId: string) =>
+        connectorsService.getToken(extensionId, connectorId, accountId),
+      fetch: (
+        extensionId: string,
+        connectorId: string,
+        accountId: string,
+        path: string,
+        options?: Parameters<typeof connectorsService.fetch>[4],
+      ) => connectorsService.fetch(extensionId, connectorId, accountId, path, options),
+    },
     shell: {
       spawn: (
         extensionId: string,

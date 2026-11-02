@@ -40,7 +40,10 @@ export function injectThemeVariables(vars: Record<string, string>): void {
   const declarations = Object.entries(vars)
     .map(([name, value]) => `  ${name}: ${value};`)
     .join('\n');
-  style.textContent = `:root {\n${declarations}\n}`;
+  // Tripled `:root` (0,3,0) so the host's resolved theme beats tokens.css's
+  // `@media (prefers-color-scheme: dark) :root:not([data-theme='light'])`
+  // block (0,2,0); otherwise a dark OS forces dark tokens under a light launcher.
+  style.textContent = `:root:root:root {\n${declarations}\n}`;
 }
 
 /** Inject font-face CSS into the document. */

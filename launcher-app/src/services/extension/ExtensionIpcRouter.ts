@@ -37,6 +37,7 @@ export const ALLOWED_EXTENSION_INVOKE_COMMANDS = new Set(Object.keys(EXTENSION_I
 export const INJECTS_EXTENSION_ID = new Set<Namespace>([
   'storage',
   'oauth',
+  'connectors',
   'shell',
   'interop',
   'cache',
@@ -135,6 +136,11 @@ export const METHOD_PARAM_SCHEMAS: Record<string, string[]> = {
   // oauth
   'oauth:authorize': ['providerId', 'clientId', 'authorizationUrl', 'tokenUrl', 'scopes', 'flowId'],
   'oauth:revokeToken': ['providerId'],
+
+  // connectors
+  'connectors:getAccounts': ['connectorId'],
+  'connectors:getToken': ['connectorId', 'accountId'],
+  'connectors:fetch': ['connectorId', 'accountId', 'path', 'options'],
 
   // shell
   'shell:spawn': ['program', 'args', 'spawnId', 'stdin'],

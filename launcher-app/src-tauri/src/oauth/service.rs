@@ -97,11 +97,90 @@ pub(crate) async fn exchange_code_for_token(
     Ok(build_token_from_response(resp, now_secs()))
 }
 
+/// Trade a refresh token for a new access token. Providers that rotate refresh
+/// tokens return a new one; otherwise the previous one stays valid and is kept.
+pub(crate) async fn refresh_access_token(
+    token_url: &str,
+    client_id: &str,
+    refresh_token: &str,
+) -> Result<OAuthToken, AppError> {
+    let client = reqwest::Client::new();
+    let params = [
+        ("grant_type", "refresh_token"),
+        ("refresh_token", refresh_token),
+        ("client_id", client_id),
+    ];
+
+    let response = client
+        .post(token_url)
+        .header("Accept", "application/json")
+        .form(&params)
+        .send()
+        .await?;
+
+    if !response.status().is_success() {
+        let status = response.status();
+        let body = response.text().await.unwrap_or_default();
+        return Err(AppError::OAuth(format!(
+            "Token refresh failed ({status}): {body}"
+        )));
+    }
+
+    let resp: TokenExchangeResponse = response
+        .json()
+        .await
+        .map_err(|e| AppError::OAuth(format!("Failed to parse refresh response: {e}")))?;
+
+    Ok(apply_refresh_response(resp, refresh_token, now_secs()))
+}
+
+/// Build the stored token from a refresh response, keeping the old refresh
+/// token when the provider did not rotate it.
+pub(crate) fn apply_refresh_response(
+    resp: TokenExchangeResponse,
+    previous_refresh_token: &str,
+    now: i64,
+) -> OAuthToken {
+    let mut token = build_token_from_response(resp, now);
+    if token.refresh_token.is_none() {
+        token.refresh_token = Some(previous_refresh_token.to_string());
+    }
+    token
+}
+
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn refresh_keeps_previous_refresh_token_when_not_rotated() {
+        let resp = TokenExchangeResponse {
+            access_token: "new".into(),
+            token_type: None,
+            expires_in: Some(3600),
+            refresh_token: None,
+            scope: None,
+        };
+        let token = apply_refresh_response(resp, "old-refresh", 100);
+        assert_eq!(token.access_token, "new");
+        assert_eq!(token.refresh_token.as_deref(), Some("old-refresh"));
+        assert_eq!(token.expires_at, Some(3700));
+    }
+
+    #[test]
+    fn refresh_adopts_rotated_refresh_token() {
+        let resp = TokenExchangeResponse {
+            access_token: "new".into(),
+            token_type: None,
+            expires_in: None,
+            refresh_token: Some("rotated".into()),
+            scope: None,
+        };
+        let token = apply_refresh_response(resp, "old-refresh", 0);
+        assert_eq!(token.refresh_token.as_deref(), Some("rotated"));
+    }
 
     fn make_token(expires_at: Option<i64>) -> OAuthToken {
         OAuthToken {

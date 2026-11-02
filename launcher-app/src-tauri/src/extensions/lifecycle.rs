@@ -211,6 +211,14 @@ pub(crate) async fn uninstall(
                     }
                     Err(e) => warn!("Failed to clear OAuth tokens for '{}': {}", extension_id, e),
                 }
+                if let Err(e) =
+                    crate::oauth::connector_store::delete_all_for_extension(&conn, extension_id)
+                {
+                    warn!(
+                        "Failed to clear connector accounts for '{}': {}",
+                        extension_id, e
+                    );
+                }
             }
             Err(e) => warn!("Failed to acquire DB lock for OAuth cleanup: {}", e),
         }
@@ -689,6 +697,7 @@ mod tests {
                 tools: None,
                 runtimes: None,
                 walkthrough: None,
+                connectors: None,
             },
             enabled: true,
             is_built_in,

@@ -79,6 +79,11 @@ pub async fn check_for_updates(
     registry: &ExtensionRegistryState,
     store_api_base_url: &str,
 ) -> Result<Vec<AvailableUpdate>, AppError> {
+    // No store configured (empty base URL): nothing to check, and nothing is sent.
+    if store_api_base_url.trim().is_empty() {
+        return Ok(vec![]);
+    }
+
     // 1. Collect installed non-built-in extension versions
     let local_versions: Vec<LocalExtensionVersion> = {
         let reg = registry.extensions.lock().map_err(|_| AppError::Lock)?;

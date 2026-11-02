@@ -18,6 +18,7 @@ type StorePage = {
  */
 export async function fetchAllStoreItems(): Promise<ApiExtension[]> {
   const items: ApiExtension[] = [];
+  if (!envService.hasStore) return items;
   let url: string | null = `${envService.storeApiBaseUrl}/api/extensions?per_page=100`;
   let pageCount = 0;
   const maxPages = 20;

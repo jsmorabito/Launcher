@@ -7,8 +7,9 @@ vi.mock('./log/logService', () => ({
 import { envService, SUPPORTED_SDK_VERSION } from './envService';
 
 describe('storeApiBaseUrl', () => {
-  it('returns the production URL', () => {
-    expect(envService.storeApiBaseUrl).toBe('https://asyar.org');
+  it('is empty (no store configured) by default', () => {
+    expect(envService.storeApiBaseUrl).toBe('');
+    expect(envService.hasStore).toBe(false);
   });
 });
 

@@ -327,7 +327,23 @@
       "required_setup_mid": "para executar",
       "coming_soon": "Em breve",
       "uninstall_title": "Desinstalar extensão",
-      "uninstall_message": "Tem certeza de que deseja desinstalar \"{title}\"? Esta ação não pode ser desfeita."
+      "uninstall_message": "Tem certeza de que deseja desinstalar \"{title}\"? Esta ação não pode ser desfeita.",
+      "connectors": {
+        "connections_title": "Conexões",
+        "connect": "Conectar",
+        "connect_another": "Conectar outra",
+        "connecting": "Aguardando {name}…",
+        "disconnect": "Desconectar",
+        "not_connected": "Não conectado",
+        "required_badge": "Obrigatório",
+        "connect_error": "Não foi possível conectar: {error}",
+        "already_connected": "{name} já está conectado.",
+        "prompt_title": "Conectar {name}",
+        "prompt_body": "{extension} precisa de uma conta {name} conectada para executar {command}.",
+        "prompt_connect": "Conectar {name}",
+        "server_label": "Endereço do servidor",
+        "server_placeholder": "https://tasks.example.com"
+      }
     },
     "ai": {
       "google_search": "Pesquisa Google",

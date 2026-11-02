@@ -10,6 +10,7 @@ const WORKER_PROXY_NAMESPACES = [
   'network',
   'shell',
   'oauth',
+  'connectors',
   'fs',
   'fsWatcher',
   'application',

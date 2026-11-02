@@ -49,19 +49,26 @@ where
 
     let spec = providers::build_request(provider_id, &config, &messages, &params)?;
 
-    let client = reqwest::Client::new();
-    let timeout = if config.hosted_web_search == Some(true) {
+    // The timeout is per read, not for the whole response: a total timeout would cut a
+    // long-running stream mid-body ("error decoding response body"). Local models can
+    // also take a while to load before the first token.
+    let read_timeout = if config.hosted_web_search == Some(true) || provider_id == "ollama" {
         std::time::Duration::from_secs(120)
     } else {
         std::time::Duration::from_secs(30)
     };
+    let client = reqwest::Client::builder()
+        .connect_timeout(std::time::Duration::from_secs(10))
+        .read_timeout(read_timeout)
+        .build()
+        .map_err(|e| AppError::Other(e.to_string()))?;
 
     let mut req_builder = client.post(&spec.url);
     for (k, v) in spec.headers {
         req_builder = req_builder.header(k, v);
     }
 
-    let response = req_builder.json(&spec.body).timeout(timeout).send().await;
+    let response = req_builder.json(&spec.body).send().await;
 
     let res = match response {
         Ok(r) => r,

@@ -55,6 +55,16 @@ pub const MIGRATIONS: &[Migration] = &[
         name: "threads_is_pinned",
         up: migration_6_threads_is_pinned,
     },
+    Migration {
+        version: 7,
+        name: "connector_accounts",
+        up: migration_7_connector_accounts,
+    },
+    Migration {
+        version: 8,
+        name: "connector_accounts_server_endpoints",
+        up: migration_8_connector_accounts_server_endpoints,
+    },
 ];
 
 /// Bring `conn` up to the newest ledger version. Idempotent.
@@ -248,6 +258,47 @@ fn migration_6_threads_is_pinned(conn: &Connection) -> Result<(), AppError> {
     Ok(())
 }
 
+/// Accounts a user has connected through a manifest-declared connector. The
+/// OAuth tokens themselves stay in `oauth_tokens`, keyed by
+/// `connector:<connector_id>:<account_id>`.
+fn migration_7_connector_accounts(conn: &Connection) -> Result<(), AppError> {
+    conn.execute_batch(
+        "CREATE TABLE IF NOT EXISTS connector_accounts (
+            extension_id TEXT NOT NULL,
+            connector_id TEXT NOT NULL,
+            account_id   TEXT NOT NULL,
+            display_name TEXT NOT NULL,
+            created_at   INTEGER NOT NULL,
+            PRIMARY KEY (extension_id, connector_id, account_id)
+        );",
+    )
+    .map_err(|e| AppError::Database(e.to_string()))?;
+    Ok(())
+}
+
+/// Connectors that point at a user-supplied server (see `server` in the manifest)
+/// register their own OAuth client at connect time, so each account remembers
+/// the server, the client id and the token endpoint needed to refresh it.
+fn migration_8_connector_accounts_server_endpoints(conn: &Connection) -> Result<(), AppError> {
+    for column in ["server_url", "client_id", "token_url"] {
+        let exists: bool = conn
+            .query_row(
+                "SELECT COUNT(*) FROM pragma_table_info('connector_accounts') WHERE name = ?1",
+                [column],
+                |row| row.get::<_, i32>(0),
+            )
+            .map(|c| c > 0)
+            .map_err(|e| AppError::Database(e.to_string()))?;
+        if !exists {
+            conn.execute_batch(&format!(
+                "ALTER TABLE connector_accounts ADD COLUMN {column} TEXT;"
+            ))
+            .map_err(|e| AppError::Database(e.to_string()))?;
+        }
+    }
+    Ok(())
+}
+
 fn migration_5_search_engine_tables(conn: &Connection) -> Result<(), AppError> {
     conn.execute_batch(
         "CREATE TABLE IF NOT EXISTS search_items (
@@ -277,6 +328,7 @@ mod tests {
         "cloud_sync_e2ee_local",
         "cloud_sync_items_journal",
         "command_arg_defaults",
+        "connector_accounts",
         "extension_cache",
         "extension_onboarding",
         "extension_preferences",

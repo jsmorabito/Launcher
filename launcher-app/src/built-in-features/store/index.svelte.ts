@@ -399,6 +399,10 @@ class StoreExtension implements Extension {
     this.logService?.debug('[Store Extension] fetchExtensions: Starting fetch...');
     storeViewState.setLoading(true);
     try {
+      if (!envService.hasStore) {
+        storeViewState.setLoading(false);
+        return;
+      }
       const response = await fetch(`${envService.storeApiBaseUrl}/api/extensions`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

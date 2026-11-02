@@ -154,7 +154,7 @@ pub async fn fetch_rates() -> Result<HashMap<String, f64>, String> {
         .user_agent(concat!(
             "Launcher/",
             env!("CARGO_PKG_VERSION"),
-            " (+https://asyar.org)"
+            " (+https://github.com/jsmorabito/Launcher)"
         ))
         .build()
         .map_err(|e| e.to_string())?;

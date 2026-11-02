@@ -16,6 +16,7 @@ const VIEW_PROXY_NAMESPACES = [
   'feedback',
   'selection',
   'oauth',
+  'connectors',
   'shell',
   'fs',
   'interop',

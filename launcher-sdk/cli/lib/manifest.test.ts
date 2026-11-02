@@ -928,3 +928,79 @@ describe('manifest validation — runtimes', () => {
     });
   });
 });
+
+describe('connectors validation', () => {
+  const linear = {
+    id: 'linear',
+    name: 'Linear',
+    multiAccount: true,
+    oauth: {
+      clientId: 'abc',
+      authorizationUrl: 'https://linear.app/oauth/authorize',
+      tokenUrl: 'https://api.linear.app/oauth/token',
+      scopes: ['read'],
+    },
+    account: {
+      url: 'https://api.linear.app/graphql',
+      method: 'POST' as const,
+      idPath: 'data.organization.id',
+      namePath: 'data.organization.name',
+    },
+  };
+  const withConnectors = (connectors: unknown, permissions = ['network', 'connectors:use']) =>
+    validateManifest(
+      { ...viewOnly, permissions, connectors } as unknown as LauncherManifest,
+      './',
+    ).filter((e) => e.field.startsWith('connectors') || e.field === 'permissions');
+
+  it('accepts a complete connector', () => {
+    expect(withConnectors([linear])).toEqual([]);
+  });
+
+  it('requires the connectors:use permission', () => {
+    const errors = withConnectors([linear], ['network']);
+    expect(errors.map((e) => e.field)).toContain('permissions');
+  });
+
+  it('rejects duplicate ids, bad ids and non-https urls', () => {
+    expect(withConnectors([linear, linear]).some((e) => e.message.includes('duplicate'))).toBe(
+      true,
+    );
+    expect(withConnectors([{ ...linear, id: 'Bad Id' }]).length).toBeGreaterThan(0);
+    const http = { ...linear, oauth: { ...linear.oauth, tokenUrl: 'http://api.linear.app/t' } };
+    expect(withConnectors([http]).map((e) => e.field)).toContain('connectors[0].oauth.tokenUrl');
+  });
+
+  it('rejects an account probe on a host the OAuth endpoints do not use', () => {
+    const bad = { ...linear, account: { ...linear.account, url: 'https://evil.example/x' } };
+    expect(withConnectors([bad]).map((e) => e.field)).toContain('connectors[0].account.url');
+  });
+
+  describe('server connectors', () => {
+    const server = {
+      id: 'tasks',
+      name: 'Tasks',
+      server: { defaultUrl: 'http://localhost:4100', scopes: ['tasks'] },
+    };
+
+    it('accepts a server connector', () => {
+      expect(withConnectors([server])).toEqual([]);
+    });
+
+    it('rejects declaring both forms or neither', () => {
+      expect(withConnectors([{ ...linear, server: server.server }]).length).toBeGreaterThan(0);
+      expect(withConnectors([{ id: 'tasks', name: 'Tasks' }]).length).toBeGreaterThan(0);
+    });
+
+    it('requires a safe default url and clean scopes', () => {
+      const bad = { ...server, server: { defaultUrl: 'http://tasks.example.com' } };
+      expect(withConnectors([bad]).map((e) => e.field)).toContain(
+        'connectors[0].server.defaultUrl',
+      );
+      const badScopes = { ...server, server: { scopes: [' '] } };
+      expect(withConnectors([badScopes]).map((e) => e.field)).toContain(
+        'connectors[0].server.scopes',
+      );
+    });
+  });
+});

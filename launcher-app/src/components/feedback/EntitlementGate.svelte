@@ -4,7 +4,6 @@
   import { gate } from '../../services/auth/gateService.svelte';
   import type { AbilityName, EntitlementName } from '../../services/auth/gateService.svelte';
   import { authService } from '../../services/auth/authService.svelte';
-  import { openUrl } from '@tauri-apps/plugin-opener';
 
   let {
     entitlement,
@@ -62,13 +61,6 @@
       {#if !authService.isLoggedIn}
         <p class="text-xs" style="color: var(--color-text-muted)">{t('entitlement.sign_in')}</p>
       {/if}
-      <button
-        class="mt-1 px-4 py-2 rounded-lg text-sm font-medium"
-        style="background: var(--color-surface); border: 1px solid var(--separator); color: var(--color-text); cursor: pointer;"
-        onclick={() => openUrl('https://asyar.org/pricing')}
-      >
-        {t('entitlement.view_plans')}
-      </button>
     </div>
   </div>
 {/if}

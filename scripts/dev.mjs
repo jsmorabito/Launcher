@@ -31,10 +31,8 @@ const sdkWatch = spawn('pnpm', ['run', 'watch'], {
 // --config merges tauri.dev.conf.json (JSON Merge Patch) over tauri.conf.json,
 // giving the dev build its own identifier (org.launcher.dev) so it gets a fully
 // separate app data dir from the installed production app — extensions,
-// snippets, search index, caches, and login/auth are all isolated. The only
-// thing shared by default is which backend they talk to (both point at
-// asyar.org); override with LAUNCHER_API_BASE to test against a different one
-// (see auth/api_client.rs).
+// snippets, search index, caches, and login/auth are all isolated. No backend is configured
+// by default; set LAUNCHER_API_BASE to test against one (see auth/api_client.rs).
 const launcherDev = spawn('pnpm', ['tauri', 'dev', '--config', 'src-tauri/tauri.dev.conf.json'], {
   cwd: resolve(root, 'launcher-app'),
   stdio: 'inherit',

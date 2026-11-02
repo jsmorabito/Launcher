@@ -69,6 +69,7 @@ export { default as SettingsFormRow } from './settings/SettingsFormRow.svelte';
 export { default as AppearanceThemeSelector } from './settings/AppearanceThemeSelector.svelte';
 export { default as WindowModeSelector } from './settings/WindowModeSelector.svelte';
 export { default as ExtensionDetailPanel } from './settings/ExtensionDetailPanel.svelte';
+export { default as ExtensionConnectors } from './settings/ExtensionConnectors.svelte';
 export { default as ExtensionPreferencesForm } from './settings/ExtensionPreferencesForm.svelte';
 
 // Form
@@ -131,6 +132,7 @@ export { default as ShellTrustManager } from './settings/ShellTrustManager.svelt
 export { default as DisableE2eeDialog } from './settings/DisableE2eeDialog.svelte';
 export { default as EncryptionEnrolmentDialog } from './settings/EncryptionEnrolmentDialog.svelte';
 export { default as PassphraseDialog } from './settings/PassphraseDialog.svelte';
+export { default as ConnectPromptHost } from './settings/ConnectPromptHost.svelte';
 export { default as PreferencesPromptHost } from './settings/PreferencesPromptHost.svelte';
 export { default as RecoverWithMnemonicDialog } from './settings/RecoverWithMnemonicDialog.svelte';
 export { default as RecoveryPhraseDialog } from './settings/RecoveryPhraseDialog.svelte';

@@ -19,7 +19,11 @@ import { logService } from '../../services/log/logService';
 import { initVerboseLoggingSync } from '../../services/log/verboseLoggingSync.svelte';
 import { agentService } from '../../built-in-features/agents/agentService.svelte';
 import type { CompatibilityStatus } from '../../types/CompatibilityStatus';
-import type { ExtensionCommand, PreferenceDeclaration } from 'launcher-sdk/contracts';
+import type {
+  ConnectorDeclaration,
+  ExtensionCommand,
+  PreferenceDeclaration,
+} from 'launcher-sdk/contracts';
 
 // Define interface for extension items with enabled status
 export interface ExtensionItem {
@@ -39,6 +43,7 @@ export interface ExtensionItem {
   disableable?: boolean;
   permissions?: string[];
   permissionArgs?: Record<string, unknown>;
+  connectors?: ConnectorDeclaration[];
 }
 
 // Initialize with default settings first

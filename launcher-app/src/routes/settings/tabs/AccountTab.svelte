@@ -264,16 +264,6 @@
         {#if authService.entitlements.length === 0}
           <div class="no-subscription">
             <span class="secondary-text">{t('settings.account.no_subscription')}</span>
-            <button
-              class="text-link"
-              onclick={() => {
-                import('@tauri-apps/plugin-opener').then((m) =>
-                  m.openUrl('https://asyar.org/pricing'),
-                );
-              }}
-            >
-              {t('settings.account.view_plans')}
-            </button>
           </div>
         {:else}
           <div class="entitlements-list">
@@ -301,26 +291,6 @@
             {/each}
           </div>
         {/if}
-      </SettingsRow>
-    </SettingsCard>
-  </div>
-
-  <div class="section-header">{t('settings.account.section_subscription')}</div>
-  <div id="account-subscription" class="anchor-group">
-    <SettingsCard>
-      <SettingsRow
-        label={t('settings.account.section_subscription')}
-        description={t('settings.account.open_billing_desc')}
-      >
-        <Button
-          onclick={() => {
-            import('@tauri-apps/plugin-opener').then((m) =>
-              m.openUrl('https://asyar.org/settings/subscription'),
-            );
-          }}
-        >
-          {t('settings.account.manage_subscription')}
-        </Button>
       </SettingsRow>
     </SettingsCard>
   </div>

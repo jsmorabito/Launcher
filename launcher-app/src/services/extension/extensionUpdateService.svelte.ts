@@ -109,6 +109,7 @@ class ExtensionUpdateService {
    */
   async checkForUpdates(): Promise<AvailableUpdate[]> {
     if (this.isChecking) return this.availableUpdates;
+    if (!envService.hasStore) return [];
     this.isChecking = true;
     try {
       const updates = await commands.checkExtensionUpdates(envService.storeApiBaseUrl);

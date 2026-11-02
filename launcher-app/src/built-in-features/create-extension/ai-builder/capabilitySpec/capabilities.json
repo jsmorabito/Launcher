@@ -15,6 +15,7 @@
     "clipboard-history:capture",
     "clipboard-history:manage",
     "clipboard-history:read",
+    "connectors:use",
     "feedback:announce",
     "entitlements:read",
     "extension:invoke",

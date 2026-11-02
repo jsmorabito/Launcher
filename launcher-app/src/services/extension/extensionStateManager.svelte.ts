@@ -157,6 +157,7 @@ export class ExtensionStateManager {
           preferences: manifest.preferences ?? [],
           permissions: (manifest as ExtendedManifest).permissions ?? [],
           permissionArgs: (manifest as ExtendedManifest).permissionArgs ?? {},
+          connectors: manifest.connectors ?? [],
         });
       }
       // Ordering (built-in first, then alphabetical) is computed by Rust's

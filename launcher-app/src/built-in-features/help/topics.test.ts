@@ -17,7 +17,7 @@ describe('help topics', () => {
   });
 
   it('builds an absolute guide URL from a slug', () => {
-    expect(guideUrl('features/calculator')).toBe(`${GUIDE_BASE_URL}/features/calculator`);
+    expect(guideUrl('features/calculator')).toBe(`${GUIDE_BASE_URL}/features/calculator.md`);
   });
 
   it('filters topics case-insensitively by title and subtitle', () => {

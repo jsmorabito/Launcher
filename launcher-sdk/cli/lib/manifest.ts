@@ -20,6 +20,7 @@ export interface LauncherManifest {
   type?: 'theme' | 'extension';
   searchable?: boolean;
   preferences?: PreferenceDeclaration[];
+  connectors?: ConnectorDeclaration[];
   /**
    * Tier 2 extensions that need an always-on headless worker (any command
    * with `mode: "background"`, or a searchable extension whose `search()`
@@ -76,6 +77,25 @@ export type PreferenceType =
 export interface DropdownOption {
   value: string;
   title: string;
+}
+
+/** Mirrors `ConnectorDeclaration` in src/types/ExtensionType.ts (the CLI build does not import src/). */
+export interface ConnectorDeclaration {
+  id: string;
+  name: string;
+  description?: string;
+  icon?: string;
+  required?: boolean;
+  multiAccount?: boolean;
+  oauth?: { clientId: string; authorizationUrl: string; tokenUrl: string; scopes: string[] };
+  account?: {
+    url: string;
+    method?: 'GET' | 'POST';
+    body?: string;
+    idPath: string;
+    namePath: string;
+  };
+  server?: { defaultUrl?: string; placeholder?: string; scopes?: string[]; clientName?: string };
 }
 
 export interface PreferenceDeclaration {
@@ -202,6 +222,7 @@ export const VALID_PERMISSIONS = [
   'storage:read',
   'storage:write',
   'oauth:use',
+  'connectors:use',
   'extension:invoke',
   'cache:read',
   'cache:write',
@@ -454,6 +475,7 @@ export function validateManifest(manifest: LauncherManifest, cwd: string): Valid
   }
 
   errors.push(...validatePreferences(manifest.preferences, 'preferences'));
+  errors.push(...validateConnectors(manifest.connectors, manifest.permissions));
   (manifest.commands ?? []).forEach((cmd, i) => {
     errors.push(...validatePreferences(cmd.preferences, `commands[${i}].preferences`));
     errors.push(...validateArguments(cmd.arguments, `commands[${i}].arguments`));
@@ -963,6 +985,129 @@ export function validateSearchBarAccessory(
     }
   }
 
+  return errors;
+}
+
+const CONNECTOR_ID_RE = /^[a-z][a-z0-9-]*$/;
+
+function httpsHost(raw: unknown): string | null {
+  if (typeof raw !== 'string') return null;
+  try {
+    const u = new URL(raw);
+    return u.protocol === 'https:' ? u.host : null;
+  } catch {
+    return null;
+  }
+}
+
+const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
+
+function validateServerConnector(
+  server: NonNullable<ConnectorDeclaration['server']>,
+  base: string,
+  errors: ValidationError[],
+): void {
+  if (typeof server !== 'object' || server === null) {
+    errors.push({ field: `${base}.server`, message: 'server must be an object' });
+    return;
+  }
+  if (server.scopes !== undefined) {
+    if (!Array.isArray(server.scopes) || server.scopes.some((s) => !String(s).trim())) {
+      errors.push({
+        field: `${base}.server.scopes`,
+        message: 'scopes must be an array of non-empty strings',
+      });
+    }
+  }
+  if (server.defaultUrl !== undefined) {
+    let ok = false;
+    try {
+      const u = new URL(server.defaultUrl);
+      ok = u.protocol === 'https:' || (u.protocol === 'http:' && LOOPBACK_HOSTS.has(u.hostname));
+    } catch {
+      ok = false;
+    }
+    if (!ok) {
+      errors.push({
+        field: `${base}.server.defaultUrl`,
+        message: 'must be an https URL (http is only allowed for localhost)',
+      });
+    }
+  }
+}
+
+export function validateConnectors(
+  connectors: ConnectorDeclaration[] | undefined,
+  permissions: string[] | undefined,
+): ValidationError[] {
+  const errors: ValidationError[] = [];
+  if (connectors === undefined) return errors;
+  if (!Array.isArray(connectors)) {
+    return [{ field: 'connectors', message: 'connectors must be an array' }];
+  }
+  if (connectors.length > 0 && !(permissions ?? []).includes('connectors:use')) {
+    errors.push({
+      field: 'permissions',
+      message: 'declaring connectors requires the "connectors:use" permission',
+    });
+  }
+
+  const seen = new Set<string>();
+  connectors.forEach((c, i) => {
+    const base = `connectors[${i}]`;
+    const fail = (field: string, message: string) =>
+      errors.push({ field: `${base}.${field}`, message });
+
+    if (!c.id || !CONNECTOR_ID_RE.test(c.id)) {
+      fail('id', `id must match ${CONNECTOR_ID_RE}`);
+    } else if (seen.has(c.id)) {
+      fail('id', `duplicate connector id '${c.id}'`);
+    } else {
+      seen.add(c.id);
+    }
+    if (!c.name?.trim()) fail('name', 'name is required');
+
+    const fixed = c.oauth !== undefined || c.account !== undefined;
+    if (fixed === (c.server !== undefined)) {
+      fail('oauth', 'declare either oauth with account, or server');
+      return;
+    }
+    if (c.server !== undefined) {
+      validateServerConnector(c.server, base, errors);
+      return;
+    }
+
+    const oauth = c.oauth;
+    if (!oauth || typeof oauth !== 'object') {
+      fail('oauth', 'oauth is required');
+      return;
+    }
+    if (!oauth.clientId?.trim()) fail('oauth.clientId', 'clientId is required');
+    if (!Array.isArray(oauth.scopes) || oauth.scopes.some((s) => !String(s).trim())) {
+      fail('oauth.scopes', 'scopes must be an array of non-empty strings');
+    }
+    const authHost = httpsHost(oauth.authorizationUrl);
+    const tokenHost = httpsHost(oauth.tokenUrl);
+    if (!authHost) fail('oauth.authorizationUrl', 'must be an https URL');
+    if (!tokenHost) fail('oauth.tokenUrl', 'must be an https URL');
+
+    const account = c.account;
+    if (!account || typeof account !== 'object') {
+      fail('account', 'account is required');
+      return;
+    }
+    const accountHost = httpsHost(account.url);
+    if (!accountHost) {
+      fail('account.url', 'must be an https URL');
+    } else if (accountHost !== authHost && accountHost !== tokenHost) {
+      fail('account.url', 'host must match oauth.authorizationUrl or oauth.tokenUrl');
+    }
+    if (account.method !== undefined && account.method !== 'GET' && account.method !== 'POST') {
+      fail('account.method', 'must be GET or POST');
+    }
+    if (!account.idPath?.trim()) fail('account.idPath', 'idPath is required');
+    if (!account.namePath?.trim()) fail('account.namePath', 'namePath is required');
+  });
   return errors;
 }
 

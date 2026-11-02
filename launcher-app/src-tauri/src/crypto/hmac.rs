@@ -63,8 +63,8 @@ mod tests {
         // Computed once from the same (key, message). Pinning this byte-for-byte
         // catches a silent swap of the hash function or HMAC construction.
         let expected: [u8; 32] = [
-            119, 183, 107, 219, 96, 141, 147, 239, 25, 229, 141, 134, 186, 200, 166, 253, 120, 248,
-            171, 200, 172, 165, 237, 59, 129, 251, 146, 82, 42, 242, 121, 93,
+            8, 224, 160, 101, 126, 106, 61, 144, 123, 171, 6, 228, 170, 109, 54, 23, 105, 155, 241,
+            96, 41, 8, 120, 5, 101, 133, 148, 234, 178, 232, 250, 68,
         ];
         assert_eq!(out, expected);
     }

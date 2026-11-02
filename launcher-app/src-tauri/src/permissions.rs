@@ -252,6 +252,10 @@ fn get_required_permission(call_type: &str) -> Option<&'static str> {
         // OAuth PKCE for extensions
         "launcher:api:oauth:authorize" => Some("oauth:use"),
         "launcher:api:oauth:revokeToken" => Some("oauth:use"),
+        // Host-managed connector accounts
+        "launcher:api:connectors:getAccounts" => Some("connectors:use"),
+        "launcher:api:connectors:getToken" => Some("connectors:use"),
+        "launcher:api:connectors:fetch" => Some("connectors:use"),
         // Inter-extension command invocation
         "launcher:api:interop:launchCommand" => Some("extension:invoke"),
         // Application Service
@@ -352,9 +356,9 @@ fn get_required_permission(call_type: &str) -> Option<&'static str> {
         | "launcher:api:tools:unregisterTool"
         | "launcher:api:tools:listTools" => Some("tools:register"),
         // Model Context Protocol (MCP) client: discover servers, inspect tools, invoke tools
-        "launcher:api:mcp:listServers" | "launcher:api:mcp:listTools" | "launcher:api:mcp:invokeTool" => {
-            Some("mcp")
-        }
+        "launcher:api:mcp:listServers"
+        | "launcher:api:mcp:listTools"
+        | "launcher:api:mcp:invokeTool" => Some("mcp"),
         // AI Model Prompting — Tier 2 extensions prompting configured AI providers / spending tokens.
         "launcher:api:ai:streamChat" | "launcher:api:ai:complete" => Some("ai"),
         // browser:listAvailableBrowsers / isCompanionInstalled are intentionally
@@ -1202,7 +1206,10 @@ mod tests {
             get_required_permission("launcher:api:feedback:announce"),
             Some("feedback:announce")
         );
-        assert_eq!(get_required_permission("launcher:api:feedback:report"), None);
+        assert_eq!(
+            get_required_permission("launcher:api:feedback:report"),
+            None
+        );
         assert_eq!(
             get_required_permission("launcher:api:feedback:showProgress"),
             None
@@ -1333,6 +1340,16 @@ mod tests {
     }
 
     #[test]
+    fn connector_calls_map_to_connectors_use() {
+        for call in ["getAccounts", "getToken", "fetch"] {
+            assert_eq!(
+                get_required_permission(&format!("launcher:api:connectors:{call}")),
+                Some("connectors:use")
+            );
+        }
+    }
+
+    #[test]
     fn oauth_revoke_token_maps_to_oauth_use() {
         assert_eq!(
             get_required_permission("launcher:api:oauth:revokeToken"),
@@ -1346,7 +1363,10 @@ mod tests {
             get_required_permission("launcher:api:ai:streamChat"),
             Some("ai")
         );
-        assert_eq!(get_required_permission("launcher:api:ai:complete"), Some("ai"));
+        assert_eq!(
+            get_required_permission("launcher:api:ai:complete"),
+            Some("ai")
+        );
     }
 
     #[test]
@@ -1395,7 +1415,10 @@ mod tests {
         }
         // Passing the manifest permission name → allowed
         assert!(reg
-            .check(&Some("org.launcher.sdk-playground".to_string()), "shell:spawn")
+            .check(
+                &Some("org.launcher.sdk-playground".to_string()),
+                "shell:spawn"
+            )
             .is_ok());
         // Passing the IPC wire type → denied (proves shell.rs must NOT use this string)
         assert!(reg
@@ -1656,6 +1679,7 @@ mod tests {
                 tools: None,
                 runtimes: None,
                 walkthrough: None,
+                connectors: None,
             },
             enabled: true,
             is_built_in,
@@ -1693,8 +1717,12 @@ mod tests {
         let extensions: HashMap<String, crate::extensions::ExtensionRecord> = HashMap::new();
         let supplied = vec!["network".to_string()];
 
-        let (is_built_in, declared_perms, _declared_args) =
-            resolve_declared_permissions(&extensions, "org.launcher.unknown", supplied.clone(), None);
+        let (is_built_in, declared_perms, _declared_args) = resolve_declared_permissions(
+            &extensions,
+            "org.launcher.unknown",
+            supplied.clone(),
+            None,
+        );
 
         assert!(!is_built_in);
         assert_eq!(declared_perms, supplied);

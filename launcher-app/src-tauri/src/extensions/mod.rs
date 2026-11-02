@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Mutex;
 
+pub mod connectors;
 pub mod consent;
 pub mod discovery;
 pub mod extension_runtime;
@@ -374,6 +375,10 @@ pub struct ExtensionManifest {
     /// `walkthrough` module — the extension writes no completion code.
     #[serde(default)]
     pub walkthrough: Option<Vec<crate::walkthrough::WalkthroughTaskDecl>>,
+    /// Third-party accounts this extension uses. Launcher runs the connect
+    /// flow in its own Settings UI; see [`connectors`].
+    #[serde(default)]
+    pub connectors: Option<Vec<connectors::ConnectorDecl>>,
 }
 
 impl ExtensionManifest {
@@ -1266,6 +1271,7 @@ mod tests {
                     tools: None,
                     runtimes: None,
                     walkthrough: None,
+                    connectors: None,
                 },
                 enabled: true,
                 is_built_in: false,

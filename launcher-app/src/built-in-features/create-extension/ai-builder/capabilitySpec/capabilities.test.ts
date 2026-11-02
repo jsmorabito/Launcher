@@ -36,6 +36,7 @@ const GET_REQUIRED_PERMISSIONS = [
   'clipboard-history:capture',
   'clipboard-history:manage',
   'clipboard-history:read',
+  'connectors:use',
   'entitlements:read',
   'extension:invoke',
   'fs:read',

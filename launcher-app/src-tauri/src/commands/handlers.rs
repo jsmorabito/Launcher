@@ -572,6 +572,13 @@ macro_rules! browser_and_sync_commands {
                 $crate::commands::oauth_exchange_code,
                 $crate::commands::oauth_get_stored_token,
                 $crate::commands::oauth_revoke_extension_token,
+                $crate::commands::connector_list_accounts,
+                $crate::commands::connector_finalize_connect,
+                $crate::commands::connector_get_token,
+                $crate::commands::connector_disconnect,
+                $crate::commands::connector_fetch,
+                $crate::commands::connector_begin_dynamic,
+                $crate::commands::connector_finalize_dynamic,
             )
         )
     };

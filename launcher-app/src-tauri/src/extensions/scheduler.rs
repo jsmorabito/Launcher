@@ -394,7 +394,12 @@ mod tests {
         let outcome = DispatchOutcome::ReadyDeliverNow {
             messages: vec![msg],
         };
-        handle_dispatch_outcome(&emitter, "org.launcher.sdk-playground", "tick-test", &outcome);
+        handle_dispatch_outcome(
+            &emitter,
+            "org.launcher.sdk-playground",
+            "tick-test",
+            &outcome,
+        );
 
         let recorded = emitter.events();
         let deliver = recorded

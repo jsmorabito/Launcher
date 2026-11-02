@@ -37,6 +37,12 @@ pub fn validate_manifest(m: &ExtensionManifest) -> Result<(), AppError> {
     }
 
     if ext_type == EXTENSION_TYPE_THEME {
+        if m.connectors.as_ref().is_some_and(|c| !c.is_empty()) {
+            return Err(AppError::Validation(format!(
+                "Theme extension '{}' must not declare connectors.",
+                m.id
+            )));
+        }
         if !m.commands.is_empty() {
             return Err(AppError::Validation(format!(
                 "Theme extension '{}' must not declare commands ({} found).",
@@ -62,6 +68,12 @@ pub fn validate_manifest(m: &ExtensionManifest) -> Result<(), AppError> {
             "Extension '{}' (type=\"extension\") has no commands, is not searchable, and declares no background bundle — it contributes nothing.",
             m.id
         )));
+    }
+
+    if let Some(connectors) = &m.connectors {
+        super::connectors::validate_connectors(connectors).map_err(|e| {
+            AppError::Validation(format!("Extension '{}' has invalid connectors: {e}", m.id))
+        })?;
     }
 
     let mut has_background_command = false;
@@ -550,6 +562,7 @@ mod background_entry_resolution_tests {
             onboarding: None,
             runtimes: None,
             walkthrough: None,
+            connectors: None,
             tools: None,
         }
     }
@@ -773,6 +786,7 @@ mod first_view_component_tests {
             tools: None,
             runtimes: None,
             walkthrough: None,
+            connectors: None,
         }
     }
 
@@ -921,6 +935,7 @@ mod onboarding_validation_tests {
             tools: None,
             runtimes: None,
             walkthrough: None,
+            connectors: None,
         }
     }
 
@@ -1050,7 +1065,10 @@ mod compatibility_tests {
     use super::*;
     use crate::extensions::{CompatibilityStatus, ExtensionManifest};
 
-    fn test_manifest(launcher_sdk: Option<&str>, min_app_version: Option<&str>) -> ExtensionManifest {
+    fn test_manifest(
+        launcher_sdk: Option<&str>,
+        min_app_version: Option<&str>,
+    ) -> ExtensionManifest {
         ExtensionManifest {
             id: "test.extension".to_string(),
             name: "Test".to_string(),
@@ -1073,6 +1091,7 @@ mod compatibility_tests {
             tools: None,
             runtimes: None,
             walkthrough: None,
+            connectors: None,
         }
     }
 
@@ -2076,8 +2095,7 @@ mod manifest_schema_tests {
         for path in &manifest_paths {
             // Match production loading: statically compiled built-ins are
             // host primitives, not installed worker/view extensions.
-            let result = if path.starts_with(repo_root.join("launcher-app/src/built-in-features"))
-            {
+            let result = if path.starts_with(repo_root.join("launcher-app/src/built-in-features")) {
                 serde_json::from_str::<ExtensionManifest>(&std::fs::read_to_string(path).unwrap())
                     .map_err(|error| error.to_string())
             } else {
@@ -2311,6 +2329,7 @@ mod manifest_schema_tests {
             tools: None,
             runtimes: None,
             walkthrough: None,
+            connectors: None,
         };
 
         let err = validate_manifest(&manifest)

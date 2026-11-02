@@ -54,6 +54,14 @@ export { SelectionServiceProxy } from './SelectionServiceProxy';
 
 export type { IOAuthService, OAuthConfig, OAuthToken, OAuthError } from './IOAuthService';
 export { OAuthServiceProxy } from './OAuthServiceProxy';
+export type {
+  ConnectorAccount,
+  ConnectorFetchOptions,
+  ConnectorFetchResponse,
+  ConnectorErrorCode,
+  IConnectorsService,
+} from './IConnectorsService';
+export { ConnectorsServiceProxy } from './ConnectorsServiceProxy';
 
 export * from './IShellService';
 export { ShellServiceProxy } from './ShellServiceProxy';

@@ -6,7 +6,7 @@ vi.mock('../../lib/ipc/bridgeEvents', () => ({
   bridgeListen: vi.fn().mockResolvedValue(vi.fn()),
 }));
 vi.mock('../envService', () => ({
-  envService: { storeApiBaseUrl: 'http://localhost' },
+  envService: { storeApiBaseUrl: 'http://localhost', hasStore: true },
 }));
 vi.mock('../log/logService', () => ({
   logService: { debug: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn() },

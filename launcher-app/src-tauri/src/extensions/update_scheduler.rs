@@ -29,7 +29,11 @@ fn read_auto_update_setting(app: &AppHandle) -> bool {
 fn run_tick(app: &AppHandle) {
     if read_auto_update_setting(app) {
         info!("extension_updater: scheduled check running...");
-        crate::event_bridge::bridge_emit(app, "launcher:extension-update:tick", serde_json::json!({}));
+        crate::event_bridge::bridge_emit(
+            app,
+            "launcher:extension-update:tick",
+            serde_json::json!({}),
+        );
     } else {
         info!("extension_updater: auto-update is disabled, skipping scheduled tick");
     }

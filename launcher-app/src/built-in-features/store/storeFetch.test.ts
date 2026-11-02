@@ -1,15 +1,32 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { fetchAllStoreItems } from './storeFetch';
 
+const envMock = vi.hoisted(() => ({
+  storeApiBaseUrl: 'https://store.example.test',
+  hasStore: true,
+}));
+vi.mock('../../services/envService', () => ({ envService: envMock }));
+
 describe('fetchAllStoreItems', () => {
   const originalFetch = globalThis.fetch;
 
   beforeEach(() => {
     vi.clearAllMocks();
+    envMock.hasStore = true;
+    envMock.storeApiBaseUrl = 'https://store.example.test';
   });
 
   afterEach(() => {
     globalThis.fetch = originalFetch;
+  });
+
+  it('returns nothing and makes no request when no store is configured', async () => {
+    envMock.hasStore = false;
+    envMock.storeApiBaseUrl = '';
+    globalThis.fetch = vi.fn();
+
+    await expect(fetchAllStoreItems()).resolves.toEqual([]);
+    expect(globalThis.fetch).not.toHaveBeenCalled();
   });
 
   it('fetches store items with per_page=100', async () => {
@@ -21,7 +38,9 @@ describe('fetchAllStoreItems', () => {
 
     const result = await fetchAllStoreItems();
 
-    expect(globalThis.fetch).toHaveBeenCalledWith('https://asyar.org/api/extensions?per_page=100');
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      'https://store.example.test/api/extensions?per_page=100',
+    );
     expect(result).toEqual(mockItems);
   });
 
@@ -35,7 +54,7 @@ describe('fetchAllStoreItems', () => {
         ok: true,
         json: async () => ({
           data: page1Items,
-          next_page_url: 'https://asyar.org/api/extensions?page=2&per_page=100',
+          next_page_url: 'https://store.example.test/api/extensions?page=2&per_page=100',
         }),
       } as Response)
       .mockResolvedValueOnce({

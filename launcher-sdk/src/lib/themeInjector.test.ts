@@ -24,7 +24,7 @@ describe('themeInjector', () => {
     });
 
     const style = document.getElementById('launcher-theme-vars')!;
-    expect(style.textContent).toContain(':root {');
+    expect(style.textContent).toContain(':root:root:root {');
     expect(style.textContent).toContain('--color-bg: red;');
     expect(style.textContent).toContain('--color-text: white;');
   });
@@ -43,7 +43,7 @@ describe('themeInjector', () => {
   it('injectThemeVariables with empty object produces an empty :root {} block', () => {
     injectThemeVariables({});
     const style = document.getElementById('launcher-theme-vars');
-    expect(style?.textContent).toContain(':root {\n\n}');
+    expect(style?.textContent).toContain(':root:root:root {\n\n}');
   });
 
   it('receiving launcher:theme:variables message triggers injection', () => {

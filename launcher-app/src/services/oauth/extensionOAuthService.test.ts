@@ -168,7 +168,9 @@ describe('ExtensionOAuthService', () => {
       });
 
       // Simulate callback
-      await (service as any)._handleCallback('launcher://oauth/callback?code=mycode&state=state-abc');
+      await (service as any)._handleCallback(
+        'launcher://oauth/callback?code=mycode&state=state-abc',
+      );
 
       expect(commands.oauthExchangeCode).toHaveBeenCalledWith('state-abc', 'mycode');
       // document.querySelector is mocked — the postMessage on the returned iframe fires
@@ -248,7 +250,9 @@ describe('ExtensionOAuthService', () => {
         token,
       });
 
-      await (service as any)._handleCallback('launcher://oauth/callback?code=c&state=state-broadcast');
+      await (service as any)._handleCallback(
+        'launcher://oauth/callback?code=c&state=state-broadcast',
+      );
 
       // Both iframes received the broadcast. The non-initiator's SDK proxy
       // drops the message because its flowId does not match the registered
@@ -262,6 +266,83 @@ describe('ExtensionOAuthService', () => {
           }),
           expect.any(String),
         );
+      }
+    });
+  });
+
+  describe('authorizeForHost()', () => {
+    const cfg = {
+      clientId: 'cid',
+      authorizationUrl: 'https://linear.app/oauth/authorize',
+      tokenUrl: 'https://api.linear.app/oauth/token',
+      scopes: ['read'],
+    };
+
+    async function begin(service: ExtensionOAuthService) {
+      vi.mocked(commands.oauthStartFlow).mockResolvedValue({
+        state: 'state-h',
+        authUrl: 'https://linear.app/oauth/authorize?x=1',
+      });
+      const done = service.authorizeForHost('ext.foo', 'prov', cfg);
+      await vi.waitFor(() => expect(openUrl).toHaveBeenCalled());
+      const flowId = vi.mocked(commands.oauthStartFlow).mock.calls.at(-1)![6];
+      return { done, flowId };
+    }
+
+    it('opens the browser with a host-prefixed flow id and resolves after the exchange', async () => {
+      const service = makeService();
+      const { done, flowId } = await begin(service);
+      expect(flowId).toMatch(/^host:/);
+
+      vi.mocked(commands.oauthExchangeCode).mockResolvedValue({
+        extensionId: 'ext.foo',
+        flowId,
+        token: validToken(),
+      });
+      await service._handleCallback('launcher://oauth/callback?code=c&state=state-h');
+
+      await expect(done).resolves.toBeUndefined();
+    });
+
+    it('does not broadcast host flow results to extension iframes', async () => {
+      const service = makeService();
+      const iframes = setMockIframes(1);
+      const { done, flowId } = await begin(service);
+      vi.mocked(commands.oauthExchangeCode).mockResolvedValue({
+        extensionId: 'ext.foo',
+        flowId,
+        token: validToken(),
+      });
+      await service._handleCallback('launcher://oauth/callback?code=c&state=state-h');
+      await done;
+      expect(iframes[0].contentWindow.postMessage).not.toHaveBeenCalled();
+    });
+
+    it('rejects when the user denies access', async () => {
+      const service = makeService();
+      const { done } = await begin(service);
+      await service._handleCallback('launcher://oauth/callback?error=access_denied&state=state-h');
+      await expect(done).rejects.toThrow('access_denied');
+    });
+
+    it('rejects when the token exchange fails', async () => {
+      const service = makeService();
+      const { done } = await begin(service);
+      vi.mocked(commands.oauthExchangeCode).mockRejectedValue(new Error('boom'));
+      await service._handleCallback('launcher://oauth/callback?code=c&state=state-h');
+      await expect(done).rejects.toThrow('exchange_failed');
+    });
+
+    it('rejects with a timeout when the browser flow never completes', async () => {
+      vi.useFakeTimers();
+      try {
+        const service = makeService();
+        const { done } = await begin(service);
+        const assertion = expect(done).rejects.toThrow('timeout');
+        await vi.advanceTimersByTimeAsync(5 * 60 * 1000 + 1);
+        await assertion;
+      } finally {
+        vi.useRealTimers();
       }
     });
   });

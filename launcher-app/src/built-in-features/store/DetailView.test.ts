@@ -12,7 +12,7 @@ vi.mock('../../lib/ipc/commands', () => ({
 
 vi.mock('../../services/envService', () => ({
   envService: {
-    storeApiBaseUrl: 'https://asyar.org',
+    storeApiBaseUrl: 'https://store.example.test',
     supportedSdkVersion: '4.13.0',
     isDev: false,
   },

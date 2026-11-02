@@ -15,8 +15,17 @@ class EnvService {
     return import.meta.env.MODE === 'development';
   }
 
+  /**
+   * Base URL of the extension store API. Empty (the default) means no store is
+   * configured: the Store lists nothing and no extension update checks run.
+   * Set VITE_LAUNCHER_STORE_URL at build time to point at your own store.
+   */
   get storeApiBaseUrl(): string {
-    return 'https://asyar.org';
+    return (import.meta.env.VITE_LAUNCHER_STORE_URL as string | undefined) ?? '';
+  }
+
+  get hasStore(): boolean {
+    return this.storeApiBaseUrl !== '';
   }
 
   /**

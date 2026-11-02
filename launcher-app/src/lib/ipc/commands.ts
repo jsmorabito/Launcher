@@ -36,6 +36,7 @@ export * from './extensionStorageCommands';
 export * from './profileCommands';
 export * from './permissionCommands';
 export * from './authCommands';
+export * from './connectorCommands';
 export * from './syncCommands';
 export * from './onboardingCommands';
 export * from './privacyCommands';

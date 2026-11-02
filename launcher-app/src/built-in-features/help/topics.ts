@@ -1,5 +1,5 @@
 import { t } from '../../services/i18n';
-/** Maps each Help topic to its page in the user guide on asyar.org. */
+/** Maps each Help topic to its page in the user guide in the Launcher repo. */
 export interface HelpTopic {
   id: string;
   title: string;
@@ -10,10 +10,10 @@ export interface HelpTopic {
   slug: string;
 }
 
-export const GUIDE_BASE_URL = 'https://asyar.org/docs/guide';
+export const GUIDE_BASE_URL = 'https://github.com/jsmorabito/Launcher/blob/main/docs/guide';
 
 export function guideUrl(slug: string): string {
-  return `${GUIDE_BASE_URL}/${slug}`;
+  return `${GUIDE_BASE_URL}/${slug}.md`;
 }
 
 export const HELP_TOPICS: readonly HelpTopic[] = [
